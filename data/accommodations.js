@@ -11,7 +11,7 @@ var accommodations = [
   [[12.510261, 41.885701], 'IT', 'Serventi Longhi Rooms'],
   [[15.980007, 45.805426], 'HR', 'Hotel Central'],
   [[15.893119, 43.735263], 'HR', 'Adriatic Suites'],
-  [[16.436395, 43.510643], 'HR', 'Gold Rooms'],
+  [[16.436395, 43.510643], 'HR', 'Rooms Gold'],
   [[18.111357, 42.639682], 'HR', 'Luna'],
   [[14.758148, 40.679235], 'IT', 'Il Vicolo Della Neve B&B']
 ]
