@@ -11,6 +11,7 @@
       mobile_url : "nos2viajando.travelmap.net",
     });
   // ]]></script>
+  <script src="js/mapbox_token.js"></script>
   <script src="js/countries_bbox.js"></script>
 
   <!-- Locations data -->
@@ -87,7 +88,7 @@
 
 <script>
 
-  mapboxgl.accessToken = 'pk.eyJ1IjoiaGFyYWxkby1maWxobyIsImEiOiJja2Vha3RvcjQwMWw4Mzh0MzZzaGdqbXgxIn0.oRUG1yvJiEFcyjFcDqW89w';
+  mapboxgl.accessToken = mapbox_token;
 
   var map = new mapboxgl.Map({
     container: 'map',
