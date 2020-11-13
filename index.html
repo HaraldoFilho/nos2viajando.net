@@ -16,6 +16,7 @@
   <!-- Locations data -->
   <script src="data/cities.js"></script>
   <script src="data/parks.js"></script>
+  <script src="data/accommodations.js"></script>
   <script src="data/airports.js"></script>
 
   <!-- Mapbox -->
@@ -47,11 +48,11 @@
       </div>
       <div class="distance">
         <img class="metric" src="icons/distance.svg"/>
-        57.341 km
+        58.065 km
       </div>
       <div class="days">
         <img class="metric" src="icons/days.svg"/>
-        58 dias
+        69 dias
       </div>
       <div class="map">
         <div id='map' style='width: 300px; height: 150px;'></div>
@@ -109,6 +110,15 @@
     new mapboxgl.Marker({color:'#a0a0a0',scale:0.4,draggable:false})
     .setLngLat(airports[i][0])
     .setPopup(new mapboxgl.Popup({closeButton:false}).setText(airports[i][2]))
+    .addTo(map);
+
+  }
+
+  for (var i = 0; i < accommodations.length; i++) {
+
+    new mapboxgl.Marker({color:'#f6df00',scale:0.4,draggable:false})
+    .setLngLat(accommodations[i][0])
+    .setPopup(new mapboxgl.Popup({closeButton:false}).setText(accommodations[i][2]))
     .addTo(map);
 
   }
@@ -209,6 +219,11 @@
   parks_list.setAttribute('style', 'margin-top:25px');
   parks_list.innerText = 'Parques Nacionais';
 
+  var accommodations_list = document.createElement('DIV');
+  accommodations_list.setAttribute('class', 'list-title');
+  accommodations_list.setAttribute('style', 'margin-top:25px');
+  accommodations_list.innerText = 'Hospedagens';
+
   var airports_list = document.createElement('DIV');
   airports_list.setAttribute('class', 'list-title');
   airports_list.setAttribute('style', 'margin-top:25px');
@@ -244,6 +259,21 @@
     lists.appendChild(list_item);
   }
   parks.forEach(addListenerToItems);
+
+  lists.appendChild(accommodations_list);
+  for (var i = 0; i < accommodations.length; i++) {
+    var list_item = document.createElement('P');
+    var item_id = getItemId(accommodations[i][2]);
+    list_item.setAttribute('id', item_id);
+    list_item.setAttribute('class', 'list-item');
+    var tiny_flag = document.createElement('IMG');
+    tiny_flag.setAttribute('class', 'tiny_icon');
+    tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
+    list_item.appendChild(tiny_flag);
+    list_item.append(accommodations[i][2]);
+    lists.appendChild(list_item);
+  }
+  accommodations.forEach(addListenerToItems);
 
   lists.appendChild(airports_list);
   for (var i = 0; i < airports.length; i++) {
