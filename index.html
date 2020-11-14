@@ -13,6 +13,7 @@
     // ]]></script>
     <script src="js/mapbox_token.js"></script>
     <script src="js/countries_bbox.js"></script>
+    <script src="js/functions.js"></script>
 
     <!-- Locations data -->
     <script src="data/stats.js"></script>
@@ -56,7 +57,6 @@
           <div class="map">
             <div id='map' style='width: 300px; height: 150px;'></div>
           </div>
-
           <!-- Countries flags panel -->
           <div class="flags">
             <div id ='BR'><img class="flag" src="icons/flags/brazil.svg" title="Brasil" alt="Brasil"/></div>
@@ -67,29 +67,25 @@
             <div id ='VA'><img class="flag" src="icons/flags/vatican.svg" title="Vaticano" alt="Vaticano"/></div>
             <div id ='HR'><img class="flag" src="icons/flags/croatia.svg" title="Croácia" alt="Croácia"/></div>
           </div>
-
         </div>
 
-        <div id="lists" class="lists-container">
-        </div>
+        <div id="lists" class="lists-container"></div>
 
       </div>
 
-      <div class="map-container">
-        <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" allowfullscreen >
+      <div class="travelmap-container">
+        <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
           Navegador não compatível
         </iframe>
       </div>
 
-      <img id="fullscreen-enter-icon" class="fullscreen-enter" src="icons/fullscreen_enter.svg"/>
+      <img id="fullwindow-enter-icon" class="fullwindow-enter" src="icons/full_window_enter.svg"/>
+      <img id="zoom-out-icon" class="zoom-out" src="icons/fit_window.svg"/>
 
     </div>
 
-    <div id="map-overlay" class="map-overlay">
-      <div class="map-fullscreen">
-        <div id='map-full' style='width: 100%; height: 100%;'></div>
-        <img id="fullscreen-exit-icon" class="fullscreen-exit" src="icons/fullscreen_exit.svg"/>
-      </div>
+    <div id="map-overlay">
+      <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
     </div>
 
     <script>
@@ -101,23 +97,21 @@
 
     mapboxgl.accessToken = mapbox_token;
 
-    var initial_bbox = [];
     var current_bbox = [];
     var current_coords = [];
 
-    var west = 180;
-    var south = 90;
-    var east = -180;
-    var north = -90;
+    var initial_bbox = getInitialBoundingBox(cities);
 
-    var lng_offset = 0;
-    var lat_offset = 10;
+    var init_x_offset = 0;
+    var init_y_offset = 10;
 
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v10'
     });
+
     loadMapData(map, 0.4);
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30)
 
     // Add click listeners to countries icons
     document.getElementById('BR').addEventListener('click', function() { fitRegion(map, 'BR') });
@@ -128,8 +122,9 @@
     document.getElementById('VA').addEventListener('click', function() { fitRegion(map, 'VA') });
     document.getElementById('HR').addEventListener('click', function() { fitRegion(map, 'HR') });
 
-    document.getElementById('fullscreen-enter-icon').addEventListener('click', function() { enterMapFullscreen() });
-    document.getElementById('fullscreen-exit-icon').addEventListener('click', function() { exitMapFullscreen() });
+    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
+    document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
 
     var lists = document.getElementById('lists');
 
@@ -289,151 +284,7 @@
     accommodations.forEach(addListenerToPlaces);
     airports.forEach(addListenerToRegions);
 
+  </script>
 
-    // Functions
-
-    function addListenerToRegions(item) {
-      document.getElementById(getItemId(item[2]))
-      .addEventListener('click', function() { flyToCoordinates(map, item[0], 10, 0.01) });
-    }
-
-    function addListenerToPlaces(item) {
-      document.getElementById(getItemId(item[2]))
-      .addEventListener('click', function() { flyToCoordinates(map, item[0], 15, 0.0003) });
-    }
-
-    function flyToCoordinates(map, coords, zoom, offset) {
-      current_bbox = [];
-      current_coords = coords;
-      map.flyTo({center: [coords[0], coords[1] + offset], zoom: zoom});
-    }
-
-    function getIconSrc(country_code) {
-      return "icons/flags/".concat(countries_bbox[country_code][0]
-        .replace(/\s/g, "-").toLowerCase()).concat(".svg");
-      }
-
-      function getItemId(item_name) {
-        return item_name.replace(/\s/g, "_").toUpperCase();
-      }
-
-      function enterMapFullscreen() {
-        document.getElementById('map-overlay').style.height = "100%";
-        document.getElementById('fullscreen-exit-icon').style.width = "40px";
-        document.getElementById('fullscreen-exit-icon').style.height = "40px";
-        var map = new mapboxgl.Map({
-          container: 'map-full',
-          style: 'mapbox://styles/mapbox/outdoors-v11'
-        });
-        loadMapData(map, 0.7);
-        if (current_coords.length == 0) {
-          map.fitBounds(current_bbox, {padding: 50});
-        } else {
-          flyToCoordinates(map, current_coords, 18, 0);
-        }
-      }
-
-      function exitMapFullscreen() {
-        document.getElementById('map-overlay').style.height = "0%";
-        document.getElementById('fullscreen-exit-icon').style.width = "0";
-        document.getElementById('fullscreen-exit-icon').style.height = "0";
-      }
-
-      function loadMapData(map, markers_scale) {
-
-        for (var i = 0; i < airports.length; i++) {
-
-          new mapboxgl.Marker({color:'#a0a0a0',scale:markers_scale,draggable:false})
-          .setLngLat(airports[i][0])
-          .setPopup(new mapboxgl.Popup({closeButton:false}).setText(airports[i][2]))
-          .addTo(map);
-
-        }
-
-        for (var i = 0; i < accommodations.length; i++) {
-
-          new mapboxgl.Marker({color:'#dec900',scale:markers_scale,draggable:false})
-          .setLngLat(accommodations[i][0])
-          .setPopup(new mapboxgl.Popup({closeButton:false}).setText(accommodations[i][2]))
-          .addTo(map);
-
-        }
-
-        for (var i = 0; i < attractions.length; i++) {
-
-          new mapboxgl.Marker({color:'#ff8080',scale:markers_scale,draggable:false})
-          .setLngLat(attractions[i][0])
-          .setPopup(new mapboxgl.Popup({closeButton:false}).setText(attractions[i][2]))
-          .addTo(map);
-
-        }
-
-        for (var i = 0; i < parks.length; i++) {
-
-          new mapboxgl.Marker({color:'#55a455',scale:markers_scale,draggable:false})
-          .setLngLat(parks[i][0])
-          .setPopup(new mapboxgl.Popup({closeButton:false}).setText(parks[i][2]))
-          .addTo(map);
-
-        }
-
-        for (var i = 0; i < cities.length; i++) {
-
-          new mapboxgl.Marker({color:'#3fb1ce',scale:markers_scale,draggable:false})
-          .setLngLat(cities[i][0])
-          .setPopup(new mapboxgl.Popup({closeButton:false}).setText(cities[i][2]))
-          .addTo(map);
-
-          if (cities[i][0][0] < west) {
-            west = cities[i][0][0];
-          }
-          if (cities[i][0][0] > east) {
-            east = cities[i][0][0];
-          }
-          if (cities[i][0][1] < south) {
-            south = cities[i][0][1];
-          }
-          if (cities[i][0][1] > north) {
-            north = cities[i][0][1];
-          }
-          initial_bbox = [west, south, east, north];
-
-        }
-
-        map_padding = 100;
-
-        if (markers_scale == 0.4) {
-          initial_bbox[0] += lng_offset;
-          initial_bbox[1] += lat_offset;
-          initial_bbox[2] += lng_offset;
-          initial_bbox[3] += lat_offset;
-          map_padding = 30;
-        }
-
-        map.fitBounds([
-          [initial_bbox[0], initial_bbox[1]],
-          [initial_bbox[2], initial_bbox[3]]],
-          {padding: map_padding}
-        );
-
-      }
-
-      function fitRegion(map, region) {
-
-        var bboxes = countries_bbox[region][1]
-
-        var west = bboxes[0];
-        var south = bboxes[1];
-        var east = bboxes[2];
-        var north = bboxes[3];
-
-        current_coords = [];
-        current_bbox = [[west, south],[east, north]];
-        map.fitBounds(current_bbox, {padding: 5});
-
-      }
-
-    </script>
-
-  </body>
-  </html>
+</body>
+</html>
