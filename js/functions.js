@@ -60,8 +60,8 @@ function addListenerToPlaces(item) {
   .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5) });
 }
 
-function addListenerToFLags(country_code) {
-  document.getElementById(country_code).addEventListener('click', function() { fitRegion(map, country_code) });
+function addListenerToFLags(item) {
+  document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
 }
 
 

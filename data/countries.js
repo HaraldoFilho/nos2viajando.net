@@ -1,9 +1,9 @@
 var countries = [
-  'BR',
-  'AR',
-  'PY',
-  'US',
-  'IT',
-  'VA',
-  'HR'
+  ['Brasil', 'BR'],
+  ['Argentina', 'AR'],
+  ['Paraguai', 'PY'],
+  ['Estados Unidos', 'US'],
+  ['Itália', 'IT'],
+  ['Vaticano', 'VA'],
+  ['Croácia', 'HR']
 ]
