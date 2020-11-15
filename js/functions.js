@@ -68,26 +68,88 @@ function addListenerToFLags(item) {
 // Full Window
 
 function enterMapFullwindow(current_bbox, current_coords) {
+
   document.getElementById('map-overlay').style.height = "100%";
-  document.getElementById('fullwindow-exit-icon').style.width = "40px";
-  document.getElementById('fullwindow-exit-icon').style.height = "40px";
-  var map_fullwindow = new mapboxgl.Map({
-    container: 'map-overlay',
-    style: 'mapbox://styles/mapbox/outdoors-v11'
-  });
-  console.log(current_coords);
+  document.getElementById('fullwindow-exit-icon').style.width = "28px";
+  document.getElementById('fullwindow-exit-icon').style.height = "28px";
+
+  if (map_fullwindow == null) {
+    map_fullwindow = new mapboxgl.Map({
+      container: 'map-overlay',
+      style: 'mapbox://styles/mapbox/outdoors-v11'
+    });
+    map_fullwindow.addControl(new mapboxgl.NavigationControl());
+  }
+
+  if (menu == null) {
+    buildSwitchLayerMenu();
+  }
+
   loadMapData(map_fullwindow, 0.7);
   if (current_coords.length == 0) {
     fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
   } else {
     flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
   }
+
 }
 
 function exitMapFullwindow() {
   document.getElementById('map-overlay').style.height = "0%";
   document.getElementById('fullwindow-exit-icon').style.width = "0";
   document.getElementById('fullwindow-exit-icon').style.height = "0";
+}
+
+function buildSwitchLayerMenu() {
+
+  menu = document.getElementById('menu');
+
+  var streets_input = document.createElement('INPUT');
+  streets_input.setAttribute('id', 'streets-v11');
+  streets_input.setAttribute('type', 'radio');
+  streets_input.setAttribute('name', 'rtoggle');
+  streets_input.setAttribute('value', 'streets');
+  streets_input.setAttribute('checked', 'checked');
+  var streets_label = document.createElement('LABEL');
+  streets_label.setAttribute('for', 'streets_v11');
+  streets_label.innerText = 'streets';
+
+  var outdoors_input = document.createElement('INPUT');
+  outdoors_input.setAttribute('id', 'outdoors-v11');
+  outdoors_input.setAttribute('type', 'radio');
+  outdoors_input.setAttribute('name', 'rtoggle');
+  outdoors_input.setAttribute('value', 'outdoors');
+  var outdoors_label = document.createElement('LABEL');
+  outdoors_label.setAttribute('for', 'outdoors_v11');
+  outdoors_label.innerText = 'outdoors';
+
+  var satellite_input = document.createElement('INPUT');
+  satellite_input.setAttribute('id', 'satellite-v9');
+  satellite_input.setAttribute('type', 'radio');
+  satellite_input.setAttribute('name', 'rtoggle');
+  satellite_input.setAttribute('value', 'satellite');
+  var satellite_label = document.createElement('LABEL');
+  satellite_label.setAttribute('for', 'satellite_v9');
+  satellite_label.innerText = 'satellite';
+
+  menu.appendChild(streets_input);
+  menu.appendChild(streets_label);
+  menu.appendChild(outdoors_input);
+  menu.appendChild(outdoors_label);
+  menu.appendChild(satellite_input);
+  menu.appendChild(satellite_label);
+
+  layerList = document.getElementById('menu');
+  inputs = layerList.getElementsByTagName('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].onclick = switchLayer;
+  }
+
+}
+
+function switchLayer(layer) {
+  var layerId = layer.target.id;
+  map_fullwindow.setStyle('mapbox://styles/mapbox/' + layerId);
 }
 
 

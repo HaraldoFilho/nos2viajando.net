@@ -78,13 +78,10 @@
 
     <div id="map-overlay">
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
+      <div id="menu"></div>
     </div>
 
     <script>
-
-    document.getElementById('trips').append(n_trips + " viagens");
-    document.getElementById('distance').append(distance + " km");
-    document.getElementById('days').append(days + " dias");
 
     mapboxgl.accessToken = mapbox_token;
 
@@ -96,6 +93,7 @@
     var init_x_offset = 0;
     var init_y_offset = 10;
 
+    // Travelmap
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v10'
@@ -103,6 +101,18 @@
 
     loadMapData(map, 0.4);
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30)
+
+    // Full window map
+    var map_fullwindow;
+    var menu;
+    var layerList;
+    var inputs;
+
+    // Sidepanel
+
+    document.getElementById('trips').append(n_trips + " viagens");
+    document.getElementById('distance').append(distance + " km");
+    document.getElementById('days').append(days + " dias");
 
     var countries_panel = document.getElementById('countries-panel');
     var lists = document.getElementById('lists');
