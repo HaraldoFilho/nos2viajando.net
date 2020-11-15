@@ -189,6 +189,7 @@ p.list-item {
   grid-area: flags;
   width: 290px;
   height: 30px;
+  grid-gap: 5px;
   padding: 10px 5px 10px 5px;
   border-radius: 5px;
   background-color: #cad2d3;

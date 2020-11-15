@@ -60,6 +60,10 @@ function addListenerToPlaces(item) {
   .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5) });
 }
 
+function addListenerToFLags(country_code) {
+  document.getElementById(country_code).addEventListener('click', function() { fitRegion(map, country_code) });
+}
+
 
 // Full Window
 
@@ -120,8 +124,8 @@ function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
 // Getters
 
 function getIconSrc(country_code) {
-  return "icons/flags/".concat(countries_bbox[country_code][0]
-    .replace(/\s/g, "-").toLowerCase()).concat(".svg");
+  return "icons/flags/".concat(countries_bbox[country_code][0])
+    .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
 function getItemId(item_name) {
