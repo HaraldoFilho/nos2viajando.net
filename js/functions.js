@@ -72,6 +72,8 @@ function enterMapFullwindow(current_bbox, current_coords) {
   document.getElementById('map-overlay').style.height = "100%";
   document.getElementById('fullwindow-exit-icon').style.width = "28px";
   document.getElementById('fullwindow-exit-icon').style.height = "28px";
+  document.getElementById('fullwindow-zoom-out-icon').style.width = "28px";
+  document.getElementById('fullwindow-zoom-out-icon').style.height = "28px";
 
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({

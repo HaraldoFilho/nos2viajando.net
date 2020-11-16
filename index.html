@@ -77,8 +77,9 @@
     </div>
 
     <div id="map-overlay">
-      <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
       <div id="menu"></div>
+      <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
+      <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
     </div>
 
     <script>
@@ -142,9 +143,10 @@
       countries_panel.appendChild(country);
     }
 
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
+    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
-    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
 
     var lists = document.getElementById('lists');
 
