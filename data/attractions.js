@@ -44,7 +44,7 @@ var attractions = [
   [[-32.410139, -3.837930], 'BR', 'Forte de Nossa Senhora dos Remédios'],
   [[12.454642, 41.904746], 'VA', 'Museus do Vaticano'],
   [[12.454479, 41.902965], 'VA', 'Capela Sistina'],
-  [[12.454479, 41.902965], 'VA', 'Escadaria Bramante'],
+  [[12.453930, 41.906293], 'VA', 'Escadaria Bramante'],
   [[12.457334, 41.902255], 'VA', 'Praça de São Pedro'],
   [[12.461570, 41.902114], 'IT', 'Museu Leonardo da Vinci Experience'],
   [[12.492231, 41.890210], 'IT', 'Coliseu'],

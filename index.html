@@ -23,6 +23,7 @@
     <script src="data/attractions.js"></script>
     <script src="data/accommodations.js"></script>
     <script src="data/airports.js"></script>
+    <script src="data/photos.js"></script>
 
     <!-- Mapbox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
@@ -77,9 +78,39 @@
     </div>
 
     <div id="map-overlay">
-      <div id="menu"></div>
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
+
+      <div id="menu" class="menu">
+        <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked" />
+        <label for="streets-v11">mapa</label>
+        <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
+        <label for="outdoors-v11">relevo</label>
+        <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
+        <label for="satellite-v9">satélite</label>
+      </div>
+
+      <div id="selector" class="selector">
+        <input id="checkbox-cities" type="checkbox" checked="checked" />
+        <img src="icons/marker_city.svg" height="20px" style="margin-bottom:-3px"/>
+        cidades<br>
+        <input id="checkbox-parks" type="checkbox" checked="checked" />
+        <img src="icons/marker_park.svg" height="20px" style="margin-bottom:-3px"/>
+        parques<br>
+        <input id="checkbox-attractions" type="checkbox" checked="checked" />
+        <img src="icons/marker_attraction.svg" height="20px" style="margin-bottom:-3px"/>
+        atrações<br>
+        <input id="checkbox-accommodations" type="checkbox" checked="checked" />
+        <img src="icons/marker_accommodation.svg" height="20px" style="margin-bottom:-3px"/>
+        hospedagens<br>
+        <input id="checkbox-airports" type="checkbox" checked="checked" />
+        <img src="icons/marker_airport.svg" height="20px" style="margin-bottom:-3px"/>
+        aeroportos<br>
+        <input id="checkbox-photos" type="checkbox" />
+        <img src="icons/marker_photo.svg" height="20px" style="margin-bottom:-3px"/>
+        fotos
+      </div>
+
     </div>
 
     <script>
@@ -93,6 +124,8 @@
 
     var init_x_offset = 0;
     var init_y_offset = 10;
+
+    var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
     // Travelmap
     var map = new mapboxgl.Map({
@@ -306,6 +339,14 @@
     attractions.forEach(addListenerToPlaces);
     accommodations.forEach(addListenerToPlaces);
     airports.forEach(addListenerToRegions);
+
+    document.getElementById("checkbox-cities").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-parks").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-attractions").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-accommodations").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-airports").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-photos").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+
 
   </script>
 
