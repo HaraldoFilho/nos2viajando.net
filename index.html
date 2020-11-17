@@ -23,6 +23,7 @@
     <script src="data/attractions.js"></script>
     <script src="data/accommodations.js"></script>
     <script src="data/airports.js"></script>
+    <script src="data/flights.js"></script>
     <script src="data/photos.js"></script>
 
     <!-- Mapbox -->
@@ -107,8 +108,14 @@
         <img src="icons/marker_airport.svg" height="20px" style="margin-bottom:-3px"/>
         aeroportos<br>
         <input id="checkbox-photos" type="checkbox" />
-        <img src="icons/marker_photo.svg" height="20px" style="margin-bottom:-3px"/>
-        fotos
+        <img src="icons/marker_photo.svg" height="18px" style="margin: 0px 2px -4px 1px"/>
+        fotos<br>
+        <input id="checkbox-flights-international" type="checkbox" />
+        <img src="icons/flight_international.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
+        internacional<br>
+        <input id="checkbox-flights-domestic" type="checkbox" />
+        <img src="icons/flight_domestic.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
+        doméstico
       </div>
 
     </div>
@@ -346,7 +353,8 @@
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-airports").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-photos").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
-
+    document.getElementById("checkbox-flights-international").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
 
   </script>
 
@@ -367,6 +375,6 @@
   alt="Web Analytics Made Easy -
   StatCounter"></a></div></noscript>
   <!-- End of Statcounter Code -->
-  
+
 </body>
 </html>

@@ -99,6 +99,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
     loadPhotosOnMap(map_fullwindow, locations_dict);
     loadMapData(map_fullwindow, 0.7);
+    loadFlights(map_fullwindow, flights, airports);
   }
 
   if (current_coords.length == 0) {
@@ -122,6 +123,7 @@ function switchLayer(layer) {
   var layerId = layer.target.id;
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
+  refreshMap(map_fullwindow, current_map_style, locations_dict)
 }
 
 
@@ -213,6 +215,13 @@ function loadPhotosOnMap(map, locations_dict) {
 
 function addPhotoMarker(map, value) {
 
+  var marker = document.createElement('div');
+  var img = document.createElement('img');
+  img.setAttribute('src', 'icons/marker_photo.svg');
+  img.setAttribute('width', '28');
+  img.setAttribute('height', '28');
+  marker.appendChild(img);
+
   var htmlText = "<div style=\"max-height:410px;overflow:auto;\">";
 
   for (var i = 0; i < value[1].length; i++) {
@@ -222,12 +231,12 @@ function addPhotoMarker(map, value) {
   htmlText = htmlText.concat("</div>");
 
   if (value[1].length <= 35) {
-    new mapboxgl.Marker({color:'#C2185B',scale:0.7,draggable:false})
+    new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
     .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'566px'}).setHTML(htmlText))
     .addTo(map);
   } else {
-    new mapboxgl.Marker({color:'#C2185B',scale:0.7,draggable:false})
+    new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
     .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'592px'}).setHTML(htmlText))
     .addTo(map);
@@ -252,11 +261,93 @@ function refreshMap(map, current_map_style, locations_dict){
   map_fullwindow.addControl(new mapboxgl.NavigationControl());
   loadMapData(map_fullwindow, 0.7);
   loadPhotosOnMap(map_fullwindow, locations_dict);
+  loadFlights(map_fullwindow, flights, airports);
 
   if (current_coords.length == 0) {
     fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
   } else {
     flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
   }
+
+}
+
+function loadFlights(map, flights, airports) {
+
+  for (var f = 0; f < flights.length; f++) {
+    var route = 'route_' + (f+1);
+    for (var t = 0; t < flights[f][1].length; t++) {
+      for (var c = 1; c < flights[f][1][t].length; c++) {
+        var id = route + '_' + (t+1) + '_' + (c);
+        for (var a = 0; a < airports.length; a++) {
+
+          var airport_1 = flights[f][1][t][c-1];
+          var airport_2 = flights[f][1][t][c];
+
+          if (airport_1 == airports[a][3]) {
+            var coord_a = airports[a][0];
+            var country_a = airports[a][1];
+          }
+          if (airport_2 == airports[a][3]) {
+            var coord_b = airports[a][0];
+            var country_b = airports[a][1];
+          }
+
+        }
+
+        var color;
+        var width;
+        var add;
+
+        if (country_a == country_b) {
+          color = '#00F';
+          width = 2;
+          add = document.getElementById("checkbox-flights-domestic").checked;
+
+        } else {
+          color = '#F00';
+          width = 2;
+          add = document.getElementById("checkbox-flights-international").checked;
+        }
+
+        if (add) {
+          addFlightLine(map, id, coord_a, coord_b, color, width);
+        }
+
+      }
+    }
+  }
+}
+
+function addFlightLine(map, id, coord_a, coord_b, color, width) {
+
+  map.on('load', function () {
+
+    map.addSource(id, {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [ coord_a, coord_b ]
+        }
+      }
+    });
+
+    map.addLayer({
+      'id': id,
+      'type': 'line',
+      'source': id,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      'paint': {
+        'line-color': color,
+        'line-width': width
+      }
+    });
+
+  });
 
 }
