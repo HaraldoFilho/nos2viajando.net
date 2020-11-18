@@ -36,7 +36,7 @@
 
     <div class="main-container">
 
-      <div class="sidebar-container">
+      <div id="sidebar" class="sidebar-container">
 
         <div class="top-container">
           <div class="avatar">
@@ -59,22 +59,23 @@
           </div>
           <div class="map">
             <div id='map' style='width: 300px; height: 150px;'></div>
+            <img id="fullwindow-enter-icon" class="fullwindow-enter" src="icons/full_window_enter.svg"/>
+            <img id="zoom-out-icon" class="zoom-out" src="icons/fit_window.svg"/>
           </div>
           <div id="countries-panel" class="flags"></div>
+
         </div>
 
         <div id="lists" class="lists-container"></div>
 
       </div>
 
-      <div class="travelmap-container">
+      <div id="travelmap" class="travelmap-container">
         <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
           Navegador não compatível
         </iframe>
+        <img id="toggle-sidepanel" class="toggle-sidepanel" src="icons/sidepanel.svg"/>
       </div>
-
-      <img id="fullwindow-enter-icon" class="fullwindow-enter" src="icons/full_window_enter.svg"/>
-      <img id="zoom-out-icon" class="zoom-out" src="icons/fit_window.svg"/>
 
     </div>
 
@@ -187,6 +188,7 @@
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    document.getElementById('toggle-sidepanel').addEventListener('click', function() { toggleSidePanel() });
 
     var lists = document.getElementById('lists');
 
@@ -355,6 +357,8 @@
     document.getElementById("checkbox-photos").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
+
+    // hideSidePanel();
 
   </script>
 

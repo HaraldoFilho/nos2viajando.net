@@ -351,3 +351,21 @@ function addFlightLine(map, id, coord_a, coord_b, color, width) {
   });
 
 }
+
+function toggleSidePanel() {
+  if (document.getElementById('sidebar').style.display == 'none')  {
+    showSidePanel();
+  }  else {
+    hideSidePanel();
+  }
+}
+
+function hideSidePanel() {
+  document.getElementById('sidebar').style.display = 'none';
+  document.getElementById('travelmap').style="grid-column:1 / span 2";
+}
+
+function showSidePanel() {
+  document.getElementById('sidebar').style.display = 'grid';
+  document.getElementById('travelmap').style="grid-column:2";
+}

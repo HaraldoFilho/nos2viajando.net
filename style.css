@@ -47,8 +47,8 @@ img.fullwindow-enter {
   position: absolute;
   top: 0;
   left: 0;
-  margin-left: 276px;
-  margin-top: 110px;
+  margin-left: 267px;
+  margin-top: 100px;
   width: 21px;
   heigh: 21px;
   z-index: 1;
@@ -81,8 +81,8 @@ img.zoom-out {
   position: absolute;
   top: 0;
   left: 0;
-  margin-left: 20px;
-  margin-top: 110px;
+  margin-left: 10px;
+  margin-top: 100px;
   width: 21px;
   heigh: 21px;
   z-index: 1;
@@ -107,6 +107,24 @@ img.fullwindow-zoom-out {
   border-width: 2px;
   border-color: lightgrey;
   border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+}
+
+img.toggle-sidepanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 385px;
+  margin-top: 15px;
+  padding: 3px 5px 3px 5px;
+  width: 30px;
+  heigh: 30px;
+  z-index: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-radius: 5px;
   background-color: white;
   cursor: pointer;
 }
@@ -299,6 +317,7 @@ p.list-item {
   grid-column: 2;
   grid-row: 1;
   width: 100%;
+  z-index: 9;
 }
 
 .main-container {
