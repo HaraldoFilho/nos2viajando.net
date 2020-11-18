@@ -350,20 +350,24 @@ function addFlightLine(map, id, coord_a, coord_b, color, width) {
 
 }
 
-function toggleSidePanel() {
-  if (document.getElementById('sidebar').style.display == 'none')  {
-    showSidePanel();
-  }  else {
-    hideSidePanel();
-  }
-}
-
-function hideSidePanel() {
+function hideSideBar() {
   document.getElementById('sidebar').style.display = 'none';
-  document.getElementById('travelmap').style="grid-column:1 / span 2";
+  document.getElementById('travelmap').style = "grid-column:1 / span 2";
+  document.getElementById('open-sidebar').style.display = 'block';
+  document.getElementById('close-sidebar').style.display = 'none';
 }
 
-function showSidePanel() {
+function showSideBar() {
   document.getElementById('sidebar').style.display = 'grid';
-  document.getElementById('travelmap').style="grid-column:2";
+  document.getElementById('travelmap').style = "grid-column:2";
+  document.getElementById('open-sidebar').style.display = 'none';
+  document.getElementById('close-sidebar').style.display = 'block';
+}
+
+function hideSideBarTab() {
+  document.getElementById('close-sidebar').style = 'margin-left:289px';
+}
+
+function showSideBarTab() {
+  document.getElementById('close-sidebar').style = 'margin-left:310px';
 }

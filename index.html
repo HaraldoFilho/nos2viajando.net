@@ -38,43 +38,54 @@
 
       <div id="sidebar" class="sidebar-container">
 
-        <div class="top-container">
+        <div id="top-container" class="top-container">
+
           <div class="avatar">
             <img class="avatar" src="avatar.jpg" title="Haraldo & Raquel" alt="Haraldo & Raquel"/>
           </div>
+
           <div class="title">
             Nós Dois Viajando
           </div>
+
           <div id="trips" class="trips">
             <img class="metric" src="icons/luggage.svg"/>
           </div>
+
           <div id="countries" class="countries">
             <img class="metric" src="icons/world.svg"/>
           </div>
+
           <div id="distance" class="distance">
             <img class="metric" src="icons/distance.svg"/>
           </div>
+
           <div id="days" class="days">
             <img class="metric" src="icons/days.svg"/>
           </div>
+
           <div class="map">
             <div id='map' style='width: 300px; height: 150px;'></div>
             <img id="fullwindow-enter-icon" class="fullwindow-enter" src="icons/full_window_enter.svg"/>
             <img id="zoom-out-icon" class="zoom-out" src="icons/fit_window.svg"/>
           </div>
+
           <div id="countries-panel" class="flags"></div>
 
         </div>
+
+        <img id="close-sidebar" class="close-sidebar" src="icons/sidebar_close.svg"/>
 
         <div id="lists" class="lists-container"></div>
 
       </div>
 
+      <img id="open-sidebar" class="open-sidebar" src="icons/sidebar_open.svg"/>
+
       <div id="travelmap" class="travelmap-container">
         <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
           Navegador não compatível
         </iframe>
-        <img id="toggle-sidepanel" class="toggle-sidepanel" src="icons/sidepanel.svg"/>
       </div>
 
     </div>
@@ -188,7 +199,10 @@
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
-    document.getElementById('toggle-sidepanel').addEventListener('click', function() { toggleSidePanel() });
+    document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
+    document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });
+    document.getElementById('sidebar').addEventListener('mouseover', function() { showSideBarTab() });
+    document.getElementById('sidebar').addEventListener('mouseleave', function() { hideSideBarTab() });
 
     var lists = document.getElementById('lists');
 
@@ -357,8 +371,6 @@
     document.getElementById("checkbox-photos").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { refreshMap(map_fullwindow, current_map_style, locations_dict) });
-
-    // hideSidePanel();
 
   </script>
 

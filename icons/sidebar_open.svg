@@ -7,17 +7,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   enable-background="new 0 0 24 24"
-   viewBox="0 0 24 24"
-   fill="black"
-   width="48px"
-   height="48px"
+   viewBox="0 0 7.4099998 12"
+   width="14.82"
+   height="24"
    version="1.1"
-   id="svg8"
-   sodipodi:docname="sidepanel.svg"
+   id="svg6"
+   sodipodi:docname="sidebar_open.svg"
+   style="fill:#000000"
    inkscape:version="0.92.1 r15371">
   <metadata
-     id="metadata14">
+     id="metadata12">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -28,7 +27,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs12" />
+     id="defs10" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -38,31 +37,25 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1376"
-     inkscape:window-height="848"
-     id="namedview10"
+     inkscape:window-width="732"
+     inkscape:window-height="480"
+     id="namedview8"
      showgrid="false"
      inkscape:zoom="4.9166667"
-     inkscape:cx="-10.677966"
-     inkscape:cy="24"
+     inkscape:cx="6.82"
+     inkscape:cy="12"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="g6" />
-  <g
-     id="g6"
-     transform="matrix(-1,0,0,1,24,0)">
-    <rect
-       height="24"
-       width="24"
-       id="rect2"
-       x="0"
-       y="0"
-       style="fill:none" />
-    <path
-       d="M 16,20 H 2 V 4 H 16 Z M 18,8 h 4 V 4 h -4 z m 0,12 h 4 v -4 h -4 z m 0,-6 h 4 v -4 h -4 z"
-       id="path4"
-       inkscape:connector-curvature="0"
-       style="fill:#4d4d4d" />
-  </g>
+     inkscape:current-layer="svg6" />
+  <path
+     d="m -8.59,-6 h 24 v 24 h -24 z"
+     id="path2"
+     inkscape:connector-curvature="0"
+     style="fill:none" />
+  <path
+     d="M 1.41,0 0,1.41 4.58,6 0,10.59 1.41,12 l 6,-6 z"
+     id="path4"
+     style="fill:#4d4d4d"
+     inkscape:connector-curvature="0" />
 </svg>
