@@ -76,10 +76,8 @@ function addListenerToFLags(item) {
 function enterMapFullwindow(current_bbox, current_coords) {
 
   document.getElementById('map-overlay').style.height = "100%";
-  document.getElementById('fullwindow-exit-icon').style.width = "28px";
-  document.getElementById('fullwindow-exit-icon').style.height = "28px";
-  document.getElementById('fullwindow-zoom-out-icon').style.width = "28px";
-  document.getElementById('fullwindow-zoom-out-icon').style.height = "28px";
+  document.getElementById('fullwindow-exit-icon').style.display = "block";
+  document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
   document.getElementById('selector').style.display = "block";
 
@@ -112,8 +110,8 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
 function exitMapFullwindow() {
   document.getElementById('map-overlay').style.height = "0%";
-  document.getElementById('fullwindow-exit-icon').style.width = "0";
-  document.getElementById('fullwindow-exit-icon').style.height = "0";
+  document.getElementById('fullwindow-exit-icon').style.display = "none";
+  document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
   document.getElementById('menu').style.display = "none";
   document.getElementById('selector').style.display = "none";
 }
