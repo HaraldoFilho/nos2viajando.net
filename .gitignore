@@ -1,4 +1,4 @@
-py/__pycache__
 py/*
 !py/photosets.py
-!update-photo-markers.py
+!py/setup-photoset.py
+!py/update-photo-markers.py
