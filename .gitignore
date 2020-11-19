@@ -4,4 +4,5 @@ py/countries.py
 py/locations.py
 py/user.py
 py/api_credentials.py
-
+py/generate-map-data.py
+py/countries_info.py
