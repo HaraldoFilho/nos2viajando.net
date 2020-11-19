@@ -1,8 +1,4 @@
 py/__pycache__
-py/config.py
-py/countries.py
-py/locations.py
-py/user.py
-py/api_credentials.py
-py/generate-map-data.py
-py/countries_info.py
+py/*
+!py/photosets.py
+!update-photo-markers.py
