@@ -84,7 +84,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({
       container: 'map-overlay',
-      style: 'mapbox://styles/mapbox/outdoors-v11'
+      style: current_map_style
     });
     map_fullwindow.addControl(new mapboxgl.NavigationControl());
 
