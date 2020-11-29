@@ -5,6 +5,6 @@ var parks = [
   [[-119.592716, 37.745702], 'US', 'Parque Nacional de Yosemite'],
   [[-118.751439, 36.581700], 'US', 'Parque Nacional da Sequoia'],
   [[-32.415536, -3.860330], 'BR', 'P. Nac. Marinho de Fernando de Noronha'],
-  [[15.645725, 44.970572], 'HR', 'Parque Nacional dos Lagos Plitvice'],
+  [[15.604231, 44.881627], 'HR', 'Parque Nacional dos Lagos Plitvice'],
   [[15.964112, 43.805828], 'HR', 'Parque Nacional Krka']
 ]
