@@ -197,8 +197,8 @@ function createPhotoMarker(map, value) {
   var marker = document.createElement('div');
   var img = document.createElement('img');
   img.setAttribute('src', 'icons/marker_photo.svg');
-  img.setAttribute('width', '28');
-  img.setAttribute('height', '28');
+  img.setAttribute('width', '20');
+  img.setAttribute('height', '20');
   marker.appendChild(img);
 
   var htmlText = "<div style=\"max-height:410px;overflow:auto;\">";
