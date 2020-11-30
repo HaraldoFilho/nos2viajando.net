@@ -1,56 +1,41 @@
+function createMarkers(map, places, color, scale) {
+  var markers = [];
+  for (var i = 0; i < places.length; i++) {
+    markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
+    .setLngLat(places[i][0])
+    .setPopup(new mapboxgl.Popup({closeButton:false}).setText(places[i][2]));
+  }
+  return markers;
+}
+
+function addMarkersToMap(map, markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].addTo(map);
+  }
+}
+
+function toggleMarkers(map, markers, checkbox) {
+  for (var i = 0; i < markers.length; i++) {
+    if (document.getElementById(checkbox).checked) {
+      markers[i].addTo(map);
+    } else {
+      markers[i].remove();
+    }
+  }
+}
+
 function loadMapData(map, markers_scale) {
-
-  var airports_checked = document.getElementById("checkbox-airports").checked;
-  var accommodations_checked = document.getElementById("checkbox-accommodations").checked;
-  var attractions_checked = document.getElementById("checkbox-attractions").checked;
-  var parks_checked = document.getElementById("checkbox-parks").checked;
-  var cities_checked = document.getElementById("checkbox-cities").checked;
-
-  if (airports_checked) {
-    for (var i = 0; i < airports.length; i++) {
-      new mapboxgl.Marker({color:'#a0a0a0',scale:markers_scale,draggable:false})
-      .setLngLat(airports[i][0])
-      .setPopup(new mapboxgl.Popup({closeButton:false}).setText(airports[i][2]))
-      .addTo(map);
-    }
-  }
-
-  if (accommodations_checked) {
-    for (var i = 0; i < accommodations.length; i++) {
-      new mapboxgl.Marker({color:'#dec900',scale:markers_scale,draggable:false})
-      .setLngLat(accommodations[i][0])
-      .setPopup(new mapboxgl.Popup({closeButton:false}).setText(accommodations[i][2]))
-      .addTo(map);
-    }
-  }
-
-  if (attractions_checked) {
-    for (var i = 0; i < attractions.length; i++) {
-      new mapboxgl.Marker({color:'#ff8080',scale:markers_scale,draggable:false})
-      .setLngLat(attractions[i][0])
-      .setPopup(new mapboxgl.Popup({closeButton:false}).setText(attractions[i][2]))
-      .addTo(map);
-    }
-  }
-
-  if (parks_checked) {
-    for (var i = 0; i < parks.length; i++) {
-      new mapboxgl.Marker({color:'#55a455',scale:markers_scale,draggable:false})
-      .setLngLat(parks[i][0])
-      .setPopup(new mapboxgl.Popup({closeButton:false}).setText(parks[i][2]))
-      .addTo(map);
-    }
-  }
-
-  if (cities_checked) {
-    for (var i = 0; i < cities.length; i++) {
-      new mapboxgl.Marker({color:'#3fb1ce',scale:markers_scale,draggable:false})
-      .setLngLat(cities[i][0])
-      .setPopup(new mapboxgl.Popup({closeButton:false}).setText(cities[i][2]))
-      .addTo(map);
-    }
-  }
-
+  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale);
+  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale);
+  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
+  parks_markers = createMarkers(map, parks, '#55a455', markers_scale);
+  cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale);
+  photos_markers = createPhotosMarkers(map, locations_dict);
+  addMarkersToMap(map, airports_markers);
+  addMarkersToMap(map, accommodations_markers);
+  addMarkersToMap(map, attractions_markers);
+  addMarkersToMap(map, parks_markers);
+  addMarkersToMap(map, cities_markers);
 }
 
 
@@ -95,9 +80,8 @@ function enterMapFullwindow(current_bbox, current_coords) {
       inputs[i].onclick = switchLayer;
     }
 
-    loadPhotosOnMap(map_fullwindow, locations_dict);
     loadMapData(map_fullwindow, 0.7);
-    loadFlights(map_fullwindow, flights, airports);
+    //loadFlights(map_fullwindow, flights, airports);
   }
 
   if (current_coords.length == 0) {
@@ -121,7 +105,6 @@ function switchLayer(layer) {
   var layerId = layer.target.id;
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
-  refreshMap(map_fullwindow, current_map_style, locations_dict)
 }
 
 
@@ -197,21 +180,19 @@ function getInitialBoundingBox(markers) {
 
 }
 
-function loadPhotosOnMap(map, locations_dict) {
-
-  var photos_checked = document.getElementById("checkbox-photos").checked;
-
-  if (photos_checked) {
-    for (var country in locations_dict) {
-      for (var i = 0; i < locations_dict[country].length; i++) {
-        addPhotoMarker(map, locations_dict[country][i]);
-      }
+function createPhotosMarkers(map, locations) {
+  var photos_markers = [];
+  var m = 0;
+  for (var country in locations) {
+    for (var i = 0; i < locations[country].length; i++) {
+      photos_markers[m] = createPhotoMarker(map, locations[country][i]);
+      m++;
     }
   }
-
+  return photos_markers;
 }
 
-function addPhotoMarker(map, value) {
+function createPhotoMarker(map, value) {
 
   var marker = document.createElement('div');
   var img = document.createElement('img');
@@ -228,127 +209,124 @@ function addPhotoMarker(map, value) {
   }
   htmlText = htmlText.concat("</div>");
 
+  var photo_marker;
+
   if (value[1].length <= 35) {
-    new mapboxgl.Marker({element:marker,scale:1,draggable:false})
+    photo_marker = new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
-    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'566px'}).setHTML(htmlText))
-    .addTo(map);
+    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'566px'}).setHTML(htmlText));
   } else {
-    new mapboxgl.Marker({element:marker,scale:1,draggable:false})
+    photo_marker = new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
-    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'592px'}).setHTML(htmlText))
-    .addTo(map);
+    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'592px'}).setHTML(htmlText));
   }
 
-}
-
-function refreshMap(map, current_map_style, locations_dict){
-
-  document.getElementById('map-overlay').style.height = "100%";
-  document.getElementById('fullwindow-exit-icon').style.width = "28px";
-  document.getElementById('fullwindow-exit-icon').style.height = "28px";
-  document.getElementById('fullwindow-zoom-out-icon').style.width = "28px";
-  document.getElementById('fullwindow-zoom-out-icon').style.height = "28px";
-
-  map_fullwindow.remove();
-  map_fullwindow = new mapboxgl.Map({
-    container: 'map-overlay',
-    style: current_map_style
-  });
-
-  map_fullwindow.addControl(new mapboxgl.NavigationControl());
-  loadMapData(map_fullwindow, 0.7);
-  loadPhotosOnMap(map_fullwindow, locations_dict);
-  loadFlights(map_fullwindow, flights, airports);
-
-  if (current_coords.length == 0) {
-    fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
-  } else {
-    flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
-  }
+  return photo_marker;
 
 }
 
-function loadFlights(map, flights, airports) {
-
-  for (var f = 0; f < flights.length; f++) {
-    var route = 'route_' + (f+1);
-    for (var t = 0; t < flights[f][1].length; t++) {
-      for (var c = 1; c < flights[f][1][t].length; c++) {
-        var id = route + '_' + (t+1) + '_' + (c);
-        for (var a = 0; a < airports.length; a++) {
-
-          var airport_1 = flights[f][1][t][c-1];
-          var airport_2 = flights[f][1][t][c];
-
-          if (airport_1 == airports[a][3]) {
-            var coord_a = airports[a][0];
-            var country_a = airports[a][1];
-          }
-          if (airport_2 == airports[a][3]) {
-            var coord_b = airports[a][0];
-            var country_b = airports[a][1];
-          }
-
-        }
-
-        var color;
-        var width;
-        var add;
-
-        if (country_a == country_b) {
-          color = '#00F';
-          width = 2;
-          add = document.getElementById("checkbox-flights-domestic").checked;
-
-        } else {
-          color = '#F00';
-          width = 2;
-          add = document.getElementById("checkbox-flights-international").checked;
-        }
-
-        if (add) {
-          addFlightLine(map, id, coord_a, coord_b, color, width);
-        }
-
-      }
-    }
-  }
-}
-
-function addFlightLine(map, id, coord_a, coord_b, color, width) {
-
-  map.on('load', function () {
-
-    map.addSource(id, {
-      'type': 'geojson',
-      'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': [ coord_a, coord_b ]
-        }
-      }
-    });
-
-    map.addLayer({
-      'id': id,
-      'type': 'line',
-      'source': id,
-      'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      'paint': {
-        'line-color': color,
-        'line-width': width
-      }
-    });
-
-  });
-
-}
+// function loadFlights(map, flights, airports) {
+//
+//   for (var f = 0; f < flights.length; f++) {
+//     var route = 'route_' + (f+1);
+//     for (var t = 0; t < flights[f][1].length; t++) {
+//       for (var c = 1; c < flights[f][1][t].length; c++) {
+//         var id = route + '_' + (t+1) + '_' + (c);
+//         for (var a = 0; a < airports.length; a++) {
+//
+//           var airport_1 = flights[f][1][t][c-1];
+//           var airport_2 = flights[f][1][t][c];
+//
+//           if (airport_1 == airports[a][3]) {
+//             var coord_a = airports[a][0];
+//             var country_a = airports[a][1];
+//           }
+//           if (airport_2 == airports[a][3]) {
+//             var coord_b = airports[a][0];
+//             var country_b = airports[a][1];
+//           }
+//
+//         }
+//
+//         var color;
+//         var width;
+//         var add;
+//
+//         if (country_a == country_b) {
+//           color = '#00F';
+//           width = 2;
+//           add = document.getElementById("checkbox-flights-domestic").checked;
+//
+//         } else {
+//           color = '#F00';
+//           width = 2;
+//           add = document.getElementById("checkbox-flights-international").checked;
+//         }
+//
+//         destroyFlightLine(map, id);
+//         createFlightLine(map, id, coord_a, coord_b);
+//
+//         if (add) {
+//           addFlightLine(map, id, color, width);
+//         } else {
+//           removeFlightLine(map, id);
+//         }
+//
+//       }
+//     }
+//   }
+// }
+//
+// function createFlightLine(map, id, coord_a, coord_b) {
+//
+//   map.on('load', function () {
+//     map.addSource(id, {
+//       'type': 'geojson',
+//       'data': {
+//         'type': 'Feature',
+//         'properties': {},
+//         'geometry': {
+//           'type': 'LineString',
+//           'coordinates': [ coord_a, coord_b ]
+//         }
+//       }
+//     });
+//   });
+//
+// }
+//
+// function destroyFlightLine(map, id) {
+//   map.on('load', function () {
+//   if(map.getSource(id)) {
+//     map.removeSource(id);
+//   }
+// });
+//
+// }
+//
+// function addFlightLine(map, id, color, width) {
+//
+//     map.addLayer({
+//       'id': id,
+//       'type': 'line',
+//       'source': id,
+//       'layout': {
+//         'line-join': 'round',
+//         'line-cap': 'round'
+//       },
+//       'paint': {
+//         'line-color': color,
+//         'line-width': width
+//       }
+//     });
+//
+// }
+//
+// function removeFlightLine(map, id) {
+//   if (map.getLayer(id)) {
+//     map.removeLayer(id);
+//   }
+// }
 
 function hideSideBar() {
   document.getElementById('sidebar').style.display = 'none';
