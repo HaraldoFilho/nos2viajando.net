@@ -81,7 +81,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
     }
 
     loadMapData(map_fullwindow, 0.7);
-    //loadFlights(map_fullwindow, flights, airports);
+
   }
 
   if (current_coords.length == 0) {
@@ -105,6 +105,9 @@ function switchLayer(layer) {
   var layerId = layer.target.id;
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
+  map_fullwindow.on('styledata', function() {
+    loadFlights(map_fullwindow, flights, airports);
+  });
 }
 
 
@@ -225,108 +228,100 @@ function createPhotoMarker(map, value) {
 
 }
 
-// function loadFlights(map, flights, airports) {
-//
-//   for (var f = 0; f < flights.length; f++) {
-//     var route = 'route_' + (f+1);
-//     for (var t = 0; t < flights[f][1].length; t++) {
-//       for (var c = 1; c < flights[f][1][t].length; c++) {
-//         var id = route + '_' + (t+1) + '_' + (c);
-//         for (var a = 0; a < airports.length; a++) {
-//
-//           var airport_1 = flights[f][1][t][c-1];
-//           var airport_2 = flights[f][1][t][c];
-//
-//           if (airport_1 == airports[a][3]) {
-//             var coord_a = airports[a][0];
-//             var country_a = airports[a][1];
-//           }
-//           if (airport_2 == airports[a][3]) {
-//             var coord_b = airports[a][0];
-//             var country_b = airports[a][1];
-//           }
-//
-//         }
-//
-//         var color;
-//         var width;
-//         var add;
-//
-//         if (country_a == country_b) {
-//           color = '#00F';
-//           width = 2;
-//           add = document.getElementById("checkbox-flights-domestic").checked;
-//
-//         } else {
-//           color = '#F00';
-//           width = 2;
-//           add = document.getElementById("checkbox-flights-international").checked;
-//         }
-//
-//         destroyFlightLine(map, id);
-//         createFlightLine(map, id, coord_a, coord_b);
-//
-//         if (add) {
-//           addFlightLine(map, id, color, width);
-//         } else {
-//           removeFlightLine(map, id);
-//         }
-//
-//       }
-//     }
-//   }
-// }
-//
-// function createFlightLine(map, id, coord_a, coord_b) {
-//
-//   map.on('load', function () {
-//     map.addSource(id, {
-//       'type': 'geojson',
-//       'data': {
-//         'type': 'Feature',
-//         'properties': {},
-//         'geometry': {
-//           'type': 'LineString',
-//           'coordinates': [ coord_a, coord_b ]
-//         }
-//       }
-//     });
-//   });
-//
-// }
-//
-// function destroyFlightLine(map, id) {
-//   map.on('load', function () {
-//   if(map.getSource(id)) {
-//     map.removeSource(id);
-//   }
-// });
-//
-// }
-//
-// function addFlightLine(map, id, color, width) {
-//
-//     map.addLayer({
-//       'id': id,
-//       'type': 'line',
-//       'source': id,
-//       'layout': {
-//         'line-join': 'round',
-//         'line-cap': 'round'
-//       },
-//       'paint': {
-//         'line-color': color,
-//         'line-width': width
-//       }
-//     });
-//
-// }
-//
-// function removeFlightLine(map, id) {
-//   if (map.getLayer(id)) {
-//     map.removeLayer(id);
-//   }
-// }
+function loadFlights(map, flights, airports) {
+
+  for (var f = 0; f < flights.length; f++) {
+    var route = 'route_' + (f+1);
+    for (var t = 0; t < flights[f][1].length; t++) {
+      for (var c = 1; c < flights[f][1][t].length; c++) {
+        var id = route + '_' + (t+1) + '_' + (c);
+        for (var a = 0; a < airports.length; a++) {
+
+          var airport_1 = flights[f][1][t][c-1];
+          var airport_2 = flights[f][1][t][c];
+
+          if (airport_1 == airports[a][3]) {
+            var coord_a = airports[a][0];
+            var country_a = airports[a][1];
+          }
+          if (airport_2 == airports[a][3]) {
+            var coord_b = airports[a][0];
+            var country_b = airports[a][1];
+          }
+
+        }
+
+        var color;
+        var width;
+        var add;
+
+        if (country_a == country_b) {
+          color = '#00F';
+          width = 2;
+          add = document.getElementById("checkbox-flights-domestic").checked;
+
+        } else {
+          color = '#F00';
+          width = 2;
+          add = document.getElementById("checkbox-flights-international").checked;
+        }
+
+        createFlightLine(map, id, coord_a, coord_b);
+
+        if (add) {
+          addFlightLine(map, id, color, width);
+        } else {
+          removeFlightLine(map, id);
+        }
+
+      }
+    }
+  }
+}
+
+function createFlightLine(map, id, coord_a, coord_b) {
+
+  if (!map.getSource(id)) {
+    map.addSource(id, {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [ coord_a, coord_b ]
+        }
+      }
+    });
+  }
+
+}
+
+function addFlightLine(map, id, color, width) {
+
+  if (!map.getLayer(id)) {
+    map.addLayer({
+      'id': id,
+      'type': 'line',
+      'source': id,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      'paint': {
+        'line-color': color,
+        'line-width': width
+      }
+    });
+  }
+
+}
+
+function removeFlightLine(map, id) {
+  if (map.getLayer(id)) {
+    map.removeLayer(id);
+  }
+}
 
 function hideSideBar() {
   document.getElementById('sidebar').style.display = 'none';

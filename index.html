@@ -122,12 +122,12 @@
         <input id="checkbox-photos" type="checkbox" />
         <img src="icons/marker_photo.svg" height="18px" style="margin: 0px 2px -4px 1px"/>
         fotos<br>
-        <!-- <input id="checkbox-flights-international" type="checkbox" />
+        <input id="checkbox-flights-international" type="checkbox" />
         <img src="icons/flight_international.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
         internacional<br>
         <input id="checkbox-flights-domestic" type="checkbox" />
         <img src="icons/flight_domestic.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
-        doméstico -->
+        doméstico
       </div>
 
     </div>
@@ -387,8 +387,8 @@
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
-    // document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
-    // document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
 
   </script>
 
