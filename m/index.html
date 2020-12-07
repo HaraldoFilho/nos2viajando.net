@@ -56,7 +56,7 @@
           </div>
 
           <div class="map">
-            <div id='map' style='width: 100%; height: 150px;'></div>
+            <div id='map' style='width: 100%; height: 700px;'></div>
             <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/>
             <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
           </div>
@@ -65,7 +65,7 @@
 
         </div>
 
-        <div id="lists" class="lists-container"></div>
+        <!-- <div id="lists" class="lists-container"></div> -->
 
     </div>
 
@@ -121,7 +121,7 @@
     var initial_bbox = getInitialBoundingBox(cities);
 
     var init_x_offset = 0;
-    var init_y_offset = 10;
+    var init_y_offset = 2;
 
     var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
@@ -139,8 +139,8 @@
       style: 'mapbox://styles/mapbox/light-v10'
     });
 
-    loadMapData(map, 0.4);
-    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30)
+    loadMapData(map, 1);
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 90)
 
     // Full window map
     var map_fullwindow;
@@ -168,14 +168,14 @@
     var lists = document.getElementById('lists');
 
     var n_countries = countries.length;
-    var icons_per_row = 7;
-    var panel_rows = Math.ceil(n_countries/icons_per_row);
-    var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
-    var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
-
+    // var icons_per_row = 7;
+    // var panel_rows = Math.ceil(n_countries/icons_per_row);
+    // var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
+    // var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
+    //
     document.getElementById('countries').append(n_countries + " países");
-    countries_panel.setAttribute('style', 'height:'.concat(panel_height));
-    lists.setAttribute('style', 'top:'.concat(lists_height));
+    // countries_panel.setAttribute('style', 'height:'.concat(panel_height));
+    // lists.setAttribute('style', 'top:'.concat(lists_height));
 
     for (var i = 0; i < n_countries; i++) {
       var country_name = countries[i][0];
