@@ -148,6 +148,11 @@ function getIconSrc(country_code) {
     .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
+function getMobileIconSrc(country_code) {
+  return "../icons/flags/".concat(countries_bbox[country_code][0])
+    .replace(/\s/g, "-").toLowerCase().concat(".svg");
+}
+
 function getItemId(item_name) {
   return item_name.replace(/\s/g, "_").toUpperCase();
 }
