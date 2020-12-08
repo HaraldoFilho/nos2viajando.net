@@ -14,3 +14,20 @@ var airports = [
   [[18.262164, 42.560850], 'HR', 'Aeroporto de Dubrovnik', 'DBV'],
   [[14.289361, 40.884847], 'IT', 'Aeroporto de Nápoles', 'NAP']
 ]
+
+var airports_en = [
+  [[-47.137552, -23.008121], 'BR', 'Viracopos Airport', 'VCP'],
+  [[-51.175306, -29.993566], 'BR', 'Porto Alegre Airport', 'POA'],
+  [[-54.488620, -25.598144], 'BR', 'Foz do Iguaçu Airport', 'IGU'],
+  [[-46.473064, -23.429726], 'BR', 'Guarulhos Airport', 'GRU'],
+  [[-74.174473, 40.689515], 'US', 'Newark Airport', 'EWR'],
+  [[-122.379020, 37.621432], 'US', 'San Francisco Airport', 'SFO'],
+  [[-95.336579, 29.990220], 'US', 'Houston Airport', 'IAH'],
+  [[-34.923919, -8.125910], 'BR', 'Recife Airport', 'REC'],
+  [[-32.424450, -3.853822], 'BR', 'Fernando de Noronha Airport', 'FEN'],
+  [[12.246163, 41.799919], 'IT', 'Rome-Fiumicino Airport', 'FCO'],
+  [[16.298966, 43.537061], 'HR', 'Split Airport', 'SPU'],
+  [[16.067458, 45.740863], 'HR', 'Zagreb Airport', 'ZAG'],
+  [[18.262164, 42.560850], 'HR', 'Dubrovnik Airport', 'DBV'],
+  [[14.289361, 40.884847], 'IT', 'Naples Airport', 'NAP']
+]

@@ -8,7 +8,7 @@
   <script type="text/javascript" src="js/redirection-mobile.js"></script>
   <script type="text/javascript">// <![CDATA[
     SA.redirection_mobile ({
-      mobile_url : "nos2viajando.travelmap.net",
+      mobile_url : "nos2viajando.net/m/",
     });
     // ]]></script>
     <script src="js/mapbox_token.js"></script>
@@ -16,6 +16,7 @@
     <script src="js/functions.js"></script>
 
     <!-- Locations data -->
+    <script src="data/texts.js"></script>
     <script src="data/trips.js"></script>
     <script src="data/countries.js"></script>
     <script src="data/cities.js"></script>
@@ -44,9 +45,7 @@
             <img class="avatar" src="avatar.jpg" title="Haraldo & Raquel" alt="Haraldo & Raquel"/>
           </div>
 
-          <div class="title">
-            Nós Dois Viajando
-          </div>
+          <div id="title" class="title"></div>
 
           <div id="trips" class="trips">
             <img class="metric" src="icons/luggage.svg"/>
@@ -134,6 +133,20 @@
 
     <script>
 
+    var userLang = navigator.language || navigator.userLanguage;
+    console.log ("User language is: " + userLang);
+
+    if (userLang != 'pt-BR') {
+      texts_dict = texts_dict_en;
+      accommodations = accommodations_en;
+      airports = airports_en;
+      attractions = attractions_en;
+      cities = cities_en;
+      countries = countries_en;
+      parks = parks_en;
+      trips = trips_en;
+    }
+
     mapboxgl.accessToken = mapbox_token;
 
     var current_bbox = [];
@@ -181,9 +194,10 @@
       days += trips[i][3];
     }
 
-    document.getElementById('trips').append(n_trips + " viagens");
+    document.getElementById('title').innerText = texts_dict['TITLE'];
+    document.getElementById('trips').append(n_trips + " " + texts_dict['TRIPS']);
     document.getElementById('distance').append(distance/1000 + " km");
-    document.getElementById('days').append(days + " dias");
+    document.getElementById('days').append(days + " " + texts_dict['DAYS']);
 
     var countries_panel = document.getElementById('countries-panel');
     var lists = document.getElementById('lists');
@@ -194,7 +208,7 @@
     var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
     var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
 
-    document.getElementById('countries').append(n_countries + " países");
+    document.getElementById('countries').append(n_countries + " " + texts_dict['COUNTRIES']);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
@@ -233,7 +247,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_city.svg');
     title.appendChild(marker);
-    title.append('Cidades');
+    title.append(texts_dict['CITIES']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = cities.length;
@@ -263,7 +277,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_park.svg');
     title.appendChild(marker);
-    title.append('Parques Nacionais');
+    title.append(texts_dict['PARKS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = parks.length;
@@ -293,7 +307,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_attraction.svg');
     title.appendChild(marker);
-    title.append('Atrações Turísticas');
+    title.append(texts_dict['ATTRACTIONS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = attractions.length;
@@ -323,7 +337,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_accommodation.svg');
     title.appendChild(marker);
-    title.append('Hospedagens');
+    title.append(texts_dict['ACCOMMODATIONS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = accommodations.length;
@@ -353,7 +367,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_airport.svg');
     title.appendChild(marker);
-    title.append('Aeroportos');
+    title.append(texts_dict['AIRPORTS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = airports.length;

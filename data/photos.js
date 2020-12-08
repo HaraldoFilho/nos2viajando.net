@@ -1,4 +1,4 @@
-locations_dict = {
+var locations_dict = {
   'VA': [
     [[12.454226, 41.904856], [['49680288613', 'https://live.staticflickr.com/65535/49680288613_846cfe7c4e_s.jpg']]],
     [[12.453861, 41.906596], [['49687632177', 'https://live.staticflickr.com/65535/49687632177_edb5a6783c_s.jpg'], ['49686873401', 'https://live.staticflickr.com/65535/49686873401_ef5b2a64d8_s.jpg']]],
