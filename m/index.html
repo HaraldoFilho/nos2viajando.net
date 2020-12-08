@@ -55,8 +55,8 @@
 
           <div class="map">
             <div id='map' style='height: 500px;'>
-              <!-- <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
-              <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/> -->
+              <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
+              <!-- <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/> -->
             </div>
           </div>
 
@@ -190,7 +190,7 @@
       countries_panel.appendChild(country);
     }
 
-    // document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
     // document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
     // document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
     // document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });

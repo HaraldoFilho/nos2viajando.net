@@ -108,7 +108,7 @@ img.fullwindow-zoom-out {
 }
 
 p.list-item {
-  font-size: 48px;
+  font-size: 40px;
   text-align: left;
   margin-top: -20px;
   color: #606060;
@@ -140,7 +140,7 @@ p.list-item {
   grid-area: trips;
   width: auto;
   font-family: arial;
-  font-size: 32px;
+  font-size: 24px;
   text-align: left;
   padding-left: 25px;
   color: grey;
@@ -152,7 +152,7 @@ p.list-item {
   grid-area: countries;
   width: auto;
   font-family: arial;
-  font-size: 32px;
+  font-size: 24px;
   text-align: left;
   padding-left: 5px;
   color: grey;
@@ -163,7 +163,7 @@ p.list-item {
   display: block;
   grid-area: distance;
   width: auto;
-  font-size: 32px;
+  font-size: 24px;
   font-family: arial;
   text-align: left;
   padding-left: 25px;
@@ -176,7 +176,7 @@ p.list-item {
   grid-area: days;
   width: auto;
   font-family: arial;
-  font-size: 32px;
+  font-size: 24px;
   text-align: left;
   padding-left: 5px;
   cursor: default;
@@ -225,7 +225,7 @@ p.list-item {
   display: grid;
   grid-area: list-title-container;
   grid-template-columns: auto auto;
-  font-size: 60px;
+  font-size: 54px;
   font-weight: bold;
   color: #606060;
   border-style: none none solid none;
