@@ -30,7 +30,6 @@ function loadMapData(map, markers_scale) {
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale);
-  photos_markers = createPhotosMarkers(map, locations_dict);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
@@ -38,6 +37,9 @@ function loadMapData(map, markers_scale) {
   addMarkersToMap(map, cities_markers);
 }
 
+function loadPhotosMarkers(map) {
+  photos_markers = createPhotosMarkers(map, locations_dict);
+}
 
 // Listeners
 
@@ -81,6 +83,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
     }
 
     loadMapData(map_fullwindow, 0.7);
+    loadPhotosMarkers(map_fullwindow);
 
   }
 

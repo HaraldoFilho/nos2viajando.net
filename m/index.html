@@ -8,6 +8,11 @@
     <script src="../js/countries_bbox.js"></script>
     <script src="../js/functions.js"></script>
 
+    <script type="text/javascript">
+      var userLang = navigator.language || navigator.userLanguage;
+      console.log ("The language is: " + userLang);
+    </script>
+
     <!-- Locations data -->
     <script src="../data/trips.js"></script>
     <script src="../data/countries.js"></script>
@@ -67,7 +72,7 @@
         </div>
 
 
-    <div id="map-overlay">
+    <!-- <div id="map-overlay">
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../icons/fit_window.svg"/>
 
@@ -107,7 +112,7 @@
         doméstico
       </div>
 
-    </div>
+    </div> -->
 
     <script>
 
@@ -354,14 +359,14 @@
     accommodations.forEach(addListenerToPlaces);
     airports.forEach(addListenerToRegions);
 
-    document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
-    document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
-    document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
-    document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
-    document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
-    document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
-    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
-    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    // document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
+    // document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
+    // document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
+    // document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
+    // document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
+    // document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
+    // document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    // document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
 
   </script>
 
