@@ -27,14 +27,14 @@ img.metric {
 }
 
 img.tiny_icon {
-  width: 24px;
-  height: 24px;
-  margin: 0px 7px -2px 0px;
+  width: 50px;
+  height: 50px;
+  margin: 0px 20px -6px 0px;
 }
 
 img.marker {
-  height: 30px;
-  margin: 0px 4px -2px -1px;
+  height: 60px;
+  margin: 0px 8px -6px -4px;
 }
 
 img.fullwindow-enter {
@@ -108,9 +108,9 @@ img.fullwindow-zoom-out {
 }
 
 p.list-item {
-  font-size: 20px;
+  font-size: 48px;
   text-align: left;
-  margin-top: -7px;
+  margin-top: -20px;
   color: #606060;
   cursor: pointer;
 }
@@ -128,7 +128,7 @@ p.list-item {
   width: 100%;
   height: auto;
   font-weight: bold;
-  font-size: 70px;
+  font-size: 64px;
   text-align: left;
   padding-left: 25px;
   color: #606060;
@@ -225,30 +225,31 @@ p.list-item {
   display: grid;
   grid-area: list-title-container;
   grid-template-columns: auto auto;
-  font-size: 30px;
+  font-size: 60px;
   font-weight: bold;
   color: #606060;
   border-style: none none solid none;
   border-color: grey;
   border-width: thin;
-  margin-top: 5px;
-  margin-bottom: 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   cursor: default;
 }
 
-.top-container {
+.main-container {
   display: grid;
   z-index: 3;
   top: 0;
-  grid-area: top-container;
+  grid-area: main-container;
   grid-template-areas:
   'avatar title title'
   'avatar trips countries'
   'avatar distance days'
-  'map map map '
-  'flags flags flags';
+  'map map map'
+  'flags flags flags'
+  'lists lists lists';
   grid-template-columns: 25% 30% auto;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   position: sticky;
   width: auto;
   height: auto;
@@ -258,35 +259,19 @@ p.list-item {
   border-color: lightgrey;
 }
 
-.lists-container {
+.lists {
   display: block;
   z-index: 3;
-  grid-area: lists-container;
-  overflow-y: scroll;
-  position: absolute;
-  top: 1500px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  padding: 5px 10px 0px 10px;
+  left: 0;
+  right: 0;
+  grid-area: lists;
   width: auto;
+  margin-top: 25px;
   text-align: left;
   border-width: 1px 0 0 0;
   border-style: solid;
   border-color: lightgrey;
   background-color: white;
-}
-
-.main-container {
-  display: grid;
-  z-index: 3;
-  grid-area: sidebar-container;
-  grid-column: 1;
-  grid-row: 1;
-  grid-template-areas:
-    'top-container'
-    'lists-container';
-  text-align: center;
 }
 
 #map-overlay {

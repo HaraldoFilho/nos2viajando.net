@@ -27,9 +27,7 @@
 
   <body>
 
-    <div class="main-container">
-
-        <div id="top-container" class="top-container">
+        <div id="main-container" class="main-container">
 
           <div class="avatar">
             <img class="avatar" src="../avatar.jpg" title="Haraldo & Raquel" alt="Haraldo & Raquel"/>
@@ -56,19 +54,18 @@
           </div>
 
           <div class="map">
-            <div id='map' style='width: 100%; height: 500px;'>
-              <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
-              <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/>
+            <div id='map' style='height: 500px;'>
+              <!-- <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
+              <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/> -->
             </div>
           </div>
 
           <div id="countries-panel" class="flags"></div>
 
+          <div id="lists" class="lists"></div>
+
         </div>
 
-        <!-- <div id="lists" class="lists-container"></div> -->
-
-    </div>
 
     <div id="map-overlay">
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
@@ -121,8 +118,8 @@
 
     var initial_bbox = getInitialBoundingBox(cities);
 
-    var init_x_offset = 0;
-    var init_y_offset = 10;
+    var init_x_offset = 5;
+    var init_y_offset = 5;
 
     var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
@@ -141,7 +138,7 @@
     });
 
     loadMapData(map, 1);
-    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30)
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100)
 
     // Full window map
     var map_fullwindow;
@@ -193,10 +190,10 @@
       countries_panel.appendChild(country);
     }
 
-    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
-    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
-    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
-    document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    // document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
+    // document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
+    // document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
+    // document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
 
     var lists = document.getElementById('lists');
 

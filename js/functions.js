@@ -130,7 +130,7 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 }
 
 function fitRegion(map, region) {
-  var bbox = countries_bbox[region][1]
+  var bbox = countries_bbox[region][1];
   fitBoundingBox(map, bbox, 0, 0, 5, false);
 }
 
