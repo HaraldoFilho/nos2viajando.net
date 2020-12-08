@@ -5,8 +5,8 @@ body {
 }
 
 img.avatar {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: auto;
   border-style: solid;
   border-width: 1px;
   border-radius: 50%;
@@ -14,15 +14,15 @@ img.avatar {
 }
 
 img.flag {
-  width: 120px;
-  height: 120px;
+  width: auto;
+  height: auto;
   cursor: pointer;
 }
 
 img.metric {
-  width: 70px;
-  height: 70px;
-  margin-bottom: -20px;
+  width: 50px;
+  height: 50px;
+  margin-bottom: -10px;
   cursor: default;
 }
 
@@ -41,8 +41,8 @@ img.fullwindow-enter {
   position: absolute;
   top: 0;
   right: 0;
-  margin-right: 80px;
-  margin-top: 530px;
+  margin-right: 30px;
+  margin-top: 30px;
   width: 60px;
   heigh: 60px;
   z-index: 1;
@@ -76,8 +76,8 @@ img.zoom-out {
   position: absolute;
   top: 0;
   left: 0;
-  margin-left: 80px;
-  margin-top: 530px;
+  margin-left: 30px;
+  margin-top: 30px;
   width: 60px;
   heigh: 60px;
   z-index: 1;
@@ -118,18 +118,19 @@ p.list-item {
 .avatar {
   display: block;
   grid-area: avatar;
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: auto;
 }
 
 .title {
   display: block;
   grid-area: title;
-  width: auto;
+  width: 100%;
+  height: auto;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 70px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 25px;
   color: #606060;
   cursor: default;
 }
@@ -139,9 +140,9 @@ p.list-item {
   grid-area: trips;
   width: auto;
   font-family: arial;
-  font-size: 40px;
+  font-size: 32px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 25px;
   color: grey;
   cursor: default;
 }
@@ -151,9 +152,9 @@ p.list-item {
   grid-area: countries;
   width: auto;
   font-family: arial;
-  font-size: 40px;
+  font-size: 32px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 5px;
   color: grey;
   cursor: default;
 }
@@ -162,10 +163,10 @@ p.list-item {
   display: block;
   grid-area: distance;
   width: auto;
-  font-size: 40px;
+  font-size: 32px;
   font-family: arial;
   text-align: left;
-  padding-left: 5px;
+  padding-left: 25px;
   color: grey;
   cursor: default;
 }
@@ -175,7 +176,7 @@ p.list-item {
   grid-area: days;
   width: auto;
   font-family: arial;
-  font-size: 40px;
+  font-size: 32px;
   text-align: left;
   padding-left: 5px;
   cursor: default;
@@ -186,9 +187,9 @@ p.list-item {
   display: block;
   grid-area: map;
   width: 100%;
-  height: 700px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  height: 500px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .flags {
@@ -196,9 +197,9 @@ p.list-item {
   grid-area: flags;
   z-index: 3;
   width: auto;
-  height: 120px;
-  grid-gap: 0px;
-  padding: 40px 20px 40px 20px;
+  height: auto;
+  grid-gap: 25px;
+  padding: 25px;
   border-radius: 20px;
   background-color: #cad2d3;
   grid-template-columns: auto auto auto auto auto auto auto;
@@ -241,17 +242,17 @@ p.list-item {
   top: 0;
   grid-area: top-container;
   grid-template-areas:
-  'avatar title title title title'
-  'avatar trips trips countries countries'
-  'avatar distance distance days days'
-  'map map map map map'
-  'flags flags flags flags flags';
-  grid-template-columns: 450px auto auto auto auto;
-  grid-template-rows: 200px 100px 100px 800px auto;
+  'avatar title title'
+  'avatar trips countries'
+  'avatar distance days'
+  'map map map '
+  'flags flags flags';
+  grid-template-columns: 25% 30% auto;
+  grid-template-rows: auto auto auto;
   position: sticky;
   width: auto;
   height: auto;
-  padding: 50px;
+  padding: 25px;
   border-width: 0 1px 0 0;
   border-style: solid;
   border-color: lightgrey;
