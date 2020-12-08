@@ -53,10 +53,14 @@ function addListenerToPlaces(item) {
   .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5) });
 }
 
+
 function addListenerToFLags(item) {
   document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
 }
 
+function addListenerToFLagsMobile(item) {
+  document.getElementById(item[1]).addEventListener('click', function() { fitRegionMobile(map, item[1]) });
+}
 
 // Full Window
 
@@ -135,6 +139,11 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 function fitRegion(map, region) {
   var bbox = countries_bbox[region][1];
   fitBoundingBox(map, bbox, 0, 0, 5, false);
+}
+
+function fitRegionMobile(map, region) {
+  var bbox = countries_bbox[region][1];
+  fitBoundingBox(map, bbox, 0, 0, 50, false);
 }
 
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {

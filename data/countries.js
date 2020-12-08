@@ -9,11 +9,11 @@ var countries = [
 ]
 
 var countries_en = [
-  ['Brasil', 'BR'],
+  ['Brazil', 'BR'],
   ['Argentina', 'AR'],
-  ['Paraguai', 'PY'],
-  ['Estados Unidos', 'US'],
-  ['Itália', 'IT'],
-  ['Vaticano', 'VA'],
-  ['Croácia', 'HR']
+  ['Paraguay', 'PY'],
+  ['United States', 'US'],
+  ['Italy', 'IT'],
+  ['Vatican', 'VA'],
+  ['Croatia', 'HR']
 ]
