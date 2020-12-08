@@ -30,15 +30,12 @@ function loadMapData(map, markers_scale) {
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale);
+  photos_markers = createPhotosMarkers(map, locations_dict);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
-}
-
-function loadPhotosMarkers(map) {
-  photos_markers = createPhotosMarkers(map, locations_dict);
 }
 
 // Listeners
@@ -56,10 +53,6 @@ function addListenerToPlaces(item) {
 
 function addListenerToFLags(item) {
   document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
-}
-
-function addListenerToFLagsMobile(item) {
-  document.getElementById(item[1]).addEventListener('click', function() { fitRegionMobile(map, item[1]) });
 }
 
 // Full Window
@@ -87,7 +80,6 @@ function enterMapFullwindow(current_bbox, current_coords) {
     }
 
     loadMapData(map_fullwindow, 0.7);
-    loadPhotosMarkers(map_fullwindow);
 
   }
 
@@ -141,11 +133,6 @@ function fitRegion(map, region) {
   fitBoundingBox(map, bbox, 0, 0, 5, false);
 }
 
-function fitRegionMobile(map, region) {
-  var bbox = countries_bbox[region][1];
-  fitBoundingBox(map, bbox, 0, 0, 50, false);
-}
-
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
   current_bbox = [];
   current_coords = coords;
@@ -157,11 +144,6 @@ function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
 
 function getIconSrc(country_code) {
   return "icons/flags/".concat(countries_bbox[country_code][0])
-    .replace(/\s/g, "-").toLowerCase().concat(".svg");
-}
-
-function getMobileIconSrc(country_code) {
-  return "../icons/flags/".concat(countries_bbox[country_code][0])
     .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 

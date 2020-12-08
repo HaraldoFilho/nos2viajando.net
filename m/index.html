@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="../js/mapbox_token.js"></script>
     <script src="../js/countries_bbox.js"></script>
-    <script src="../js/functions.js"></script>
+    <script src="functions.js"></script>
 
     <!-- Locations data -->
     <script src="../data/texts.js"></script>
@@ -55,7 +55,6 @@
           <div class="map">
             <div id='map' style='height: 500px;'>
               <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
-              <!-- <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/> -->
             </div>
           </div>
 
@@ -64,49 +63,6 @@
           <div id="lists" class="lists"></div>
 
         </div>
-
-
-    <!-- <div id="map-overlay">
-      <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
-      <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../icons/fit_window.svg"/>
-
-      <div id="menu" class="menu">
-        <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked" />
-        <label for="streets-v11">mapa</label>
-        <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
-        <label for="outdoors-v11">relevo</label>
-        <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
-        <label for="satellite-v9">satélite</label>
-      </div>
-
-      <div id="selector" class="selector">
-        <input id="checkbox-cities" type="checkbox" checked="checked" />
-        <img src="../icons/marker_city.svg" height="20px" style="margin-bottom:-3px"/>
-        cidades<br>
-        <input id="checkbox-parks" type="checkbox" checked="checked" />
-        <img src="../icons/marker_park.svg" height="20px" style="margin-bottom:-3px"/>
-        parques<br>
-        <input id="checkbox-attractions" type="checkbox" checked="checked" />
-        <img src="../icons/marker_attraction.svg" height="20px" style="margin-bottom:-3px"/>
-        atrações<br>
-        <input id="checkbox-accommodations" type="checkbox" checked="checked" />
-        <img src="../icons/marker_accommodation.svg" height="20px" style="margin-bottom:-3px"/>
-        hospedagens<br>
-        <input id="checkbox-airports" type="checkbox" checked="checked" />
-        <img src="../icons/marker_airport.svg" height="20px" style="margin-bottom:-3px"/>
-        aeroportos<br>
-        <input id="checkbox-photos" type="checkbox" />
-        <img src="../icons/marker_photo.svg" height="18px" style="margin: 0px 2px -4px 1px"/>
-        fotos<br>
-        <input id="checkbox-flights-international" type="checkbox" />
-        <img src="../icons/flight_international.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
-        internacional<br>
-        <input id="checkbox-flights-domestic" type="checkbox" />
-        <img src="../icons/flight_domestic.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
-        doméstico
-      </div>
-
-    </div> -->
 
     <script>
 
@@ -194,7 +150,7 @@
     for (var i = 0; i < n_countries; i++) {
       var country_name = countries[i][0];
       var country_code = countries[i][1];
-      var country_icon = getMobileIconSrc(country_code);
+      var country_icon = getIconSrc(country_code);
       var country = document.createElement('DIV');
       country.setAttribute('id', country_code);
       var country_flag = document.createElement('IMG');
@@ -206,10 +162,7 @@
       countries_panel.appendChild(country);
     }
 
-    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
-    // document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
-    // document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
-    // document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100) });
 
     var lists = document.getElementById('lists');
 
@@ -236,7 +189,7 @@
       list_item.setAttribute('class', 'list-item');
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getMobileIconSrc(cities[i][1]));
+      tiny_flag.setAttribute('src', getIconSrc(cities[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(cities[i][2]);
       lists.appendChild(list_item);
@@ -266,7 +219,7 @@
       list_item.setAttribute('class', 'list-item');
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getMobileIconSrc(parks[i][1]));
+      tiny_flag.setAttribute('src', getIconSrc(parks[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(parks[i][2]);
       lists.appendChild(list_item);
@@ -296,7 +249,7 @@
       list_item.setAttribute('class', 'list-item');
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getMobileIconSrc(attractions[i][1]));
+      tiny_flag.setAttribute('src', getIconSrc(attractions[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(attractions[i][2]);
       lists.appendChild(list_item);
@@ -326,7 +279,7 @@
       list_item.setAttribute('class', 'list-item');
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getMobileIconSrc(accommodations[i][1]));
+      tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(accommodations[i][2]);
       lists.appendChild(list_item);
@@ -356,28 +309,19 @@
       list_item.setAttribute('class', 'list-item');
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getMobileIconSrc(airports[i][1]));
+      tiny_flag.setAttribute('src', getIconSrc(airports[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(airports[i][2]);
       lists.appendChild(list_item);
     }
 
     // Add click listeners
-    countries.forEach(addListenerToFLagsMobile);
+    countries.forEach(addListenerToFLags);
     cities.forEach(addListenerToRegions);
     parks.forEach(addListenerToRegions);
     attractions.forEach(addListenerToPlaces);
     accommodations.forEach(addListenerToPlaces);
     airports.forEach(addListenerToRegions);
-
-    // document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
-    // document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
-    // document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
-    // document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
-    // document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
-    // document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
-    // document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
-    // document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
 
   </script>
 
