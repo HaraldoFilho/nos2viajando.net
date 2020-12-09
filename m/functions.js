@@ -69,6 +69,7 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
   bounding_box[2] = bbox[2] + x_offset;
   bounding_box[3] = bbox[3] + y_offset;
 
+  map.resetNorth();
   map.fitBounds(bounding_box, {padding: padding, linear:linear});
 
 }

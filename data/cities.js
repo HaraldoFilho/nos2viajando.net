@@ -43,7 +43,7 @@ var cities_en = [
   [[-122.144187, 37.442150], 'US', 'Palo Alto'],
   [[-122.080926, 37.386313], 'US', 'Mountain View'],
   [[-46.038230, -22.863142], 'BR', 'Monte Verde'],
-  [[-32.429811, -3.856387], 'BR', 'Fernando de Noronha Island'],
+  [[-32.429811, -3.856387], 'BR', 'Ilha de Fernando de Noronha'],
   [[12.496451, 41.903236], 'IT', 'Rome'],
   [[12.453799, 41.902443], 'VA', 'Vatican City'],
   [[15.985610, 45.817144], 'HR', 'Zagreb'],

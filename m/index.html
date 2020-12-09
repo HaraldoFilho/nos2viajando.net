@@ -66,10 +66,12 @@
 
     <script>
 
+    var traveling = false;
+
     var userLang = navigator.language || navigator.userLanguage;
     console.log ("User language is: " + userLang);
 
-    if (userLang == 'pt-BR') {
+    if (userLang != 'pt-BR') {
       texts_dict = texts_dict_en;
       accommodations = accommodations_en;
       airports = airports_en;
@@ -78,7 +80,7 @@
       countries = countries_en;
       parks = parks_en;
       trips = trips_en;
-    } else {
+    } else if (traveling) {
       window.location.replace("https://nos2viajando.travelmap.net")
     }
 
@@ -107,8 +109,6 @@
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v10'
     });
-
-    map.addControl(new mapboxgl.NavigationControl());
 
     loadMapData(map, 1);
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100)
