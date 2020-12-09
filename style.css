@@ -375,7 +375,7 @@ p.list-item {
   display: none;
   bottom: 0;
   left: 0;
-  width: 120px;
+  width: auto;
   z-index: 9;
   margin: 5px;
   background: white;

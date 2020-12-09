@@ -93,41 +93,9 @@
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
 
-      <div id="menu" class="menu">
-        <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked" />
-        <label for="streets-v11">mapa</label>
-        <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
-        <label for="outdoors-v11">relevo</label>
-        <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
-        <label for="satellite-v9">satélite</label>
-      </div>
+      <div id="menu" class="menu"></div>
 
-      <div id="selector" class="selector">
-        <input id="checkbox-cities" type="checkbox" checked="checked" />
-        <img src="icons/marker_city.svg" height="20px" style="margin-bottom:-3px"/>
-        cidades<br>
-        <input id="checkbox-parks" type="checkbox" checked="checked" />
-        <img src="icons/marker_park.svg" height="20px" style="margin-bottom:-3px"/>
-        parques<br>
-        <input id="checkbox-attractions" type="checkbox" checked="checked" />
-        <img src="icons/marker_attraction.svg" height="20px" style="margin-bottom:-3px"/>
-        atrações<br>
-        <input id="checkbox-accommodations" type="checkbox" checked="checked" />
-        <img src="icons/marker_accommodation.svg" height="20px" style="margin-bottom:-3px"/>
-        hospedagens<br>
-        <input id="checkbox-airports" type="checkbox" checked="checked" />
-        <img src="icons/marker_airport.svg" height="20px" style="margin-bottom:-3px"/>
-        aeroportos<br>
-        <input id="checkbox-photos" type="checkbox" />
-        <img src="icons/marker_photo.svg" height="18px" style="margin: 0px 2px -4px 1px"/>
-        fotos<br>
-        <input id="checkbox-flights-international" type="checkbox" />
-        <img src="icons/flight_international.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
-        internacional<br>
-        <input id="checkbox-flights-domestic" type="checkbox" />
-        <img src="icons/flight_domestic.svg" height="18px" style="margin: 0px 1px -2px 2px"/>
-        doméstico
-      </div>
+      <div id="selector" class="selector"></div>
 
     </div>
 
@@ -386,6 +354,150 @@
       list_item.append(airports[i][2]);
       lists.appendChild(list_item);
     }
+
+    // construct menu on full window map
+    var input_streets = document.createElement('INPUT');
+    input_streets.setAttribute('id', 'streets-v11');
+    input_streets.setAttribute('type', 'radio');
+    input_streets.setAttribute('name', 'rtoggle');
+    input_streets.setAttribute('value', 'streets');
+    input_streets.setAttribute('checked', 'checked');
+    var label_streets = document.createElement('LABEL');
+    label_streets.setAttribute('for', 'streets-v11');
+    label_streets.innerText = texts_dict['MAP_LAYER_1'];
+    var input_outdoors = document.createElement('INPUT');
+    input_outdoors.setAttribute('id', 'outdoors-v11');
+    input_outdoors.setAttribute('type', 'radio');
+    input_outdoors.setAttribute('name', 'rtoggle');
+    input_outdoors.setAttribute('value', 'outdoors');
+    var label_outdoors = document.createElement('LABEL');
+    label_outdoors.setAttribute('for', 'outdoors-v11');
+    label_outdoors.innerText = texts_dict['MAP_LAYER_2'];
+    var input_satellite = document.createElement('INPUT');
+    input_satellite.setAttribute('id', 'satellite-v9');
+    input_satellite.setAttribute('type', 'radio');
+    input_satellite.setAttribute('name', 'rtoggle');
+    input_satellite.setAttribute('value', 'satellite');
+    var label_satellite = document.createElement('LABEL');
+    label_satellite.setAttribute('for', 'satellite-v9');
+    label_satellite.innerText = texts_dict['MAP_LAYER_3'];
+    var menu = document.getElementById('menu');
+    menu.appendChild(input_streets);
+    menu.appendChild(label_streets);
+    menu.appendChild(input_outdoors);
+    menu.appendChild(label_outdoors);
+    menu.appendChild(input_satellite);
+    menu.appendChild(label_satellite);
+
+    // construct selector on full window map
+    var input_cities = document.createElement('INPUT');
+    input_cities.setAttribute('id', 'checkbox-cities');
+    input_cities.setAttribute('type', 'checkbox');
+    input_cities.setAttribute('checked', 'checked');
+    var icon_cities = document.createElement('IMG');
+    icon_cities.setAttribute('src', 'icons/marker_city.svg');
+    icon_cities.setAttribute('height', '20px');
+    icon_cities.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_parks = document.createElement('INPUT');
+    input_parks.setAttribute('id', 'checkbox-parks');
+    input_parks.setAttribute('type', 'checkbox');
+    input_parks.setAttribute('checked', 'checked');
+    var icon_parks = document.createElement('IMG');
+    icon_parks.setAttribute('src', 'icons/marker_park.svg');
+    icon_parks.setAttribute('height', '20px');
+    icon_parks.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_attractions = document.createElement('INPUT');
+    input_attractions.setAttribute('id', 'checkbox-attractions');
+    input_attractions.setAttribute('type', 'checkbox');
+    input_attractions.setAttribute('checked', 'checked');
+    var icon_attractions = document.createElement('IMG');
+    icon_attractions.setAttribute('src', 'icons/marker_attraction.svg');
+    icon_attractions.setAttribute('height', '20px');
+    icon_attractions.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_accommodations = document.createElement('INPUT');
+    input_accommodations.setAttribute('id', 'checkbox-accommodations');
+    input_accommodations.setAttribute('type', 'checkbox');
+    input_accommodations.setAttribute('checked', 'checked');
+    var icon_accommodations = document.createElement('IMG');
+    icon_accommodations.setAttribute('src', 'icons/marker_accommodation.svg');
+    icon_accommodations.setAttribute('height', '20px');
+    icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_airports = document.createElement('INPUT');
+    input_airports.setAttribute('id', 'checkbox-airports');
+    input_airports.setAttribute('type', 'checkbox');
+    input_airports.setAttribute('checked', 'checked');
+    var icon_airports = document.createElement('IMG');
+    icon_airports.setAttribute('src', 'icons/marker_airport.svg');
+    icon_airports.setAttribute('height', '20px');
+    icon_airports.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_photos = document.createElement('INPUT');
+    input_photos.setAttribute('id', 'checkbox-photos');
+    input_photos.setAttribute('type', 'checkbox');
+    var icon_photos = document.createElement('IMG');
+    icon_photos.setAttribute('src', 'icons/marker_photo.svg');
+    icon_photos.setAttribute('height', '18px');
+    icon_photos.setAttribute('style', 'margin: 0px 2px -4px 1px');
+
+    var input_flights_international = document.createElement('INPUT');
+    input_flights_international.setAttribute('id', 'checkbox-flights-international');
+    input_flights_international.setAttribute('type', 'checkbox');
+    var icon_flights_international = document.createElement('IMG');
+    icon_flights_international.setAttribute('src', 'icons/flight_international.svg');
+    icon_flights_international.setAttribute('height', '18px');
+    icon_flights_international.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var input_flights_domestic = document.createElement('INPUT');
+    input_flights_domestic.setAttribute('id', 'checkbox-flights-domestic');
+    input_flights_domestic.setAttribute('type', 'checkbox');
+    var icon_flights_domestic = document.createElement('IMG');
+    icon_flights_domestic.setAttribute('src', 'icons/flight_domestic.svg');
+    icon_flights_domestic.setAttribute('height', '18px');
+    icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var selector = document.getElementById('selector');
+    selector.appendChild(input_cities);
+    selector.appendChild(icon_cities);
+    selector.append(texts_dict['MKR_CITIES']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_parks);
+    selector.appendChild(icon_parks);
+    selector.append(texts_dict['MKR_PARKS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_attractions);
+    selector.appendChild(icon_attractions);
+    selector.append(texts_dict['MKR_ATTRACTIONS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_accommodations);
+    selector.appendChild(icon_accommodations);
+    selector.append(texts_dict['MKR_ACCOMMODATIONS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_airports);
+    selector.appendChild(icon_airports);
+    selector.append(texts_dict['MKR_AIRPORTS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_photos);
+    selector.appendChild(icon_photos);
+    selector.append(texts_dict['MKR_PHOTOS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_flights_international);
+    selector.appendChild(icon_flights_international);
+    selector.append(texts_dict['MKR_INTERNATIONAL_FLIGHT']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_flights_domestic);
+    selector.appendChild(icon_flights_domestic);
+    selector.append(texts_dict['MKR_DOMESTIC_FLIGHT']);
 
     // Add click listeners
     countries.forEach(addListenerToFLags);
