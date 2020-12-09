@@ -1,7 +1,7 @@
 function createMarkers(map, places, color, scale) {
   var markers = [];
   for (var i = 0; i < places.length; i++) {
-    var htmlText = "<p style=\"font-size:14px;\">".concat(places[i][2]).concat("</p>")
+    var htmlText = "<p style=\"font-size:24px;\">".concat(places[i][2]).concat("</p>")
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
     .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(htmlText));
