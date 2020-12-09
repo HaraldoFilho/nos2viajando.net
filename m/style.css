@@ -34,7 +34,7 @@ img.tiny_icon {
 
 img.marker {
   height: 58px;
-  margin: 0px 8px -6px -4px;
+  margin: 0px 8px -4px -6px;
 }
 
 img.zoom-out {
@@ -55,9 +55,9 @@ img.zoom-out {
 }
 
 p.list-item {
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
-  margin-top: -16px;
+  margin-top: -10px;
   color: #606060;
   cursor: pointer;
 }
@@ -173,13 +173,13 @@ p.list-item {
   display: grid;
   grid-area: list-title-container;
   grid-template-columns: auto auto;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: bold;
   color: #606060;
   border-style: none none solid none;
   border-color: grey;
   border-width: thin;
-  margin-top: 100px;
+  margin-top: 25px;
   margin-bottom: 35px;
   cursor: default;
 }
@@ -215,6 +215,7 @@ p.list-item {
   grid-area: lists;
   width: auto;
   margin-top: 25px;
+  margin-bottom: 25px;
   text-align: left;
   border-width: 1px 0 0 0;
   border-style: solid;
