@@ -108,6 +108,8 @@
       style: 'mapbox://styles/mapbox/light-v10'
     });
 
+    map.addControl(new mapboxgl.NavigationControl());
+
     loadMapData(map, 1);
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100)
 
