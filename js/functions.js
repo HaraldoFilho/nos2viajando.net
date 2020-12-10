@@ -70,7 +70,9 @@ function enterMapFullwindow(current_bbox, current_coords) {
       container: 'map-overlay',
       style: current_map_style
     });
-    map_fullwindow.addControl(new mapboxgl.NavigationControl());
+    map_fullwindow.addControl(new mapboxgl.NavigationControl({showCompass:false}));
+    map_fullwindow.dragRotate.disable();
+    map_fullwindow.touchZoomRotate.disableRotation();
 
     layerList = document.getElementById('menu');
     inputs = layerList.getElementsByTagName('input');
@@ -124,7 +126,6 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
   bounding_box[2] = bbox[2] + x_offset;
   bounding_box[3] = bbox[3] + y_offset;
 
-  map.resetNorth();
   map.fitBounds(bounding_box, {padding: padding, linear:linear});
 
 }

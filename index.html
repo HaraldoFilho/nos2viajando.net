@@ -141,6 +141,9 @@
       style: 'mapbox://styles/mapbox/light-v10'
     });
 
+    map.dragRotate.disable();
+    map.touchZoomRotate.disableRotation();
+
     loadMapData(map, 0.4);
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30)
 

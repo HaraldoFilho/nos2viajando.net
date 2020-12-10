@@ -1,7 +1,7 @@
 function createMarkers(map, places, color, scale) {
   var markers = [];
   for (var i = 0; i < places.length; i++) {
-    var htmlText = "<p style=\"font-size:24px;\">".concat(places[i][2]).concat("</p>")
+    var htmlText = "<p style=\"font-size:24px;padding:0 24px 0 24px;\">".concat(places[i][2]).concat("</p>")
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
     .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(htmlText));
@@ -69,7 +69,6 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
   bounding_box[2] = bbox[2] + x_offset;
   bounding_box[3] = bbox[3] + y_offset;
 
-  map.resetNorth();
   map.fitBounds(bounding_box, {padding: padding, linear:linear});
 
 }
