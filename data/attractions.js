@@ -128,7 +128,7 @@ var attractions_en = [
   [[12.453930, 41.906293], 'VA', 'Bramante Staircase'],
   [[12.457334, 41.902255], 'VA', 'Saint Peter\'s Square'],
   [[12.461570, 41.902114], 'IT', 'Leonardo da Vinci Experience Museum'],
-  [[12.492231, 41.890210], 'IT', 'Coliseum'],
+  [[12.492231, 41.890210], 'IT', 'Colosseum'],
   [[12.492461, 41.879030], 'IT', 'Baths of Caracala'],
   [[12.488685, 41.884290], 'IT', 'Circo Massimo'],
   [[12.486326, 41.890891], 'IT', 'Palatino and Roman Forum'],
