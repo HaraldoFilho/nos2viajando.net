@@ -74,8 +74,8 @@ var attractions = [
   [[18.110638, 42.640335], 'HR', 'Palácio do Reitor'],
   [[18.112295, 42.639902], 'HR', 'Muralhas de Dubrovnik'],
   [[18.112498, 42.640104], 'HR', 'Museu Marítimo de Dubrovnik'],
+  [[18.107098, 42.641568], 'HR', 'Igreja e Monastério Fanciscano'],
   [[18.122144, 42.625386], 'HR', 'Ilha Lokrum'],
-  [[18.107098, 42.641568], 'HR', 'Igreja e Mosteiro Fanciscano'],
   [[14.495298, 40.749709], 'IT', 'Parque Arqueológico de Pompéia'],
   [[14.549958, 40.614219], 'IT', 'Costa Amalfitana']
 ]
@@ -156,8 +156,8 @@ var attractions_en = [
   [[18.110638, 42.640335], 'HR', 'Rector\'s Palace'],
   [[18.112295, 42.639902], 'HR', 'Dubrovnik Walls'],
   [[18.112498, 42.640104], 'HR', 'Dubrovnik Maritime Museum'],
-  [[18.122144, 42.625386], 'HR', 'Lokrum Island'],
   [[18.107098, 42.641568], 'HR', 'Fanciscan Church and Monastery'],
+  [[18.122144, 42.625386], 'HR', 'Lokrum Island'],
   [[14.495298, 40.749709], 'IT', 'Archaeological Park of Pompeii'],
   [[14.549958, 40.614219], 'IT', 'Amalfi Coast']
 ]
