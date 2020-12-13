@@ -8,7 +8,7 @@ var trips = [
   ['2017', 'Califórnia', 24478, 12],
   ['2018', 'Monte Verde', 313, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
-  ['2019', 'Croácia e Itália', 12077, 22]
+  ['2019', 'Croácia e Itália', 21956, 22]
 ]
 
 var trips_en = [
@@ -19,5 +19,5 @@ var trips_en = [
   ['2017', 'California', 24478, 12],
   ['2018', 'Monte Verde', 313, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
-  ['2019', 'Croatia and Italy', 12077, 22]
+  ['2019', 'Croatia and Italy', 21956, 22]
 ]
