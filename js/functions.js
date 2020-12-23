@@ -83,6 +83,14 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
     loadMapData(map_fullwindow, 0.7);
 
+    map_fullwindow.on('styledata', function() {
+      addMapLine(map_fullwindow, "Artic_Circle", [-180,66.563444], [180,66.563444], '#FFF', 1, [5,5]);
+      addMapLine(map_fullwindow, "Topic_of_Cancer", [-180,23.43656], [180,23.43656], '#DDD', 1, [5,5]);
+      addMapLine(map_fullwindow, "Equator", [-180,0], [180,0], '#AAA', 1, [5,5]);
+      addMapLine(map_fullwindow, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656], '#DDD', 1, [5,5]);
+      addMapLine(map_fullwindow, "Antartic_Circle", [-180,-66.563444], [180,-66.563444], '#FFF', 1, [5,5]);
+    });
+
   }
 
   if (current_coords.length == 0) {
@@ -226,6 +234,40 @@ function createPhotoMarker(map, value) {
   }
 
   return photo_marker;
+
+}
+
+function addMapLine(map, id, coord_a, coord_b, color, width, dasharray) {
+  if (!map.getSource(id)) {
+    map.addSource(id, {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [ coord_a, coord_b ]
+        }
+      }
+    });
+  }
+
+  if (!map.getLayer(id)) {
+    map.addLayer({
+      'id': id,
+      'type': 'line',
+      'source': id,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      'paint': {
+        'line-color': color,
+        'line-width': width,
+        'line-dasharray': dasharray
+      }
+    });
+  }
 
 }
 
