@@ -81,15 +81,11 @@ function enterMapFullwindow(current_bbox, current_coords) {
       inputs[i].onclick = switchLayer;
     }
 
-    loadMapData(map_fullwindow, 0.7);
-
     map_fullwindow.on('styledata', function() {
-      addMapLine(map_fullwindow, "Artic_Circle", [-180,66.563444], [180,66.563444], '#FFF', 1, [5,5]);
-      addMapLine(map_fullwindow, "Topic_of_Cancer", [-180,23.43656], [180,23.43656], '#DDD', 1, [5,5]);
-      addMapLine(map_fullwindow, "Equator", [-180,0], [180,0], '#AAA', 1, [5,5]);
-      addMapLine(map_fullwindow, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656], '#DDD', 1, [5,5]);
-      addMapLine(map_fullwindow, "Antartic_Circle", [-180,-66.563444], [180,-66.563444], '#FFF', 1, [5,5]);
+      showLatitudeLines(map_fullwindow);
     });
+
+    loadMapData(map_fullwindow, 0.7);
 
   }
 
@@ -115,6 +111,10 @@ function switchLayer(layer) {
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
   map_fullwindow.on('styledata', function() {
+    hideLatitudeLines(map_fullwindow);
+    if(layerId != "satellite-v9") {
+      showLatitudeLines(map_fullwindow);
+    }
     loadFlights(map_fullwindow, flights, airports);
   });
 }
@@ -237,7 +237,25 @@ function createPhotoMarker(map, value) {
 
 }
 
-function addMapLine(map, id, coord_a, coord_b, color, width, dasharray) {
+function showLatitudeLines(map) {
+  line_number++;
+  addLatitudeLine(map, "Artic_Circle_".concat(line_number.toString()), [-180,66.563444], [180,66.563444], '#FFF', 1, [5,5]);
+  addLatitudeLine(map, "Topic_of_Cancer_".concat(line_number.toString()), [-180,23.43656], [180,23.43656], '#DDD', 1, [5,5]);
+  addLatitudeLine(map, "Equator_".concat(line_number.toString()), [-180,0], [180,0], '#AAA', 1, [5,5]);
+  addLatitudeLine(map, "Tropic_of_Capricorn_".concat(line_number.toString()), [-180,-23.43656], [180,-23.43656], '#DDD', 1, [5,5]);
+  addLatitudeLine(map, "Antartic_Circle_".concat(line_number.toString()), [-180,-66.563444], [180,-66.563444], '#FFF', 1, [5,5]);
+}
+
+function hideLatitudeLines(map) {
+  removeLatitudeLine(map, "Artic_Circle_".concat(line_number.toString()));
+  removeLatitudeLine(map, "Topic_of_Cancer_".concat(line_number.toString()));
+  removeLatitudeLine(map, "Equator_".concat(line_number.toString()));
+  removeLatitudeLine(map, "Tropic_of_Capricorn_".concat(line_number.toString()));
+  removeLatitudeLine(map, "Antartic_Circle_".concat(line_number.toString()));
+}
+
+function addLatitudeLine(map, id, coord_a, coord_b, color, width, dasharray) {
+
   if (!map.getSource(id)) {
     map.addSource(id, {
       'type': 'geojson',
@@ -268,7 +286,15 @@ function addMapLine(map, id, coord_a, coord_b, color, width, dasharray) {
       }
     });
   }
+}
 
+function removeLatitudeLine(map, id) {
+  if (map.getLayer(id)) {
+    map.removeLayer(id);
+  }
+  if (map.getSource(id)) {
+    map.removeSource(id);
+  }
 }
 
 function loadFlights(map, flights, airports) {
