@@ -296,6 +296,16 @@ function removeLatitudeLine(map, id) {
 
 function loadFlights(map, flights, airports) {
 
+  map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
+  if (error) throw error;
+  if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
+  });
+
+  map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_domestic.png', function(error, image) {
+  if (error) throw error;
+  if (!map.hasImage('flight_domestic')) map.addImage('flight_domestic', image);
+  });
+
   for (var f = 0; f < flights.length; f++) {
     var route = 'route_' + (f+1);
     for (var t = 0; t < flights[f][1].length; t++) {
@@ -429,6 +439,14 @@ function createFlightLine(map, id, coord_a, coord_b) {
 
 function addFlightLine(map, id, color, width) {
 
+  var flight_icon;
+
+  if (color == '#F00') {
+    flight_icon = 'flight_international';
+  } else {
+    flight_icon = 'flight_domestic';
+  }
+
   if (!map.getLayer(id)) {
     map.addLayer({
       'id': id,
@@ -442,16 +460,12 @@ function addFlightLine(map, id, color, width) {
   }
 
   if (!map.getLayer(id.concat("__"))) {
-    map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight.png', function(error, image) {
-    if (error) throw error;
-    if (!map.hasImage('plane')) map.addImage('plane', image);
-    });
     map.addLayer({
       'id': id.concat("__"),
       'source': id.concat("__"),
       'type': 'symbol',
       'layout': {
-        'icon-image': 'plane',
+        'icon-image': flight_icon,
         'icon-rotate': ['get', 'bearing'],
         'icon-rotation-alignment': 'map',
         'icon-allow-overlap': true,
