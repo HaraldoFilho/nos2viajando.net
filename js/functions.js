@@ -332,12 +332,12 @@ function loadFlights(map, flights, airports) {
         var add;
 
         if (country_a == country_b) {
-          color = '#00F';
+          color = color_domestic;
           width = 2;
           add = document.getElementById("checkbox-flights-domestic").checked;
 
         } else {
-          color = '#F00';
+          color = color_international;
           width = 2;
           add = document.getElementById("checkbox-flights-international").checked;
         }
@@ -441,7 +441,7 @@ function addFlightLine(map, id, color, width) {
 
   var flight_icon;
 
-  if (color == '#F00') {
+  if (color == color_international) {
     flight_icon = 'flight_international';
   } else {
     flight_icon = 'flight_domestic';
