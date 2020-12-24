@@ -81,10 +81,6 @@ function enterMapFullwindow(current_bbox, current_coords) {
       inputs[i].onclick = switchLayer;
     }
 
-    map_fullwindow.on('styledata', function() {
-      showLatitudeLines(map_fullwindow);
-    });
-
     loadMapData(map_fullwindow, 0.7);
 
   }
@@ -105,15 +101,15 @@ function exitMapFullwindow() {
   document.getElementById('selector').style.display = "none";
 }
 
-
 function switchLayer(layer) {
   var layerId = layer.target.id;
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
   map_fullwindow.on('styledata', function() {
-    hideLatitudeLines(map_fullwindow);
-    if(layerId != "satellite-v9") {
+    if (layerId == "outdoors-v11") {
       showLatitudeLines(map_fullwindow);
+    } else {
+      hideLatitudeLines(map_fullwindow);
     }
     loadFlights(map_fullwindow, flights, airports);
   });
@@ -154,7 +150,7 @@ function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
 
 function getIconSrc(country_code) {
   return "icons/flags/".concat(countries_bbox[country_code][0])
-    .replace(/\s/g, "-").toLowerCase().concat(".svg");
+  .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
 function getItemId(item_name) {
@@ -191,6 +187,7 @@ function getInitialBoundingBox(markers) {
   return initial_bbox;
 
 }
+
 
 function createPhotosMarkers(map, locations) {
   var photos_markers = [];
@@ -350,17 +347,43 @@ function loadFlights(map, flights, airports) {
 
 function createFlightLine(map, id, coord_a, coord_b) {
 
+  var route = {
+    'type': 'FeatureCollection',
+    'features': [
+      {
+        'type': 'Feature',
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [coord_a, coord_b]
+        }
+      }
+    ]
+  }
+
+  // Calculate the distance in kilometers between route start/end point.
+  var lineDistance = turf.length(route.features[0]);
+
+  var arc = [];
+
+  // Number of steps to use in the arc and animation, more steps means
+  // a smoother arc and animation, but too many steps will result in a
+  // low frame rate
+  var steps = 100;
+
+  // Draw an arc between the `origin` & `destination` of the two points
+  for (var i = 0; i < lineDistance; i += lineDistance / steps) {
+    var segment = turf.along(route.features[0], i);
+    arc.push(segment.geometry.coordinates);
+  }
+  arc.push(coord_b);
+
+  // Update the route with calculated arc coordinates
+  route.features[0].geometry.coordinates = arc;
+
   if (!map.getSource(id)) {
     map.addSource(id, {
       'type': 'geojson',
-      'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': [ coord_a, coord_b ]
-        }
-      }
+      'data': route
     });
   }
 
@@ -373,10 +396,6 @@ function addFlightLine(map, id, color, width) {
       'id': id,
       'type': 'line',
       'source': id,
-      'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
       'paint': {
         'line-color': color,
         'line-width': width
