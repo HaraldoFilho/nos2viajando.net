@@ -360,20 +360,29 @@ function createFlightLine(map, id, coord_a, coord_b) {
     ]
   }
 
+  // Number of steps to use in the arc
+  var steps = 1000;
+
   // Calculate the distance in kilometers between route start/end point.
   var lineDistance = turf.length(route.features[0]);
 
   var arc = [];
-
-  // Number of steps to use in the arc and animation, more steps means
-  // a smoother arc and animation, but too many steps will result in a
-  // low frame rate
-  var steps = 100;
+  var prev_point_coords = [];
+  var current_point_coords = [];
+  var point_added = false;
+  var prev_segment;
+  var segment;
 
   // Draw an arc between the `origin` & `destination` of the two points
   for (var i = 0; i < lineDistance; i += lineDistance / steps) {
-    var segment = turf.along(route.features[0], i);
+    prev_segment = segment;
+    segment = turf.along(route.features[0], i);
     arc.push(segment.geometry.coordinates);
+    if (i > lineDistance/2+lineDistance/10 && !point_added) {
+      prev_point_coords = prev_segment.geometry.coordinates
+      current_point_coords = segment.geometry.coordinates;
+      point_added = true;
+    }
   }
   arc.push(coord_b);
 
@@ -384,6 +393,35 @@ function createFlightLine(map, id, coord_a, coord_b) {
     map.addSource(id, {
       'type': 'geojson',
       'data': route
+    });
+  }
+
+  var point = {
+    'type': 'FeatureCollection',
+    'features': [
+      {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'Point',
+          'coordinates': current_point_coords
+        }
+      }
+    ]
+  };
+
+  // Calculate the bearing to ensure the icon is rotated to match the route arc
+  // The bearing is calculated between the current point and the next point, except
+  // at the end of the arc, which uses the previous point and the current point
+  point.features[0].properties.bearing = turf.bearing(
+      turf.point(prev_point_coords),
+      turf.point(current_point_coords)
+  );
+
+  if (!map.getSource(id.concat("__"))) {
+    map.addSource(id.concat("__"), {
+      'type': 'geojson',
+      'data': point
     });
   }
 
@@ -403,12 +441,37 @@ function addFlightLine(map, id, color, width) {
     });
   }
 
+  if (!map.getLayer(id.concat("__"))) {
+    map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight.png', function(error, image) {
+    if (error) throw error;
+    if (!map.hasImage('plane')) map.addImage('plane', image);
+    });
+    map.addLayer({
+      'id': id.concat("__"),
+      'source': id.concat("__"),
+      'type': 'symbol',
+      'layout': {
+        'icon-image': 'plane',
+        'icon-rotate': ['get', 'bearing'],
+        'icon-rotation-alignment': 'map',
+        'icon-allow-overlap': true,
+        'icon-ignore-placement': true
+      }
+    });
+  }
+
 }
 
 function removeFlightLine(map, id) {
+
   if (map.getLayer(id)) {
     map.removeLayer(id);
   }
+
+  if (map.getLayer(id.concat("__"))) {
+    map.removeLayer(id.concat("__"));
+  }
+
 }
 
 function hideSideBar() {
