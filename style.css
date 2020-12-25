@@ -389,3 +389,39 @@ p.list-item {
   cursor: default;
   transition: 0.5s;
 }
+
+
+/* Style of countries panel */
+
+.fullmap-countries-panel {
+  display: grid;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: auto auto 5px -160px;
+  padding: 10px;
+  grid-gap: 7px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightgrey;
+  border-radius: 10px;
+  z-index: 9;
+  background-color: white;
+  grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.flag-icon {
+  width: 32px;
+  height: 32px;
+  padding: 1px;
+}
+
+.flag-icon:hover {
+  cursor: pointer;
+}
+
+img.icon {
+  width: 32px;
+  height: 32px;
+  margin: auto;
+}

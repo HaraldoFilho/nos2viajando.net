@@ -64,6 +64,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
   document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
   document.getElementById('selector').style.display = "block";
+  document.getElementById('fullmap-countries-panel').style.display = "grid";
 
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({
@@ -83,6 +84,16 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
     loadMapData(map_fullwindow, 0.7);
 
+    var fullmap_countries_panel = document.getElementById('fullmap-countries-panel');
+    setSelectorPosition();
+
+    for (var i = 0; i < countries.length; i++) {
+      var country_code = countries[i][1];
+        addIcon(country_code, fullmap_countries_panel);
+    }
+
+    countries.forEach(addListenerToFLagsFullWindow);
+
   }
 
   if (current_coords.length == 0) {
@@ -93,12 +104,37 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
 }
 
+function addIcon(country_code, panel) {
+  var country_name = countries_bbox[country_code][0];
+  var elem = document.createElement("IMG");
+  elem.setAttribute("id", country_code.concat("__"));
+  elem.setAttribute("class", "icon");
+  elem.setAttribute("src", getIconSrc(country_code));
+  elem.setAttribute("title", country_name);
+  elem.setAttribute("alt", country_name);
+  var div_icon = document.createElement("DIV");
+  div_icon.setAttribute("class", "flag-icon");
+  div_icon.appendChild(elem);
+  panel.appendChild(div_icon);
+}
+
+function setSelectorPosition() {
+  var pixels = window.innerWidth/2;
+  var selector_position = pixels.toString() + "px";
+  document.getElementById("fullmap-countries-panel").style.left = selector_position;
+}
+
+function addListenerToFLagsFullWindow(item) {
+  document.getElementById(item[1].concat("__")).addEventListener('click', function() { fitRegion(map_fullwindow, item[1]) });
+}
+
 function exitMapFullwindow() {
   document.getElementById('map-overlay').style.height = "0%";
   document.getElementById('fullwindow-exit-icon').style.display = "none";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
   document.getElementById('menu').style.display = "none";
   document.getElementById('selector').style.display = "none";
+  document.getElementById('fullmap-countries-panel').style.display = "none";
 }
 
 function switchLayer(layer) {
