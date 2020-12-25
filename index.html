@@ -16,7 +16,7 @@
     <script src="js/functions.js"></script>
 
     <!-- Locations data -->
-    <script src="data/texts.js"></script>
+    <script src="data/strings.js"></script>
     <script src="data/trips.js"></script>
     <script src="data/countries.js"></script>
     <script src="data/cities.js"></script>
@@ -108,7 +108,7 @@
     console.log ("User language is: " + userLang);
 
     if (userLang != 'pt-BR') {
-      texts_dict = texts_dict_en;
+      strings_dict = strings_dict_en;
       accommodations = accommodations_en;
       airports = airports_en;
       attractions = attractions_en;
@@ -172,10 +172,10 @@
       days += trips[i][3];
     }
 
-    document.getElementById('title').innerText = texts_dict['TITLE'];
-    document.getElementById('trips').append(n_trips + " " + texts_dict['TRIPS']);
+    document.getElementById('title').innerText = strings_dict['TITLE'];
+    document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
     document.getElementById('distance').append(distance/1000 + " km");
-    document.getElementById('days').append(days + " " + texts_dict['DAYS']);
+    document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
     var countries_panel = document.getElementById('countries-panel');
     var lists = document.getElementById('lists');
@@ -186,7 +186,7 @@
     var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
     var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
 
-    document.getElementById('countries').append(n_countries + " " + texts_dict['COUNTRIES']);
+    document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
@@ -225,7 +225,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_city.svg');
     title.appendChild(marker);
-    title.append(texts_dict['CITIES']);
+    title.append(strings_dict['CITIES']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = cities.length;
@@ -255,7 +255,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_park.svg');
     title.appendChild(marker);
-    title.append(texts_dict['PARKS']);
+    title.append(strings_dict['PARKS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = parks.length;
@@ -285,7 +285,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_attraction.svg');
     title.appendChild(marker);
-    title.append(texts_dict['ATTRACTIONS']);
+    title.append(strings_dict['ATTRACTIONS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = attractions.length;
@@ -315,7 +315,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_accommodation.svg');
     title.appendChild(marker);
-    title.append(texts_dict['ACCOMMODATIONS']);
+    title.append(strings_dict['ACCOMMODATIONS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = accommodations.length;
@@ -345,7 +345,7 @@
     marker.setAttribute('class', 'marker');
     marker.setAttribute('src', 'icons/marker_airport.svg');
     title.appendChild(marker);
-    title.append(texts_dict['AIRPORTS']);
+    title.append(strings_dict['AIRPORTS']);
     var count = document.createElement('DIV');
     count.setAttribute('class', 'list-count');
     count.innerText = airports.length;
@@ -374,7 +374,7 @@
     input_streets.setAttribute('checked', 'checked');
     var label_streets = document.createElement('LABEL');
     label_streets.setAttribute('for', 'streets-v11');
-    label_streets.innerText = texts_dict['MAP_LAYER_1'];
+    label_streets.innerText = strings_dict['MAP_LAYER_1'];
     var input_outdoors = document.createElement('INPUT');
     input_outdoors.setAttribute('id', 'outdoors-v11');
     input_outdoors.setAttribute('type', 'radio');
@@ -382,7 +382,7 @@
     input_outdoors.setAttribute('value', 'outdoors');
     var label_outdoors = document.createElement('LABEL');
     label_outdoors.setAttribute('for', 'outdoors-v11');
-    label_outdoors.innerText = texts_dict['MAP_LAYER_2'];
+    label_outdoors.innerText = strings_dict['MAP_LAYER_2'];
     var input_satellite = document.createElement('INPUT');
     input_satellite.setAttribute('id', 'satellite-v9');
     input_satellite.setAttribute('type', 'radio');
@@ -390,7 +390,7 @@
     input_satellite.setAttribute('value', 'satellite');
     var label_satellite = document.createElement('LABEL');
     label_satellite.setAttribute('for', 'satellite-v9');
-    label_satellite.innerText = texts_dict['MAP_LAYER_3'];
+    label_satellite.innerText = strings_dict['MAP_LAYER_3'];
     var menu = document.getElementById('menu');
     menu.appendChild(input_streets);
     menu.appendChild(label_streets);
@@ -472,42 +472,42 @@
     var selector = document.getElementById('selector');
     selector.appendChild(input_cities);
     selector.appendChild(icon_cities);
-    selector.append(texts_dict['MKR_CITIES']);
+    selector.append(strings_dict['MKR_CITIES']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_parks);
     selector.appendChild(icon_parks);
-    selector.append(texts_dict['MKR_PARKS']);
+    selector.append(strings_dict['MKR_PARKS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_attractions);
     selector.appendChild(icon_attractions);
-    selector.append(texts_dict['MKR_ATTRACTIONS']);
+    selector.append(strings_dict['MKR_ATTRACTIONS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_accommodations);
     selector.appendChild(icon_accommodations);
-    selector.append(texts_dict['MKR_ACCOMMODATIONS']);
+    selector.append(strings_dict['MKR_ACCOMMODATIONS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_airports);
     selector.appendChild(icon_airports);
-    selector.append(texts_dict['MKR_AIRPORTS']);
+    selector.append(strings_dict['MKR_AIRPORTS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_photos);
     selector.appendChild(icon_photos);
-    selector.append(texts_dict['MKR_PHOTOS']);
+    selector.append(strings_dict['MKR_PHOTOS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_flights_international);
     selector.appendChild(icon_flights_international);
-    selector.append(texts_dict['MKR_INTERNATIONAL_FLIGHT']);
+    selector.append(strings_dict['MKR_INTERNATIONAL_FLIGHT']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_flights_domestic);
     selector.appendChild(icon_flights_domestic);
-    selector.append(texts_dict['MKR_DOMESTIC_FLIGHT']);
+    selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
 
     // Add click listeners
     countries.forEach(addListenerToFLags);

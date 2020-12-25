@@ -1,4 +1,4 @@
-var texts_dict = {
+var strings_dict = {
   'TITLE': 'Nós Dois Viajando',
   'TRIPS': 'viagens',
   'COUNTRIES': 'países',
@@ -21,7 +21,7 @@ var texts_dict = {
   'MKR_DOMESTIC_FLIGHT': 'doméstico'
 }
 
-var texts_dict_en = {
+var strings_dict_en = {
   'TITLE': 'We Traveling',
   'TRIPS': 'trips',
   'COUNTRIES': 'countries',
