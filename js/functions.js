@@ -55,6 +55,7 @@ function addListenerToFLags(item) {
   document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
 }
 
+
 // Full Window
 
 function enterMapFullwindow(current_bbox, current_coords) {
@@ -89,17 +90,34 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
     for (var i = 0; i < countries.length; i++) {
       var country_code = countries[i][1];
-        addIcon(country_code, fullmap_countries_panel);
+      addIcon(country_code, fullmap_countries_panel);
     }
 
     countries.forEach(addListenerToFLagsFullWindow);
 
+    map_fullwindow.on('render', function() {
+      try {
+        if (current_map_style != "mapbox://styles/mapbox/satellite-v9") {
+          showLatitudeLines(map_fullwindow);
+        } else {
+          hideLatitudeLines(map_fullwindow);
+        }
+        loadFlights(map_fullwindow, flights, airports);
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
   }
 
   if (current_coords.length == 0) {
-    fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+    if (current_bbox != last_bbox) {
+      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+    }
   } else {
-    flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
+    if (current_coords != last_coords) {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
+    }
   }
 
 }
@@ -141,14 +159,6 @@ function switchLayer(layer) {
   var layerId = layer.target.id;
   current_map_style = 'mapbox://styles/mapbox/' + layerId;
   map_fullwindow.setStyle(current_map_style);
-  map_fullwindow.on('styledata', function() {
-    if (layerId == "outdoors-v11") {
-      showLatitudeLines(map_fullwindow);
-    } else {
-      hideLatitudeLines(map_fullwindow);
-    }
-    loadFlights(map_fullwindow, flights, airports);
-  });
 }
 
 
@@ -156,7 +166,9 @@ function switchLayer(layer) {
 
 function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 
+  last_coords = current_coords;
   current_coords = [];
+  last_bbox = current_bbox;
   current_bbox = bbox;
 
   var bounding_box = [];
@@ -176,7 +188,9 @@ function fitRegion(map, region) {
 }
 
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
+  last_bbox = current_bbox;
   current_bbox = [];
+  last_coords = current_coords;
   current_coords = coords;
   map.flyTo({center: [coords[0] + x_offset, coords[1] + y_offset], zoom: zoom, speed:speed});
 }
@@ -270,24 +284,32 @@ function createPhotoMarker(map, value) {
 
 }
 
+function createLatitudeLines(map) {
+  createLatitudeLine(map, "Artic_Circle", [-180,66.563444], [180,66.563444]);
+  createLatitudeLine(map, "Topic_of_Cancer", [-180,23.43656], [180,23.43656]);
+  createLatitudeLine(map, "Equator", [-180,0], [180,0]);
+  createLatitudeLine(map, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656]);
+  createLatitudeLine(map, "Antartic_Circle", [-180,-66.563444], [180,-66.563444]);
+}
+
 function showLatitudeLines(map) {
-  line_number++;
-  addLatitudeLine(map, "Artic_Circle_".concat(line_number.toString()), [-180,66.563444], [180,66.563444], '#FFF', 1, [5,5]);
-  addLatitudeLine(map, "Topic_of_Cancer_".concat(line_number.toString()), [-180,23.43656], [180,23.43656], '#DDD', 1, [5,5]);
-  addLatitudeLine(map, "Equator_".concat(line_number.toString()), [-180,0], [180,0], '#AAA', 1, [5,5]);
-  addLatitudeLine(map, "Tropic_of_Capricorn_".concat(line_number.toString()), [-180,-23.43656], [180,-23.43656], '#DDD', 1, [5,5]);
-  addLatitudeLine(map, "Antartic_Circle_".concat(line_number.toString()), [-180,-66.563444], [180,-66.563444], '#FFF', 1, [5,5]);
+  createLatitudeLines(map);
+  addLatitudeLine(map, "Artic_Circle", '#FFF', 1, [5,5]);
+  addLatitudeLine(map, "Topic_of_Cancer", '#DDD', 1, [5,5]);
+  addLatitudeLine(map, "Equator", '#AAA', 1, [5,5]);
+  addLatitudeLine(map, "Tropic_of_Capricorn", '#DDD', 1, [5,5]);
+  addLatitudeLine(map, "Antartic_Circle", '#FFF', 1, [5,5]);
 }
 
 function hideLatitudeLines(map) {
-  removeLatitudeLine(map, "Artic_Circle_".concat(line_number.toString()));
-  removeLatitudeLine(map, "Topic_of_Cancer_".concat(line_number.toString()));
-  removeLatitudeLine(map, "Equator_".concat(line_number.toString()));
-  removeLatitudeLine(map, "Tropic_of_Capricorn_".concat(line_number.toString()));
-  removeLatitudeLine(map, "Antartic_Circle_".concat(line_number.toString()));
+  removeLatitudeLine(map, "Artic_Circle");
+  removeLatitudeLine(map, "Topic_of_Cancer");
+  removeLatitudeLine(map, "Equator");
+  removeLatitudeLine(map, "Tropic_of_Capricorn");
+  removeLatitudeLine(map, "Antartic_Circle");
 }
 
-function addLatitudeLine(map, id, coord_a, coord_b, color, width, dasharray) {
+function createLatitudeLine(map, id, coord_a, coord_b) {
 
   if (!map.getSource(id)) {
     map.addSource(id, {
@@ -302,6 +324,10 @@ function addLatitudeLine(map, id, coord_a, coord_b, color, width, dasharray) {
       }
     });
   }
+
+}
+
+function addLatitudeLine(map, id, color, width, dasharray) {
 
   if (!map.getLayer(id)) {
     map.addLayer({
@@ -325,21 +351,18 @@ function removeLatitudeLine(map, id) {
   if (map.getLayer(id)) {
     map.removeLayer(id);
   }
-  if (map.getSource(id)) {
-    map.removeSource(id);
-  }
 }
 
 function loadFlights(map, flights, airports) {
 
   map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
-  if (error) throw error;
-  if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
+    if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
+    if (error) throw error;
   });
 
   map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_domestic.png', function(error, image) {
-  if (error) throw error;
-  if (!map.hasImage('flight_domestic')) map.addImage('flight_domestic', image);
+    if (!map.hasImage('flight_domestic')) map.addImage('flight_domestic', image);
+    if (error) throw error;
   });
 
   for (var f = 0; f < flights.length; f++) {
@@ -460,8 +483,8 @@ function createFlightLine(map, id, coord_a, coord_b) {
   // The bearing is calculated between the current point and the next point, except
   // at the end of the arc, which uses the previous point and the current point
   point.features[0].properties.bearing = turf.bearing(
-      turf.point(prev_point_coords),
-      turf.point(current_point_coords)
+    turf.point(prev_point_coords),
+    turf.point(current_point_coords)
   );
 
   if (!map.getSource(id.concat("__"))) {

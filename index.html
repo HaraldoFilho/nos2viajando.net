@@ -123,7 +123,9 @@
     mapboxgl.accessToken = mapbox_token;
 
     var current_bbox = [];
+    var last_bbox = [];
     var current_coords = [];
+    var last_coords = [];
 
     var initial_bbox = getInitialBoundingBox(cities);
 
@@ -142,7 +144,6 @@
     var flights_lines = {};
     var color_international = '#F00';
     var color_domestic = '#00F';
-    var line_number = 0;
 
     // Travelmap
     var map = new mapboxgl.Map({
@@ -528,25 +529,25 @@
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
 
-  </script>
+    </script>
 
-  <!-- Default Statcounter code for nós dois viajando
-  https://nos2viajando.net/ -->
-  <script type="text/javascript">
-  var sc_project=12430951;
-  var sc_invisible=1;
-  var sc_security="e38346be";
-  </script>
-  <script type="text/javascript"
-  src="https://www.statcounter.com/counter/counter.js"
-  async></script>
-  <noscript><div class="statcounter"><a title="Web Analytics
-  Made Easy - StatCounter" href="https://statcounter.com/"
-  target="_blank"><img class="statcounter"
-  src="https://c.statcounter.com/12430951/0/e38346be/1/"
-  alt="Web Analytics Made Easy -
-  StatCounter"></a></div></noscript>
-  <!-- End of Statcounter Code -->
+    <!-- Default Statcounter code for nós dois viajando
+    https://nos2viajando.net/ -->
+    <script type="text/javascript">
+    var sc_project=12430951;
+    var sc_invisible=1;
+    var sc_security="e38346be";
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js"
+    async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics
+      Made Easy - StatCounter" href="https://statcounter.com/"
+      target="_blank"><img class="statcounter"
+      src="https://c.statcounter.com/12430951/0/e38346be/1/"
+      alt="Web Analytics Made Easy -
+      StatCounter"></a></div></noscript>
+      <!-- End of Statcounter Code -->
 
-</body>
-</html>
+    </body>
+    </html>
