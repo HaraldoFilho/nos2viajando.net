@@ -42,17 +42,32 @@ function loadMapData(map, markers_scale) {
 
 function addListenerToRegions(item) {
   document.getElementById(getItemId(item[2]))
-  .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.01, 10, 1.5) });
+  .addEventListener('click', function() {
+    flyToCoordinates(map, item[0], 0, 0.01, 10, 1.5)
+    if (map_fullwindow != null) {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
+    }
+  });
 }
 
 function addListenerToPlaces(item) {
   document.getElementById(getItemId(item[2]))
-  .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5) });
+  .addEventListener('click', function() {
+    flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5)
+    if (map_fullwindow != null) {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
+    }
+  });
 }
 
 
 function addListenerToFLags(item) {
-  document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
+  document.getElementById(item[1]).addEventListener('click', function() {
+    fitRegion(map, item[1]);
+    if (map_fullwindow != null) {
+      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+    }
+  });
 }
 
 
@@ -108,17 +123,15 @@ function enterMapFullwindow(current_bbox, current_coords) {
       }
     });
 
-  }
-
-  if (current_coords.length == 0) {
-    if (current_bbox != last_bbox) {
+    if (current_coords.length == 0) {
       fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
-    }
-  } else {
-    if (current_coords != last_coords) {
+    } else {
       flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
     }
+
   }
+
+  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
 
 }
 
@@ -153,6 +166,7 @@ function exitMapFullwindow() {
   document.getElementById('menu').style.display = "none";
   document.getElementById('selector').style.display = "none";
   document.getElementById('fullmap-countries-panel').style.display = "none";
+  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
 }
 
 function switchLayer(layer) {
