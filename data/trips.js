@@ -21,3 +21,5 @@ var trips_en = [
   ['2018', 'Fernando de Noronha', 5463, 9],
   ['2019', 'Croatia and Italy', 21956, 22]
 ]
+
+var traveling = false;
