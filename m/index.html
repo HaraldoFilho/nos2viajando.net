@@ -140,12 +140,11 @@
   var countries_panel = document.getElementById('countries-panel');
   var lists = document.getElementById('lists');
 
-  var n_countries = countries.length;
+  var n_countries = Object.keys(countries).length;
   document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
 
-  for (var i = 0; i < n_countries; i++) {
-    var country_name = countries[i][0];
-    var country_code = countries[i][1];
+  for (var country_code in countries) {
+    var country_name = countries[country_code];
     var country_icon = getIconSrc(country_code);
     var country = document.createElement('DIV');
     country.setAttribute('id', country_code);
@@ -312,7 +311,9 @@
   }
 
   // Add click listeners
-  countries.forEach(addListenerToFLags);
+  for (var country_code in countries) {
+    addListenerToFLags(country_code);
+  }
   cities.forEach(addListenerToRegions);
   parks.forEach(addListenerToRegions);
   attractions.forEach(addListenerToPlaces);

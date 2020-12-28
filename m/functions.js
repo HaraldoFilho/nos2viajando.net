@@ -43,8 +43,8 @@ function addListenerToPlaces(item) {
   .addEventListener('click', function() { flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5) });
 }
 
-function addListenerToFLags(item) {
-  document.getElementById(item[1]).addEventListener('click', function() { fitRegion(map, item[1]) });
+function addListenerToFLags(id) {
+  document.getElementById(id).addEventListener('click', function() { fitRegion(map, id) });
 }
 
 

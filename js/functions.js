@@ -99,9 +99,7 @@ function addListenerToFLagsFullWindow(id) {
 
 function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 
-  last_coords = current_coords;
   current_coords = [];
-  last_bbox = current_bbox;
   current_bbox = bbox;
 
   var bounding_box = [];
@@ -121,9 +119,7 @@ function fitRegion(map, region, padding) {
 }
 
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
-  last_bbox = current_bbox;
   current_bbox = [];
-  last_coords = current_coords;
   current_coords = coords;
   map.flyTo({center: [coords[0] + x_offset, coords[1] + y_offset], zoom: zoom, speed:speed});
 }
