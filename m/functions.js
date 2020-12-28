@@ -1,3 +1,5 @@
+// Markers
+
 function createMarkers(map, places, color, scale) {
   var markers = [];
   for (var i = 0; i < places.length; i++) {
@@ -15,7 +17,7 @@ function addMarkersToMap(map, markers) {
   }
 }
 
-function loadMapData(map, markers_scale) {
+function loadMarkersOnMap(map, markers_scale) {
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
@@ -27,6 +29,7 @@ function loadMapData(map, markers_scale) {
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
 }
+
 
 // Listeners
 

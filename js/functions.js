@@ -1,11 +1,27 @@
-function createMarkers(map, places, color, scale) {
+// Markers
+
+function createMarkers(map, places, color, scale, get_farthest_points) {
+
   var markers = [];
+
   for (var i = 0; i < places.length; i++) {
+
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
     .setPopup(new mapboxgl.Popup({closeButton:false}).setText(places[i][2]));
+
+    if (get_farthest_points) {
+      if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
+      if (places[i][0][0] > far_east[0][0]) { far_east = places[i]};
+      if (places[i][0][1] < far_south[0][1]) { far_south = places[i]};
+      if (places[i][0][0] < far_west[0][0]) { far_west = places[i]};
+      farthest_points = [far_north, far_east, far_south, far_west];
+    }
+
   }
+
   return markers;
+
 }
 
 function addMarkersToMap(map, markers) {
@@ -24,19 +40,21 @@ function toggleMarkers(map, markers, checkbox) {
   }
 }
 
-function loadMapData(map, markers_scale) {
-  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale);
-  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale);
-  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
-  parks_markers = createMarkers(map, parks, '#55a455', markers_scale);
-  cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale);
+function loadMarkersOnMap(map, markers_scale) {
+  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
+  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
+  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
+  parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
+  cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   photos_markers = createPhotosMarkers(map, locations_dict);
+  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
 }
+
 
 // Listeners
 
@@ -61,118 +79,19 @@ function addListenerToPlaces(item) {
 }
 
 
-function addListenerToFLags(item) {
-  document.getElementById(item[1]).addEventListener('click', function() {
-    fitRegion(map, item[1]);
+function addListenerToFLags(id) {
+  document.getElementById(id).addEventListener('click', function() {
+    fitRegion(map, id, 10);
     if (map_fullwindow != null) {
       fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
     }
   });
 }
 
-
-// Full Window
-
-function enterMapFullwindow(current_bbox, current_coords) {
-
-  document.getElementById('map-overlay').style.height = "100%";
-  document.getElementById('fullwindow-exit-icon').style.display = "block";
-  document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
-  document.getElementById('menu').style.display = "block";
-  document.getElementById('selector').style.display = "block";
-  document.getElementById('fullmap-countries-panel').style.display = "grid";
-
-  if (map_fullwindow == null) {
-    map_fullwindow = new mapboxgl.Map({
-      container: 'map-overlay',
-      style: current_map_style
-    });
-    map_fullwindow.addControl(new mapboxgl.NavigationControl({showCompass:false}));
-    map_fullwindow.dragRotate.disable();
-    map_fullwindow.touchZoomRotate.disableRotation();
-
-    layerList = document.getElementById('menu');
-    inputs = layerList.getElementsByTagName('input');
-
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].onclick = switchLayer;
-    }
-
-    loadMapData(map_fullwindow, 0.7);
-
-    var fullmap_countries_panel = document.getElementById('fullmap-countries-panel');
-    setSelectorPosition();
-
-    for (var i = 0; i < countries.length; i++) {
-      var country_code = countries[i][1];
-      addIcon(country_code, fullmap_countries_panel);
-    }
-
-    countries.forEach(addListenerToFLagsFullWindow);
-
-    map_fullwindow.on('render', function() {
-      try {
-        if (current_map_style != "mapbox://styles/mapbox/satellite-v9") {
-          showLatitudeLines(map_fullwindow);
-        } else {
-          hideLatitudeLines(map_fullwindow);
-        }
-        loadFlights(map_fullwindow, flights, airports);
-      } catch (e) {
-        console.log(e);
-      }
-    });
-
-    if (current_coords.length == 0) {
-      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
-    } else {
-      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
-    }
-
-  }
-
-  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
-
-}
-
-function addIcon(country_code, panel) {
-  var country_name = countries_bbox[country_code][0];
-  var elem = document.createElement("IMG");
-  elem.setAttribute("id", country_code.concat("__"));
-  elem.setAttribute("class", "icon");
-  elem.setAttribute("src", getIconSrc(country_code));
-  elem.setAttribute("title", country_name);
-  elem.setAttribute("alt", country_name);
-  var div_icon = document.createElement("DIV");
-  div_icon.setAttribute("class", "flag-icon");
-  div_icon.appendChild(elem);
-  panel.appendChild(div_icon);
-}
-
-function setSelectorPosition() {
-  var pixels = window.innerWidth/2;
-  var selector_position = pixels.toString() + "px";
-  document.getElementById("fullmap-countries-panel").style.left = selector_position;
-}
-
-function addListenerToFLagsFullWindow(item) {
-  document.getElementById(item[1].concat("__")).addEventListener('click', function() { fitRegion(map_fullwindow, item[1]) });
-}
-
-function exitMapFullwindow() {
-  document.getElementById('map-overlay').style.height = "0%";
-  document.getElementById('fullwindow-exit-icon').style.display = "none";
-  document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
-  document.getElementById('menu').style.display = "none";
-  document.getElementById('selector').style.display = "none";
-  document.getElementById('fullmap-countries-panel').style.display = "none";
-  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
-}
-
-function switchLayer(layer) {
-  var layerId = layer.target.id;
-  current_map_style = 'mapbox://styles/mapbox/' + layerId;
-  map_fullwindow.setStyle(current_map_style);
+function addListenerToFLagsFullWindow(id) {
+  document.getElementById(id.concat("__")).addEventListener('click', function() {
+    fitRegion(map_fullwindow, id, 100);
+  });
 }
 
 
@@ -196,9 +115,9 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 
 }
 
-function fitRegion(map, region) {
+function fitRegion(map, region, padding) {
   var bbox = countries_bbox[region][1];
-  fitBoundingBox(map, bbox, 0, 0, 5, false);
+  fitBoundingBox(map, bbox, 0, 0, padding, false);
 }
 
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
@@ -253,6 +172,127 @@ function getInitialBoundingBox(markers) {
 }
 
 
+// Full Window
+
+function enterMapFullwindow(current_bbox, current_coords) {
+
+  document.getElementById('map-overlay').style.height = "100%";
+  document.getElementById('fullwindow-exit-icon').style.display = "block";
+  document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
+  document.getElementById('menu').style.display = "block";
+  document.getElementById('selector').style.display = "block";
+  document.getElementById('fullmap-countries-panel').style.display = "grid";
+
+  if (map_fullwindow == null) {
+    map_fullwindow = new mapboxgl.Map({
+      container: 'map-overlay',
+      style: current_map_style
+    });
+    map_fullwindow.addControl(new mapboxgl.NavigationControl({showCompass:false}));
+    map_fullwindow.dragRotate.disable();
+    map_fullwindow.touchZoomRotate.disableRotation();
+
+    layerList = document.getElementById('menu');
+    inputs = layerList.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].onclick = switchLayer;
+    }
+
+    loadMarkersOnMap(map_fullwindow, 0.7);
+
+    var fullmap_countries_panel = document.getElementById('fullmap-countries-panel');
+    setSelectorPosition();
+
+    for (var country_code in countries) {
+      addIcon(country_code, fullmap_countries_panel);
+      addListenerToFLagsFullWindow(country_code);
+    }
+
+    map_fullwindow.on('render', function() {
+      try {
+        if (current_map_style != "mapbox://styles/mapbox/satellite-v9") {
+          showLatitudeLines(map_fullwindow);
+        } else {
+          hideLatitudeLines(map_fullwindow);
+        }
+        loadFarthestPoints(map_fullwindow, farthest_points);
+        loadFlights(map_fullwindow, flights, airports);
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    if (current_coords.length == 0) {
+      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+    } else {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
+    }
+
+  }
+
+  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
+
+}
+
+function exitMapFullwindow() {
+  document.getElementById('map-overlay').style.height = "0%";
+  document.getElementById('fullwindow-exit-icon').style.display = "none";
+  document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
+  document.getElementById('menu').style.display = "none";
+  document.getElementById('selector').style.display = "none";
+  document.getElementById('fullmap-countries-panel').style.display = "none";
+  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
+}
+
+function hideSideBar() {
+  document.getElementById('sidebar').style.display = 'none';
+  document.getElementById('travelmap').style = "grid-column:1 / span 2";
+  document.getElementById('open-sidebar').style.display = 'block';
+  document.getElementById('close-sidebar').style.display = 'none';
+}
+
+function showSideBar() {
+  document.getElementById('sidebar').style.display = 'grid';
+  document.getElementById('travelmap').style = "grid-column:2";
+  document.getElementById('open-sidebar').style.display = 'none';
+  document.getElementById('close-sidebar').style.display = 'block';
+}
+
+function hideSideBarTab() {
+  document.getElementById('close-sidebar').style = 'margin-left:289px';
+}
+
+function showSideBarTab() {
+  document.getElementById('close-sidebar').style = 'margin-left:310px';
+}
+
+function switchLayer(layer) {
+  var layerId = layer.target.id;
+  current_map_style = 'mapbox://styles/mapbox/' + layerId;
+  map_fullwindow.setStyle(current_map_style);
+}
+
+function setSelectorPosition() {
+  var pixels = window.innerWidth/2;
+  var selector_position = pixels.toString() + "px";
+  document.getElementById("fullmap-countries-panel").style.left = selector_position;
+}
+
+function addIcon(country_code, panel) {
+  var country_name = countries[country_code];
+  var elem = document.createElement("IMG");
+  elem.setAttribute("id", country_code.concat("__"));
+  elem.setAttribute("class", "icon");
+  elem.setAttribute("src", getIconSrc(country_code));
+  elem.setAttribute("title", country_name);
+  elem.setAttribute("alt", country_name);
+  var div_icon = document.createElement("DIV");
+  div_icon.setAttribute("class", "flag-icon");
+  div_icon.appendChild(elem);
+  panel.appendChild(div_icon);
+}
+
 function createPhotosMarkers(map, locations) {
   var photos_markers = [];
   var m = 0;
@@ -298,32 +338,87 @@ function createPhotoMarker(map, value) {
 
 }
 
+function createFarthestPointsMarkers(map, values) {
+  var markers = [];
+  markers[0] = createFarthestPointMarker(map, home[0], home[2], home[1], 'icons/home.svg', 28);
+  markers[1] = createFarthestPointMarker(map, values[0][0], values[0][2], values[0][1], 'icons/arrow_north.svg', 28);
+  markers[2] = createFarthestPointMarker(map, values[1][0], values[1][2], values[1][1], 'icons/arrow_east.svg', 28);
+  markers[3] = createFarthestPointMarker(map, values[2][0], values[2][2], values[2][1], 'icons/arrow_south.svg', 28);
+  markers[4] = createFarthestPointMarker(map, values[3][0], values[3][2], values[3][1], 'icons/arrow_west.svg', 28);
+  return markers;
+}
+
+function createFarthestPointMarker(map, coord, text, country_code, icon, size) {
+  var marker = document.createElement('div');
+  var img = document.createElement('img');
+  img.setAttribute('src', icon);
+  img.setAttribute('width', size);
+  img.setAttribute('height', size);
+  marker.appendChild(img);
+  return new mapboxgl.Marker({element:marker,scale:1,draggable:false})
+  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setText(text + ", " + countries[country_code]));
+}
+
 function createLatitudeLines(map) {
-  createLatitudeLine(map, "Artic_Circle", [-180,66.563444], [180,66.563444]);
-  createLatitudeLine(map, "Topic_of_Cancer", [-180,23.43656], [180,23.43656]);
-  createLatitudeLine(map, "Equator", [-180,0], [180,0]);
-  createLatitudeLine(map, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656]);
-  createLatitudeLine(map, "Antartic_Circle", [-180,-66.563444], [180,-66.563444]);
+  createLine(map, "Artic_Circle", [-180,66.563444], [180,66.563444]);
+  createLine(map, "Topic_of_Cancer", [-180,23.43656], [180,23.43656]);
+  createLine(map, "Equator", [-180,0], [180,0]);
+  createLine(map, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656]);
+  createLine(map, "Antartic_Circle", [-180,-66.563444], [180,-66.563444]);
 }
 
 function showLatitudeLines(map) {
   createLatitudeLines(map);
-  addLatitudeLine(map, "Artic_Circle", '#FFF', 1, [5,5]);
-  addLatitudeLine(map, "Topic_of_Cancer", '#DDD', 1, [5,5]);
-  addLatitudeLine(map, "Equator", '#AAA', 1, [5,5]);
-  addLatitudeLine(map, "Tropic_of_Capricorn", '#DDD', 1, [5,5]);
-  addLatitudeLine(map, "Antartic_Circle", '#FFF', 1, [5,5]);
+  addLine(map, "Artic_Circle", '#FFF', 1, [5,5]);
+  addLine(map, "Topic_of_Cancer", '#DDD', 1, [5,5]);
+  addLine(map, "Equator", '#AAA', 1, [5,5]);
+  addLine(map, "Tropic_of_Capricorn", '#DDD', 1, [5,5]);
+  addLine(map, "Antartic_Circle", '#FFF', 1, [5,5]);
 }
 
 function hideLatitudeLines(map) {
-  removeLatitudeLine(map, "Artic_Circle");
-  removeLatitudeLine(map, "Topic_of_Cancer");
-  removeLatitudeLine(map, "Equator");
-  removeLatitudeLine(map, "Tropic_of_Capricorn");
-  removeLatitudeLine(map, "Antartic_Circle");
+  removeLine(map, "Artic_Circle");
+  removeLine(map, "Topic_of_Cancer");
+  removeLine(map, "Equator");
+  removeLine(map, "Tropic_of_Capricorn");
+  removeLine(map, "Antartic_Circle");
 }
 
-function createLatitudeLine(map, id, coord_a, coord_b) {
+function loadFarthestPoints(map, farthest_points) {
+
+  var add = document.getElementById("checkbox-farthest-points").checked;
+
+  if (add) {
+    showFarthestPointsLines(map, farthest_points);
+  } else {
+    hideFarthestPointsLines(map);
+  }
+
+}
+
+function createFarthestPointsLines(map, farthest_points) {
+  createLine(map, "FarthestNorth", home[0], farthest_points[0][0]);
+  createLine(map, "FarthestEast", home[0], farthest_points[1][0]);
+  createLine(map, "FarthestSouth", home[0], farthest_points[2][0]);
+  createLine(map, "FarthestWest", home[0], farthest_points[3][0]);
+}
+
+function showFarthestPointsLines(map, farthest_points) {
+  createFarthestPointsLines(map, farthest_points);
+  addLine(map, "FarthestNorth", '#F70', 3, [1,5]);
+  addLine(map, "FarthestEast", '#F70', 3, [1,5]);
+  addLine(map, "FarthestSouth", '#F70', 3, [1,5]);
+  addLine(map, "FarthestWest", '#F70', 3, [1,5]);
+}
+
+function hideFarthestPointsLines(map) {
+  removeLine(map, "FarthestNorth");
+  removeLine(map, "FarthestEast");
+  removeLine(map, "FarthestSouth");
+  removeLine(map, "FarthestWest");
+}
+
+function createLine(map, id, coord_a, coord_b) {
 
   if (!map.getSource(id)) {
     map.addSource(id, {
@@ -341,7 +436,7 @@ function createLatitudeLine(map, id, coord_a, coord_b) {
 
 }
 
-function addLatitudeLine(map, id, color, width, dasharray) {
+function addLine(map, id, color, width, dasharray) {
 
   if (!map.getLayer(id)) {
     map.addLayer({
@@ -361,7 +456,7 @@ function addLatitudeLine(map, id, color, width, dasharray) {
   }
 }
 
-function removeLatitudeLine(map, id) {
+function removeLine(map, id) {
   if (map.getLayer(id)) {
     map.removeLayer(id);
   }
@@ -559,26 +654,4 @@ function removeFlightLine(map, id) {
     map.removeLayer(id.concat("__"));
   }
 
-}
-
-function hideSideBar() {
-  document.getElementById('sidebar').style.display = 'none';
-  document.getElementById('travelmap').style = "grid-column:1 / span 2";
-  document.getElementById('open-sidebar').style.display = 'block';
-  document.getElementById('close-sidebar').style.display = 'none';
-}
-
-function showSideBar() {
-  document.getElementById('sidebar').style.display = 'grid';
-  document.getElementById('travelmap').style = "grid-column:2";
-  document.getElementById('open-sidebar').style.display = 'none';
-  document.getElementById('close-sidebar').style.display = 'block';
-}
-
-function hideSideBarTab() {
-  document.getElementById('close-sidebar').style = 'margin-left:289px';
-}
-
-function showSideBarTab() {
-  document.getElementById('close-sidebar').style = 'margin-left:310px';
 }

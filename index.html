@@ -93,6 +93,7 @@
     </div>
 
     <div id="map-overlay">
+
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
 
@@ -123,9 +124,7 @@
     mapboxgl.accessToken = mapbox_token;
 
     var current_bbox = [];
-    var last_bbox = [];
     var current_coords = [];
-    var last_coords = [];
 
     var initial_bbox = getInitialBoundingBox(cities);
 
@@ -140,12 +139,22 @@
     var accommodations_markers = [];
     var airports_markers = [];
     var photos_markers = [];
+    var farthest_points_markers = [];
 
     var flights_lines = {};
     var color_international = '#F00';
     var color_domestic = '#00F';
 
+    var home = [[-47.06272960051834, -22.90991593806534], 'BR', 'Campinas'];
+    var far_north = home;
+    var far_east = home;
+    var far_south = home;
+    var far_west = home;
+    var farthest_points;
+
+
     // Travelmap
+
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v10'
@@ -154,14 +163,19 @@
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
 
-    loadMapData(map, 0.4);
+    loadMarkersOnMap(map, 0.4);
+    console.log(farthest_points);
+
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
 
+
     // Full window map
+
     var map_fullwindow;
     var menu;
     var layerList;
     var inputs;
+
 
     // Sidepanel
 
@@ -183,7 +197,7 @@
     var countries_panel = document.getElementById('countries-panel');
     var lists = document.getElementById('lists');
 
-    var n_countries = countries.length;
+    var n_countries = Object.keys(countries).length;
     var icons_per_row = 7;
     var panel_rows = Math.ceil(n_countries/icons_per_row);
     var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
@@ -193,9 +207,8 @@
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
-    for (var i = 0; i < n_countries; i++) {
-      var country_name = countries[i][0];
-      var country_code = countries[i][1];
+    for (var country_code in countries) {
+      var country_name = countries[country_code];
       var country_icon = getIconSrc(country_code);
       var country = document.createElement('DIV');
       country.setAttribute('id', country_code);
@@ -454,7 +467,7 @@
     var icon_photos = document.createElement('IMG');
     icon_photos.setAttribute('src', 'icons/marker_photo.svg');
     icon_photos.setAttribute('height', '18px');
-    icon_photos.setAttribute('style', 'margin: 0px 2px -4px 1px');
+    icon_photos.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_flights_international = document.createElement('INPUT');
     input_flights_international.setAttribute('id', 'checkbox-flights-international');
@@ -471,6 +484,14 @@
     icon_flights_domestic.setAttribute('src', 'icons/flight_domestic.svg');
     icon_flights_domestic.setAttribute('height', '18px');
     icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var input_farthest_points = document.createElement('INPUT');
+    input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
+    input_farthest_points.setAttribute('type', 'checkbox');
+    var icon_farthest_points = document.createElement('IMG');
+    icon_farthest_points.setAttribute('src', 'icons/farthest_points.svg');
+    icon_farthest_points.setAttribute('height', '17px');
+    icon_farthest_points.setAttribute('style', 'margin: 0px 2px -2px 2px');
 
     var selector = document.getElementById('selector');
     selector.appendChild(input_cities);
@@ -511,9 +532,16 @@
     selector.appendChild(input_flights_domestic);
     selector.appendChild(icon_flights_domestic);
     selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_farthest_points);
+    selector.appendChild(icon_farthest_points);
+    selector.append(strings_dict['MKR_FARTHEST_POINTS']);
 
     // Add click listeners
-    countries.forEach(addListenerToFLags);
+    for (var country_code in countries) {
+      addListenerToFLags(country_code);
+    }
     cities.forEach(addListenerToRegions);
     parks.forEach(addListenerToRegions);
     attractions.forEach(addListenerToPlaces);
@@ -528,8 +556,16 @@
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
+      loadFarthestPoints(map_fullwindow, farthest_points);
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
+      if (document.getElementById("checkbox-farthest-points").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
+      }
+    });
 
     </script>
+
 
     <!-- Default Statcounter code for nós dois viajando
     https://nos2viajando.net/ -->

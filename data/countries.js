@@ -1,19 +1,19 @@
-var countries = [
-  ['Brasil', 'BR'],
-  ['Argentina', 'AR'],
-  ['Paraguai', 'PY'],
-  ['Estados Unidos', 'US'],
-  ['Itália', 'IT'],
-  ['Vaticano', 'VA'],
-  ['Croácia', 'HR']
-]
+var countries = {
+  'BR': 'Brasil',
+  'AR': 'Argentina',
+  'PY': 'Paraguai',
+  'US': 'Estados Unidos',
+  'IT': 'Itália',
+  'VA': 'Vaticano',
+  'HR': 'Croácia'
+}
 
-var countries_en = [
-  ['Brazil', 'BR'],
-  ['Argentina', 'AR'],
-  ['Paraguay', 'PY'],
-  ['United States', 'US'],
-  ['Italy', 'IT'],
-  ['Vatican', 'VA'],
-  ['Croatia', 'HR']
-]
+var countries_en = {
+  'BR': 'Brazil',
+  'AR': 'Argentina',
+  'PY': 'Paraguay',
+  'US': 'United States',
+  'IT': 'Italy',
+  'VA': 'Vatican City',
+  'HR': 'Croatia'
+}
