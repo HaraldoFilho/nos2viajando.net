@@ -207,7 +207,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
 
     map_fullwindow.on('render', function() {
       try {
-        if (current_map_style != "mapbox://styles/mapbox/satellite-v9") {
+        if (current_map_style == "mapbox://styles/mapbox/outdoors-v11") {
           showLatitudeLines(map_fullwindow);
         } else {
           hideLatitudeLines(map_fullwindow);
