@@ -83,14 +83,14 @@ function addListenerToFLags(id) {
   document.getElementById(id).addEventListener('click', function() {
     fitRegion(map, id, 10);
     if (map_fullwindow != null) {
-      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, map_padding_fw, true);
     }
   });
 }
 
 function addListenerToFLagsFullWindow(id) {
   document.getElementById(id.concat("__")).addEventListener('click', function() {
-    fitRegion(map_fullwindow, id, 100);
+    fitRegion(map_fullwindow, id, map_padding_fw);
   });
 }
 
@@ -137,20 +137,20 @@ function getItemId(item_name) {
 }
 
 
-function getInitialBoundingBox(markers) {
+function getInitialBoundingBox(markers, long_offset) {
 
-  var west = 180;
+  var west = getOffsetLongitude(180, long_offset);
   var south = 90;
-  var east = -180;
+  var east = getOffsetLongitude(-180, long_offset);
   var north = -90;
 
   for (var i = 0; i < markers.length; i++) {
 
-    if (markers[i][0][0] < west) {
-      west = markers[i][0][0];
+    if (getOffsetLongitude(markers[i][0][0], long_offset) < west) {
+      west = getOffsetLongitude(markers[i][0][0], long_offset);
     }
-    if (markers[i][0][0] > east) {
-      east = markers[i][0][0];
+    if (getOffsetLongitude(markers[i][0][0], long_offset) > east) {
+      east = getOffsetLongitude(markers[i][0][0], long_offset);
     }
     if (markers[i][0][1] < south) {
       south = markers[i][0][1];
@@ -220,14 +220,14 @@ function enterMapFullwindow(current_bbox, current_coords) {
     });
 
     if (current_coords.length == 0) {
-      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, 100, true);
+      fitBoundingBox(map_fullwindow, current_bbox, init_x_offset, 0, map_padding_fw, true);
     } else {
       flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5);
     }
 
   }
 
-  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
+  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30, true);
 
 }
 
@@ -238,7 +238,7 @@ function exitMapFullwindow() {
   document.getElementById('menu').style.display = "none";
   document.getElementById('selector').style.display = "none";
   document.getElementById('fullmap-countries-panel').style.display = "none";
-  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
+  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, map_padding_fw, true);
 }
 
 function hideSideBar() {
@@ -655,8 +655,22 @@ function removeFlightLine(map, id) {
 
 function getOffsetLongitude(value, offset) {
   var new_value = value - offset;
-  if (value <= 180 && value > (180 + offset)) {
-    new_value = new_value - (180 - offset);
+  if (Math.abs(new_value) > 180) {
+    new_value = 360 - Math.abs(new_value);
+    if (offset < 0) {
+      new_value = -1*new_value;
+    }
+  }
+  return new_value;
+}
+
+function getOriginalLongitude(value, offset) {
+  var new_value = value + offset;
+  if (Math.abs(new_value) > 180) {
+    new_value = 360 - Math.abs(new_value);
+    if (offset > 0) {
+      new_value = -1*new_value;
+    }
   }
   return new_value;
 }

@@ -126,10 +126,23 @@
     var current_bbox = [];
     var current_coords = [];
 
-    var initial_bbox = getInitialBoundingBox(cities);
+    var home = [[-47.06272960051834, -22.90991593806534], 'BR', 'Campinas'];
+
+    var far_north = home;
+    var far_east = home;
+    var far_south = home;
+    var far_west = home;
+    var farthest_points;
+
+    var ref_long = 0;
 
     var init_x_offset = 0;
     var init_y_offset = 10;
+
+    var map_padding = 30;
+    var map_padding_fw = 100;
+
+    var initial_bbox = getInitialBoundingBox(cities, ref_long);
 
     var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
@@ -145,14 +158,6 @@
     var color_international = '#F00';
     var color_domestic = '#00F';
 
-    var home = [[-47.06272960051834, -22.90991593806534], 'BR', 'Campinas'];
-    var far_north = home;
-    var far_east = home;
-    var far_south = home;
-    var far_west = home;
-    var farthest_points;
-
-
     // Travelmap
 
     var map = new mapboxgl.Map({
@@ -164,9 +169,8 @@
     map.touchZoomRotate.disableRotation();
 
     loadMarkersOnMap(map, 0.4);
-    console.log(farthest_points);
 
-    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30);
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
 
     // Full window map
@@ -221,8 +225,8 @@
       countries_panel.appendChild(country);
     }
 
-    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30) });
-    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100) });
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
+    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
     document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
@@ -560,7 +564,7 @@
       loadFarthestPoints(map_fullwindow, farthest_points);
       toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
       if (document.getElementById("checkbox-farthest-points").checked) {
-        fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, 100);
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       }
     });
 
