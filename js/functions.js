@@ -651,3 +651,12 @@ function removeFlightLine(map, id) {
   }
 
 }
+
+
+function getOffsetLongitude(value, offset) {
+  var new_value = value - offset;
+  if (value <= 180 && value > (180 + offset)) {
+    new_value = new_value - (180 - offset);
+  }
+  return new_value;
+}
