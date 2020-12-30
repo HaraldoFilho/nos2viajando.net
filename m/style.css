@@ -135,7 +135,7 @@ p.list-item {
   grid-area: blog-button;
   width: auto;
   font-family: arial;
-  font-size: 64px;
+  font-size: 56px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
