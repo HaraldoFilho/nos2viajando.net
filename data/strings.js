@@ -28,7 +28,7 @@ var strings_dict_en = {
   'TRIPS': 'trips',
   'COUNTRIES': 'countries',
   'DAYS': 'days',
-  'BLOG': 'GO TO TRAVEL BLOG', 
+  'BLOG': 'GO TO TRAVEL DIARY', 
   'CITIES': 'Cities',
   'PARKS': 'National Parks',
   'ATTRACTIONS': 'Touristic Attractions',
