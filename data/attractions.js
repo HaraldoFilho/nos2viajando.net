@@ -70,7 +70,7 @@ var attractions = [
   [[18.111725, 42.643098], 'HR', 'Teleférico de Dubrovnik'],
   [[18.111458, 42.649525], 'HR', 'Monte Srđ'],
   [[18.109520, 42.641246], 'HR', 'Stradun'],
-  [[18.104090, 42.640994], 'HR', 'Forte de Lovrijenac'],
+  [[18.104090, 42.640994], 'HR', 'Forte Lovrijenac'],
   [[18.110638, 42.640335], 'HR', 'Palácio do Reitor'],
   [[18.112295, 42.639902], 'HR', 'Muralhas de Dubrovnik'],
   [[18.112498, 42.640104], 'HR', 'Museu Marítimo de Dubrovnik'],
