@@ -52,6 +52,8 @@
       <img class="metric" src="../icons/days.svg"/>
     </div>
 
+    <div id="blog-button" class="blog-button"></div>
+
     <div class="map">
       <div id='map' style='height: 500px;'>
         <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
@@ -136,6 +138,7 @@
   document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
   document.getElementById('distance').append(distance/1000 + " km");
   document.getElementById('days').append(days + " " + strings_dict['DAYS']);
+  document.getElementById('blog-button').append(strings_dict['BLOG']);
 
   var countries_panel = document.getElementById('countries-panel');
   var lists = document.getElementById('lists');
@@ -158,6 +161,7 @@
   }
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100) });
+  document.getElementById('blog-button').addEventListener('click', function() { window.location.assign("https://nos2viajando.travelmap.net") });
 
   var lists = document.getElementById('lists');
 

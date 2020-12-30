@@ -130,6 +130,22 @@ p.list-item {
   color: grey;
 }
 
+.blog-button {
+  display: block;
+  grid-area: blog-button;
+  width: auto;
+  font-family: arial;
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  background-color: grey;
+  padding: 25px;
+  margin-top: 25px;
+  border-radius: 50px;
+}
+
 .map {
   display: block;
   grid-area: map;
@@ -194,6 +210,7 @@ p.list-item {
   'avatar title title'
   'avatar trips countries'
   'avatar distance days'
+  'blog-button blog-button blog-button'
   'map map map'
   'flags flags flags'
   'lists lists lists';
