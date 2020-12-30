@@ -57,6 +57,7 @@
     <div class="map">
       <div id='map' style='height: 500px;'>
         <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
+        <img id="map-style-icon" class="map-style" src="../icons/map-satellite.svg"/>
       </div>
     </div>
 
@@ -94,7 +95,7 @@
   var init_x_offset = 5;
   var init_y_offset = 5;
 
-  var current_map_style = 'mapbox://styles/mapbox/streets-v11';
+  var current_map_style = 'light-v10';
 
   var cities_markers = [];
   var parks_markers = [];
@@ -107,7 +108,7 @@
   // Travelmap
   var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v10'
+    style: 'mapbox://styles/mapbox/' + current_map_style
   });
 
   map.dragRotate.disable();
@@ -161,6 +162,7 @@
   }
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100) });
+  document.getElementById('map-style-icon').addEventListener('click', function() { toggleMapStyle() });
   document.getElementById('blog-button').addEventListener('click', function() { window.location.assign("https://nos2viajando.travelmap.net") });
 
   var lists = document.getElementById('lists');

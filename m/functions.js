@@ -1,3 +1,18 @@
+// Map style
+
+function toggleMapStyle() {
+  if (current_map_style == 'light-v10') {
+    current_map_style = 'satellite-v9'
+    map.setStyle('mapbox://styles/mapbox/' + current_map_style);
+    document.getElementById('map-style-icon').setAttribute('src', '../icons/map-light.svg');
+  } else {
+    current_map_style = 'light-v10'
+    map.setStyle('mapbox://styles/mapbox/' + current_map_style);
+    document.getElementById('map-style-icon').setAttribute('src', '../icons/map-satellite.svg');
+  }
+}
+
+
 // Markers
 
 function createMarkers(map, places, color, scale) {
@@ -45,16 +60,6 @@ function addListenerToPlaces(item) {
 
 function addListenerToFLags(id) {
   document.getElementById(id).addEventListener('click', function() { fitRegion(map, id) });
-}
-
-
-function switchLayer(layer) {
-  var layerId = layer.target.id;
-  current_map_style = 'mapbox://styles/mapbox/' + layerId;
-  map_fullwindow.setStyle(current_map_style);
-  map_fullwindow.on('styledata', function() {
-    loadFlights(map_fullwindow, flights, airports);
-  });
 }
 
 
