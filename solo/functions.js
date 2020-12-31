@@ -42,16 +42,9 @@ function toggleMarkers(map, markers, checkbox) {
 
 function loadMarkersOnMap(map, markers_scale) {
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
-  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
-  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
-  parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
-  photos_markers = createPhotosMarkers(map, locations_dict);
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points);
   addMarkersToMap(map, airports_markers);
-  addMarkersToMap(map, accommodations_markers);
-  addMarkersToMap(map, attractions_markers);
-  addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
 }
 
@@ -128,7 +121,7 @@ function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed) {
 // Getters
 
 function getIconSrc(country_code) {
-  return "icons/flags/".concat(countries_bbox[country_code][0])
+  return "../icons/flags/".concat(countries_bbox[country_code][0])
   .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
@@ -305,7 +298,7 @@ function createPhotoMarker(map, value) {
 
   var marker = document.createElement('div');
   var img = document.createElement('img');
-  img.setAttribute('src', 'icons/marker_photo.svg');
+  img.setAttribute('src', '../icons/marker_photo.svg');
   img.setAttribute('width', '20');
   img.setAttribute('height', '20');
   marker.appendChild(img);
@@ -336,11 +329,11 @@ function createPhotoMarker(map, value) {
 
 function createFarthestPointsMarkers(map, values) {
   var markers = [];
-  markers[0] = createFarthestPointMarker(map, home[0], home[2], home[1], 'icons/home.svg', 28);
-  markers[1] = createFarthestPointMarker(map, values[0][0], values[0][2], values[0][1], 'icons/arrow_north.svg', 28);
-  markers[2] = createFarthestPointMarker(map, values[1][0], values[1][2], values[1][1], 'icons/arrow_east.svg', 28);
-  markers[3] = createFarthestPointMarker(map, values[2][0], values[2][2], values[2][1], 'icons/arrow_south.svg', 28);
-  markers[4] = createFarthestPointMarker(map, values[3][0], values[3][2], values[3][1], 'icons/arrow_west.svg', 28);
+  markers[0] = createFarthestPointMarker(map, home[0], home[2], home[1], '../icons/home.svg', 28);
+  markers[1] = createFarthestPointMarker(map, values[0][0], values[0][2], values[0][1], '../icons/arrow_north.svg', 28);
+  markers[2] = createFarthestPointMarker(map, values[1][0], values[1][2], values[1][1], '../icons/arrow_east.svg', 28);
+  markers[3] = createFarthestPointMarker(map, values[2][0], values[2][2], values[2][1], '../icons/arrow_south.svg', 28);
+  markers[4] = createFarthestPointMarker(map, values[3][0], values[3][2], values[3][1], '../icons/arrow_west.svg', 28);
   return markers;
 }
 

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eu Viajando</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+    <script src="../js/mapbox_token.js"></script>
+    <script src="../js/countries_bbox.js"></script>
+    <script src="functions.js"></script>
+
+    <!-- Locations data -->
+    <script src="data/strings.js"></script>
+    <script src="data/trips.js"></script>
+    <script src="data/cities.js"></script>
+    <script src="data/airports.js"></script>
+    <script src="data/flights.js"></script>
+    <script src="../data/strings.js"></script>
+    <script src="../data/trips.js"></script>
+    <script src="../data/countries.js"></script>
+    <script src="../data/cities.js"></script>
+    <script src="../data/airports.js"></script>
+    <script src="../data/flights.js"></script>
+
+    <!-- Mapbox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Turf -->
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+
+  </head>
+
+  <body onresize="setSelectorPosition()">
+
+    <div class="main-container">
+
+      <div id="sidebar" class="sidebar-container">
+
+        <div id="top-container" class="top-container">
+
+          <div class="avatar">
+            <img class="avatar" src="avatar.jpeg" title="Haraldo" alt="Haraldo"/>
+          </div>
+
+          <div id="title" class="title"></div>
+
+          <div id="trips" class="trips">
+            <img class="metric" src="../icons/luggage.svg"/>
+          </div>
+
+          <div id="countries" class="countries">
+            <img class="metric" src="../icons/world.svg"/>
+          </div>
+
+          <div id="distance" class="distance">
+            <img class="metric" src="../icons/distance.svg"/>
+          </div>
+
+          <div id="days" class="days">
+            <img class="metric" src="../icons/days.svg"/>
+          </div>
+
+          <div class="map">
+            <div id='map' style='width: 300px; height: 150px;'></div>
+            <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/>
+            <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
+          </div>
+
+          <div id="countries-panel" class="flags"></div>
+
+        </div>
+
+        <img id="close-sidebar" class="close-sidebar" src="../icons/sidebar_close.svg"/>
+
+        <div id="lists" class="lists-container"></div>
+
+      </div>
+
+      <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
+
+      <div id="travelmap" class="travelmap-container">
+        <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
+          Navegador não compatível
+        </iframe>
+      </div>
+
+    </div>
+
+    <div id="map-overlay">
+
+      <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
+      <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../icons/fit_window.svg"/>
+
+      <div id="menu" class="menu"></div>
+
+      <div id="selector" class="selector"></div>
+
+      <div id="fullmap-countries-panel" class="fullmap-countries-panel"></div>
+
+    </div>
+
+    <script>
+
+    for (var i = 0; i < cities.length; i++) {
+      cities_solo.push(cities[i]);
+    }
+    cities = cities_solo;
+
+    for (var i = 0; i < airports.length; i++) {
+      airports_solo.push(airports[i]);
+    }
+    airports = airports_solo;
+
+    for (var i = 0; i < flights.length; i++) {
+      flights_solo.push(flights[i]);
+    }
+    flights = flights_solo;
+
+    for (var i = 0; i < trips.length; i++) {
+      trips_solo.push(trips[i]);
+    }
+    trips = trips_solo;
+
+    mapboxgl.accessToken = mapbox_token;
+
+    var current_bbox = [];
+    var current_coords = [];
+
+    var home = [[-47.06272960051834, -22.90991593806534], 'BR', 'Campinas'];
+
+    var far_north = home;
+    var far_east = home;
+    var far_south = home;
+    var far_west = home;
+    var farthest_points;
+
+    var ref_long = 0;
+
+    var init_x_offset = 0;
+    var init_y_offset = 10;
+
+    var map_padding = 30;
+    var map_padding_fw = 100;
+
+    var initial_bbox = getInitialBoundingBox(cities, ref_long);
+
+    var current_map_style = 'mapbox://styles/mapbox/streets-v11';
+
+    var cities_markers = [];
+    var airports_markers = [];
+    var farthest_points_markers = [];
+
+    var flights_lines = {};
+    var color_international = '#F00';
+    var color_domestic = '#00F';
+
+
+    // Travelmap
+
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v10'
+    });
+
+    map.dragRotate.disable();
+    map.touchZoomRotate.disableRotation();
+
+    loadMarkersOnMap(map, 0.4);
+
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
+
+
+    // Full window map
+
+    var map_fullwindow;
+    var menu;
+    var layerList;
+    var inputs;
+
+
+    // Sidepanel
+
+    var n_trips = trips.length;
+
+    var distance = 0;
+    var days = 0;
+
+    for (var i = 0; i < n_trips; i++) {
+      distance += trips[i][2];
+      days += trips[i][3];
+    }
+
+    document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
+    document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
+    document.getElementById('distance').append(distance/1000 + " km");
+    document.getElementById('days').append(days + " " + strings_dict['DAYS']);
+
+    var countries_panel = document.getElementById('countries-panel');
+    var lists = document.getElementById('lists');
+
+    var n_countries = Object.keys(countries).length;
+    var icons_per_row = 7;
+    var panel_rows = Math.ceil(n_countries/icons_per_row);
+    var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
+    var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
+
+    document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
+    countries_panel.setAttribute('style', 'height:'.concat(panel_height));
+    lists.setAttribute('style', 'top:'.concat(lists_height));
+
+    for (var country_code in countries) {
+      var country_name = countries[country_code];
+      var country_icon = getIconSrc(country_code);
+      var country = document.createElement('DIV');
+      country.setAttribute('id', country_code);
+      var country_flag = document.createElement('IMG');
+      country_flag.setAttribute('class', 'flag');
+      country_flag.setAttribute('src', country_icon);
+      country_flag.setAttribute('title', country_name);
+      country_flag.setAttribute('alt', country_name);
+      country.appendChild(country_flag);
+      countries_panel.appendChild(country);
+    }
+
+    document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
+    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
+    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
+    document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
+    document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });
+    document.getElementById('sidebar').addEventListener('mouseover', function() { showSideBarTab() });
+    document.getElementById('sidebar').addEventListener('mouseleave', function() { hideSideBarTab() });
+
+    var lists = document.getElementById('lists');
+
+    // Construct list of Cities
+    var cities_list = document.createElement('DIV');
+    cities_list.setAttribute('class', 'list-title-container');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', '../icons/marker_city.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['CITIES']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = cities.length;
+    cities_list.appendChild(title);
+    cities_list.appendChild(count);
+    lists.appendChild(cities_list);
+    for (var i = 0; i < cities.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(cities[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(cities[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(cities[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    // Construct list of Airports
+    var airports_list = document.createElement('DIV');
+    airports_list.setAttribute('class', 'list-title-container');
+    airports_list.setAttribute('style', 'margin-top:25px');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', '../icons/marker_airport.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['AIRPORTS']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = airports.length;
+    airports_list.appendChild(title);
+    airports_list.appendChild(count);
+    lists.appendChild(airports_list);
+    for (var i = 0; i < airports.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(airports[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(airports[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(airports[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    // construct menu on full window map
+    var input_streets = document.createElement('INPUT');
+    input_streets.setAttribute('id', 'streets-v11');
+    input_streets.setAttribute('type', 'radio');
+    input_streets.setAttribute('name', 'rtoggle');
+    input_streets.setAttribute('value', 'streets');
+    input_streets.setAttribute('checked', 'checked');
+    var label_streets = document.createElement('LABEL');
+    label_streets.setAttribute('for', 'streets-v11');
+    label_streets.innerText = strings_dict['MAP_LAYER_1'];
+    var input_outdoors = document.createElement('INPUT');
+    input_outdoors.setAttribute('id', 'outdoors-v11');
+    input_outdoors.setAttribute('type', 'radio');
+    input_outdoors.setAttribute('name', 'rtoggle');
+    input_outdoors.setAttribute('value', 'outdoors');
+    var label_outdoors = document.createElement('LABEL');
+    label_outdoors.setAttribute('for', 'outdoors-v11');
+    label_outdoors.innerText = strings_dict['MAP_LAYER_2'];
+    var input_satellite = document.createElement('INPUT');
+    input_satellite.setAttribute('id', 'satellite-v9');
+    input_satellite.setAttribute('type', 'radio');
+    input_satellite.setAttribute('name', 'rtoggle');
+    input_satellite.setAttribute('value', 'satellite');
+    var label_satellite = document.createElement('LABEL');
+    label_satellite.setAttribute('for', 'satellite-v9');
+    label_satellite.innerText = strings_dict['MAP_LAYER_3'];
+    var menu = document.getElementById('menu');
+    menu.appendChild(input_streets);
+    menu.appendChild(label_streets);
+    menu.appendChild(input_outdoors);
+    menu.appendChild(label_outdoors);
+    menu.appendChild(input_satellite);
+    menu.appendChild(label_satellite);
+
+    // construct selector on full window map
+    var input_cities = document.createElement('INPUT');
+    input_cities.setAttribute('id', 'checkbox-cities');
+    input_cities.setAttribute('type', 'checkbox');
+    input_cities.setAttribute('checked', 'checked');
+    var icon_cities = document.createElement('IMG');
+    icon_cities.setAttribute('src', '../icons/marker_city.svg');
+    icon_cities.setAttribute('height', '20px');
+    icon_cities.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_airports = document.createElement('INPUT');
+    input_airports.setAttribute('id', 'checkbox-airports');
+    input_airports.setAttribute('type', 'checkbox');
+    input_airports.setAttribute('checked', 'checked');
+    var icon_airports = document.createElement('IMG');
+    icon_airports.setAttribute('src', '../icons/marker_airport.svg');
+    icon_airports.setAttribute('height', '20px');
+    icon_airports.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_flights_international = document.createElement('INPUT');
+    input_flights_international.setAttribute('id', 'checkbox-flights-international');
+    input_flights_international.setAttribute('type', 'checkbox');
+    var icon_flights_international = document.createElement('IMG');
+    icon_flights_international.setAttribute('src', '../icons/flight_international.svg');
+    icon_flights_international.setAttribute('height', '18px');
+    icon_flights_international.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var input_flights_domestic = document.createElement('INPUT');
+    input_flights_domestic.setAttribute('id', 'checkbox-flights-domestic');
+    input_flights_domestic.setAttribute('type', 'checkbox');
+    var icon_flights_domestic = document.createElement('IMG');
+    icon_flights_domestic.setAttribute('src', '../icons/flight_domestic.svg');
+    icon_flights_domestic.setAttribute('height', '18px');
+    icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var input_farthest_points = document.createElement('INPUT');
+    input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
+    input_farthest_points.setAttribute('type', 'checkbox');
+    var icon_farthest_points = document.createElement('IMG');
+    icon_farthest_points.setAttribute('src', '../icons/farthest_points.svg');
+    icon_farthest_points.setAttribute('height', '17px');
+    icon_farthest_points.setAttribute('style', 'margin: 0px 2px -2px 2px');
+
+    var selector = document.getElementById('selector');
+    selector.appendChild(input_cities);
+    selector.appendChild(icon_cities);
+    selector.append(strings_dict['MKR_CITIES']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_airports);
+    selector.appendChild(icon_airports);
+    selector.append(strings_dict['MKR_AIRPORTS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_flights_international);
+    selector.appendChild(icon_flights_international);
+    selector.append(strings_dict['MKR_INTERNATIONAL_FLIGHT']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_flights_domestic);
+    selector.appendChild(icon_flights_domestic);
+    selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_farthest_points);
+    selector.appendChild(icon_farthest_points);
+    selector.append(strings_dict['MKR_FARTHEST_POINTS']);
+
+    // Add click listeners
+    for (var country_code in countries) {
+      addListenerToFLags(country_code);
+    }
+    cities.forEach(addListenerToRegions);
+    airports.forEach(addListenerToRegions);
+
+    document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
+    document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
+    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
+      loadFarthestPoints(map_fullwindow, farthest_points);
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
+      if (document.getElementById("checkbox-farthest-points").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+      }
+    });
+
+    </script>
+
+
+    <!-- Default Statcounter code for nós dois viajando
+    https://nos2viajando.net/ -->
+    <script type="text/javascript">
+    var sc_project=12430951;
+    var sc_invisible=1;
+    var sc_security="e38346be";
+    </script>
+    <script type="text/javascript"
+    src="https://www.statcounter.com/counter/counter.js"
+    async></script>
+    <noscript><div class="statcounter"><a title="Web Analytics
+      Made Easy - StatCounter" href="https://statcounter.com/"
+      target="_blank"><img class="statcounter"
+      src="https://c.statcounter.com/12430951/0/e38346be/1/"
+      alt="Web Analytics Made Easy -
+      StatCounter"></a></div></noscript>
+      <!-- End of Statcounter Code -->
+
+    </body>
+    </html>
