@@ -42,9 +42,13 @@ function toggleMarkers(map, markers, checkbox) {
 
 function loadMarkersOnMap(map, markers_scale) {
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
+  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
+  parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points);
   addMarkersToMap(map, airports_markers);
+  addMarkersToMap(map, attractions_markers);
+  addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
 }
 
