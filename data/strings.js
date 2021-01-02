@@ -20,6 +20,7 @@ var strings_dict = {
   'MKR_PHOTOS': 'fotos',
   'MKR_INTERNATIONAL_FLIGHT': 'internacional',
   'MKR_DOMESTIC_FLIGHT': 'doméstico',
+  'MKR_CAR': 'viagem de carro',
   'MKR_FARTHEST_POINTS': 'extremos'
 }
 
@@ -45,5 +46,6 @@ var strings_dict_en = {
   'MKR_PHOTOS': 'photos',
   'MKR_INTERNATIONAL_FLIGHT': 'international',
   'MKR_DOMESTIC_FLIGHT': 'domestic',
+  'MKR_CAR': 'road trip',
   'MKR_FARTHEST_POINTS': 'extremes'
 }

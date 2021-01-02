@@ -31,16 +31,31 @@ function addMarkersToMap(map, markers) {
 }
 
 function toggleMarkers(map, markers, checkbox) {
+  if (document.getElementById(checkbox).checked) {
+    showMarkers(map, markers);
+  } else {
+    hideMarkers(map, markers);
+  }
+}
+
+function showMarkers(map, markers) {
   for (var i = 0; i < markers.length; i++) {
-    if (document.getElementById(checkbox).checked) {
-      markers[i].addTo(map);
-    } else {
-      markers[i].remove();
-    }
+    markers[i].addTo(map);
+  }
+}
+
+function hideMarkers(map, markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].remove();
   }
 }
 
 function loadMarkersOnMap(map, markers_scale) {
+  if (markers_scale > 0.4) {
+    var home_marker = [];
+    home_marker.push(createSpecialMarker(map, home[0], home[2], home[1], 'icons/home.svg', 24));
+    addMarkersToMap(map, home_marker);
+  }
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
@@ -213,7 +228,8 @@ function enterMapFullwindow(current_bbox, current_coords) {
           hideLatitudeLines(map_fullwindow);
         }
         loadFarthestPoints(map_fullwindow, farthest_points);
-        loadFlights(map_fullwindow, flights, airports);
+        loadFlights(map_fullwindow, flights, airports, hide_flights);
+        loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
       } catch (e) {
         console.log(e);
       }
@@ -336,15 +352,14 @@ function createPhotoMarker(map, value) {
 
 function createFarthestPointsMarkers(map, values) {
   var markers = [];
-  markers[0] = createFarthestPointMarker(map, home[0], home[2], home[1], 'icons/home.svg', 28);
-  markers[1] = createFarthestPointMarker(map, values[0][0], values[0][2], values[0][1], 'icons/arrow_north.svg', 28);
-  markers[2] = createFarthestPointMarker(map, values[1][0], values[1][2], values[1][1], 'icons/arrow_east.svg', 28);
-  markers[3] = createFarthestPointMarker(map, values[2][0], values[2][2], values[2][1], 'icons/arrow_south.svg', 28);
-  markers[4] = createFarthestPointMarker(map, values[3][0], values[3][2], values[3][1], 'icons/arrow_west.svg', 28);
+  markers[0] = createSpecialMarker(map, values[0][0], values[0][2], values[0][1], 'icons/arrow_north.svg', 28);
+  markers[1] = createSpecialMarker(map, values[1][0], values[1][2], values[1][1], 'icons/arrow_east.svg', 28);
+  markers[2] = createSpecialMarker(map, values[2][0], values[2][2], values[2][1], 'icons/arrow_south.svg', 28);
+  markers[3] = createSpecialMarker(map, values[3][0], values[3][2], values[3][1], 'icons/arrow_west.svg', 28);
   return markers;
 }
 
-function createFarthestPointMarker(map, coord, text, country_code, icon, size) {
+function createSpecialMarker(map, coord, text, country_code, icon, size) {
   var marker = document.createElement('div');
   var img = document.createElement('img');
   img.setAttribute('src', icon);
@@ -434,7 +449,7 @@ function createLine(map, id, coord_a, coord_b) {
 
 function addLine(map, id, color, width, dasharray) {
 
-  if (!map.getLayer(id)) {
+  if (map.getSource(id) && !map.getLayer(id)) {
     map.addLayer({
       'id': id,
       'type': 'line',
@@ -458,9 +473,7 @@ function removeLine(map, id) {
   }
 }
 
-function loadFlights(map, flights, airports) {
-
-  var n_flights = 0;
+function loadFlights(map, flights, airports, hide) {
 
   map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
     if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
@@ -473,7 +486,7 @@ function loadFlights(map, flights, airports) {
   });
 
   for (var f = 0; f < flights.length; f++) {
-    var route = 'route_' + (f+1);
+    var route = 'fly_route_' + (f+1);
     for (var t = 0; t < flights[f][1].length; t++) {
       for (var c = 1; c < flights[f][1][t].length; c++) {
         var id = route + '_' + (t+1) + '_' + (c);
@@ -509,9 +522,8 @@ function loadFlights(map, flights, airports) {
         }
 
         createFlightLine(map, id, coord_a, coord_b);
-        n_flights++;
 
-        if (add) {
+        if (add && !hide) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);
@@ -520,8 +532,6 @@ function loadFlights(map, flights, airports) {
       }
     }
   }
-
-  console.log("Number of flights: " + n_flights);
 
 }
 
@@ -617,7 +627,7 @@ function addFlightLine(map, id, color, width) {
     flight_icon = 'flight_domestic';
   }
 
-  if (!map.getLayer(id)) {
+  if (map.getSource(id) && !map.getLayer(id)) {
     map.addLayer({
       'id': id,
       'type': 'line',
@@ -629,7 +639,7 @@ function addFlightLine(map, id, color, width) {
     });
   }
 
-  if (!map.getLayer(id.concat("__"))) {
+  if (map.getSource(id.concat("__")) && !map.getLayer(id.concat("__"))) {
     map.addLayer({
       'id': id.concat("__"),
       'source': id.concat("__"),
@@ -679,4 +689,113 @@ function getOriginalLongitude(value, offset) {
     }
   }
   return new_value;
+}
+
+function loadCarRoutes(map, driving, accommodations, hide_car_routes) {
+
+  for (var d = 0; d < driving.length; d++) {
+    var route_id = 'car_route_' + (d+1);
+    for (var a = 0; a < accommodations.length; a++) {
+      if (driving[d][1] == accommodations[a][2]) {
+        createCarRoute(map, route_id, accommodations[a][0]);
+        road_trips_accommodations.push(accommodations[a]);
+        break;
+      }
+    }
+
+    if (document.getElementById("checkbox-road-trips").checked && !hide_car_routes) {
+      addCarRoute(map, route_id);
+    } else {
+      removeCarRoute(map, route_id);
+    }
+
+  }
+
+}
+
+function createCarRoute(map, id, end) {
+
+  var start = home[0];
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + home[0][0] + ',' + home[0][1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+
+  // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+  var req = new XMLHttpRequest();
+  req.open('GET', url, true);
+  req.onload = function() {
+    var json = JSON.parse(req.response);
+    var data = json.routes[0];
+    var route = data.geometry.coordinates;
+    var geojson = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: route
+      }
+    }
+    if (!map.getSource(id)) {
+      map.addSource(id, {
+        'type': 'geojson',
+        'data': geojson
+      });
+    }
+  }
+  req.send();
+
+}
+
+function addCarRoute(map, id) {
+  if (map.getSource(id) && !map.getLayer(id)) {
+    map.addLayer({
+      'id': id,
+      'type': 'line',
+      'source': id,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      'paint': {
+        'line-color': '#0B0',
+        'line-width': 4
+      }
+    });
+  }
+}
+
+function removeCarRoute(map, id) {
+  if (map.getLayer(id)) {
+    map.removeLayer(id);
+  }
+}
+
+function getRoadTripsBoundingBox(markers, long_offset) {
+
+  var road_west = getOffsetLongitude(180, long_offset);
+  var road_south = 90;
+  var road_east = getOffsetLongitude(-180, long_offset);
+  var road_north = -90;
+
+  var road_trips_bbox;
+
+  for (var i = 0; i < markers.length; i++) {
+
+    if (getOffsetLongitude(markers[i][0][0], long_offset) < road_west) {
+      road_west = getOffsetLongitude(markers[i][0][0], long_offset);
+    }
+    if (getOffsetLongitude(markers[i][0][0], long_offset) > road_east) {
+      road_east = getOffsetLongitude(markers[i][0][0], long_offset);
+    }
+    if (markers[i][0][1] < road_south) {
+      road_south = markers[i][0][1];
+    }
+    if (markers[i][0][1] > road_north) {
+      road_north = markers[i][0][1];
+    }
+
+    road_trips_bbox = [road_west, road_south, road_east, road_north];
+
+  }
+
+  return road_trips_bbox;
+
 }
