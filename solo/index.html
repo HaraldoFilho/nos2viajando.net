@@ -51,16 +51,24 @@
             <img class="metric" src="../icons/luggage.svg"/>
           </div>
 
+          <div id="flights" class="flights">
+            <img class="metric" src="../icons/plane.svg"/>
+          </div>
+
           <div id="countries" class="countries">
+            <img class="metric" src="../icons/flag.svg"/>
+          </div>
+
+          <div id="continents" class="continents">
             <img class="metric" src="../icons/world.svg"/>
           </div>
 
           <div id="distance" class="distance">
-            <img class="metric" src="../icons/distance.svg"/>
+            <img class="metric_2" src="../icons/navigation.svg"/>
           </div>
 
           <div id="days" class="days">
-            <img class="metric" src="../icons/days.svg"/>
+            <img class="metric_2" src="../icons/calendar.svg"/>
           </div>
 
           <div class="map">
@@ -189,6 +197,7 @@
     // Sidepanel
 
     var n_trips = trips.length;
+    var n_flights = 0;
 
     var distance = 0;
     var days = 0;
@@ -198,8 +207,15 @@
       days += trips[i][3];
     }
 
-    document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
+    for (var i = 0; i < flights.length; i++) {
+      for (var j = 0; j < flights[i][1].length; j++) {
+        n_flights += flights[i][1][j].length - 1;
+      }
+    }
+
+    document.getElementById('title').innerText = "Eu Viajando";
     document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
+    document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
     document.getElementById('distance').append(distance/1000 + " km");
     document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
@@ -207,12 +223,20 @@
     var lists = document.getElementById('lists');
 
     var n_countries = Object.keys(countries).length;
+    var n_continents = 0;
+    for (var i = 0; i < continents.length; i++) {
+      if (continents[i][1].length > 0) {
+        n_continents++;
+      }
+    }
+
     var icons_per_row = 7;
     var panel_rows = Math.ceil(n_countries/icons_per_row);
     var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
     var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
 
     document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
+    document.getElementById('continents').append(n_continents + " " + strings_dict['CONTINENTS']);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 

@@ -26,6 +26,13 @@ img.metric {
   cursor: default;
 }
 
+img.metric_2 {
+  width: 60px;
+  height: 60px;
+  margin-bottom: -20px;
+  cursor: default;
+}
+
 img.tiny_icon {
   width: 40px;
   height: 40px;
@@ -111,9 +118,33 @@ p.list-item {
   cursor: default;
 }
 
+.flights {
+  display: block;
+  grid-area: flights;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 5px;
+  color: grey;
+  cursor: default;
+}
+
 .countries {
   display: block;
   grid-area: countries;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 25px;
+  color: grey;
+  cursor: default;
+}
+
+.continents {
+  display: block;
+  grid-area: continents;
   width: auto;
   font-family: arial;
   font-size: 13px;
@@ -127,24 +158,34 @@ p.list-item {
   display: block;
   grid-area: distance;
   width: auto;
-  font-size: 13px;
+  height: 80px;
+  font-size: 21px;
   font-family: arial;
   text-align: left;
-  padding-left: 25px;
+  padding: 14px 0 0 90px;
+  margin-top: 25px;
   color: grey;
   cursor: default;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
 }
 
 .days {
   display: block;
   grid-area: days;
   width: auto;
+  height: 80px;
   font-family: arial;
-  font-size: 13px;
+  font-size: 21px;
   text-align: left;
-  padding-left: 5px;
+  padding: 14px 0 0 0;
+  margin-top: 25px;
   cursor: default;
   color: grey;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
 }
 
 .blog-button {
@@ -225,14 +266,14 @@ p.list-item {
   grid-area: main-container;
   grid-template-areas:
   'avatar title title'
-  'avatar trips countries'
-  'avatar distance days'
+  'avatar trips flights'
+  'avatar countries continents'
+  'distance distance days'
   'blog-button blog-button blog-button'
   'map map map'
   'flags flags flags'
   'lists lists lists';
   grid-template-columns: 25% 35% auto;
-  grid-template-rows: auto auto auto auto;
   position: sticky;
   width: auto;
   height: auto;
