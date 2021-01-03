@@ -55,16 +55,24 @@
             <img class="metric" src="icons/luggage.svg"/>
           </div>
 
+          <div id="flights" class="flights">
+            <img class="metric" src="icons/plane.svg"/>
+          </div>
+
           <div id="countries" class="countries">
+            <img class="metric" src="icons/flag.svg"/>
+          </div>
+
+          <div id="continents" class="continents">
             <img class="metric" src="icons/world.svg"/>
           </div>
 
           <div id="distance" class="distance">
-            <img class="metric" src="icons/distance.svg"/>
+            <img class="metric_2" src="icons/navigation.svg"/>
           </div>
 
           <div id="days" class="days">
-            <img class="metric" src="icons/days.svg"/>
+            <img class="metric_2" src="icons/calendar.svg"/>
           </div>
 
           <div class="map">
@@ -208,6 +216,7 @@
 
     document.getElementById('title').innerText = strings_dict['TITLE'];
     document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
+    document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
     document.getElementById('distance').append(distance/1000 + " km");
     document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
@@ -228,6 +237,7 @@
     var lists_height = (320+40*(panel_rows-1)).toString().concat('px');
 
     document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
+    document.getElementById('continents').append(n_continents + " " + strings_dict['CONTINENTS']);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
@@ -513,7 +523,7 @@
     input_road_trips.setAttribute('id', 'checkbox-road-trips');
     input_road_trips.setAttribute('type', 'checkbox');
     var icon_road_trip = document.createElement('IMG');
-    icon_road_trip.setAttribute('src', 'icons/road_trip.svg');
+    icon_road_trip.setAttribute('src', 'icons/car.svg');
     icon_road_trip.setAttribute('height', '18px');
     icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
 

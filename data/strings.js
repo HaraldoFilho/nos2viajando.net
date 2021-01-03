@@ -1,7 +1,9 @@
 var strings_dict = {
   'TITLE': 'Nós Dois Viajando',
   'TRIPS': 'viagens',
+  'FLIGHTS': 'voos',
   'COUNTRIES': 'países',
+  'CONTINENTS': 'continentes',
   'DAYS': 'dias',
   'BLOG': 'IR PARA O DIÁRIO DE VIAGEM',
   'CITIES': 'Cidades',
@@ -27,7 +29,9 @@ var strings_dict = {
 var strings_dict_en = {
   'TITLE': 'We Traveling',
   'TRIPS': 'trips',
+  'FLIGHTS': 'flights',
   'COUNTRIES': 'countries',
+  'CONTINENTS': 'continents',
   'DAYS': 'days',
   'BLOG': 'GO TO THE TRAVEL DIARY',
   'CITIES': 'Cities',

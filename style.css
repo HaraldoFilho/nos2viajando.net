@@ -32,6 +32,13 @@ img.metric {
   cursor: default;
 }
 
+img.metric_2 {
+  width: 20px;
+  height: 20px;
+  margin-bottom: -2px;
+  cursor: default;
+}
+
 img.tiny_icon {
   width: 14px;
   height: 14px;
@@ -46,9 +53,26 @@ img.marker {
 img.fullwindow-enter {
   position: absolute;
   top: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-top: 160px;
+  width: 21px;
+  heigh: 21px;
+  z-index: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+img.zoom-out {
+  position: absolute;
+  top: 0;
   left: 0;
-  margin-left: 276px;
-  margin-top: 110px;
+  margin-left: 20px;
+  margin-top: 160px;
   width: 21px;
   heigh: 21px;
   z-index: 1;
@@ -68,29 +92,12 @@ img.fullwindow-exit {
   margin-right: 9px;
   margin-top: 118px;
   width: 28px;
-  heigh: 0;
+  height: 28px;
   z-index: 1;
   border-style: solid;
   border-width: 2px;
   border-color: lightgrey;
   border-radius: 6px;
-  background-color: white;
-  cursor: pointer;
-}
-
-img.zoom-out {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 20px;
-  margin-top: 110px;
-  width: 21px;
-  heigh: 21px;
-  z-index: 1;
-  border-style: solid;
-  border-width: 1px;
-  border-color: lightgrey;
-  border-radius: 5px;
   background-color: white;
   cursor: pointer;
 }
@@ -119,7 +126,7 @@ img.close-sidebar {
   top: 0;
   left: 0;
   margin-left: 288px;
-  margin-top: 284px;
+  margin-top: 334px;
   padding: 12px 8px 12px 17px;
   height: 12px;
   border-radius: 0 50% 50% 0;
@@ -175,10 +182,23 @@ p.list-item {
 .trips {
   display: block;
   grid-area: trips;
-  width: 100px;
-  height: 20px;
+  width: 90px;
+  height: 25px;
   font-family: arial;
-  font-size: 15px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 5px;
+  color: grey;
+  cursor: default;
+}
+
+.flights {
+  display: block;
+  grid-area: flights;
+  width: 110px;
+  height: 25px;
+  font-family: arial;
+  font-size: 14px;
   text-align: left;
   padding-left: 5px;
   color: grey;
@@ -188,10 +208,23 @@ p.list-item {
 .countries {
   display: block;
   grid-area: countries;
-  width: 100%;
-  height: 20px;
+  width: 90px;
+  height: 25px;
   font-family: arial;
-  font-size: 15px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 5px;
+  color: grey;
+  cursor: default;
+}
+
+.continents {
+  display: block;
+  grid-area: continents;
+  width: 110px;
+  height: 25px;
+  font-family: arial;
+  font-size: 14px;
   text-align: left;
   padding-left: 5px;
   color: grey;
@@ -201,27 +234,35 @@ p.list-item {
 .distance {
   display: block;
   grid-area: distance;
-  width: 100px;
-  height: 20px;
-  font-size: 15px;
+  width: auto;
+  height: 30px;
+  font-size: 18px;
   font-family: arial;
   text-align: left;
-  padding-left: 5px;
+  padding: 7px 0 0 30px;
+  margin-top: 10px;
   color: grey;
   cursor: default;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
 }
 
 .days {
   display: block;
   grid-area: days;
-  width: 110px;
-  height: 20px;
+  width: auto;
+  height: 30px;
   font-family: arial;
-  font-size: 15px;
+  font-size: 18px;
   text-align: left;
-  padding-left: 5px;
+  padding: 7px 0 0 0;
+  margin-top: 10px;
   cursor: default;
   color: grey;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
 }
 
 .map {
@@ -284,13 +325,14 @@ p.list-item {
   grid-area: top-container;
   grid-template-areas:
   'avatar title title title title'
-  'avatar trips trips countries countries'
-  'avatar distance distance days days'
+  'avatar trips trips flights flights'
+  'avatar countries countries continents continents'
+  'distance distance distance days days'
   'map map map map map'
   'flags flags flags flags flags';
   position: sticky;
   width: 300px;
-  height: 300px;
+  height: 350px;
   padding: 10px;
   background-color: inherit;
   border-width: 0 1px 0 0;
@@ -308,9 +350,9 @@ p.list-item {
   left: 0px;
   bottom: 0px;
   padding: 5px 10px 0px 10px;
+  margin-top: 50px;
   width: 299px;
   text-align: left;
-  padding: 10px;
   border-width: 1px;
   border-style: solid;
   border-color: lightgrey;

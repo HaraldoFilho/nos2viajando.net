@@ -494,7 +494,7 @@ function loadFlights(map, flights, airports) {
         var width;
         var add;
 
-        if (country_a == country_b) {
+        if (country_a == 'BR' && country_b == 'BR') {
           color = color_domestic;
           width = 2;
           add = document.getElementById("checkbox-flights-domestic").checked;
