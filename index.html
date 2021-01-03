@@ -160,7 +160,6 @@
     var color_international = '#F00';
     var color_domestic = '#00F';
 
-    var hide_flights = false;
     var hide_car_routes = false;
 
     var road_trips_accommodations = [];
@@ -191,6 +190,7 @@
     // Sidepanel
 
     var n_trips = trips.length;
+    var n_flights = 0;
 
     var distance = 0;
     var days = 0;
@@ -198,6 +198,12 @@
     for (var i = 0; i < n_trips; i++) {
       distance += trips[i][2];
       days += trips[i][3];
+    }
+
+    for (var i = 0; i < flights.length; i++) {
+      for (var j = 0; j < flights[i][1].length; j++) {
+        n_flights += flights[i][1][j].length - 1;
+      }
     }
 
     document.getElementById('title').innerText = strings_dict['TITLE'];
@@ -209,6 +215,13 @@
     var lists = document.getElementById('lists');
 
     var n_countries = Object.keys(countries).length;
+    var n_continents = 0;
+    for (var i = 0; i < continents.length; i++) {
+      if (continents[i][1].length > 0) {
+        n_continents++;
+      }
+    }
+
     var icons_per_row = 7;
     var panel_rows = Math.ceil(n_countries/icons_per_row);
     var panel_height = (panel_rows*30+10*(panel_rows-1)).toString().concat('px');
@@ -578,8 +591,8 @@
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
-    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports, hide_flights) });
-    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports, hide_flights) });
+    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
       loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
       if (document.getElementById("checkbox-road-trips").checked) {
@@ -606,7 +619,6 @@
         hideMarkers(map_fullwindow, accommodations_markers);
         hideMarkers(map_fullwindow, airports_markers);
         hideMarkers(map_fullwindow, photos_markers);
-        hide_flights = true;
         hide_car_routes = true;
       } else {
         toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
@@ -615,7 +627,6 @@
         toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
         toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
         toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
-        hide_flights = false;
         hide_car_routes = false;
         if (document.getElementById("checkbox-road-trips").checked) {
           var road_trips_bbox = getRoadTripsBoundingBox(road_trips_accommodations, 0);

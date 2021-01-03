@@ -228,7 +228,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
           hideLatitudeLines(map_fullwindow);
         }
         loadFarthestPoints(map_fullwindow, farthest_points);
-        loadFlights(map_fullwindow, flights, airports, hide_flights);
+        loadFlights(map_fullwindow, flights, airports);
         loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
       } catch (e) {
         console.log(e);
@@ -473,7 +473,7 @@ function removeLine(map, id) {
   }
 }
 
-function loadFlights(map, flights, airports, hide) {
+function loadFlights(map, flights, airports) {
 
   map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
     if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
@@ -510,7 +510,7 @@ function loadFlights(map, flights, airports, hide) {
         var width;
         var add;
 
-        if (country_a == country_b) {
+        if (country_a == 'BR' && country_b == 'BR') {
           color = color_domestic;
           width = 2;
           add = document.getElementById("checkbox-flights-domestic").checked;
@@ -523,7 +523,8 @@ function loadFlights(map, flights, airports, hide) {
 
         createFlightLine(map, id, coord_a, coord_b);
 
-        if (add && !hide) {
+        if (add && !document.getElementById("checkbox-road-trips").checked
+            && !document.getElementById("checkbox-farthest-points").checked) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);

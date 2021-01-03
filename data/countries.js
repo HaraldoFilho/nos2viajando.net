@@ -17,3 +17,14 @@ var countries_en = {
   'VA': 'Vatican City',
   'HR': 'Croatia'
 }
+
+var continents = [
+  ['South America', ['BR', 'AR', 'PY']],
+  ['Central America', []],
+  ['North America', ['US']],
+  ['Europe', ['IT', 'VA', 'HR']],
+  ['Africa', []],
+  ['Asia', []],
+  ['Oceania', []],
+  ['Antarctica', []]
+]
