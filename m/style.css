@@ -158,7 +158,7 @@ p.list-item {
   display: block;
   grid-area: distance;
   width: auto;
-  font-size: 40px;
+  font-size: 24px;
   font-family: arial;
   text-align: left;
   padding: 0 0 30px 120px;
@@ -175,7 +175,7 @@ p.list-item {
   grid-area: days;
   width: auto;
   font-family: arial;
-  font-size: 40px;
+  font-size: 24px;
   text-align: left;
   padding: 0 0 30px 120px;
   margin-top: 25px;
