@@ -208,6 +208,11 @@
       days += trips[i][3];
     }
 
+    var distance_str = distance/1000 + " km";
+    if (userLang != 'pt-BR') {
+      distance_str = distance_str.replace('.',',');
+    }
+
     for (var i = 0; i < flights.length; i++) {
       for (var j = 0; j < flights[i][1].length; j++) {
         n_flights += flights[i][1][j].length - 1;
@@ -217,7 +222,7 @@
     document.getElementById('title').innerText = strings_dict['TITLE'];
     document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
     document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
-    document.getElementById('distance').append(distance/1000 + " km");
+    document.getElementById('distance').append(distance_str);
     document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
     var countries_panel = document.getElementById('countries-panel');
