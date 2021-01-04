@@ -29,7 +29,7 @@ img.metric {
 img.metric_2 {
   width: 60px;
   height: 60px;
-  margin-bottom: -20px;
+  margin-top: 20px;
   cursor: default;
 }
 
@@ -159,10 +159,10 @@ p.list-item {
   grid-area: distance;
   width: auto;
   height: 80px;
-  font-size: 21px;
+  font-size: 40px;
   font-family: arial;
   text-align: left;
-  padding: 14px 0 0 90px;
+  padding: 0 0 30px 240px;
   margin-top: 25px;
   color: grey;
   cursor: default;
@@ -177,9 +177,9 @@ p.list-item {
   width: auto;
   height: 80px;
   font-family: arial;
-  font-size: 21px;
+  font-size: 40px;
   text-align: left;
-  padding: 14px 0 0 0;
+  padding: 0 0 30px 0;
   margin-top: 25px;
   cursor: default;
   color: grey;
