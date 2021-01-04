@@ -1,7 +1,7 @@
 var attractions_solo = [
+  [[-35.902746, -9.669572], 'BR', 'Lagoa Manguaba'],
   [[-35.904206, -9.859470], 'BR', 'Praia do Gunga'],
   [[-36.394894, -10.479603], 'BR', 'Foz do Rio São Francisco'],
-  [[-35.902746, -9.669572], 'BR', 'Lagoa Manguaba'],
   [[-87.605072, 41.891815], 'US', 'Navy Pier'],
   [[-87.583001, 41.790652], 'US', 'Museu da Ciência e Indústria'],
   [[-48.565894, -27.593956], 'BR', 'Ponte Hercílio Luz'],
