@@ -161,7 +161,7 @@ p.list-item {
   font-size: 18px;
   font-family: arial;
   text-align: left;
-  padding: 0 0 25px 120px;
+  padding: 0 0 20px 120px;
   margin-top: 25px;
   color: grey;
   cursor: default;
@@ -177,7 +177,7 @@ p.list-item {
   font-family: arial;
   font-size: 18px;
   text-align: left;
-  padding: 0 0 25px 40px;
+  padding: 0 0 20px 40px;
   margin-top: 25px;
   cursor: default;
   color: grey;
