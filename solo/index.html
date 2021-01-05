@@ -97,7 +97,7 @@
       <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
 
       <div id="travelmap" class="travelmap-container">
-        <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
+        <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1025885/?tiles=default&showguide=true" frameBorder="0" >
           Navegador não compatível
         </iframe>
       </div>
@@ -225,7 +225,7 @@
       }
     }
 
-    document.getElementById('title').innerText = strings_dict['TITLE'];
+    document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
     document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
     document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
     document.getElementById('distance').append(distance_str);
@@ -640,6 +640,7 @@
         hideMarkers(map_fullwindow, accommodations_markers);
         hideMarkers(map_fullwindow, airports_markers);
         hideMarkers(map_fullwindow, photos_markers);
+        hideMarkers(map_fullwindow, photos_markers_solo);
         hide_car_routes = true;
       } else {
         toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
@@ -648,6 +649,7 @@
         toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
         toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
         toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+        toggleMarkers(map_fullwindow, photos_markers_solo, 'checkbox-photos');
         hide_car_routes = false;
         if (document.getElementById("checkbox-road-trips").checked) {
           var road_trips_bbox = getRoadTripsBoundingBox(road_trips_accommodations, 0);
