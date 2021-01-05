@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Eu Viajando</title>
+  <title>Nós Dois Viajando</title>
   <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
   <link rel="stylesheet" type="text/css" href="../style.css" />
+
     <script src="../js/mapbox_token.js"></script>
     <script src="../js/countries_bbox.js"></script>
     <script src="functions.js"></script>
+    <script src="solo.js"></script>
 
     <!-- Locations data -->
-    <script src="data/strings.js"></script>
-    <script src="data/trips.js"></script>
-    <script src="data/cities.js"></script>
-    <script src="data/attractions.js"></script>
-    <script src="data/airports.js"></script>
-    <script src="data/flights.js"></script>
     <script src="../data/strings.js"></script>
     <script src="../data/trips.js"></script>
     <script src="../data/countries.js"></script>
     <script src="../data/cities.js"></script>
     <script src="../data/parks.js"></script>
     <script src="../data/attractions.js"></script>
+    <script src="../data/accommodations.js"></script>
     <script src="../data/airports.js"></script>
     <script src="../data/flights.js"></script>
+    <script src="../data/driving.js"></script>
+    <script src="../data/photos.js"></script>
+
+    <script src="data/strings.js"></script>
+    <script src="data/trips.js"></script>
+    <script src="data/cities.js"></script>
+    <script src="data/attractions.js"></script>
+    <script src="data/airports.js"></script>
+    <script src="data/flights.js"></script>
+    <script src="data/photos.js"></script>
 
     <!-- Mapbox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
@@ -90,7 +97,7 @@
       <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
 
       <div id="travelmap" class="travelmap-container">
-        <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1025885/?tiles=default&showguide=true" frameBorder="0" >
+        <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
           Navegador não compatível
         </iframe>
       </div>
@@ -112,33 +119,25 @@
 
     <script>
 
-    for (var i = 0; i < cities.length; i++) {
-      cities_solo.push(cities[i]);
-    }
-    cities = cities_solo;
+    loadAdditionalData();
 
-    for (var i = 0; i < attractions.length; i++) {
-      attractions_solo.push(attractions[i]);
-    }
-    attractions = attractions_solo;
+    var userLang = navigator.language || navigator.userLanguage;
+    console.log ("User language is: " + userLang);
 
-    for (var i = 0; i < airports.length; i++) {
-      airports_solo.push(airports[i]);
+    if (userLang != 'pt-BR') {
+      strings_dict = strings_dict_en;
+      accommodations = accommodations_en;
+      airports = airports_en;
+      attractions = attractions_en;
+      cities = cities_en;
+      countries = countries_en;
+      parks = parks_en;
+      trips = trips_en;
     }
-    airports = airports_solo;
-
-    for (var i = 0; i < flights.length; i++) {
-      flights_solo.push(flights[i]);
-    }
-    flights = flights_solo;
-
-    for (var i = 0; i < trips.length; i++) {
-      trips_solo.push(trips[i]);
-    }
-    trips = trips_solo;
 
     mapboxgl.accessToken = mapbox_token;
 
+    var previous_bbox;
     var current_bbox = [];
     var current_coords = [];
 
@@ -163,13 +162,21 @@
     var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
     var cities_markers = [];
+    var parks_markers = [];
+    var attractions_markers = [];
+    var accommodations_markers = [];
     var airports_markers = [];
+    var photos_markers = [];
+    var photos_markers_solo = [];
     var farthest_points_markers = [];
 
     var flights_lines = {};
     var color_international = '#F00';
     var color_domestic = '#00F';
 
+    var hide_car_routes = false;
+
+    var road_trips_accommodations = [];
 
     // Travelmap
 
@@ -207,16 +214,21 @@
       days += trips[i][3];
     }
 
+    var distance_str = distance/1000 + " km";
+    if (userLang != 'pt-BR') {
+      distance_str = distance_str.replace('.',',');
+    }
+
     for (var i = 0; i < flights.length; i++) {
       for (var j = 0; j < flights[i][1].length; j++) {
         n_flights += flights[i][1][j].length - 1;
       }
     }
 
-    document.getElementById('title').innerText = "Eu Viajando";
+    document.getElementById('title').innerText = strings_dict['TITLE'];
     document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
     document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
-    document.getElementById('distance').append(distance/1000 + " km");
+    document.getElementById('distance').append(distance_str);
     document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
     var countries_panel = document.getElementById('countries-panel');
@@ -354,6 +366,35 @@
       lists.appendChild(list_item);
     }
 
+    // Construct list of Accommodations
+    var accommodations_list = document.createElement('DIV');
+    accommodations_list.setAttribute('class', 'list-title-container');
+    accommodations_list.setAttribute('style', 'margin-top:25px');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', '../icons/marker_accommodation.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['ACCOMMODATIONS']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = accommodations.length;
+    accommodations_list.appendChild(title);
+    accommodations_list.appendChild(count);
+    lists.appendChild(accommodations_list);
+    for (var i = 0; i < accommodations.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(accommodations[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(accommodations[i][2]);
+      lists.appendChild(list_item);
+    }
 
     // Construct list of Airports
     var airports_list = document.createElement('DIV');
@@ -447,6 +488,15 @@
     icon_attractions.setAttribute('height', '20px');
     icon_attractions.setAttribute('style', 'margin-bottom:-3px');
 
+    var input_accommodations = document.createElement('INPUT');
+    input_accommodations.setAttribute('id', 'checkbox-accommodations');
+    input_accommodations.setAttribute('type', 'checkbox');
+    input_accommodations.setAttribute('checked', 'checked');
+    var icon_accommodations = document.createElement('IMG');
+    icon_accommodations.setAttribute('src', '../icons/marker_accommodation.svg');
+    icon_accommodations.setAttribute('height', '20px');
+    icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
+
     var input_airports = document.createElement('INPUT');
     input_airports.setAttribute('id', 'checkbox-airports');
     input_airports.setAttribute('type', 'checkbox');
@@ -455,6 +505,14 @@
     icon_airports.setAttribute('src', '../icons/marker_airport.svg');
     icon_airports.setAttribute('height', '20px');
     icon_airports.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_photos = document.createElement('INPUT');
+    input_photos.setAttribute('id', 'checkbox-photos');
+    input_photos.setAttribute('type', 'checkbox');
+    var icon_photos = document.createElement('IMG');
+    icon_photos.setAttribute('src', '../icons/marker_photo.svg');
+    icon_photos.setAttribute('height', '18px');
+    icon_photos.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_flights_international = document.createElement('INPUT');
     input_flights_international.setAttribute('id', 'checkbox-flights-international');
@@ -471,6 +529,14 @@
     icon_flights_domestic.setAttribute('src', '../icons/flight_domestic.svg');
     icon_flights_domestic.setAttribute('height', '18px');
     icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
+
+    var input_road_trips = document.createElement('INPUT');
+    input_road_trips.setAttribute('id', 'checkbox-road-trips');
+    input_road_trips.setAttribute('type', 'checkbox');
+    var icon_road_trip = document.createElement('IMG');
+    icon_road_trip.setAttribute('src', '../icons/car.svg');
+    icon_road_trip.setAttribute('height', '18px');
+    icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_farthest_points = document.createElement('INPUT');
     input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
@@ -496,9 +562,19 @@
     selector.append(strings_dict['MKR_ATTRACTIONS']);
     selector.appendChild(document.createElement('BR'));
 
+    selector.appendChild(input_accommodations);
+    selector.appendChild(icon_accommodations);
+    selector.append(strings_dict['MKR_ACCOMMODATIONS']);
+    selector.appendChild(document.createElement('BR'));
+
     selector.appendChild(input_airports);
     selector.appendChild(icon_airports);
     selector.append(strings_dict['MKR_AIRPORTS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_photos);
+    selector.appendChild(icon_photos);
+    selector.append(strings_dict['MKR_PHOTOS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_flights_international);
@@ -509,6 +585,11 @@
     selector.appendChild(input_flights_domestic);
     selector.appendChild(icon_flights_domestic);
     selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_road_trips);
+    selector.appendChild(icon_road_trip);
+    selector.append(strings_dict['MKR_CAR']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_farthest_points);
@@ -522,19 +603,56 @@
     cities.forEach(addListenerToRegions);
     parks.forEach(addListenerToRegions);
     attractions.forEach(addListenerToPlaces);
+    accommodations.forEach(addListenerToPlaces);
     airports.forEach(addListenerToRegions);
 
     document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
     document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
     document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
+    document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
+    document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos"); toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos") });
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-road-trips").addEventListener('click', function() {
+      loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
+      if (document.getElementById("checkbox-road-trips").checked) {
+        previous_bbox = current_bbox;
+        var road_trips_bbox = getRoadTripsBoundingBox(road_trips_accommodations, 0);
+        if(!hide_car_routes) {
+          fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
+        }
+        hide_flights = true;
+      } else {
+        current_bbox = previous_bbox;
+        fitBoundingBox(map_fullwindow, current_bbox, init_x_offset, 0, map_padding_fw, false);
+        hide_flights = false;
+      }
+    });
     document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
       loadFarthestPoints(map_fullwindow, farthest_points);
       toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
       if (document.getElementById("checkbox-farthest-points").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        hideMarkers(map_fullwindow, cities_markers);
+        hideMarkers(map_fullwindow, parks_markers);
+        hideMarkers(map_fullwindow, attractions_markers);
+        hideMarkers(map_fullwindow, accommodations_markers);
+        hideMarkers(map_fullwindow, airports_markers);
+        hideMarkers(map_fullwindow, photos_markers);
+        hide_car_routes = true;
+      } else {
+        toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
+        toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
+        toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
+        toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
+        toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
+        toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+        hide_car_routes = false;
+        if (document.getElementById("checkbox-road-trips").checked) {
+          var road_trips_bbox = getRoadTripsBoundingBox(road_trips_accommodations, 0);
+          fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
+        }
       }
     });
 

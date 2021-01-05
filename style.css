@@ -186,7 +186,7 @@ p.list-item {
   font-family: arial;
   font-size: 14px;
   text-align: left;
-  color: grey;
+  color: inherit;
   cursor: default;
 }
 
@@ -198,7 +198,7 @@ p.list-item {
   font-family: arial;
   font-size: 14px;
   text-align: left;
-  color: grey;
+  color: inherit;
   cursor: default;
 }
 
@@ -210,7 +210,7 @@ p.list-item {
   font-family: arial;
   font-size: 14px;
   text-align: left;
-  color: grey;
+  color: inherit;
   cursor: default;
 }
 
@@ -222,7 +222,7 @@ p.list-item {
   font-family: arial;
   font-size: 14px;
   text-align: left;
-  color: grey;
+  color: inherit;
   cursor: default;
 }
 
@@ -236,7 +236,7 @@ p.list-item {
   text-align: left;
   padding: 7px 0 0 22px;
   margin-top: 10px;
-  color: grey;
+  color: inherit;
   cursor: default;
   border-width: 1px 0 1px 0;
   border-style: solid;
@@ -254,7 +254,7 @@ p.list-item {
   padding: 7px 0 0 0;
   margin-top: 10px;
   cursor: default;
-  color: grey;
+  color: inherit;
   border-width: 1px 0 1px 0;
   border-style: solid;
   border-color: lightgrey;
@@ -333,6 +333,7 @@ p.list-item {
   border-width: 0 1px 0 0;
   border-style: solid;
   border-color: lightgrey;
+  color: #707070;
 }
 
 .lists-container {

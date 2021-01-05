@@ -6,9 +6,10 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
 
   for (var i = 0; i < places.length; i++) {
 
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + places[i][2] + "</p>";
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
-    .setPopup(new mapboxgl.Popup({closeButton:false}).setText(places[i][2]));
+    .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
 
     if (get_farthest_points) {
       if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
@@ -31,22 +32,42 @@ function addMarkersToMap(map, markers) {
 }
 
 function toggleMarkers(map, markers, checkbox) {
+  if (document.getElementById(checkbox).checked) {
+    showMarkers(map, markers);
+  } else {
+    hideMarkers(map, markers);
+  }
+}
+
+function showMarkers(map, markers) {
   for (var i = 0; i < markers.length; i++) {
-    if (document.getElementById(checkbox).checked) {
-      markers[i].addTo(map);
-    } else {
-      markers[i].remove();
-    }
+    markers[i].addTo(map);
+  }
+}
+
+function hideMarkers(map, markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].remove();
   }
 }
 
 function loadMarkersOnMap(map, markers_scale) {
+  if (markers_scale > 0.4) {
+    var home_marker = [];
+    var text = home[2] + ", " + countries[home[1]];
+    home_marker.push(createSpecialMarker(map, home[0], text, '../icons/home.svg', 24));
+    addMarkersToMap(map, home_marker);
+  }
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
+  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
-  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points);
+  photos_markers = createPhotosMarkers(map, locations_dict);
+  photos_markers_solo = createPhotosMarkers(map, locations_dict_solo);
+  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances());
   addMarkersToMap(map, airports_markers);
+  addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
@@ -209,8 +230,10 @@ function enterMapFullwindow(current_bbox, current_coords) {
         } else {
           hideLatitudeLines(map_fullwindow);
         }
+
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
+        loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
       } catch (e) {
         console.log(e);
       }
@@ -225,6 +248,42 @@ function enterMapFullwindow(current_bbox, current_coords) {
   }
 
   fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30, true);
+
+}
+
+function getFarthestDistances() {
+
+  var my_home = new mapboxgl.LngLat(home[0][0], home[0][1]);
+
+  var far_points = [];
+  var far_points_km = [];
+
+  for (var i = 0; i < farthest_points.length; i++) {
+    far_points[i] = new mapboxgl.LngLat(farthest_points[i][0][0], farthest_points[i][0][1]);
+  }
+
+  for (var i = 0; i < far_points.length; i++) {
+    far_points_km[i] = my_home.distanceTo(far_points[i])/1000000;
+  }
+
+  var farthest = 0;
+
+  for (var i = 1; i < far_points_km.length; i++) {
+    if (far_points_km[i] > far_points_km[i-1]) {
+      farthest = i;
+    }
+  }
+
+  for (var i = 0; i < far_points.length; i++) {
+    if (far_points_km[i] < 1) {
+      far_points_km[i] *= 1000;
+      far_points_km[i] = far_points_km[i].toFixed(0);
+    } else {
+      far_points_km[i] = far_points_km[i].toFixed(3);
+    }
+  }
+
+  return [[far_points_km[0], far_points_km[1], far_points_km[2], far_points_km[3]], farthest];
 
 }
 
@@ -331,17 +390,27 @@ function createPhotoMarker(map, value) {
 
 }
 
-function createFarthestPointsMarkers(map, values) {
+function createFarthestPointsMarkers(map, values, distances) {
+
   var markers = [];
-  markers[0] = createFarthestPointMarker(map, home[0], home[2], home[1], '../icons/home.svg', 28);
-  markers[1] = createFarthestPointMarker(map, values[0][0], values[0][2], values[0][1], '../icons/arrow_north.svg', 28);
-  markers[2] = createFarthestPointMarker(map, values[1][0], values[1][2], values[1][1], '../icons/arrow_east.svg', 28);
-  markers[3] = createFarthestPointMarker(map, values[2][0], values[2][2], values[2][1], '../icons/arrow_south.svg', 28);
-  markers[4] = createFarthestPointMarker(map, values[3][0], values[3][2], values[3][1], '../icons/arrow_west.svg', 28);
+  var directions = ['north', 'east', 'south', 'west'];
+
+  for (var i = 0; i < values.length; i++) {
+    var icon_name = "../icons/arrow_";
+    if (i == distances[1]) {
+      icon_name = icon_name + "far_";
+    }
+    icon_name = icon_name + directions[i] + ".svg";
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + values[i][2] + ", " + countries[values[i][1]] + "<br><b>" + distances[0][i] + " km</b></p>";
+    markers[i] = createSpecialMarker(map, values[i][0], text, icon_name, 28);
+
+  }
+
   return markers;
+
 }
 
-function createFarthestPointMarker(map, coord, text, country_code, icon, size) {
+function createSpecialMarker(map, coord, text, icon, size) {
   var marker = document.createElement('div');
   var img = document.createElement('img');
   img.setAttribute('src', icon);
@@ -349,7 +418,7 @@ function createFarthestPointMarker(map, coord, text, country_code, icon, size) {
   img.setAttribute('height', size);
   marker.appendChild(img);
   return new mapboxgl.Marker({element:marker,scale:1,draggable:false})
-  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setText(text + ", " + countries[country_code]));
+  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
 }
 
 function createLatitudeLines(map) {
@@ -431,7 +500,7 @@ function createLine(map, id, coord_a, coord_b) {
 
 function addLine(map, id, color, width, dasharray) {
 
-  if (!map.getLayer(id)) {
+  if (map.getSource(id) && !map.getLayer(id)) {
     map.addLayer({
       'id': id,
       'type': 'line',
@@ -457,8 +526,6 @@ function removeLine(map, id) {
 
 function loadFlights(map, flights, airports) {
 
-  var n_flights = 0;
-
   map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
     if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
     if (error) throw error;
@@ -470,7 +537,7 @@ function loadFlights(map, flights, airports) {
   });
 
   for (var f = 0; f < flights.length; f++) {
-    var route = 'route_' + (f+1);
+    var route = 'fly_route_' + (f+1);
     for (var t = 0; t < flights[f][1].length; t++) {
       for (var c = 1; c < flights[f][1][t].length; c++) {
         var id = route + '_' + (t+1) + '_' + (c);
@@ -506,9 +573,9 @@ function loadFlights(map, flights, airports) {
         }
 
         createFlightLine(map, id, coord_a, coord_b);
-        n_flights++;
 
-        if (add) {
+        if (add && !document.getElementById("checkbox-road-trips").checked
+            && !document.getElementById("checkbox-farthest-points").checked) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);
@@ -517,8 +584,6 @@ function loadFlights(map, flights, airports) {
       }
     }
   }
-
-  console.log("Number of flights: " + n_flights);
 
 }
 
@@ -614,7 +679,7 @@ function addFlightLine(map, id, color, width) {
     flight_icon = 'flight_domestic';
   }
 
-  if (!map.getLayer(id)) {
+  if (map.getSource(id) && !map.getLayer(id)) {
     map.addLayer({
       'id': id,
       'type': 'line',
@@ -626,7 +691,7 @@ function addFlightLine(map, id, color, width) {
     });
   }
 
-  if (!map.getLayer(id.concat("__"))) {
+  if (map.getSource(id.concat("__")) && !map.getLayer(id.concat("__"))) {
     map.addLayer({
       'id': id.concat("__"),
       'source': id.concat("__"),
@@ -676,4 +741,113 @@ function getOriginalLongitude(value, offset) {
     }
   }
   return new_value;
+}
+
+function loadCarRoutes(map, driving, accommodations, hide_car_routes) {
+
+  for (var d = 0; d < driving.length; d++) {
+    var route_id = 'car_route_' + (d+1);
+    for (var a = 0; a < accommodations.length; a++) {
+      if (driving[d][1] == accommodations[a][2]) {
+        createCarRoute(map, route_id, accommodations[a][0]);
+        road_trips_accommodations.push(accommodations[a]);
+        break;
+      }
+    }
+
+    if (document.getElementById("checkbox-road-trips").checked && !hide_car_routes) {
+      addCarRoute(map, route_id);
+    } else {
+      removeCarRoute(map, route_id);
+    }
+
+  }
+
+}
+
+function createCarRoute(map, id, end) {
+
+  var start = home[0];
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + home[0][0] + ',' + home[0][1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+
+  // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+  var req = new XMLHttpRequest();
+  req.open('GET', url, true);
+  req.onload = function() {
+    var json = JSON.parse(req.response);
+    var data = json.routes[0];
+    var route = data.geometry.coordinates;
+    var geojson = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: route
+      }
+    }
+    if (!map.getSource(id)) {
+      map.addSource(id, {
+        'type': 'geojson',
+        'data': geojson
+      });
+    }
+  }
+  req.send();
+
+}
+
+function addCarRoute(map, id) {
+  if (map.getSource(id) && !map.getLayer(id)) {
+    map.addLayer({
+      'id': id,
+      'type': 'line',
+      'source': id,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      'paint': {
+        'line-color': '#0B0',
+        'line-width': 4
+      }
+    });
+  }
+}
+
+function removeCarRoute(map, id) {
+  if (map.getLayer(id)) {
+    map.removeLayer(id);
+  }
+}
+
+function getRoadTripsBoundingBox(markers, long_offset) {
+
+  var road_west = getOffsetLongitude(180, long_offset);
+  var road_south = 90;
+  var road_east = getOffsetLongitude(-180, long_offset);
+  var road_north = -90;
+
+  var road_trips_bbox;
+
+  for (var i = 0; i < markers.length; i++) {
+
+    if (getOffsetLongitude(markers[i][0][0], long_offset) < road_west) {
+      road_west = getOffsetLongitude(markers[i][0][0], long_offset);
+    }
+    if (getOffsetLongitude(markers[i][0][0], long_offset) > road_east) {
+      road_east = getOffsetLongitude(markers[i][0][0], long_offset);
+    }
+    if (markers[i][0][1] < road_south) {
+      road_south = markers[i][0][1];
+    }
+    if (markers[i][0][1] > road_north) {
+      road_north = markers[i][0][1];
+    }
+
+    road_trips_bbox = [road_west, road_south, road_east, road_north];
+
+  }
+
+  return road_trips_bbox;
+
 }

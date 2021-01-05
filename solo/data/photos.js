@@ -1,4 +1,4 @@
-locations_dict = {
+locations_dict_solo = {
   'US': [
     [[-98.48387, 29.419413], [['4968592983', 'https://live.staticflickr.com/65535/4968592983_5140d63465_s.jpg']]],
     [[-98.484481, 29.422175], [['5001443187', 'https://live.staticflickr.com/65535/5001443187_ed35b17b91_s.jpg']]],
