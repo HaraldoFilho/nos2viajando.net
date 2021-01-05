@@ -6,9 +6,10 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
 
   for (var i = 0; i < places.length; i++) {
 
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + places[i][2] + "</p>";
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
-    .setPopup(new mapboxgl.Popup({closeButton:false}).setText(places[i][2]));
+    .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
 
     if (get_farthest_points) {
       if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
@@ -53,7 +54,8 @@ function hideMarkers(map, markers) {
 function loadMarkersOnMap(map, markers_scale) {
   if (markers_scale > 0.4) {
     var home_marker = [];
-    home_marker.push(createSpecialMarker(map, home[0], home[2], home[1], 'icons/home.svg', 24));
+    var text = home[2] + ", " + countries[home[1]];
+    home_marker.push(createSpecialMarker(map, home[0], text, 'icons/home.svg', 24));
     addMarkersToMap(map, home_marker);
   }
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
@@ -398,7 +400,8 @@ function createFarthestPointsMarkers(map, values, distances) {
       icon_name = icon_name + "far_";
     }
     icon_name = icon_name + directions[i] + ".svg";
-    markers[i] = createSpecialMarker(map, values[i][0], values[i][2], values[i][1], icon_name, 28);
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + values[i][2] + ", " + countries[values[i][1]] + "<br><b>" + distances[0][i] + " km</b></p>";
+    markers[i] = createSpecialMarker(map, values[i][0], text, icon_name, 28);
 
   }
 
@@ -406,7 +409,7 @@ function createFarthestPointsMarkers(map, values, distances) {
 
 }
 
-function createSpecialMarker(map, coord, text, country_code, icon, size) {
+function createSpecialMarker(map, coord, text, icon, size) {
   var marker = document.createElement('div');
   var img = document.createElement('img');
   img.setAttribute('src', icon);
@@ -414,7 +417,7 @@ function createSpecialMarker(map, coord, text, country_code, icon, size) {
   img.setAttribute('height', size);
   marker.appendChild(img);
   return new mapboxgl.Marker({element:marker,scale:1,draggable:false})
-  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setText(text + ", " + countries[country_code]));
+  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
 }
 
 function createLatitudeLines(map) {

@@ -14,7 +14,7 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="arrow_far_north.svg"
-   inkscape:version="0.92.1 r15371">
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
      id="metadata12">
     <rdf:RDF>
@@ -47,7 +47,8 @@
      inkscape:window-x="375"
      inkscape:window-y="153"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg6" />
+     inkscape:current-layer="svg6"
+     inkscape:document-rotation="0" />
   <path
      d="M0 0h24v24H0z"
      fill="none"
@@ -55,5 +56,5 @@
   <path
      d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
      id="path4"
-     style="fill:#ff0000" />
+     style="fill:#800080" />
 </svg>

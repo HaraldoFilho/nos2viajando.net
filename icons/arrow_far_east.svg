@@ -14,7 +14,7 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="arrow_far_east.svg"
-   inkscape:version="0.92.1 r15371">
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
      id="metadata12">
     <rdf:RDF>
@@ -45,9 +45,10 @@
      inkscape:cx="-14.605932"
      inkscape:cy="8.9999997"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg6" />
+     inkscape:current-layer="svg6"
+     inkscape:document-rotation="0" />
   <path
      d="M0 0h24v24H0z"
      fill="none"
@@ -56,5 +57,5 @@
      d="M 21.5,11.5 3.21,4 2.5,4.71 l 3,6.79 -3,6.79 0.71,0.71 z"
      id="path4"
      inkscape:connector-curvature="0"
-     style="fill:#ff0000" />
+     style="fill:#800080" />
 </svg>
