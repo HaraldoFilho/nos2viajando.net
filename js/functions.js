@@ -62,7 +62,7 @@ function loadMarkersOnMap(map, markers_scale) {
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   photos_markers = createPhotosMarkers(map, locations_dict);
-  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points);
+  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances());
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
@@ -227,6 +227,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
         } else {
           hideLatitudeLines(map_fullwindow);
         }
+
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
         loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
@@ -244,6 +245,42 @@ function enterMapFullwindow(current_bbox, current_coords) {
   }
 
   fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30, true);
+
+}
+
+function getFarthestDistances() {
+
+  var my_home = new mapboxgl.LngLat(home[0][0], home[0][1]);
+
+  var far_points = [];
+  var far_points_km = [];
+
+  for (var i = 0; i < farthest_points.length; i++) {
+    far_points[i] = new mapboxgl.LngLat(farthest_points[i][0][0], farthest_points[i][0][1]);
+  }
+
+  for (var i = 0; i < far_points.length; i++) {
+    far_points_km[i] = my_home.distanceTo(far_points[i])/1000000;
+  }
+
+  var farthest = 0;
+
+  for (var i = 1; i < far_points_km.length; i++) {
+    if (far_points_km[i] > far_points_km[i-1]) {
+      farthest = i;
+    }
+  }
+
+  for (var i = 0; i < far_points.length; i++) {
+    if (far_points_km[i] < 1) {
+      far_points_km[i] *= 1000;
+      far_points_km[i] = far_points_km[i].toFixed(0);
+    } else {
+      far_points_km[i] = far_points_km[i].toFixed(3);
+    }
+  }
+
+  return [[far_points_km[0], far_points_km[1], far_points_km[2], far_points_km[3]], farthest];
 
 }
 
@@ -350,13 +387,23 @@ function createPhotoMarker(map, value) {
 
 }
 
-function createFarthestPointsMarkers(map, values) {
+function createFarthestPointsMarkers(map, values, distances) {
+
   var markers = [];
-  markers[0] = createSpecialMarker(map, values[0][0], values[0][2], values[0][1], 'icons/arrow_north.svg', 28);
-  markers[1] = createSpecialMarker(map, values[1][0], values[1][2], values[1][1], 'icons/arrow_east.svg', 28);
-  markers[2] = createSpecialMarker(map, values[2][0], values[2][2], values[2][1], 'icons/arrow_south.svg', 28);
-  markers[3] = createSpecialMarker(map, values[3][0], values[3][2], values[3][1], 'icons/arrow_west.svg', 28);
+  var directions = ['north', 'east', 'south', 'west'];
+
+  for (var i = 0; i < values.length; i++) {
+    var icon_name = "icons/arrow_";
+    if (i == distances[1]) {
+      icon_name = icon_name + "far_";
+    }
+    icon_name = icon_name + directions[i] + ".svg";
+    markers[i] = createSpecialMarker(map, values[i][0], values[i][2], values[i][1], icon_name, 28);
+
+  }
+
   return markers;
+
 }
 
 function createSpecialMarker(map, coord, text, country_code, icon, size) {
