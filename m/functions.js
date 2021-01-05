@@ -18,7 +18,7 @@ function toggleMapStyle() {
 function createMarkers(map, places, color, scale) {
   var markers = [];
   for (var i = 0; i < places.length; i++) {
-    var text = "<p style=\"text-align:center;font-size:24px;line-height:1.25;margin: 0px 5px -5px 5px;\">" + places[i][2] + "</p>";
+    var text = "<p style=\"text-align:center;font-size:25px;font-weight:bold;line-height:1.25;margin: 0px 5px -5px 5px;\">" + places[i][2] + "</p>";
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
     .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
