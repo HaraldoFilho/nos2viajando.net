@@ -26,6 +26,7 @@ function hideMarkers(map, markers) {
   }
 }
 
+
 // Listeners
 
 function addListenerToFLags(id) {
@@ -42,6 +43,7 @@ function addListenerToFLagsFullWindow(id) {
     fitRegion(map_fullwindow, id, map_padding_fw);
   });
 }
+
 
 // Fit/Fly
 
@@ -82,7 +84,6 @@ function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed, scroll) 
 function getItemId(item_name) {
   return item_name.replace(/\s/g, "_").toUpperCase();
 }
-
 
 function getInitialBoundingBox(markers, long_offset) {
 
@@ -437,7 +438,7 @@ function loadFlights(map, flights, airports) {
         createFlightLine(map, id, coord_a, coord_b);
 
         if (add && !document.getElementById("checkbox-road-trips").checked
-            && !document.getElementById("checkbox-farthest-points").checked) {
+        && !document.getElementById("checkbox-farthest-points").checked) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);
@@ -581,7 +582,6 @@ function removeFlightLine(map, id) {
   }
 
 }
-
 
 function getOffsetLongitude(value, offset) {
   var new_value = value - offset;

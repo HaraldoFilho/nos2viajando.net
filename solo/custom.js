@@ -1,3 +1,5 @@
+// Solo additional data
+
 function loadAdditionalData() {
 
   for (var i = 0; i < cities.length; i++) {
@@ -58,7 +60,7 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
 function loadMarkersOnMap(map, markers_scale) {
   if (markers_scale > 0.4) {
     var home_marker = [];
-    var text = home[2] + ", " + countries[home[1]];
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + home[2] + ", " + countries[home[1]] + "</p>";
     home_marker.push(createSpecialMarker(map, home[0], text, '../icons/home.svg', 24));
     addMarkersToMap(map, home_marker);
   }

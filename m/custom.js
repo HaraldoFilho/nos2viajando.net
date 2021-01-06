@@ -50,7 +50,7 @@ function loadMarkersOnMap(map, markers_scale) {
 
 function getIconSrc(country_code) {
   return "../icons/flags/".concat(countries_bbox[country_code][0])
-    .replace(/\s/g, "-").toLowerCase().concat(".svg");
+  .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
 
