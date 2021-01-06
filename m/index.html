@@ -6,7 +6,8 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
   <script src="../js/mapbox_token.js"></script>
   <script src="../js/countries_bbox.js"></script>
-  <script src="functions.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="custom.js"></script>
 
   <!-- Locations data -->
   <script src="../data/strings.js"></script>
@@ -98,10 +99,11 @@
   var current_bbox = [];
   var current_coords = [];
 
-  var initial_bbox = getInitialBoundingBox(cities);
-
+  var ref_long = 0;
   var init_x_offset = 5;
   var init_y_offset = 5;
+
+  var initial_bbox = getInitialBoundingBox(cities, ref_long);
 
   var current_map_style = 'light-v10';
 
@@ -123,15 +125,10 @@
   map.touchZoomRotate.disableRotation();
 
   loadMarkersOnMap(map, 1);
-  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100)
+  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100, true)
 
   // Full window map
-  var map_fullwindow;
-  var menu;
-  var layerList;
-  var inputs;
-
-  // Sidepanel
+  var map_fullwindow = null;
 
   var n_trips = trips.length;
   var n_flights = 0;
@@ -190,7 +187,7 @@
     countries_panel.appendChild(country);
   }
 
-  document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100) });
+  document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100, false) });
   document.getElementById('map-style-icon').addEventListener('click', function() { toggleMapStyle() });
   document.getElementById('blog-button').addEventListener('click', function() { window.location.assign("https://nos2viajando.travelmap.net") });
 
