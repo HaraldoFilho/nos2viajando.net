@@ -45,6 +45,26 @@ function addListenerToFLagsFullWindow(id) {
   });
 }
 
+function addListenerToRegions(item, scroll) {
+  document.getElementById(getItemId(item[2]))
+  .addEventListener('click', function() {
+    flyToCoordinates(map, item[0], 0, 0.01, 10, 1.5, scroll)
+    if (map_fullwindow != null) {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, scroll);
+    }
+  });
+}
+
+function addListenerToPlaces(item, scroll) {
+  document.getElementById(getItemId(item[2]))
+  .addEventListener('click', function() {
+    flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5, scroll)
+    if (map_fullwindow != null) {
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, scroll);
+    }
+  });
+}
+
 
 // Fit/Fly
 

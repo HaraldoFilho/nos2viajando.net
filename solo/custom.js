@@ -153,26 +153,3 @@ function addIcon(country_code, panel) {
   div_icon.appendChild(elem);
   panel.appendChild(div_icon);
 }
-
-
-// Listeners
-
-function addListenerToRegions(item) {
-  document.getElementById(getItemId(item[2]))
-  .addEventListener('click', function() {
-    flyToCoordinates(map, item[0], 0, 0.01, 10, 1.5, false)
-    if (map_fullwindow != null) {
-      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, false);
-    }
-  });
-}
-
-function addListenerToPlaces(item) {
-  document.getElementById(getItemId(item[2]))
-  .addEventListener('click', function() {
-    flyToCoordinates(map, item[0], 0, 0.0003, 15, 1.5, false)
-    if (map_fullwindow != null) {
-      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, false);
-    }
-  });
-}

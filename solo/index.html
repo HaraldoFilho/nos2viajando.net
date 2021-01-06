@@ -600,11 +600,11 @@
   for (var country_code in countries) {
     addListenerToFLags(country_code, 10);
   }
-  cities.forEach(addListenerToRegions);
-  parks.forEach(addListenerToRegions);
-  attractions.forEach(addListenerToPlaces);
-  accommodations.forEach(addListenerToPlaces);
-  airports.forEach(addListenerToRegions);
+  cities.forEach(addListenerToRegions, false);
+  parks.forEach(addListenerToRegions, false);
+  attractions.forEach(addListenerToPlaces, false);
+  accommodations.forEach(addListenerToPlaces, false);
+  airports.forEach(addListenerToRegions, false);
 
   document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
   document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });

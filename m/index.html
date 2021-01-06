@@ -346,11 +346,11 @@
   for (var country_code in countries) {
     addListenerToFLags(country_code, 20);
   }
-  cities.forEach(addListenerToRegions);
-  parks.forEach(addListenerToRegions);
-  attractions.forEach(addListenerToPlaces);
-  accommodations.forEach(addListenerToPlaces);
-  airports.forEach(addListenerToRegions);
+  cities.forEach(addListenerToRegions, true);
+  parks.forEach(addListenerToRegions, true);
+  attractions.forEach(addListenerToPlaces, true);
+  accommodations.forEach(addListenerToPlaces, true);
+  airports.forEach(addListenerToRegions, true);
 
   </script>
 
