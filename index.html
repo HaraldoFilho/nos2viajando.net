@@ -15,7 +15,7 @@
     <script src="js/countries_bbox.js"></script>
     <script src="js/common.js"></script>
     <script src="custom.js"></script>
-    
+
     <!-- Locations data -->
     <script src="data/strings.js"></script>
     <script src="data/trips.js"></script>
@@ -593,7 +593,7 @@
 
     // Add click listeners
     for (var country_code in countries) {
-      addListenerToFLags(country_code);
+      addListenerToFLags(country_code, 10);
     }
     cities.forEach(addListenerToRegions);
     parks.forEach(addListenerToRegions);

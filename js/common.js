@@ -30,9 +30,9 @@ function hideMarkers(map, markers) {
 
 // Listeners
 
-function addListenerToFLags(id) {
+function addListenerToFLags(id, padding) {
   document.getElementById(id).addEventListener('click', function() {
-    fitRegion(map, id, 10);
+    fitRegion(map, id, padding);
     if (map_fullwindow != null) {
       fitBoundingBox(map_fullwindow, current_bbox, 0, 0, map_padding_fw, true);
     }
@@ -161,7 +161,6 @@ function enterMapFullwindow(current_bbox, current_coords) {
         } else {
           hideLatitudeLines(map_fullwindow);
         }
-
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
         loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
@@ -173,7 +172,7 @@ function enterMapFullwindow(current_bbox, current_coords) {
     if (current_coords.length == 0) {
       fitBoundingBox(map_fullwindow, current_bbox, init_x_offset, 0, map_padding_fw, true);
     } else {
-      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, true);
+      flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, false);
     }
 
   }
