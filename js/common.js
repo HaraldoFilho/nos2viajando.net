@@ -7,7 +7,8 @@ function addMarkersToMap(map, markers) {
 }
 
 function toggleMarkers(map, markers, checkbox) {
-  if (document.getElementById(checkbox).checked) {
+  if (document.getElementById(checkbox).checked
+      && (!document.getElementById("checkbox-farthest-points").checked || checkbox == "checkbox-farthest-points")) {
     showMarkers(map, markers);
   } else {
     hideMarkers(map, markers);
