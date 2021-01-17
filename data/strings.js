@@ -20,9 +20,9 @@ var strings_dict = {
   'MKR_ACCOMMODATIONS': 'hospedagens',
   'MKR_AIRPORTS': 'aeroportos',
   'MKR_PHOTOS': 'fotos',
-  'MKR_INTERNATIONAL_FLIGHT': 'internacional',
-  'MKR_DOMESTIC_FLIGHT': 'doméstico',
-  'MKR_CAR': 'viagem de carro',
+  'MKR_INTERNATIONAL_FLIGHT': 'voos internacionais',
+  'MKR_DOMESTIC_FLIGHT': 'voos domésticos',
+  'MKR_CAR': 'viagens de carro',
   'MKR_FARTHEST_POINTS': 'extremos'
 }
 
@@ -48,8 +48,8 @@ var strings_dict_en = {
   'MKR_ACCOMMODATIONS': 'accommodations',
   'MKR_AIRPORTS': 'airports',
   'MKR_PHOTOS': 'photos',
-  'MKR_INTERNATIONAL_FLIGHT': 'international',
-  'MKR_DOMESTIC_FLIGHT': 'domestic',
-  'MKR_CAR': 'road trip',
+  'MKR_INTERNATIONAL_FLIGHT': 'international flights',
+  'MKR_DOMESTIC_FLIGHT': 'domestic flights',
+  'MKR_CAR': 'road trips',
   'MKR_FARTHEST_POINTS': 'extremes'
 }
