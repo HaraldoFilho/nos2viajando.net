@@ -1,10 +1,10 @@
 // Year, Trip, Distance (km), Days
 
 var trips = [
-  ['2009', 'Monte Alegre do Sul', 146, 4],
+  ['2009', 'Monte Alegre do Sul', 182, 4],
   ['2012', 'Canela', 2400, 7],
   ['2016', 'Foz do Iguaçu', 2721, 8],
-  ['2016', 'Analândia', 265, 4],
+  ['2016', 'Analândia', 405, 3],
   ['2017', 'Califórnia', 24478, 12],
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
@@ -12,10 +12,10 @@ var trips = [
 ]
 
 var trips_en = [
-  ['2009', 'Monte Alegre do Sul', 146, 4],
+  ['2009', 'Monte Alegre do Sul', 182, 4],
   ['2012', 'Canela', 2400, 7],
   ['2016', 'Foz do Iguaçu', 2721, 8],
-  ['2016', 'Analândia', 265, 4],
+  ['2016', 'Analândia', 405, 3],
   ['2017', 'California', 24478, 12],
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
