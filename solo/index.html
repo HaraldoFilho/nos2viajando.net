@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nós Dois Viajando</title>
+  <title>Eu Viajando</title>
   <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
   <link rel="stylesheet" type="text/css" href="../style.css" />
 
@@ -119,8 +119,6 @@
 
   <script>
 
-  loadAdditionalData();
-
   var userLang = navigator.language || navigator.userLanguage;
   console.log ("User language is: " + userLang);
 
@@ -134,6 +132,8 @@
     parks = parks_en;
     trips = trips_en;
   }
+
+  loadAdditionalData();
 
   mapboxgl.accessToken = mapbox_token;
 

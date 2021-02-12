@@ -2,6 +2,14 @@
 
 function loadAdditionalData() {
 
+  if (userLang != 'pt-BR') {
+    strings_dict_solo = strings_dict_solo_en;
+    airports_solo = airports_solo_en;
+    attractions_solo = attractions_solo_en;
+    cities_solo = cities_solo_en;
+    trips_solo = trips_solo_en;
+  }
+
   for (var i = 0; i < cities.length; i++) {
     cities_solo.push(cities[i]);
   }
