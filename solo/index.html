@@ -70,7 +70,7 @@
           <img class="metric" src="../icons/world.svg"/>
         </div>
 
-        <div id="distance" class="distance">
+        <div id="distance" class="distance" style="padding:7px 0 0 13px;">
           <img class="metric_2" src="../icons/navigation.svg"/>
         </div>
 
@@ -366,36 +366,36 @@
     lists.appendChild(list_item);
   }
 
-  // Construct list of Accommodations
-  var accommodations_list = document.createElement('DIV');
-  accommodations_list.setAttribute('class', 'list-title-container');
-  accommodations_list.setAttribute('style', 'margin-top:25px');
-  var title = document.createElement('DIV');
-  title.setAttribute('class', 'list-title');
-  var marker = document.createElement('IMG');
-  marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', '../icons/marker_accommodation.svg');
-  title.appendChild(marker);
-  title.append(strings_dict['ACCOMMODATIONS']);
-  var count = document.createElement('DIV');
-  count.setAttribute('class', 'list-count');
-  count.innerText = accommodations.length;
-  accommodations_list.appendChild(title);
-  accommodations_list.appendChild(count);
-  lists.appendChild(accommodations_list);
-  for (var i = 0; i < accommodations.length; i++) {
-    var list_item = document.createElement('P');
-    var item_id = getItemId(accommodations[i][2]);
-    list_item.setAttribute('id', item_id);
-    list_item.setAttribute('class', 'list-item');
-    var tiny_flag = document.createElement('IMG');
-    tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
-    list_item.appendChild(tiny_flag);
-    list_item.append(accommodations[i][2]);
-    lists.appendChild(list_item);
-  }
-
+  // // Construct list of Accommodations
+  // var accommodations_list = document.createElement('DIV');
+  // accommodations_list.setAttribute('class', 'list-title-container');
+  // accommodations_list.setAttribute('style', 'margin-top:25px');
+  // var title = document.createElement('DIV');
+  // title.setAttribute('class', 'list-title');
+  // var marker = document.createElement('IMG');
+  // marker.setAttribute('class', 'marker');
+  // marker.setAttribute('src', '../icons/marker_accommodation.svg');
+  // title.appendChild(marker);
+  // title.append(strings_dict['ACCOMMODATIONS']);
+  // var count = document.createElement('DIV');
+  // count.setAttribute('class', 'list-count');
+  // count.innerText = accommodations.length;
+  // accommodations_list.appendChild(title);
+  // accommodations_list.appendChild(count);
+  // lists.appendChild(accommodations_list);
+  // for (var i = 0; i < accommodations.length; i++) {
+  //   var list_item = document.createElement('P');
+  //   var item_id = getItemId(accommodations[i][2]);
+  //   list_item.setAttribute('id', item_id);
+  //   list_item.setAttribute('class', 'list-item');
+  //   var tiny_flag = document.createElement('IMG');
+  //   tiny_flag.setAttribute('class', 'tiny_icon');
+  //   tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
+  //   list_item.appendChild(tiny_flag);
+  //   list_item.append(accommodations[i][2]);
+  //   lists.appendChild(list_item);
+  // }
+  //
   // Construct list of Airports
   var airports_list = document.createElement('DIV');
   airports_list.setAttribute('class', 'list-title-container');
@@ -488,14 +488,14 @@
   icon_attractions.setAttribute('height', '20px');
   icon_attractions.setAttribute('style', 'margin-bottom:-3px');
 
-  var input_accommodations = document.createElement('INPUT');
-  input_accommodations.setAttribute('id', 'checkbox-accommodations');
-  input_accommodations.setAttribute('type', 'checkbox');
-  input_accommodations.setAttribute('checked', 'checked');
-  var icon_accommodations = document.createElement('IMG');
-  icon_accommodations.setAttribute('src', '../icons/marker_accommodation.svg');
-  icon_accommodations.setAttribute('height', '20px');
-  icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
+  // var input_accommodations = document.createElement('INPUT');
+  // input_accommodations.setAttribute('id', 'checkbox-accommodations');
+  // input_accommodations.setAttribute('type', 'checkbox');
+  // input_accommodations.setAttribute('checked', 'checked');
+  // var icon_accommodations = document.createElement('IMG');
+  // icon_accommodations.setAttribute('src', '../icons/marker_accommodation.svg');
+  // icon_accommodations.setAttribute('height', '20px');
+  // icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
 
   var input_airports = document.createElement('INPUT');
   input_airports.setAttribute('id', 'checkbox-airports');
@@ -562,10 +562,10 @@
   selector.append(strings_dict['MKR_ATTRACTIONS']);
   selector.appendChild(document.createElement('BR'));
 
-  selector.appendChild(input_accommodations);
-  selector.appendChild(icon_accommodations);
-  selector.append(strings_dict['MKR_ACCOMMODATIONS']);
-  selector.appendChild(document.createElement('BR'));
+  // selector.appendChild(input_accommodations);
+  // selector.appendChild(icon_accommodations);
+  // selector.append(strings_dict['MKR_ACCOMMODATIONS']);
+  // selector.appendChild(document.createElement('BR'));
 
   selector.appendChild(input_airports);
   selector.appendChild(icon_airports);
@@ -603,19 +603,19 @@
   cities.forEach(addListenerToRegions, false);
   parks.forEach(addListenerToRegions, false);
   attractions.forEach(addListenerToPlaces, false);
-  accommodations.forEach(addListenerToPlaces, false);
+  // accommodations.forEach(addListenerToPlaces, false);
   airports.forEach(addListenerToRegions, false);
 
   document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
   document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
   document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
-  document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
+  // document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
   document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
   document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos"); toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos") });
   document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
   document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
   document.getElementById("checkbox-road-trips").addEventListener('click', function() {
-    loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
+    loadCarRoutes(map_fullwindow, driving, cities, hide_car_routes);
     if (document.getElementById("checkbox-road-trips").checked) {
       previous_bbox = current_bbox;
       var road_trips_bbox = getRoadTripsBoundingBox(road_trips_accommodations, 0);
@@ -637,14 +637,14 @@
       hideMarkers(map_fullwindow, cities_markers);
       hideMarkers(map_fullwindow, parks_markers);
       hideMarkers(map_fullwindow, attractions_markers);
-      hideMarkers(map_fullwindow, accommodations_markers);
+      // hideMarkers(map_fullwindow, accommodations_markers);
       hideMarkers(map_fullwindow, airports_markers);
       hideMarkers(map_fullwindow, photos_markers);
       hideMarkers(map_fullwindow, photos_markers_solo);
       hide_car_routes = true;
     } else {
       toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
-      toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
+      // toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
       toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
       toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
       toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');

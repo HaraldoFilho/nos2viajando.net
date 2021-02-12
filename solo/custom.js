@@ -73,7 +73,7 @@ function loadMarkersOnMap(map, markers_scale) {
     addMarkersToMap(map, home_marker);
   }
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
-  accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
+  // accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
@@ -81,7 +81,7 @@ function loadMarkersOnMap(map, markers_scale) {
   photos_markers_solo = createPhotosMarkers(map, locations_dict_solo);
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances());
   addMarkersToMap(map, airports_markers);
-  addMarkersToMap(map, accommodations_markers);
+  // addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
