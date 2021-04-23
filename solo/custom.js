@@ -161,3 +161,14 @@ function addIcon(country_code, panel) {
   div_icon.appendChild(elem);
   panel.appendChild(div_icon);
 }
+
+
+// Footer
+
+function addFooter() {
+  var footer = document.createElement("DIV");
+  footer.setAttribute("id", "footer");
+  footer.setAttribute("class", "footer");
+  footer.innerHTML = "Map by <a href=\"https://www.travellerspoint.com/\" target=\"_blank\"><b>Travellers</b>point</a>";
+  document.body.append(footer);
+}

@@ -252,6 +252,7 @@ function hideSideBar() {
   document.getElementById('travelmap').style = "grid-column:1 / span 2";
   document.getElementById('open-sidebar').style.display = 'block';
   document.getElementById('close-sidebar').style.display = 'none';
+  document.getElementById('footer').style = "margin-left:15px";
 }
 
 function showSideBar() {
@@ -259,6 +260,7 @@ function showSideBar() {
   document.getElementById('travelmap').style = "grid-column:2";
   document.getElementById('open-sidebar').style.display = 'none';
   document.getElementById('close-sidebar').style.display = 'block';
+  document.getElementById('footer').style = "margin-left:335px";
 }
 
 function hideSideBarTab() {
