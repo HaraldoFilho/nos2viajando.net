@@ -410,7 +410,8 @@ a:hover {
   display: grid;
   grid-template-columns: 320px auto;
   grid-gap: 1px;
-  height: 99vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #map-overlay {
