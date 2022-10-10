@@ -352,10 +352,15 @@ function createFarthestPointsLines(map, farthest_points) {
 
 function showFarthestPointsLines(map, farthest_points) {
   createFarthestPointsLines(map, farthest_points);
-  addLine(map, "FarthestNorth", '#F70', 3, [1,5]);
-  addLine(map, "FarthestEast", '#F70', 3, [1,5]);
-  addLine(map, "FarthestSouth", '#F70', 3, [1,5]);
-  addLine(map, "FarthestWest", '#F70', 3, [1,5]);
+  var directions = ["FarthestNorth", "FarthestEast", "FarthestSouth", "FarthestWest"];
+  for (var i = 0; i < directions.length; i++) {
+    if (i == getFarthestDistances()[1]) {
+      addLine(map, directions[i], '#A0A', 3, [1,5]);
+    }
+    else {
+      addLine(map, directions[i], '#F70', 3, [1,5]);
+    }
+  }
 }
 
 function hideFarthestPointsLines(map) {
