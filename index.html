@@ -122,13 +122,13 @@
 
     if (userLang != 'pt-BR') {
       strings_dict = strings_dict_en;
-      accommodations = accommodations_en;
-      airports = airports_en;
-      attractions = attractions_en;
-      cities = cities_en;
-      countries = countries_en;
-      parks = parks_en;
       trips = trips_en;
+      countries = countries_en;
+      cities = cities_en;
+      airports = airports_en;
+      accommodations = accommodations_en;
+      attractions = attractions_en;
+      parks = parks_en;
     }
 
     mapboxgl.accessToken = mapbox_token;
@@ -153,7 +153,12 @@
     var map_padding = 30;
     var map_padding_fw = 100;
 
-    var initial_bbox = getInitialBoundingBox(cities, ref_long);
+    var places = cities.concat(airports)
+                       .concat(accommodations)
+                       .concat(attractions)
+                       .concat(parks);
+
+    var initial_bbox = getInitialBoundingBox(places, ref_long);
 
     var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
@@ -263,8 +268,8 @@
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
-    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullwindow(current_bbox, current_coords) });
-    document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullwindow() });
+    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
+    document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
     document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
     document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });
     document.getElementById('sidebar').addEventListener('mouseover', function() { showSideBarTab() });

@@ -139,7 +139,7 @@ function getInitialBoundingBox(markers, long_offset) {
 
 // Full Window
 
-function enterMapFullwindow(current_bbox, current_coords) {
+function enterMapFullWindow(current_bbox, current_coords) {
 
   document.getElementById('map-overlay').style.height = "100%";
   document.getElementById('fullwindow-exit-icon').style.display = "block";
@@ -237,7 +237,7 @@ function getFarthestDistances() {
 
 }
 
-function exitMapFullwindow() {
+function exitMapFullWindow() {
   document.getElementById('map-overlay').style.height = "0%";
   document.getElementById('fullwindow-exit-icon').style.display = "none";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
