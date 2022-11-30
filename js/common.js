@@ -183,7 +183,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
         }
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
-        loadCarRoutes(map_fullwindow, driving, accommodations, hide_car_routes);
+        loadCarRoutes(map_fullwindow, driving, restaurants, hide_car_routes);
       } catch (e) {
         console.log(e);
       }
@@ -632,14 +632,14 @@ function getOriginalLongitude(value, offset) {
   return new_value;
 }
 
-function loadCarRoutes(map, driving, accommodations, hide_car_routes) {
+function loadCarRoutes(map, driving, places, hide_car_routes) {
 
   for (var d = 0; d < driving.length; d++) {
     var route_id = 'car_route_' + (d+1);
-    for (var a = 0; a < accommodations.length; a++) {
-      if (driving[d][1] == accommodations[a][2]) {
-        createCarRoute(map, route_id, accommodations[a][0]);
-        road_trips_accommodations.push(accommodations[a]);
+    for (var a = 0; a < places.length; a++) {
+      if (driving[d][1] == places[a][2]) {
+        createCarRoute(map, route_id, places[a][0]);
+        road_trips_places.push(places[a]);
         break;
       }
     }
