@@ -9,6 +9,7 @@ var restaurants = [
   [[-119.585600, 37.748010], 'US', 'Degnan\'s Deli'],
   [[-119.649680, 37.333600], 'US', 'Subway Oakhurst'],
   [[-119.645214, 37.337585], 'US', 'Denny\'s'],
+  [[-122.134940, 37.419110], 'US', 'Driftwood Deli & Market'],
   [[-32.411261, -3.846823], 'BR', 'Buena Onda Loja Café'],
   [[12.510057, 41.885720], 'IT', 'Pizzhoria Appio'],
   [[12.50914, 41.88549], 'IT', 'Le Foodie Café Bistrot'],
