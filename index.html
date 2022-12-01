@@ -20,6 +20,7 @@
     <script src="data/strings.js"></script>
     <script src="data/trips.js"></script>
     <script src="data/countries.js"></script>
+    <script src="data/home.js"></script>
     <script src="data/cities.js"></script>
     <script src="data/parks.js"></script>
     <script src="data/attractions.js"></script>
@@ -129,6 +130,7 @@
       airports = airports_en;
       attractions = attractions_en;
       parks = parks_en;
+      driving = driving_en;
     }
 
     mapboxgl.accessToken = mapbox_token;
@@ -136,8 +138,6 @@
     var previous_bbox;
     var current_bbox = [];
     var current_coords = [];
-
-    var home = [[-47.06272960051834, -22.90991593806534], 'BR', 'Campinas'];
 
     var far_north = home;
     var far_east = home;
