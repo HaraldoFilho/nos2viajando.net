@@ -153,7 +153,8 @@
     var map_padding = 30;
     var map_padding_fw = 100;
 
-    var places = cities.concat(airports)
+    var places = [home].concat(cities)
+                       .concat(airports)
                        .concat(accommodations)
                        .concat(restaurants)
                        .concat(attractions)

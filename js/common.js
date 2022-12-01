@@ -8,7 +8,7 @@ function addMarkersToMap(map, markers) {
 
 function toggleMarkers(map, markers, checkbox) {
   if (document.getElementById(checkbox).checked
-      && (!document.getElementById("checkbox-farthest-points").checked || checkbox == "checkbox-farthest-points")) {
+  && (!document.getElementById("checkbox-farthest-points").checked || checkbox == "checkbox-farthest-points")) {
     showMarkers(map, markers);
   } else {
     hideMarkers(map, markers);
@@ -635,14 +635,19 @@ function getOriginalLongitude(value, offset) {
 function loadCarRoutes(map, driving, places, hide_car_routes) {
 
   for (var d = 0; d < driving.length; d++) {
+    var trip_points = [];
     var route_id = 'car_route_' + (d+1);
-    for (var a = 0; a < places.length; a++) {
-      if (driving[d][1] == places[a][2]) {
-        createCarRoute(map, route_id, places[a][0]);
-        road_trips_places.push(places[a]);
-        break;
+    for (var p = 0; p < driving[d][1].length; p++) {
+      for (var a = 0; a < places.length; a++) {
+        if (driving[d][1][p] == places[a][2]) {
+          trip_points.push(places[a][0])
+          road_trips_places.push(places[a]);
+          break;
+        }
       }
     }
+
+    createCarRoute(map, route_id, trip_points);
 
     if (document.getElementById("checkbox-road-trips").checked && !hide_car_routes) {
       addCarRoute(map, route_id);
@@ -654,11 +659,19 @@ function loadCarRoutes(map, driving, places, hide_car_routes) {
 
 }
 
-function createCarRoute(map, id, end) {
+function createCarRoute(map, id, points) {
 
-  var start = home[0];
-  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + home[0][0] + ',' + home[0][1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/'
 
+  for (var p = 0; p < points.length; p++) {
+    url = url + points[p][0].toString() + ',' + points[p][1].toString()
+    if (p < points.length - 1) {
+      url = url + ';';
+    }
+  }
+
+  url = url + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+    
   // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
   var req = new XMLHttpRequest();
   req.open('GET', url, true);
