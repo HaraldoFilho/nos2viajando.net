@@ -11,9 +11,23 @@ var driving_en = [
 ]
 
 var driving_abroad = [
-  ['2017', ['Villa Montes Hotel', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'Califórnia']
+  ['2017', ['Aeroporto de São Francisco', 'Villa Montes Hotel'], 'Califórnia'],
+  ['2017', ['Villa Montes Hotel', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'Califórnia'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Parque Nacional de Yosemite'], 'Califórnia'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Glacier Point'], 'Califórnia'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Parque Nacional da Sequoia'], 'Califórnia'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Creekside Inn'], 'Califórnia'],
+  ['2017', ['Creekside Inn', 'Museu da História do Computador', 'Googleplex'], 'Califórnia'],
+  ['2017', ['Creekside Inn', 'Aeroporto de São Francisco'], 'Califórnia']
 ]
 
 var driving_abroad_en = [
-  ['2017', ['Villa Montes Hotel', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'California']
+  ['2017', ['San Francisco Airport', 'Villa Montes Hotel'], 'California'],
+  ['2017', ['Villa Montes Hotel', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'California'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Yosemite National Park'], 'California'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Glacier Point'], 'California'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Sequoia National Park'], 'California'],
+  ['2017', ['Yosemite Southgate Hotel & Suites', 'Creekside Inn'], 'California'],
+  ['2017', ['Creekside Inn', 'Computer History Museum', 'Googleplex'], 'California'],
+  ['2017', ['Creekside Inn', 'San Francisco Airport'], 'California']
 ]

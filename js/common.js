@@ -30,7 +30,7 @@ function hideMarkers(map, markers) {
 
 // Listeners
 
-function addListenerToFLags(id, padding) {
+function addListenerToFlags(id, padding) {
   document.getElementById(id).addEventListener('click', function() {
     fitRegion(map, id, padding);
     if (map_fullwindow != null) {
@@ -39,7 +39,7 @@ function addListenerToFLags(id, padding) {
   });
 }
 
-function addListenerToFLagsFullWindow(id) {
+function addListenerToFlagsFullWindow(id) {
   document.getElementById(id.concat("__")).addEventListener('click', function() {
     fitRegion(map_fullwindow, id, map_padding_fw);
   });
@@ -171,7 +171,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
 
     for (var country_code in countries) {
       addIcon(country_code, fullmap_countries_panel);
-      addListenerToFLagsFullWindow(country_code);
+      addListenerToFlagsFullWindow(country_code);
     }
 
     map_fullwindow.on('render', function() {
@@ -183,7 +183,8 @@ function enterMapFullWindow(current_bbox, current_coords) {
         }
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
-        loadCarRoutes(map_fullwindow, driving, restaurants, hide_car_routes);
+        loadCarRoutes(map_fullwindow, driving, places, hide_car_routes);
+        loadCarRoutesAbroad(map_fullwindow, driving_abroad, places, hide_car_routes);
       } catch (e) {
         console.log(e);
       }
@@ -464,8 +465,9 @@ function loadFlights(map, flights, airports) {
 
         createFlightLine(map, id, coord_a, coord_b);
 
-        if (add && !document.getElementById("checkbox-road-trips").checked
-        && !document.getElementById("checkbox-farthest-points").checked) {
+        if (add && !document.getElementById("checkbox-farthest-points").checked
+        && !document.getElementById("checkbox-road-trips").checked
+        && !document.getElementById("checkbox-road-trips-abroad").checked) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);
@@ -650,7 +652,34 @@ function loadCarRoutes(map, driving, places, hide_car_routes) {
     createCarRoute(map, route_id, trip_points);
 
     if (document.getElementById("checkbox-road-trips").checked && !hide_car_routes) {
-      addCarRoute(map, route_id);
+      addCarRoute(map, route_id, '#0B0');
+    } else {
+      removeCarRoute(map, route_id);
+    }
+
+  }
+
+}
+
+function loadCarRoutesAbroad(map, driving_abroad, places, hide_car_routes) {
+
+  for (var d = 0; d < driving_abroad.length; d++) {
+    var trip_points_abroad = [];
+    var route_id = 'car_route_abroad_' + (d+1);
+    for (var p = 0; p < driving_abroad[d][1].length; p++) {
+      for (var a = 0; a < places.length; a++) {
+        if (driving_abroad[d][1][p] == places[a][2]) {
+          trip_points_abroad.push(places[a][0])
+          road_trips_places_abroad.push(places[a]);
+          break;
+        }
+      }
+    }
+
+    createCarRoute(map, route_id, trip_points_abroad);
+
+    if (document.getElementById("checkbox-road-trips-abroad").checked && !hide_car_routes) {
+      addCarRoute(map, route_id, '#F00');
     } else {
       removeCarRoute(map, route_id);
     }
@@ -671,7 +700,7 @@ function createCarRoute(map, id, points) {
   }
 
   url = url + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
-    
+
   // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
   var req = new XMLHttpRequest();
   req.open('GET', url, true);
@@ -698,7 +727,7 @@ function createCarRoute(map, id, points) {
 
 }
 
-function addCarRoute(map, id) {
+function addCarRoute(map, id, color) {
   if (map.getSource(id) && !map.getLayer(id)) {
     map.addLayer({
       'id': id,
@@ -709,7 +738,7 @@ function addCarRoute(map, id) {
         'line-cap': 'round'
       },
       'paint': {
-        'line-color': '#0B0',
+        'line-color': color,
         'line-width': 4
       }
     });
