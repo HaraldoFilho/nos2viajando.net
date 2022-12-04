@@ -40,6 +40,7 @@ function loadMarkersOnMap(map, markers_scale) {
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
+  addMarkersToMap(map, restaurants_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
