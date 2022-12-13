@@ -164,7 +164,7 @@
                      .concat(parks);
 
   var initial_bbox = getInitialBoundingBox(places, ref_long);
-  
+
   var current_map_style = 'mapbox://styles/mapbox/streets-v11';
 
   var cities_markers = [];
@@ -604,7 +604,7 @@
 
   // Add click listeners
   for (var country_code in countries) {
-    addListenerToFLags(country_code, 10);
+    addListenerToFlags(country_code, 10);
   }
   cities.forEach(addListenerToRegions, false);
   parks.forEach(addListenerToRegions, false);
