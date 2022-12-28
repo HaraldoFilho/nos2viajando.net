@@ -1,5 +1,7 @@
 // Year, Trip, Distance (km), Days
 
+var traveling = false;
+
 var trips = [
   ['2009', 'Monte Alegre do Sul', 182, 4],
   ['2012', 'Canela', 2400, 7],
@@ -8,7 +10,8 @@ var trips = [
   ['2017', 'Califórnia', 24478, 12],
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
-  ['2019', 'Croácia e Itália', 21956, 22]
+  ['2019', 'Croácia e Itália', 21956, 22],
+  // ['2023', 'Patagônia', 0, 14]
 ]
 
 var trips_en = [
@@ -19,7 +22,6 @@ var trips_en = [
   ['2017', 'California', 24478, 12],
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
-  ['2019', 'Croatia and Italy', 21956, 22]
+  ['2019', 'Croatia and Italy', 21956, 22],
+  // ['2023', 'Patagonia', 0, 14]
 ]
-
-var traveling = false;

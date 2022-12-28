@@ -12,7 +12,9 @@ var airports = [
   [[16.298966, 43.537061], 'HR', 'Aeroporto de Split', 'SPU'],
   [[16.067458, 45.740863], 'HR', 'Aeroporto de Zagreb', 'ZAG'],
   [[18.262164, 42.560850], 'HR', 'Aeroporto de Dubrovnik', 'DBV'],
-  [[14.289361, 40.884847], 'IT', 'Aeroporto de Nápoles', 'NAP']
+  [[14.289361, 40.884847], 'IT', 'Aeroporto de Nápoles', 'NAP'],
+  // [[-70.792669, -33.402072], 'CL', 'Aeroporto de Santiago', 'SCL'],
+  // [[-70.847176, -53.004180], 'CL', 'Aeroporto de Punta Arenas', 'PUQ']
 ]
 
 var airports_en = [
@@ -29,5 +31,7 @@ var airports_en = [
   [[16.298966, 43.537061], 'HR', 'Split Airport', 'SPU'],
   [[16.067458, 45.740863], 'HR', 'Zagreb Airport', 'ZAG'],
   [[18.262164, 42.560850], 'HR', 'Dubrovnik Airport', 'DBV'],
-  [[14.289361, 40.884847], 'IT', 'Naples Airport', 'NAP']
+  [[14.289361, 40.884847], 'IT', 'Naples Airport', 'NAP'],
+  // [[-70.792669, -33.402072], 'CL', 'Santiago Airport', 'SCL'],
+  // [[-70.847176, -53.004180], 'CL', 'Punta Arenas Airport', 'PUQ']
 ]
