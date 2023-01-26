@@ -15,7 +15,7 @@ var accommodations = [
   [[16.436395, 43.510643], 'HR', 'Rooms Gold'],
   [[18.111357, 42.639682], 'HR', 'Luna'],
   [[14.758148, 40.679235], 'IT', 'Il Vicolo Della Neve B&B'],
-  // [[-72.507477, -51.702709], 'CL', 'Hotel Borde Glaciar'],
+  [[-72.507477, -51.702709], 'CL', 'Hotel Borde Glaciar'],
   // [[-72.986222, -51.093635], 'CL', 'Hosteria Pehoe'],
   // [[-72.984121, -51.237317], 'CL', 'Morrena Lodge'],
   // [[-72.259119, -50.318564], 'AR', 'Hotel Las Dunas'],
