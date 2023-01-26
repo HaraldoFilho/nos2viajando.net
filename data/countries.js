@@ -6,7 +6,7 @@ var countries = {
   'IT': 'Itália',
   'VA': 'Vaticano',
   'HR': 'Croácia',
-  // 'CL': 'Chile'
+  'CL': 'Chile'
 }
 
 var countries_en = {
@@ -17,7 +17,7 @@ var countries_en = {
   'IT': 'Italy',
   'VA': 'Vatican City',
   'HR': 'Croatia',
-  // 'CL': 'Chile'
+  'CL': 'Chile'
 }
 
 var continents = [
