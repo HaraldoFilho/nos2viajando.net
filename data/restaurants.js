@@ -42,5 +42,7 @@ var restaurants = [
   [[14.28304, 40.87822], 'IT', 'i\'AMME'],
   [[14.28787, 40.88289], 'IT', 'Pasticceria Vincenzo Bellavia'],
   [[-70.79033, -33.39639], 'CL', 'Cafe Britt'],
-  [[-72.84242, -51.54285], 'CL', 'Estancia Perales'] 
+  [[-72.84242, -51.54285], 'CL', 'Estancia Perales'], 
+  [[-51.23192, -72.97748], 'CL', 'Restaurant & Quincho \“Don Pascual\”'] 
+
 ]
