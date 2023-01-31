@@ -11,7 +11,7 @@ var trips = [
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
   ['2019', 'Croácia e Itália', 21956, 22],
-  ['2023', 'Patagônia', 5604, 3]
+  ['2023', 'Patagônia', 5713, 7]
 ]
 
 var trips_en = [
@@ -23,5 +23,5 @@ var trips_en = [
   ['2018', 'Monte Verde', 306, 3],
   ['2018', 'Fernando de Noronha', 5463, 9],
   ['2019', 'Croatia and Italy', 21956, 22],
-  ['2023', 'Patagonia', 5604, 3]
+  ['2023', 'Patagonia', 5713, 7]
 ]
