@@ -18,6 +18,6 @@ var accommodations = [
   [[-72.507477, -51.702709], 'CL', 'Hotel Borde Glaciar'],
   [[-72.986222, -51.093635], 'CL', 'Hosteria Pehoe'],
   [[-72.984121, -51.237317], 'CL', 'Morrena Lodge'],
-  // [[-72.259119, -50.318564], 'AR', 'Hotel Las Dunas'],
+  [[-72.259119, -50.318564], 'AR', 'Hotel Las Dunas'],
   // [[-70.898852, -53.156684], 'CL', 'Hotel Carpa Manzano']
 ]
