@@ -25,8 +25,8 @@
     <script src="data/parks.js"></script>
     <script src="data/attractions.js"></script>
     <script src="data/accommodations.js"></script>
-    <script src="data/restaurants.js"></script>
     <script src="data/airports.js"></script>
+    <script src="data/restaurants.js"></script>
     <script src="data/flights.js"></script>
     <script src="data/driving.js"></script>
     <script src="data/photos.js"></script>
@@ -168,8 +168,8 @@
     var parks_markers = [];
     var attractions_markers = [];
     var accommodations_markers = [];
-    var restaurants_markers = [];
     var airports_markers = [];
+    var restaurants_markers = [];
     var photos_markers = [];
     var farthest_points_markers = [];
 
@@ -400,36 +400,6 @@
       lists.appendChild(list_item);
     }
 
-    // Construct list of Restaurants
-    var restaurants_list = document.createElement('DIV');
-    restaurants_list.setAttribute('class', 'list-title-container');
-    restaurants_list.setAttribute('style', 'margin-top:25px');
-    var title = document.createElement('DIV');
-    title.setAttribute('class', 'list-title');
-    var marker = document.createElement('IMG');
-    marker.setAttribute('class', 'marker');
-    marker.setAttribute('src', 'icons/marker_restaurant.svg');
-    title.appendChild(marker);
-    title.append(strings_dict['RESTAURANTS']);
-    var count = document.createElement('DIV');
-    count.setAttribute('class', 'list-count');
-    count.innerText = restaurants.length;
-    restaurants_list.appendChild(title);
-    restaurants_list.appendChild(count);
-    lists.appendChild(restaurants_list);
-    for (var i = 0; i < restaurants.length; i++) {
-      var list_item = document.createElement('P');
-      var item_id = getItemId(restaurants[i][2]);
-      list_item.setAttribute('id', item_id);
-      list_item.setAttribute('class', 'list-item');
-      var tiny_flag = document.createElement('IMG');
-      tiny_flag.setAttribute('class', 'tiny_icon');
-      tiny_flag.setAttribute('src', getIconSrc(restaurants[i][1]));
-      list_item.appendChild(tiny_flag);
-      list_item.append(restaurants[i][2]);
-      lists.appendChild(list_item);
-    }
-
     // Construct list of Airports
     var airports_list = document.createElement('DIV');
     airports_list.setAttribute('class', 'list-title-container');
@@ -457,6 +427,36 @@
       tiny_flag.setAttribute('src', getIconSrc(airports[i][1]));
       list_item.appendChild(tiny_flag);
       list_item.append(airports[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    // Construct list of Restaurants
+    var restaurants_list = document.createElement('DIV');
+    restaurants_list.setAttribute('class', 'list-title-container');
+    restaurants_list.setAttribute('style', 'margin-top:25px');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', 'icons/marker_restaurant.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['RESTAURANTS']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = restaurants.length;
+    restaurants_list.appendChild(title);
+    restaurants_list.appendChild(count);
+    lists.appendChild(restaurants_list);
+    for (var i = 0; i < restaurants.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(restaurants[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(restaurants[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(restaurants[i][2]);
       lists.appendChild(list_item);
     }
 
@@ -531,15 +531,6 @@
     icon_accommodations.setAttribute('height', '20px');
     icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
 
-    var input_restaurants = document.createElement('INPUT');
-    input_restaurants.setAttribute('id', 'checkbox-restaurants');
-    input_restaurants.setAttribute('type', 'checkbox');
-    input_restaurants.setAttribute('checked', 'checked');
-    var icon_restaurants = document.createElement('IMG');
-    icon_restaurants.setAttribute('src', 'icons/marker_restaurant.svg');
-    icon_restaurants.setAttribute('height', '20px');
-    icon_restaurants.setAttribute('style', 'margin-bottom:-3px');
-
     var input_airports = document.createElement('INPUT');
     input_airports.setAttribute('id', 'checkbox-airports');
     input_airports.setAttribute('type', 'checkbox');
@@ -548,6 +539,15 @@
     icon_airports.setAttribute('src', 'icons/marker_airport.svg');
     icon_airports.setAttribute('height', '20px');
     icon_airports.setAttribute('style', 'margin-bottom:-3px');
+
+    var input_restaurants = document.createElement('INPUT');
+    input_restaurants.setAttribute('id', 'checkbox-restaurants');
+    input_restaurants.setAttribute('type', 'checkbox');
+    input_restaurants.setAttribute('checked', 'checked');
+    var icon_restaurants = document.createElement('IMG');
+    icon_restaurants.setAttribute('src', 'icons/marker_restaurant.svg');
+    icon_restaurants.setAttribute('height', '20px');
+    icon_restaurants.setAttribute('style', 'margin-bottom:-3px');
 
     var input_photos = document.createElement('INPUT');
     input_photos.setAttribute('id', 'checkbox-photos');
@@ -618,14 +618,14 @@
     selector.append(strings_dict['MKR_ACCOMMODATIONS']);
     selector.appendChild(document.createElement('BR'));
 
-    selector.appendChild(input_restaurants);
-    selector.appendChild(icon_restaurants);
-    selector.append(strings_dict['MKR_RESTAURANTS']);
-    selector.appendChild(document.createElement('BR'));
-
     selector.appendChild(input_airports);
     selector.appendChild(icon_airports);
     selector.append(strings_dict['MKR_AIRPORTS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_restaurants);
+    selector.appendChild(icon_restaurants);
+    selector.append(strings_dict['MKR_RESTAURANTS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_photos);
@@ -672,8 +672,8 @@
     document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
     document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
-    document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
+    document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
     document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
@@ -739,7 +739,7 @@
     });
 
     if (traveling) {
-      hideSideBar();      
+      hideSideBar();
     }
 
     // avoid bug of shows empty countries panel when window is resized
