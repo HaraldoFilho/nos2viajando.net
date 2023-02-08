@@ -714,14 +714,14 @@
         hideMarkers(map_fullwindow, parks_markers);
         hideMarkers(map_fullwindow, attractions_markers);
         hideMarkers(map_fullwindow, accommodations_markers);
-        hideMarkers(map_fullwindow, restaurants_markers);
         hideMarkers(map_fullwindow, airports_markers);
+        hideMarkers(map_fullwindow, restaurants_markers);
         hideMarkers(map_fullwindow, photos_markers);
         hide_car_routes = true;
       } else {
+        toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
         toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
         toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
-        toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
         toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
         toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
         toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
