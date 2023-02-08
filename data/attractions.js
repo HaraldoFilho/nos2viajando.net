@@ -82,7 +82,19 @@ var attractions = [
   [[18.107098, 42.641568], 'HR', 'Igreja e Monastério Fanciscano'],
   [[18.122144, 42.625386], 'HR', 'Ilha Lokrum'],
   [[14.495298, 40.749709], 'IT', 'Parque Arqueológico de Pompéia'],
-  [[14.549958, 40.614219], 'IT', 'Costa Amalfitana']
+  [[14.549958, 40.614219], 'IT', 'Costa Amalfitana'],
+  [[-72.591245, -51.008827], 'CL', 'Mirante Lago Sarmiento'],
+  [[-72.763529, -50.981350], 'CL', 'Mirante Laguna Amarga'],
+  [[-72.791598, -50.942928], 'CL', 'Mirante Cascata do Rio Paine'],
+  [[-72.909727, -51.041252], 'CL', 'Mirante Lago Nordenskjöld'],
+  [[-73.006833, -51.067346], 'CL', 'Mirante Cachoeira Salto Grande'],
+  [[-72.985795, -51.095779], 'CL', 'Lago Pehoé'],
+  [[-72.962396, -51.161152], 'CL', 'Ponte Weber'],
+  [[-72.968358, -51.232310], 'CL', 'Mirante Rio Serrano'],
+  [[-72.905757, -51.234628], 'CL', 'Mirante Cuernos del Paine'],
+  [[-72.866748, -51.262984], 'CL', 'Mirante Grey'],
+  [[-72.866042, -51.263814], 'CL', 'Mirante Lago Toro'],
+  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón']
 ]
 
 var attractions_en = [
@@ -169,5 +181,17 @@ var attractions_en = [
   [[18.107098, 42.641568], 'HR', 'Fanciscan Church and Monastery'],
   [[18.122144, 42.625386], 'HR', 'Lokrum Island'],
   [[14.495298, 40.749709], 'IT', 'Archaeological Park of Pompeii'],
-  [[14.549958, 40.614219], 'IT', 'Amalfi Coast']
+  [[14.549958, 40.614219], 'IT', 'Amalfi Coast'],
+  [[-72.591245, -51.008827], 'CL', 'Sarmiento Lake Lookout'],
+  [[-72.763529, -50.981350], 'CL', 'Laguna Amarga Lookout'],
+  [[-72.791598, -50.942928], 'CL', 'Rio Paine\'s Waterfall Lookout'],
+  [[-72.909727, -51.041252], 'CL', 'Nordenskjöld Lake Lookout'],
+  [[-73.006833, -51.067346], 'CL', 'Salto Grande Waterfall Lookout'],
+  [[-72.985795, -51.095779], 'CL', 'Pehoé Lake'],
+  [[-72.962396, -51.161152], 'CL', 'Weber Bridge'],
+  [[-72.968358, -51.232310], 'CL', 'Rio Serrano Lookout'],
+  [[-72.905757, -51.234628], 'CL', 'Cuernos del Paine Lookout'],
+  [[-72.866748, -51.262984], 'CL', 'Grey Lookout'],
+  [[-72.866042, -51.263814], 'CL', 'Lago Toro Lookout'],
+  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón']
 ]
