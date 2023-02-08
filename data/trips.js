@@ -1,6 +1,6 @@
 // Year, Trip, Distance (km), Days
 
-var traveling = true;
+var traveling = false;
 
 var trips = [
   ['2009', 'Monte Alegre do Sul', 182, 4],
