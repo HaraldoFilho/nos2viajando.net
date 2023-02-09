@@ -91,10 +91,21 @@ var attractions = [
   [[-72.985795, -51.095779], 'CL', 'Lago Pehoé'],
   [[-72.962396, -51.161152], 'CL', 'Ponte Weber'],
   [[-72.968358, -51.232310], 'CL', 'Mirante Rio Serrano'],
+  [[-73.119862, -51.414848], 'CL', 'Glaciar Serrano'],
+  [[-73.181558, -51.437521], 'CL', 'Glaciar Balmaceda'],
+  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón'],
+  [[-73.171123, -51.042155], 'CL', 'Lago Grey'],
+  [[-73.234661, -50.972859], 'CL', 'Glaciar Grey'],
+  [[-73.055645, -50.472517], 'CL', 'Glaciar Perito Moreno'],
   [[-72.905757, -51.234628], 'CL', 'Mirante Cuernos del Paine'],
   [[-72.866748, -51.262984], 'CL', 'Mirante Grey'],
   [[-72.866042, -51.263814], 'CL', 'Mirante Lago Toro'],
-  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón']
+  [[-72.411613, -50.231877], 'CL', 'Lago Argentino'],
+  [[-73.337392, -50.243378], 'CL', 'Glaciar Spegazzini'],
+  [[-73.248333, -50.056073], 'CL', 'Ponto de Observação do Glaciar Upsala'],
+  [[-73.223803, -50.198380], 'CL', 'Puesto Las Vacas'],
+  [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
+  [[-70.577488, -52.919268], 'CL', 'Monumento Natural Los Pingüinos']
 ]
 
 var attractions_en = [
@@ -193,5 +204,17 @@ var attractions_en = [
   [[-72.905757, -51.234628], 'CL', 'Cuernos del Paine Lookout'],
   [[-72.866748, -51.262984], 'CL', 'Grey Lookout'],
   [[-72.866042, -51.263814], 'CL', 'Lago Toro Lookout'],
-  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón']
+  [[-72.605888, -51.570388], 'CL', 'Cueva del Milodón'],
+  [[-73.171123, -51.042155], 'CL', 'Grey Lake'],
+  [[-73.234661, -50.972859], 'CL', 'Grey Glacier'],
+  [[-73.055645, -50.472517], 'CL', 'Perito Moreno Glacier'],
+  [[-72.905757, -51.234628], 'CL', 'Cuernos del Paine Lookout'],
+  [[-72.866748, -51.262984], 'CL', 'Grey Lookout'],
+  [[-72.866042, -51.263814], 'CL', 'Lago Toro Lookout'],
+  [[-72.411613, -50.231877], 'CL', 'Argentinian Lake'],
+  [[-73.337392, -50.243378], 'CL', 'Spegazzini Glacier'],
+  [[-73.248333, -50.056073], 'CL', 'Upsala Glacier Viewpoint'],
+  [[-73.223803, -50.198380], 'CL', 'Since Cows'],
+  [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
+  [[-70.577488, -52.919268], 'CL', 'Los Pingüinos Natural Monument']
 ]
