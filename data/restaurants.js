@@ -42,7 +42,8 @@ var restaurants = [
   [[14.28304, 40.87822], 'IT', 'i\'AMME'],
   [[14.28787, 40.88289], 'IT', 'Pasticceria Vincenzo Bellavia'],
   [[-70.79033, -33.39639], 'CL', 'Cafe Britt'],
-  [[-72.84242, -51.54285], 'CL', 'Estancia Perales'], 
-  [[-72.97748, -51.23192], 'CL', 'Restaurant & Quincho \“Don Pascual\”'], 
-  [[-73.12976, -51.12427], 'CL', 'Rio Pingo Restaurant & Minimarket']
+  [[-72.84242, -51.54285], 'CL', 'Estancia Perales'],
+  [[-72.97748, -51.23192], 'CL', 'Restaurant & Quincho \“Don Pascual\”'],
+  [[-73.12976, -51.12427], 'CL', 'Rio Pingo Restaurant & Minimarket'],
+  [[-70.90326, -53.15949], 'CL', 'Restaurant A Comer PUQ']
 ]
