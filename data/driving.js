@@ -13,7 +13,7 @@ var driving_abroad = [
   ['2017', ['Yosemite Southgate Hotel & Suites', 'Creekside Inn'], 'Califórnia'],
   ['2017', ['Creekside Inn', 'Museu da História do Computador', 'Googleplex'], 'Califórnia'],
   ['2017', ['Creekside Inn', 'Aeroporto de São Francisco'], 'Califórnia'],
-  ['2023', ['Puerto Natales', 'Hosteria Pehoe', 'Morrena Lodge', 'Puerto Natales'], 'Patagônia']
+  ['2023', ['Puerto Natales', 'Ponte Weber', 'Hosteria Pehoe', 'Morrena Lodge', 'Puerto Natales'], 'Patagônia']
 ]
 
 var driving_abroad_en = [
@@ -25,5 +25,5 @@ var driving_abroad_en = [
   ['2017', ['Yosemite Southgate Hotel & Suites', 'Creekside Inn'], 'California'],
   ['2017', ['Creekside Inn', 'Computer History Museum', 'Googleplex'], 'California'],
   ['2017', ['Creekside Inn', 'San Francisco Airport'], 'California'],
-  ['2023', ['Puerto Natales', 'Hosteria Pehoe', 'Morrena Lodge', 'Puerto Natales'], 'Patagonia']
+  ['2023', ['Puerto Natales', 'Weber Bridge', 'Hosteria Pehoe', 'Morrena Lodge', 'Puerto Natales'], 'Patagonia']
 ]

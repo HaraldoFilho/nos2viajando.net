@@ -184,7 +184,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
         loadFarthestPoints(map_fullwindow, farthest_points);
         loadFlights(map_fullwindow, flights, airports);
         loadCarRoutes(map_fullwindow, driving, places, hide_car_routes);
-        // loadCarRoutesAbroad(map_fullwindow, driving_abroad, places, hide_car_routes);
+        loadCarRoutesAbroad(map_fullwindow, driving_abroad, places, hide_car_routes);
       } catch (e) {
         console.log(e);
       }
@@ -467,7 +467,7 @@ function loadFlights(map, flights, airports) {
 
         if (add
         && !document.getElementById("checkbox-road-trips").checked
-        // && !document.getElementById("checkbox-road-trips-abroad").checked
+        && !document.getElementById("checkbox-road-trips-abroad").checked
         && !document.getElementById("checkbox-farthest-points").checked) {
           addFlightLine(map, id, color, width);
         } else {
@@ -662,32 +662,32 @@ function loadCarRoutes(map, driving, places, hide_car_routes) {
 
 }
 
-// function loadCarRoutesAbroad(map, driving_abroad, places, hide_car_routes) {
-//
-//   for (var d = 0; d < driving_abroad.length; d++) {
-//     var trip_points_abroad = [];
-//     var route_id = 'car_route_abroad_' + (d+1);
-//     for (var p = 0; p < driving_abroad[d][1].length; p++) {
-//       for (var a = 0; a < places.length; a++) {
-//         if (driving_abroad[d][1][p] == places[a][2]) {
-//           trip_points_abroad.push(places[a][0])
-//           road_trips_places_abroad.push(places[a]);
-//           break;
-//         }
-//       }
-//     }
-//
-//     createCarRoute(map, route_id, trip_points_abroad);
-//
-//     if (document.getElementById("checkbox-road-trips-abroad").checked && !hide_car_routes) {
-//       addCarRoute(map, route_id, '#F00');
-//     } else {
-//       removeCarRoute(map, route_id);
-//     }
-//
-//   }
-//
-// }
+function loadCarRoutesAbroad(map, driving_abroad, places, hide_car_routes) {
+
+  for (var d = 0; d < driving_abroad.length; d++) {
+    var trip_points_abroad = [];
+    var route_id = 'car_route_abroad_' + (d+1);
+    for (var p = 0; p < driving_abroad[d][1].length; p++) {
+      for (var a = 0; a < places.length; a++) {
+        if (driving_abroad[d][1][p] == places[a][2]) {
+          trip_points_abroad.push(places[a][0])
+          road_trips_places_abroad.push(places[a]);
+          break;
+        }
+      }
+    }
+
+    createCarRoute(map, route_id, trip_points_abroad);
+
+    if (document.getElementById("checkbox-road-trips-abroad").checked && !hide_car_routes) {
+      addCarRoute(map, route_id, '#F00');
+    } else {
+      removeCarRoute(map, route_id);
+    }
+
+  }
+
+}
 
 function createCarRoute(map, id, points) {
 
