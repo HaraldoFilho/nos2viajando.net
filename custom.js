@@ -40,7 +40,7 @@ function loadMarkersOnMap(map, markers_scale) {
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   photos_markers = createPhotosMarkers(map, locations_dict);
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances());
-  addMarkersToMap(map, restaurants_markers);
+  // addMarkersToMap(map, restaurants_markers);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);

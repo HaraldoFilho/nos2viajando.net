@@ -543,7 +543,6 @@
     var input_restaurants = document.createElement('INPUT');
     input_restaurants.setAttribute('id', 'checkbox-restaurants');
     input_restaurants.setAttribute('type', 'checkbox');
-    input_restaurants.setAttribute('checked', 'checked');
     var icon_restaurants = document.createElement('IMG');
     icon_restaurants.setAttribute('src', 'icons/marker_restaurant.svg');
     icon_restaurants.setAttribute('height', '20px');
@@ -719,10 +718,6 @@
         if (document.getElementById("checkbox-road-trips").checked) {
           var road_trips_bbox = getRoadTripsBoundingBox(road_trips_places, 0);
           fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
-        }
-        if (document.getElementById("checkbox-road-trips-abroad").checked) {
-          var road_trips_abroad_bbox = getRoadTripsBoundingBox(road_trips_places_abroad, 0);
-          // fitBoundingBox(map_fullwindow, road_trips_abroad_bbox, init_x_offset, 0, 300, false);
         }
       }
     });
