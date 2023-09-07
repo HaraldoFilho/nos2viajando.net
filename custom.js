@@ -13,9 +13,9 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
 
     if (get_farthest_points) {
       if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
-      if (places[i][0][0] > far_east[0][0]) { far_east = places[i]};
+      if (convertLongToFromHome(places[i][0][0]) > convertLongToFromHome(far_east[0][0])) { far_east = places[i]};
       if (places[i][0][1] < far_south[0][1]) { far_south = places[i]};
-      if (places[i][0][0] < far_west[0][0]) { far_west = places[i]};
+      if (convertLongToFromHome(places[i][0][0]) < convertLongToFromHome(far_west[0][0])) { far_west = places[i]};
       farthest_points = [far_north, far_east, far_south, far_west];
     }
 

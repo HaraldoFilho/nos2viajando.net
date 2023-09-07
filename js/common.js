@@ -506,10 +506,11 @@ function createFlightLine(map, id, coord_a, coord_b) {
   var current_point_coords = [];
   var point_added = false;
   var prev_segment;
-  var segment;
+
+  var segment = turf.along(route.features[0], 0);
 
   // Draw an arc between the `origin` & `destination` of the two points
-  for (var i = 0; i < lineDistance; i += lineDistance / steps) {
+  for (var i = 1; i < lineDistance; i += lineDistance / steps) {
     prev_segment = segment;
     segment = turf.along(route.features[0], i);
     arc.push(segment.geometry.coordinates);
@@ -782,4 +783,14 @@ function getRoadTripsBoundingBox(markers, long_offset) {
 
   return road_trips_bbox;
 
+}
+
+function convertLongToFromHome(long) {
+  var diffFromHome = long - home[0][0];
+  if (diffFromHome > 180) {
+    longFromHome = diffFromHome - 360;
+  } else {
+    longFromHome = diffFromHome;
+  }
+  return longFromHome;
 }
