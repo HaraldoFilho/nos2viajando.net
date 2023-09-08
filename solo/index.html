@@ -134,6 +134,9 @@
     trips = trips_en;
   }
 
+  var restaurants = [];
+  var accommodations = [];
+
   loadAdditionalData();
   addFooter();
 
@@ -195,7 +198,9 @@
   map.dragRotate.disable();
   map.touchZoomRotate.disableRotation();
 
-  loadMarkersOnMap(map, 0.4);
+  var icons_path = '../icons/';
+
+  loadMarkersOnMap(map, 0.4, icons_path);
 
   fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
@@ -261,7 +266,7 @@
 
   for (var country_code in countries) {
     var country_name = countries[country_code];
-    var country_icon = getIconSrc(country_code);
+    var country_icon = getIconSrc(icons_path, country_code);
     var country = document.createElement('DIV');
     country.setAttribute('id', country_code);
     var country_flag = document.createElement('IMG');
@@ -291,7 +296,7 @@
   title.setAttribute('class', 'list-title');
   var marker = document.createElement('IMG');
   marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', '../icons/marker_city.svg');
+  marker.setAttribute('src', icons_path.concat('marker_city.svg'));
   title.appendChild(marker);
   title.append(strings_dict['CITIES']);
   var count = document.createElement('DIV');
@@ -307,7 +312,7 @@
     list_item.setAttribute('class', 'list-item');
     var tiny_flag = document.createElement('IMG');
     tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(cities[i][1]));
+    tiny_flag.setAttribute('src', getIconSrc(icons_path, cities[i][1]));
     list_item.appendChild(tiny_flag);
     list_item.append(cities[i][2]);
     lists.appendChild(list_item);
@@ -321,7 +326,7 @@
   title.setAttribute('class', 'list-title');
   var marker = document.createElement('IMG');
   marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', '../icons/marker_park.svg');
+  marker.setAttribute('src', icons_path.concat('marker_park.svg'));
   title.appendChild(marker);
   title.append(strings_dict['PARKS']);
   var count = document.createElement('DIV');
@@ -337,7 +342,7 @@
     list_item.setAttribute('class', 'list-item');
     var tiny_flag = document.createElement('IMG');
     tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(parks[i][1]));
+    tiny_flag.setAttribute('src', getIconSrc(icons_path, parks[i][1]));
     list_item.appendChild(tiny_flag);
     list_item.append(parks[i][2]);
     lists.appendChild(list_item);
@@ -351,7 +356,7 @@
   title.setAttribute('class', 'list-title');
   var marker = document.createElement('IMG');
   marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', '../icons/marker_attraction.svg');
+  marker.setAttribute('src', icons_path.concat('marker_attraction.svg'));
   title.appendChild(marker);
   title.append(strings_dict['ATTRACTIONS']);
   var count = document.createElement('DIV');
@@ -367,42 +372,12 @@
     list_item.setAttribute('class', 'list-item');
     var tiny_flag = document.createElement('IMG');
     tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(attractions[i][1]));
+    tiny_flag.setAttribute('src', getIconSrc(icons_path, attractions[i][1]));
     list_item.appendChild(tiny_flag);
     list_item.append(attractions[i][2]);
     lists.appendChild(list_item);
   }
 
-  // // Construct list of Accommodations
-  // var accommodations_list = document.createElement('DIV');
-  // accommodations_list.setAttribute('class', 'list-title-container');
-  // accommodations_list.setAttribute('style', 'margin-top:25px');
-  // var title = document.createElement('DIV');
-  // title.setAttribute('class', 'list-title');
-  // var marker = document.createElement('IMG');
-  // marker.setAttribute('class', 'marker');
-  // marker.setAttribute('src', '../icons/marker_accommodation.svg');
-  // title.appendChild(marker);
-  // title.append(strings_dict['ACCOMMODATIONS']);
-  // var count = document.createElement('DIV');
-  // count.setAttribute('class', 'list-count');
-  // count.innerText = accommodations.length;
-  // accommodations_list.appendChild(title);
-  // accommodations_list.appendChild(count);
-  // lists.appendChild(accommodations_list);
-  // for (var i = 0; i < accommodations.length; i++) {
-  //   var list_item = document.createElement('P');
-  //   var item_id = getItemId(accommodations[i][2]);
-  //   list_item.setAttribute('id', item_id);
-  //   list_item.setAttribute('class', 'list-item');
-  //   var tiny_flag = document.createElement('IMG');
-  //   tiny_flag.setAttribute('class', 'tiny_icon');
-  //   tiny_flag.setAttribute('src', getIconSrc(accommodations[i][1]));
-  //   list_item.appendChild(tiny_flag);
-  //   list_item.append(accommodations[i][2]);
-  //   lists.appendChild(list_item);
-  // }
-  //
   // Construct list of Airports
   var airports_list = document.createElement('DIV');
   airports_list.setAttribute('class', 'list-title-container');
@@ -411,7 +386,7 @@
   title.setAttribute('class', 'list-title');
   var marker = document.createElement('IMG');
   marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', '../icons/marker_airport.svg');
+  marker.setAttribute('src', icons_path.concat('marker_airport.svg'));
   title.appendChild(marker);
   title.append(strings_dict['AIRPORTS']);
   var count = document.createElement('DIV');
@@ -427,7 +402,7 @@
     list_item.setAttribute('class', 'list-item');
     var tiny_flag = document.createElement('IMG');
     tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(airports[i][1]));
+    tiny_flag.setAttribute('src', getIconSrc(icons_path, airports[i][1]));
     list_item.appendChild(tiny_flag);
     list_item.append(airports[i][2]);
     lists.appendChild(list_item);
@@ -473,7 +448,7 @@
   input_cities.setAttribute('type', 'checkbox');
   input_cities.setAttribute('checked', 'checked');
   var icon_cities = document.createElement('IMG');
-  icon_cities.setAttribute('src', '../icons/marker_city.svg');
+  icon_cities.setAttribute('src', icons_path.concat('marker_city.svg'));
   icon_cities.setAttribute('height', '20px');
   icon_cities.setAttribute('style', 'margin-bottom:-3px');
 
@@ -482,7 +457,7 @@
   input_parks.setAttribute('type', 'checkbox');
   input_parks.setAttribute('checked', 'checked');
   var icon_parks = document.createElement('IMG');
-  icon_parks.setAttribute('src', '../icons/marker_park.svg');
+  icon_parks.setAttribute('src', icons_path.concat('marker_park.svg'));
   icon_parks.setAttribute('height', '20px');
   icon_parks.setAttribute('style', 'margin-bottom:-3px');
 
@@ -491,7 +466,7 @@
   input_attractions.setAttribute('type', 'checkbox');
   input_attractions.setAttribute('checked', 'checked');
   var icon_attractions = document.createElement('IMG');
-  icon_attractions.setAttribute('src', '../icons/marker_attraction.svg');
+  icon_attractions.setAttribute('src', icons_path.concat('marker_attraction.svg'));
   icon_attractions.setAttribute('height', '20px');
   icon_attractions.setAttribute('style', 'margin-bottom:-3px');
 
@@ -500,7 +475,7 @@
   // input_accommodations.setAttribute('type', 'checkbox');
   // input_accommodations.setAttribute('checked', 'checked');
   // var icon_accommodations = document.createElement('IMG');
-  // icon_accommodations.setAttribute('src', '../icons/marker_accommodation.svg');
+  // icon_accommodations.setAttribute('src', icons_path.concat('marker_accommodation.svg'));
   // icon_accommodations.setAttribute('height', '20px');
   // icon_accommodations.setAttribute('style', 'margin-bottom:-3px');
 
@@ -509,7 +484,7 @@
   input_airports.setAttribute('type', 'checkbox');
   input_airports.setAttribute('checked', 'checked');
   var icon_airports = document.createElement('IMG');
-  icon_airports.setAttribute('src', '../icons/marker_airport.svg');
+  icon_airports.setAttribute('src', icons_path.concat('marker_airport.svg'));
   icon_airports.setAttribute('height', '20px');
   icon_airports.setAttribute('style', 'margin-bottom:-3px');
 
@@ -517,7 +492,7 @@
   input_photos.setAttribute('id', 'checkbox-photos');
   input_photos.setAttribute('type', 'checkbox');
   var icon_photos = document.createElement('IMG');
-  icon_photos.setAttribute('src', '../icons/marker_photo.svg');
+  icon_photos.setAttribute('src', icons_path.concat('marker_photo.svg'));
   icon_photos.setAttribute('height', '18px');
   icon_photos.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
@@ -525,7 +500,7 @@
   input_flights_international.setAttribute('id', 'checkbox-flights-international');
   input_flights_international.setAttribute('type', 'checkbox');
   var icon_flights_international = document.createElement('IMG');
-  icon_flights_international.setAttribute('src', '../icons/flight_international.svg');
+  icon_flights_international.setAttribute('src', icons_path.concat('flight_international.svg'));
   icon_flights_international.setAttribute('height', '18px');
   icon_flights_international.setAttribute('style', 'margin: 0px 1px -2px 2px');
 
@@ -533,7 +508,7 @@
   input_flights_domestic.setAttribute('id', 'checkbox-flights-domestic');
   input_flights_domestic.setAttribute('type', 'checkbox');
   var icon_flights_domestic = document.createElement('IMG');
-  icon_flights_domestic.setAttribute('src', '../icons/flight_domestic.svg');
+  icon_flights_domestic.setAttribute('src', icons_path.concat('flight_domestic.svg'));
   icon_flights_domestic.setAttribute('height', '18px');
   icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
 
@@ -541,7 +516,7 @@
   input_road_trips.setAttribute('id', 'checkbox-road-trips');
   input_road_trips.setAttribute('type', 'checkbox');
   var icon_road_trip = document.createElement('IMG');
-  icon_road_trip.setAttribute('src', '../icons/car.svg');
+  icon_road_trip.setAttribute('src', icons_path.concat('car.svg'));
   icon_road_trip.setAttribute('height', '18px');
   icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
@@ -549,7 +524,7 @@
   input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
   input_road_trips_abroad.setAttribute('type', 'checkbox');
   var icon_road_trip_abroad = document.createElement('IMG');
-  icon_road_trip_abroad.setAttribute('src', '../icons/car_abroad.svg');
+  icon_road_trip_abroad.setAttribute('src', icons_path.concat('car_abroad.svg'));
   icon_road_trip_abroad.setAttribute('height', '18px');
   icon_road_trip_abroad.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
@@ -557,7 +532,7 @@
   input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
   input_farthest_points.setAttribute('type', 'checkbox');
   var icon_farthest_points = document.createElement('IMG');
-  icon_farthest_points.setAttribute('src', '../icons/farthest_points.svg');
+  icon_farthest_points.setAttribute('src', icons_path.concat('farthest_points.svg'));
   icon_farthest_points.setAttribute('height', '17px');
   icon_farthest_points.setAttribute('style', 'margin: 0px 2px -2px 2px');
 
