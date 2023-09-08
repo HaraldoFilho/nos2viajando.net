@@ -217,11 +217,13 @@ function getFarthestDistances() {
     far_points_km[i] = my_home.distanceTo(far_points[i])/1000000;
   }
 
+  var farthest_km = far_points_km[0];
   var farthest = 0;
 
   for (var i = 1; i < far_points_km.length; i++) {
-    if (far_points_km[i] > far_points_km[i-1]) {
+    if (far_points_km[i] > farthest_km) {
       farthest = i;
+      farthest_km = far_points_km[i];
     }
   }
 
@@ -345,30 +347,88 @@ function loadFarthestPoints(map, farthest_points) {
 }
 
 function createFarthestPointsLines(map, farthest_points) {
-  createLine(map, "FarthestNorth", home[0], farthest_points[0][0]);
-  createLine(map, "FarthestEast", home[0], farthest_points[1][0]);
-  createLine(map, "FarthestSouth", home[0], farthest_points[2][0]);
-  createLine(map, "FarthestWest", home[0], farthest_points[3][0]);
+
+  var directions = [];
+  var isFarthest;
+  var farthest_distances = getFarthestDistances();
+
+  isFarthest = false;
+  if (farthest_distances[1] == 0) {
+    isFarthest = true;
+  }
+  if (farthest_points[0][0][0] - home[0][0] > 180) {
+    createLine(map, "FarthestNorth_1", home[0], [-180, getInterLatitude(home[0], farthest_points[0][0])]);
+    directions.push(["FarthestNorth_1", isFarthest]);
+    createLine(map, "FarthestNorth_2", [180, getInterLatitude(home[0], farthest_points[0][0])], farthest_points[0][0]);
+    directions.push(["FarthestNorth_2", isFarthest]);
+  } else {
+    createLine(map, "FarthestNorth", home[0], farthest_points[0][0]);
+    directions.push(["FarthestNorth", isFarthest]);
+  }
+
+  isFarthest = false;
+  if (farthest_distances[1] == 1) {
+    isFarthest = true;
+  }
+  if (farthest_points[1][0][0] - home[0][0] > 180) {
+    createLine(map, "FarthestEast_1", home[0], [-180, getInterLatitude(home[0], farthest_points[1][0])]);
+    directions.push(["FarthestEast_1", isFarthest]);
+    createLine(map, "FarthestEast_2", [180, getInterLatitude(home[0], farthest_points[1][0])], farthest_points[1][0]);
+    directions.push(["FarthestEast_2", isFarthest]);
+  } else {
+    createLine(map, "FarthestEast", home[0], farthest_points[1][0]);
+    directions.push(["FarthestEast", isFarthest]);
+  }
+
+  isFarthest = false;
+  if (farthest_distances[1] == 2) {
+    isFarthest = true;
+  }
+  if (farthest_points[2][0][0] - home[0][0] > 180) {
+    createLine(map, "FarthestSouth_1", home[0], [-180, getInterLatitude(home[0], farthest_points[2][0])]);
+    directions.push(["FarthestSouth_1", isFarthest]);
+    createLine(map, "FarthestSouth_2", [180, getInterLatitude(home[0], farthest_points[2][0])], farthest_points[2][0]);
+    directions.push(["FarthestSouth_2", isFarthest]);
+  } else {
+    createLine(map, "FarthestSouth", home[0], farthest_points[2][0]);
+    directions.push(["FarthestSouth", isFarthest]);
+  }
+
+  isFarthest = false;
+  if (farthest_distances[1] == 3) {
+    isFarthest = true;
+  }
+  if (farthest_points[3][0][0] - home[0][0] > 180) {
+    createLine(map, "FarthestWest_1", home[0], [-180, getInterLatitude(home[0], farthest_points[3][0])]);
+    directions.push(["FarthestWest_1", isFarthest]);
+    createLine(map, "FarthestWest_2", [180, getInterLatitude(home[0], farthest_points[3][0])], farthest_points[3][0]);
+    directions.push(["FarthestWest_2", isFarthest]);
+  } else {
+    createLine(map, "FarthestWest", home[0], farthest_points[3][0]);
+    directions.push(["FarthestWest", isFarthest]);
+  }
+
+  return directions;
+
 }
 
 function showFarthestPointsLines(map, farthest_points) {
-  createFarthestPointsLines(map, farthest_points);
-  var directions = ["FarthestNorth", "FarthestEast", "FarthestSouth", "FarthestWest"];
+  var directions = createFarthestPointsLines(map, farthest_points);
   for (var i = 0; i < directions.length; i++) {
-    if (i == getFarthestDistances()[1]) {
-      addLine(map, directions[i], '#A0A', 3, [1,5]);
+    if (directions[i][1]) {
+      addLine(map, directions[i][0], '#A0A', 3, [1,5]);
     }
     else {
-      addLine(map, directions[i], '#F70', 3, [1,5]);
+      addLine(map, directions[i][0], '#F70', 3, [1,5]);
     }
   }
 }
 
 function hideFarthestPointsLines(map) {
-  removeLine(map, "FarthestNorth");
-  removeLine(map, "FarthestEast");
-  removeLine(map, "FarthestSouth");
-  removeLine(map, "FarthestWest");
+  var directions = createFarthestPointsLines(map, farthest_points);
+  for (var i = 0; i < directions.length; i++) {
+    removeLine(map, directions[i][0]);
+  }
 }
 
 function createLine(map, id, coord_a, coord_b) {
@@ -787,10 +847,22 @@ function getRoadTripsBoundingBox(markers, long_offset) {
 
 function convertLongToFromHome(long) {
   var diffFromHome = long - home[0][0];
+  var longFromHome;
   if (diffFromHome > 180) {
     longFromHome = diffFromHome - 360;
   } else {
     longFromHome = diffFromHome;
   }
   return longFromHome;
+}
+
+function getInterLatitude(coord_1, coord_2) {
+  var diff_x = coord_2[0] - coord_1[0];
+  var dist_x = - (diff_x - 360);
+  var dist_y = - (coord_2[1] - coord_1[1]);
+  var sin = dist_y/dist_x;
+  var dist_x_2 = 180 - coord_2[0];
+  var dist_y_2 = dist_x_2 * sin;
+  var inter_y = coord_2[1] + dist_y_2;
+  return inter_y;
 }
