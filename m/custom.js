@@ -26,12 +26,6 @@ function createMarkers(map, places, color, scale) {
   return markers;
 }
 
-function addMarkersToMap(map, markers) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].addTo(map);
-  }
-}
-
 function loadMarkersOnMap(map, markers_scale) {
   restaurants_markers = createMarkers(map, restaurants, '#a0a0a0', markers_scale);
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale);
@@ -45,27 +39,4 @@ function loadMarkersOnMap(map, markers_scale) {
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
-}
-
-
-// Icons
-
-function getIconSrc(country_code) {
-  return "../icons/flags/".concat(countries_bbox[country_code][0])
-  .replace(/\s/g, "-").toLowerCase().concat(".svg");
-}
-
-
-function addIcon(country_code, panel) {
-  var country_name = countries[country_code];
-  var elem = document.createElement("IMG");
-  elem.setAttribute("id", country_code.concat("__"));
-  elem.setAttribute("class", "icon");
-  elem.setAttribute("src", getIconSrc(country_code));
-  elem.setAttribute("title", country_name);
-  elem.setAttribute("alt", country_name);
-  var div_icon = document.createElement("DIV");
-  div_icon.setAttribute("class", "flag-icon");
-  div_icon.appendChild(elem);
-  panel.appendChild(div_icon);
 }

@@ -269,7 +269,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
     setSelectorPosition();
 
     for (var country_code in countries) {
-      addIcon(country_code, fullmap_countries_panel, icons_path);
+      addIcon(icons_path, country_code, fullmap_countries_panel);
       addListenerToFlagsFullWindow(country_code);
     }
 
@@ -974,7 +974,7 @@ function getIconSrc(icons_path, country_code) {
   .replace(/\s/g, "-").toLowerCase().concat(".svg");
 }
 
-function addIcon(country_code, panel, icons_path) {
+function addIcon(icons_path, country_code, panel) {
   var country_name = countries[country_code];
   var elem = document.createElement("IMG");
   elem.setAttribute("id", country_code.concat("__"));
