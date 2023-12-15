@@ -19,5 +19,9 @@ var accommodations = [
   [[-72.986222, -51.093635], 'CL', 'Hosteria Pehoe'],
   [[-72.984121, -51.237317], 'CL', 'Morrena Lodge'],
   [[-72.259119, -50.318564], 'AR', 'Hotel Las Dunas'],
-  [[-70.898852, -53.156684], 'CL', 'Hotel Carpa Manzano']
+  [[-70.898852, -53.156684], 'CL', 'Hotel Carpa Manzano'],
+  // [[-54.94409, -34.96062], 'UY', '20 Hotel'],
+  // [[-57.85253, -34.47187], 'UY', 'Posada Plaza Mayor'],
+  // [[-58.40009, -34.60927], 'AR', 'GrandView Hotel & Convention Center'],
+  // [[-56.19891, -34.90531], 'UY', 'Holiday Inn Montevideo']
 ]

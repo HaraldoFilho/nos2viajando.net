@@ -6,7 +6,8 @@ var countries = {
   'IT': 'Itália',
   'VA': 'Vaticano',
   'HR': 'Croácia',
-  'CL': 'Chile'
+  'CL': 'Chile',
+  // 'UY': 'Uruguai'
 }
 
 var countries_en = {
@@ -17,10 +18,12 @@ var countries_en = {
   'IT': 'Italy',
   'VA': 'Vatican City',
   'HR': 'Croatia',
-  'CL': 'Chile'
+  'CL': 'Chile',
+  // 'UY': 'Uruguay'
 }
 
 var continents = [
+  // ['South America', ['BR', 'AR', 'PY', 'CL', 'UY']],
   ['South America', ['BR', 'AR', 'PY', 'CL']],
   ['Central America', []],
   ['North America', ['US']],
