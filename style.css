@@ -126,7 +126,7 @@ img.close-sidebar {
   top: 0;
   left: 0;
   margin-left: 288px;
-  margin-top: 334px;
+  margin-top: 101px;
   padding: 12px 8px 12px 17px;
   height: 12px;
   border-radius: 0 50% 50% 0;
@@ -142,7 +142,7 @@ img.open-sidebar {
   top: 0;
   left: 0;
   margin-left: -10px;
-  margin-top: 301px;
+  margin-top: 101px;
   padding: 12px 8px 12px 17px;
   height: 12px;
   border-radius: 0 50% 50% 0;
