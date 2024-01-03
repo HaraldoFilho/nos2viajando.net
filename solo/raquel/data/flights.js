@@ -1,0 +1,2 @@
+var flights_solo = [
+]

@@ -2,26 +2,26 @@
 <html>
 <head>
   <title>Minhas Viagens</title>
-  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../../style.css" />
 
-  <script src="../js/mapbox_token.js"></script>
-  <script src="../js/countries_bbox.js"></script>
-  <script src="../js/common.js"></script>
+  <script src="../../js/mapbox_token.js"></script>
+  <script src="../../js/countries_bbox.js"></script>
+  <script src="../../js/common.js"></script>
   <script src="custom.js"></script>
 
   <!-- Locations data -->
-  <script src="../data/strings.js"></script>
-  <script src="../data/trips.js"></script>
-  <script src="../data/countries.js"></script>
-  <script src="../data/home.js"></script>
-  <script src="../data/cities.js"></script>
-  <script src="../data/parks.js"></script>
-  <script src="../data/attractions.js"></script>
-  <script src="../data/airports.js"></script>
-  <script src="../data/flights.js"></script>
-  <script src="../data/driving.js"></script>
-  <script src="../data/photos.js"></script>
+  <script src="../../data/strings.js"></script>
+  <script src="../../data/trips.js"></script>
+  <script src="../../data/countries.js"></script>
+  <script src="../../data/home.js"></script>
+  <script src="../../data/cities.js"></script>
+  <script src="../../data/parks.js"></script>
+  <script src="../../data/attractions.js"></script>
+  <script src="../../data/airports.js"></script>
+  <script src="../../data/flights.js"></script>
+  <script src="../../data/driving.js"></script>
+  <script src="../../data/photos.js"></script>
 
   <script src="data/strings.js"></script>
   <script src="data/trips.js"></script>
@@ -55,49 +55,49 @@
         <div id="title" class="title"></div>
 
         <div id="trips" class="trips">
-          <img class="metric" src="../icons/luggage.svg"/>
+          <img class="metric" src="../../icons/luggage.svg"/>
         </div>
 
         <div id="flights" class="flights">
-          <img class="metric" src="../icons/plane.svg"/>
+          <img class="metric" src="../../icons/plane.svg"/>
         </div>
 
         <div id="countries" class="countries">
-          <img class="metric" src="../icons/flag.svg"/>
+          <img class="metric" src="../../icons/flag.svg"/>
         </div>
 
         <div id="continents" class="continents">
-          <img class="metric" src="../icons/world.svg"/>
+          <img class="metric" src="../../icons/world.svg"/>
         </div>
 
         <div id="distance" class="distance" style="padding:7px 0 0 13px;">
-          <img class="metric_2" src="../icons/navigation.svg"/>
+          <img class="metric_2" src="../../icons/navigation.svg"/>
         </div>
 
         <div id="days" class="days">
-          <img class="metric_2" src="../icons/calendar.svg"/>
+          <img class="metric_2" src="../../icons/calendar.svg"/>
         </div>
 
         <div class="map">
           <div id='map' style='width: 300px; height: 150px;'></div>
-          <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../icons/full_window_enter.svg"/>
-          <img id="zoom-out-icon" class="zoom-out" src="../icons/fit_window.svg"/>
+          <img id="fullwindow-enter-icon" class="fullwindow-enter" src="../../icons/full_window_enter.svg"/>
+          <img id="zoom-out-icon" class="zoom-out" src="../../icons/fit_window.svg"/>
         </div>
 
         <div id="countries-panel" class="flags"></div>
 
       </div>
 
-      <img id="close-sidebar" class="close-sidebar" src="../icons/sidebar_close.svg"/>
+      <img id="close-sidebar" class="close-sidebar" src="../../icons/sidebar_close.svg"/>
 
       <div id="lists" class="lists-container"></div>
 
     </div>
 
-    <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
+    <img id="open-sidebar" class="open-sidebar" src="../../icons/sidebar_open.svg"/>
 
     <div id="travelmap" class="travelmap-container">
-      <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1025885/?tiles=default&showguide=true" frameBorder="0" >
+      <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
         Navegador não compatível
       </iframe>
     </div>
@@ -106,8 +106,8 @@
 
   <div id="map-overlay">
 
-    <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
-    <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../icons/fit_window.svg"/>
+    <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../../icons/full_window_exit.svg"/>
+    <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../../icons/fit_window.svg"/>
 
     <div id="menu" class="menu"></div>
 
@@ -136,7 +136,7 @@
   var accommodations = [];
 
   loadAdditionalData();
-  addFooter();
+  // addFooter();
 
   mapboxgl.accessToken = mapbox_token;
 
@@ -196,7 +196,7 @@
   map.dragRotate.disable();
   map.touchZoomRotate.disableRotation();
 
-  var icons_path = '../icons/';
+  var icons_path = '../../icons/';
 
   loadMarkersOnMap(map, 0.4, icons_path);
 
