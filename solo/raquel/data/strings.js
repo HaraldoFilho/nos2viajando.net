@@ -1,7 +1,7 @@
 var strings_dict_solo = {
-  'TITLE_SOLO': 'Minhas Viagens'
+  'TITLE_SOLO': 'Raquel Viajou'
 }
 
 var strings_dict_solo_en = {
-  'TITLE_SOLO': 'My Travels'
+  'TITLE_SOLO': 'Raquel Traveled'
 }
