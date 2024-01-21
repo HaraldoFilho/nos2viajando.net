@@ -103,7 +103,7 @@ var attractions = [
   [[-72.411613, -50.231877], 'AR', 'Lago Argentino'],
   [[-73.337392, -50.243378], 'AR', 'Glaciar Spegazzini'],
   [[-73.248333, -50.056073], 'AR', 'Ponto de Observação do Glaciar Upsala'],
-  [[-73.223803, -50.198380], 'AR', 'Puesto Las Vacas'],
+  [[-73.223803, -50.198380], 'AR', 'Puesto de Las Vacas'],
   [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
   [[-70.577488, -52.919268], 'CL', 'Monumento Natural Los Pingüinos'],
   // [[-55.038450, -34.895930], 'UY', 'Mirante da Rota Panorâmica'],
