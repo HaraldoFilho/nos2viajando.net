@@ -46,5 +46,6 @@ var restaurants = [
   [[-72.97748, -51.23192], 'CL', 'Restaurant & Quincho \“Don Pascual\”'],
   [[-73.12976, -51.12427], 'CL', 'Rio Pingo Restaurant & Minimarket'],
   [[-70.90326, -53.15949], 'CL', 'A Comer PUQ'],
+  [[-54.94323, -34.96149], 'UY', 'The Coffeteria'],
   [[-55.04483, -34.90872], 'UY', 'La Taberna del Rayo'],
 ]
