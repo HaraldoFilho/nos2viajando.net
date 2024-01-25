@@ -106,10 +106,9 @@ var attractions = [
   [[-73.223803, -50.198380], 'AR', 'Puesto de Las Vacas'],
   [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
   [[-70.577488, -52.919268], 'CL', 'Monumento Natural Los Pingüinos'],
-  // [[-55.038450, -34.895930], 'UY', 'Mirante da Rota Panorâmica'],
-  // [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
-  // [[-55.046690, -34.915550], 'UY', 'Mirante de Punta Ballena'],
-  // [[-55.044610, -34.908710], 'UY', 'Museu Casapueblo'],
+  [[-55.038450, -34.895930], 'UY', 'Mirante de Punta Ballena'],
+  [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
+  [[-55.044610, -34.908710], 'UY', 'Museu Casapueblo'],
   // [[-54.937180, -34.957850], 'UY', 'La Mano'],
   // [[-54.951590, -34.972970], 'UY', 'Bandeira do Uruguai'],
   // [[-54.951060, -34.963760], 'UY', 'Porto de Punta del Este'],
@@ -246,4 +245,7 @@ var attractions_en = [
   [[-73.223803, -50.198380], 'AR', 'Since Cows'],
   [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
   [[-70.577488, -52.919268], 'CL', 'Los Pingüinos Natural Monument']
+  [[-55.038450, -34.895930], 'UY', 'Punta Ballena Lookout Point'],
+  [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
+  [[-55.044610, -34.908710], 'UY', 'Museo Casapueblo'],
 ]
