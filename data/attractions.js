@@ -110,7 +110,7 @@ var attractions = [
   [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
   [[-55.044610, -34.908710], 'UY', 'Museu Casapueblo'],
   [[-54.971730, -34.953370], 'UY', 'Ilha Gorriti'],
-  // [[-54.937180, -34.957850], 'UY', 'La Mano'],
+  [[-54.937180, -34.957850], 'UY', 'La Mano'],
   // [[-54.951590, -34.972970], 'UY', 'Bandeira do Uruguai'],
   // [[-54.951060, -34.963760], 'UY', 'Porto de Punta del Este'],
   // [[-57.853020, -34.471730], 'UY', 'Paseo de San Gabriel'],
@@ -249,4 +249,5 @@ var attractions_en = [
   [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
   [[-55.044610, -34.908710], 'UY', 'Museo Casapueblo'],
   [[-54.971730, -34.953370], 'UY', 'Isla Gorriti'],
+  [[-54.937180, -34.957850], 'UY', 'La Mano'],
 ]
