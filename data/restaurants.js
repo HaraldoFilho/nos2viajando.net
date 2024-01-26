@@ -48,4 +48,7 @@ var restaurants = [
   [[-70.90326, -53.15949], 'CL', 'A Comer PUQ'],
   [[-54.94323, -34.96149], 'UY', 'The Coffeteria'],
   [[-55.04483, -34.90872], 'UY', 'La Taberna del Rayo'],
+  [[-54.94312, -34.96162], 'UY', 'Mostaza'],
+  [[-54.94141, -34.96000], 'UY', 'Il Mondo della Pizza'],
+  [[-54.94215, -34.96061], 'UY', 'Heladeria El Faro'],
 ]
