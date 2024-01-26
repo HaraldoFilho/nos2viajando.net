@@ -109,10 +109,10 @@ var attractions = [
   [[-55.038450, -34.895930], 'UY', 'Mirante de Punta Ballena'],
   [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
   [[-55.044610, -34.908710], 'UY', 'Museu Casapueblo'],
+  [[-54.971730, -34.953370], 'UY', 'Ilha Gorriti'],
   // [[-54.937180, -34.957850], 'UY', 'La Mano'],
   // [[-54.951590, -34.972970], 'UY', 'Bandeira do Uruguai'],
   // [[-54.951060, -34.963760], 'UY', 'Porto de Punta del Este'],
-  // [[-54.971730, -34.953370], 'UY', 'Ilha Gorriti'],
   // [[-57.853020, -34.471730], 'UY', 'Paseo de San Gabriel'],
   // [[-57.853250, -34.472220], 'UY', 'Museu do Azulejo'],
   // [[-57.852240, -34.472790], 'UY', 'El Faro'],
@@ -248,4 +248,5 @@ var attractions_en = [
   [[-55.038450, -34.895930], 'UY', 'Punta Ballena Lookout Point'],
   [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
   [[-55.044610, -34.908710], 'UY', 'Museo Casapueblo'],
+  [[-54.971730, -34.953370], 'UY', 'Isla Gorriti'],
 ]
