@@ -247,7 +247,7 @@ var attractions_en = [
   [[-55.044610, -34.908710], 'UY', 'Museo Casapueblo'],
   [[-54.971730, -34.953370], 'UY', 'Isla Gorriti'],
   [[-54.937180, -34.957850], 'UY', 'La Mano'],
-  [[-54.951060, -34.963760], 'UY', 'Punta del Este's Harbor'],
+  [[-54.951060, -34.963760], 'UY', 'Punta del Este\'s Harbor'],
   [[-57.853020, -34.471730], 'UY', 'Paseo de San Gabriel'],
   [[-57.852240, -34.472790], 'UY', 'The Lighthouse'],
   [[-57.851120, -34.472650], 'UY', 'Calle de los Suspiros'],
