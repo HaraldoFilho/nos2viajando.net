@@ -31,7 +31,7 @@ var cities = [
   [[-70.909352, -53.164819], 'CL', 'Punta Arenas'],
   [[-54.939842, -34.934973], 'UY', 'Punta del Este'],
   [[-55.033283, -34.888922], 'UY', 'Punta Ballena'],
-  // [[-57.835702, -34.462375], 'UY', 'Colônia do Sacramento'],
+  [[-57.835702, -34.462375], 'UY', 'Colonia del Sacramento'],
   // [[-58.386642, -34.601349], 'AR', 'Buenos Aires'],
   // [[-58.579650, -34.425080], 'AR', 'Tigre'],
   // [[-56.179962, -34.903743], 'UY', 'Montevidéu']
@@ -70,7 +70,7 @@ var cities_en = [
   [[-70.909352, -53.164819], 'CL', 'Punta Arenas'],
   [[-54.939842, -34.934973], 'UY', 'Punta del Este'],
   [[-55.033283, -34.888922], 'UY', 'Punta Ballena'],
-  // [[-57.835702, -34.462375], 'UY', 'Colonia del Sacramento'],
+  [[-57.835702, -34.462375], 'UY', 'Colonia del Sacramento'],
   // [[-58.386642, -34.601349], 'AR', 'Buenos Aires'],
   // [[-58.579650, -34.425080], 'AR', 'Tigre'],
   // [[-56.179962, -34.903743], 'UY', 'Montevideo']
