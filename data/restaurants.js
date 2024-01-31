@@ -53,5 +53,6 @@ var restaurants = [
   [[-54.94215, -34.96061], 'UY', 'Heladeria El Faro'],
   [[-57.85123, -34.47120], 'UY', '¡Qué Tupé!'],
   [[-57.85138, -34.47146], 'UY', 'Mesón de la Plaza'],
-  [[-58.40057, -34.60990], 'AR', 'Pizzería Kentucky']
+  [[-58.40057, -34.60990], 'AR', 'Pizzería Kentucky'],
+  [[-58.57250, -34.41936], 'AR', 'Waffles del Mundo']
 ]
