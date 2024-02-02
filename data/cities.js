@@ -34,7 +34,7 @@ var cities = [
   [[-57.835702, -34.462375], 'UY', 'Colonia del Sacramento'],
   [[-58.386642, -34.601349], 'AR', 'Buenos Aires'],
   [[-58.579650, -34.425080], 'AR', 'Tigre'],
-  // [[-56.179962, -34.903743], 'UY', 'Montevidéu']
+  [[-56.179962, -34.903743], 'UY', 'Montevidéu']
 ]
 
 var cities_en = [
@@ -73,5 +73,5 @@ var cities_en = [
   [[-57.835702, -34.462375], 'UY', 'Colonia del Sacramento'],
   [[-58.386642, -34.601349], 'AR', 'Buenos Aires'],
   [[-58.579650, -34.425080], 'AR', 'Tigre'],
-  // [[-56.179962, -34.903743], 'UY', 'Montevideo']
+  [[-56.179962, -34.903743], 'UY', 'Montevideo']
 ]
