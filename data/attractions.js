@@ -122,9 +122,10 @@ var attractions = [
   [[-58.362680, -34.639320], 'AR', 'Caminito'],
   [[-58.362050, -34.617710], 'AR', 'Puerto Madero'],
   [[-58.372280, -34.608360], 'AR', 'Praça de Maio'],
-  // [[-56.206330, -34.908020], 'UY', 'Cidade Velha'],
-  // [[-56.200810, -34.906520], 'UY', 'Puerta de la Ciudadela'],
-  // [[-56.198540, -34.906580], 'UY', 'Palacio Salvo'],
+  [[-56.199827, -34.906588], 'UY', 'Praça Independência'],
+  [[-56.206330, -34.908020], 'UY', 'Cidade Velha'],
+  [[-56.200810, -34.906520], 'UY', 'Puerta de la Ciudadela'],
+  [[-56.200842, -34.907460], 'UY', 'Teatro Solis']
 ]
 
 var attractions_en = [
@@ -252,4 +253,8 @@ var attractions_en = [
   [[-58.362680, -34.639320], 'AR', 'Caminito'],
   [[-58.362050, -34.617710], 'AR', 'Puerto Madero'],
   [[-58.372280, -34.608360], 'AR', 'Plaza de Mayo'],
+  [[-56.199827, -34.906588], 'UY', 'Plaza Independencia'],
+  [[-56.206330, -34.908020], 'UY', 'Old City'],
+  [[-56.200810, -34.906520], 'UY', 'Puerta de la Ciudadela'],
+  [[-56.200842, -34.907460], 'UY', 'Teatro Solis']
 ]
