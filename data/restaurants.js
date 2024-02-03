@@ -56,6 +56,7 @@ var restaurants = [
   [[-58.40057, -34.60990], 'AR', 'Pizzería Kentucky'],
   [[-58.40009, -34.60927], 'AR', 'Suragan'],
   [[-58.57250, -34.41936], 'AR', 'Waffles del Mundo'],
+  [[-58.37452, -34.59126], 'AR', 'Starbucks (Estação Retiro)'],
   [[-58.39216, -34.58855], 'AR', 'Nane'],
   [[-56.20866, -34.90850], 'UY', 'MOJO Parrillada'],
   [[-56.20808, -34.90864], 'UY', 'Piwo Helados']
