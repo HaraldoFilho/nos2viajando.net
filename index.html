@@ -219,7 +219,7 @@
       days += trips[i][3];
     }
 
-    var distance_str = distance/1000 + " km";
+    var distance_str = (distance/1000).toFixed(3) + " km";
     if (userLang != 'pt-BR') {
       distance_str = distance_str.replace('.',',');
     }
