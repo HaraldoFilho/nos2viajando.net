@@ -252,7 +252,8 @@ function enterMapFullWindow(current_bbox, current_coords) {
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({
       container: 'map-overlay',
-      style: current_map_style
+      style: current_map_style,
+      logoPosition: 'bottom-right'
     });
     map_fullwindow.addControl(new mapboxgl.NavigationControl({showCompass:false}));
     map_fullwindow.dragRotate.disable();
