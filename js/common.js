@@ -67,7 +67,7 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   photos_markers = createPhotosMarkers(map, locations_dict);
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances(), icons_path);
-  addMarkersToMap(map, restaurants_markers);  
+  addMarkersToMap(map, restaurants_markers);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
@@ -243,6 +243,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
 
   document.getElementById('map-overlay').style.height = "100%";
   document.getElementById('fullwindow-exit-icon').style.display = "block";
+  document.getElementById('fullwindow-center-icon').style.display = "block";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
   document.getElementById('selector').style.display = "block";
@@ -338,6 +339,11 @@ function getFarthestDistances() {
 
   return [[far_points_km[0], far_points_km[1], far_points_km[2], far_points_km[3]], farthest];
 
+}
+
+function centerMapOnHomeLocation(map) {
+  const {lng, lat} = map.getCenter();
+  map.flyTo({center: [home[0][0], lat], zoom: map.getZoom()});
 }
 
 function exitMapFullWindow() {

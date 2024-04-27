@@ -106,6 +106,7 @@
     <div id="map-overlay">
 
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
+      <img id="fullwindow-center-icon" class="fullwindow-center" src="icons/center_window.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
 
       <div id="menu" class="menu"></div>
@@ -273,6 +274,7 @@
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
+    document.getElementById('fullwindow-center-icon').addEventListener('click', function() { centerMapOnHomeLocation(map_fullwindow) });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
     document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
