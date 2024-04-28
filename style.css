@@ -477,6 +477,10 @@ a:hover {
   transition: 0.5s;
 }
 
+hr.separator {
+  border-top: 1px solid #ccc;
+}
+
 
 /* Style of countries panel */
 

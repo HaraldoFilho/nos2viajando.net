@@ -599,6 +599,7 @@
     icon_farthest_points.setAttribute('style', 'margin: 0px 2px -2px 2px');
 
     var selector = document.getElementById('selector');
+
     selector.appendChild(input_cities);
     selector.appendChild(icon_cities);
     selector.append(strings_dict['MKR_CITIES']);
@@ -633,6 +634,10 @@
     selector.appendChild(icon_photos);
     selector.append(strings_dict['MKR_PHOTOS']);
     selector.appendChild(document.createElement('BR'));
+
+    var separator = document.createElement('HR');
+    separator.setAttribute('class', 'separator');
+    selector.appendChild(separator);
 
     selector.appendChild(input_flights_international);
     selector.appendChild(icon_flights_international);
