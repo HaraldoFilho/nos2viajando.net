@@ -150,7 +150,7 @@
     var init_x_offset = 0;
     var init_y_offset = 10;
 
-    var map_padding = 30;
+    var map_padding = 25;
     var map_padding_fw = 100;
 
     var places = [home].concat(cities)
@@ -198,14 +198,12 @@
 
     fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
-
     // Full window map
 
     var map_fullwindow;
     var menu;
     var layerList;
     var inputs;
-
 
     // Sidepanel
 
@@ -678,51 +676,71 @@
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
-    document.getElementById("checkbox-flights-international").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
-    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() { loadFlights(map_fullwindow, flights, airports) });
+    document.getElementById("checkbox-flights-international").addEventListener('click', function() {
+      loadFlights(map_fullwindow, flights, airports)
+      if (document.getElementById("checkbox-flights-international").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-road-trips-abroad").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+      }
+      toggleAllMarkers();
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
+    });
+    document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
+      loadFlights(map_fullwindow, flights, airports);
+      if (document.getElementById("checkbox-flights-domestic").checked) {
+        fitRegion(map_fullwindow, 'BR', map_padding_fw);
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-road-trips-abroad").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+      }
+      toggleAllMarkers();
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
+    });
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
+      hide_car_routes = false;
       loadCarRoutes(map_fullwindow, driving, road_trips_places, hide_car_routes);
       if (document.getElementById("checkbox-road-trips").checked) {
-        previous_bbox = current_bbox;
         var road_trips_bbox = getRoadTripsBoundingBox(road_trips_places, 0);
         if(!hide_car_routes) {
           fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
         }
         document.getElementById("checkbox-road-trips-abroad").checked = false;
-      } else {
-        current_bbox = previous_bbox;
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        document.getElementById("checkbox-flights-domestic").checked = false;
+        document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
       }
+      toggleAllMarkers();
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-road-trips-abroad").addEventListener('click', function() {
+      hide_car_routes = false;
       loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
+      if (document.getElementById("checkbox-road-trips-abroad").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-flights-domestic").checked = false;
+        document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+      }
+      toggleAllMarkers();
+      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
       loadFarthestPoints(map_fullwindow, farthest_points);
       toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
       if (document.getElementById("checkbox-farthest-points").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
-        hideMarkers(map_fullwindow, cities_markers);
-        hideMarkers(map_fullwindow, parks_markers);
-        hideMarkers(map_fullwindow, attractions_markers);
-        hideMarkers(map_fullwindow, accommodations_markers);
-        hideMarkers(map_fullwindow, airports_markers);
-        hideMarkers(map_fullwindow, restaurants_markers);
-        hideMarkers(map_fullwindow, photos_markers);
+        hideAllMarkers();
         hide_car_routes = true;
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-road-trips-abroad").checked = false;
+        document.getElementById("checkbox-flights-domestic").checked = false;
+        document.getElementById("checkbox-flights-international").checked = false;
       } else {
-        toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
-        toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
-        toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
-        toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
-        toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
-        toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
-        toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+        toggleAllMarkers();
         hide_car_routes = false;
-        if (document.getElementById("checkbox-road-trips").checked) {
-          var road_trips_bbox = getRoadTripsBoundingBox(road_trips_places, 0);
-          fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
-        }
       }
     });
 

@@ -31,6 +31,26 @@ function addMarkersToMap(map, markers) {
   }
 }
 
+function hideAllMarkers () {
+  hideMarkers(map_fullwindow, cities_markers);
+  hideMarkers(map_fullwindow, parks_markers);
+  hideMarkers(map_fullwindow, attractions_markers);
+  hideMarkers(map_fullwindow, accommodations_markers);
+  hideMarkers(map_fullwindow, airports_markers);
+  hideMarkers(map_fullwindow, restaurants_markers);
+  hideMarkers(map_fullwindow, photos_markers);
+}
+
+function toggleAllMarkers () {
+  toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
+  toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
+  toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
+  toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
+  toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
+  toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
+  toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+}
+
 function toggleMarkers(map, markers, checkbox) {
   if (document.getElementById(checkbox).checked
   && (!document.getElementById("checkbox-farthest-points").checked || checkbox == "checkbox-farthest-points")) {
@@ -180,7 +200,9 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
   bounding_box[2] = bbox[2] + x_offset;
   bounding_box[3] = bbox[3] + y_offset;
 
-  map.fitBounds(bounding_box, {padding: padding, linear:linear});
+  if (map != null) {
+    map.fitBounds(bounding_box, {padding: padding, linear:linear});
+  }
 
 }
 
@@ -300,7 +322,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
 
   }
 
-  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 30, true);
+  fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
 }
 
@@ -344,7 +366,7 @@ function getFarthestDistances() {
 
 function centerMapOnHomeLocation(map) {
   const {lng, lat} = map.getCenter();
-  map.flyTo({center: [home[0][0], lat], zoom: map.getZoom()});
+  map.panTo([home[0][0], lat], {duration: 500});
 }
 
 function exitMapFullWindow() {
