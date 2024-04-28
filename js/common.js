@@ -654,10 +654,7 @@ function loadFlights(map, flights, airports) {
 
         createFlightLine(map, id, coord_a, coord_b);
 
-        if (add
-        && !document.getElementById("checkbox-road-trips").checked
-        && !document.getElementById("checkbox-road-trips-abroad").checked
-        && !document.getElementById("checkbox-farthest-points").checked) {
+        if (add) {
           addFlightLine(map, id, color, width);
         } else {
           removeFlightLine(map, id);

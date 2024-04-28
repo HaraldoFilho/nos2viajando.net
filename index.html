@@ -681,6 +681,7 @@
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
+
     document.getElementById("checkbox-flights-international").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports)
       if (document.getElementById("checkbox-flights-international").checked) {
