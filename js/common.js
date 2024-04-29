@@ -110,7 +110,7 @@ function createFarthestPointsMarkers(map, values, distances, icons_path) {
       icon_name = icon_name + "far_";
     }
     icon_name = icon_name + directions[i] + ".svg";
-    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + values[i][2] + ", " + countries[values[i][1]][0] + "<br><b>" + directions[i].charAt(0).toUpperCase() + directions[i].slice(1) + " " + distances[0][i] + " km </b></p>";
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + values[i][2] + ", " + countries[values[i][1]][0] + "<br><b>" + strings_dict[directions[i].toUpperCase()] + " " + distances[0][i] + " km </b></p>";
     markers[i] = createSpecialMarker(map, values[i][0], text, icon_name, 28);
   }
 
@@ -340,17 +340,12 @@ function getFarthestDistances() {
     far_points[i] = new mapboxgl.LngLat(farthest_points[i][0][0], farthest_points[i][0][1]);
   }
 
-  far_points[0] = new mapboxgl.LngLat(home[0][0], farthest_points[0][0][1]);
-  far_points[1] = new mapboxgl.LngLat(farthest_points[1][0][0], home[0][1]);
-  far_points[2] = new mapboxgl.LngLat(home[0][0], farthest_points[2][0][1]);
-  far_points[3] = new mapboxgl.LngLat(farthest_points[3][0][0], home[0][1]);
-
   for (var i = 0; i < far_points.length; i++) {
     far_points_km[i] = my_home.distanceTo(far_points[i])/1000000;
   }
 
   if (farthest_points[1][0][0] > 0) {
-    var middle = new mapboxgl.LngLat(0, home[0][1]);
+    var middle = new mapboxgl.LngLat(0, getInterLatitude(home[0], [farthest_points[1][0][0], farthest_points[1][0][1]]));
     var half_1 = my_home.distanceTo(middle)/1000000;
     var half_2 = middle.distanceTo(far_points[1])/1000000;
     far_points_km[1] = half_1 + half_2;
