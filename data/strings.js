@@ -26,7 +26,11 @@ var strings_dict = {
   'MKR_DOMESTIC_FLIGHT': 'voos domésticos',
   'MKR_CAR': 'viagens de carro',
   'MKR_CAR_ABROAD': 'dirigindo no exterior',
-  'MKR_FARTHEST_POINTS': 'extremos'
+  'MKR_FARTHEST_POINTS': 'extremos',
+  'NORTH': 'Norte',
+  'SOUTH': 'Sul',
+  'EAST': 'Leste',
+  'WEST': 'Oeste'
 }
 
 var strings_dict_en = {
@@ -57,5 +61,9 @@ var strings_dict_en = {
   'MKR_DOMESTIC_FLIGHT': 'domestic flights',
   'MKR_CAR': 'road trips',
   'MKR_CAR_ABROAD': 'driving abroad',
-  'MKR_FARTHEST_POINTS': 'extremes'
+  'MKR_FARTHEST_POINTS': 'extremes',
+  'NORTH': 'North',
+  'SOUTH': 'South',
+  'EAST': 'East',
+  'WEST': 'West'
 }
