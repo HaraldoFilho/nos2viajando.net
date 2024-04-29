@@ -13,9 +13,9 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
 
     if (get_farthest_points) {
       if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
-      if (convertLongToFromHome(places[i][0][0]) > convertLongToFromHome(far_east[0][0])) { far_east = places[i]};
+      if ((convertLongToFromHome(places[i][0][0]) > convertLongToFromHome(far_east[0][0])) && (countries[places[i][1]][1].includes('e'))) { far_east = places[i]};
       if (places[i][0][1] < far_south[0][1]) { far_south = places[i]};
-      if (convertLongToFromHome(places[i][0][0]) < convertLongToFromHome(far_west[0][0])) { far_west = places[i]};
+      if ((convertLongToFromHome(places[i][0][0]) < convertLongToFromHome(far_west[0][0])) && (countries[places[i][1]][1].includes('w'))) { far_west = places[i]};
       farthest_points = [far_north, far_east, far_south, far_west];
     }
 
@@ -39,6 +39,7 @@ function hideAllMarkers () {
   hideMarkers(map_fullwindow, airports_markers);
   hideMarkers(map_fullwindow, restaurants_markers);
   hideMarkers(map_fullwindow, photos_markers);
+  hideMarkers(map_fullwindow, farthest_points_markers);
 }
 
 function toggleAllMarkers () {
@@ -52,11 +53,14 @@ function toggleAllMarkers () {
 }
 
 function toggleMarkers(map, markers, checkbox) {
-  if (document.getElementById(checkbox).checked
-  && (!document.getElementById("checkbox-farthest-points").checked || checkbox == "checkbox-farthest-points")) {
-    showMarkers(map, markers);
-  } else {
-    hideMarkers(map, markers);
+  if (!document.getElementById("checkbox-farthest-points").checked
+  && !document.getElementById("checkbox-flights-international").checked
+  && !document.getElementById("checkbox-flights-domestic").checked) {
+    if (document.getElementById(checkbox).checked) {
+      showMarkers(map, markers);
+    } else {
+      hideMarkers(map, markers);
+    }
   }
 }
 
@@ -1002,7 +1006,7 @@ function getIconSrc(icons_path, country_code) {
 }
 
 function addIcon(icons_path, country_code, panel) {
-  var country_name = countries[country_code];
+  var country_name = countries[country_code][0];
   var elem = document.createElement("IMG");
   elem.setAttribute("id", country_code.concat("__"));
   elem.setAttribute("class", "icon");

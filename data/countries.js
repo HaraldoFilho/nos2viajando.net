@@ -1,25 +1,25 @@
 var countries = {
-  'BR': 'Brasil',
-  'AR': 'Argentina',
-  'PY': 'Paraguai',
-  'US': 'Estados Unidos',
-  'IT': 'Itália',
-  'VA': 'Vaticano',
-  'HR': 'Croácia',
-  'CL': 'Chile',
-  'UY': 'Uruguai'
+  'BR': ['Brasil', 'ew'],
+  'AR': ['Argentina', 'w'],
+  'PY': ['Paraguai', 'w'],
+  'US': ['Estados Unidos', 'w'],
+  'IT': ['Itália', 'e'],
+  'VA': ['Vaticano', 'e'],
+  'HR': ['Croácia', 'e'],
+  'CL': ['Chile', 'w'],
+  'UY': ['Uruguai', 'w']
 }
 
 var countries_en = {
-  'BR': 'Brazil',
-  'AR': 'Argentina',
-  'PY': 'Paraguay',
-  'US': 'United States',
-  'IT': 'Italy',
-  'VA': 'Vatican City',
-  'HR': 'Croatia',
-  'CL': 'Chile',
-  'UY': 'Uruguay'
+  'BR': ['Brazil', 'ew'],
+  'AR': ['Argentina', 'w'],
+  'PY': ['Paraguay', 'w'],
+  'US': ['United States', 'w'],
+  'IT': ['Italy', 'e'],
+  'VA': ['Vatican City', 'e'],
+  'HR': ['Croatia', 'e'],
+  'CL': ['Chile', 'w'],
+  'UY': ['Uruguay', 'w']
 }
 
 var continents = [

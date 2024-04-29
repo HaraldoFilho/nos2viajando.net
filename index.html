@@ -257,7 +257,7 @@
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
     for (var country_code in countries) {
-      var country_name = countries[country_code];
+      var country_name = countries[country_code][0];
       var country_icon = getIconSrc(icons_path, country_code);
       var country = document.createElement('DIV');
       country.setAttribute('id', country_code);
@@ -689,9 +689,11 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        hideAllMarkers();
+        showMarkers(map_fullwindow, airports_markers);
+      } else if (!document.getElementById("checkbox-flights-domestic").checked) {
+        toggleAllMarkers();
       }
-      toggleAllMarkers();
-      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports);
@@ -700,9 +702,11 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        hideAllMarkers();
+        showMarkers(map_fullwindow, airports_markers);
+      } else if (!document.getElementById("checkbox-flights-international").checked) {
+        toggleAllMarkers();
       }
-      toggleAllMarkers();
-      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
       hide_car_routes = false;
@@ -718,7 +722,6 @@
         document.getElementById("checkbox-farthest-points").checked = false;
       }
       toggleAllMarkers();
-      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-road-trips-abroad").addEventListener('click', function() {
       hide_car_routes = false;
@@ -731,7 +734,6 @@
         document.getElementById("checkbox-farthest-points").checked = false;
       }
       toggleAllMarkers();
-      toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     });
     document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
       loadFarthestPoints(map_fullwindow, farthest_points);
@@ -739,6 +741,7 @@
       if (document.getElementById("checkbox-farthest-points").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         hideAllMarkers();
+        showMarkers(map_fullwindow, farthest_points_markers);
         hide_car_routes = true;
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
@@ -746,6 +749,7 @@
         document.getElementById("checkbox-flights-international").checked = false;
       } else {
         toggleAllMarkers();
+        hideMarkers(map_fullwindow, farthest_points_markers);
         hide_car_routes = false;
       }
     });
