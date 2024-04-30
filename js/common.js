@@ -50,6 +50,7 @@ function toggleAllMarkers () {
   toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
   toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
   toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+  toggleMarkers(map_fullwindow, farthest_points_markers, 'checkbox-farthest-points');
 }
 
 function toggleMarkers(map, markers, checkbox) {
