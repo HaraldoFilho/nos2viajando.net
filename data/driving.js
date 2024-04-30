@@ -5,6 +5,7 @@ var driving = [
 ]
 
 var driving_abroad = [
+  ['2016', ['Foz Presidente Comfort Hotel', 'Marco das Três Fronteiras', 'Parque Nacional Iguazú', 'Foz Presidente Comfort Hotel'], 'Foz do Iguaçu'],
   ['2017', ['Aeroporto de São Francisco', 'Villa Montes Hotel'], 'Califórnia'],
   ['2017', ['Villa Montes Hotel', 'Pacific Coast Highway', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'Califórnia'],
   ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Parque Nacional de Yosemite'], 'Califórnia'],
@@ -22,6 +23,7 @@ var driving_abroad = [
 ]
 
 var driving_abroad_en = [
+  ['2016', ['Foz Presidente Comfort Hotel', 'Marco das Três Fronteiras', 'Iguazu National Park', 'Foz Presidente Comfort Hotel'], 'Foz do Iguaçu'],
   ['2017', ['San Francisco Airport', 'Villa Montes Hotel'], 'California'],
   ['2017', ['Villa Montes Hotel', 'Pacific Coast Highway', 'Hurricane Point', 'Rock Point Restaurant', 'Yosemite Southgate Hotel & Suites'], 'California'],
   ['2017', ['Yosemite Southgate Hotel & Suites', 'Tunnel View', 'Yosemite National Park'], 'California'],

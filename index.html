@@ -691,6 +691,7 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
+        restoreIconsColors();
       } else if (!document.getElementById("checkbox-flights-domestic").checked) {
         toggleAllMarkers();
       }
@@ -704,6 +705,7 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
+        restoreIconsColors();
       } else if (!document.getElementById("checkbox-flights-international").checked) {
         toggleAllMarkers();
       }
@@ -720,6 +722,7 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        restoreIconsColors();
       }
       toggleAllMarkers();
     });
@@ -732,6 +735,14 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (!countries[country_code][1].includes('d')) {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
+      } else {
+        restoreIconsColors();
       }
       toggleAllMarkers();
     });
@@ -747,6 +758,7 @@
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
+        restoreIconsColors();
       } else {
         toggleAllMarkers();
         hideMarkers(map_fullwindow, farthest_points_markers);

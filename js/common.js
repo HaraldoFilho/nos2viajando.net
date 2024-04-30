@@ -1024,3 +1024,10 @@ function addIcon(icons_path, country_code, panel) {
   div_icon.appendChild(elem);
   panel.appendChild(div_icon);
 }
+
+function restoreIconsColors() {
+  for (var country_code in countries) {
+    var flag_id = country_code.concat("__");
+    document.getElementById(flag_id).setAttribute('class', 'icon');
+  }
+}

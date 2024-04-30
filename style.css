@@ -516,3 +516,10 @@ img.icon {
   height: 32px;
   margin: auto;
 }
+
+img.icon_grey {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(100%) opacity(30%);
+  margin: auto;
+}

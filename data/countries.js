@@ -1,6 +1,6 @@
 var countries = {
   'BR': ['Brasil', ''],
-  'AR': ['Argentina', 'w'],
+  'AR': ['Argentina', 'wd'],
   'PY': ['Paraguai', 'w'],
   'US': ['Estados Unidos', 'wd'],
   'IT': ['Itália', 'e'],
@@ -12,7 +12,7 @@ var countries = {
 
 var countries_en = {
   'BR': ['Brazil', ''],
-  'AR': ['Argentina', 'w'],
+  'AR': ['Argentina', 'wd'],
   'PY': ['Paraguay', 'w'],
   'US': ['United States', 'wd'],
   'IT': ['Italy', 'e'],
