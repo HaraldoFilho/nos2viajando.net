@@ -509,7 +509,7 @@ function createFarthestPointsLines(map, farthest_points) {
     if (farthest_distances[1] == 1) {
       isFarthest = true;
     }
-    if ((farthest_points[1][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1] == 'w')) {
+    if ((farthest_points[1][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1].includes('w'))) {
       createLine(map, "FarthestEast_1", home[0], [-180, getInterLatitude(home[0], farthest_points[1][0])]);
       directions.push(["FarthestEast_1", isFarthest]);
       createLine(map, "FarthestEast_2", [180, getInterLatitude(home[0], farthest_points[1][0])], farthest_points[1][0]);
@@ -537,7 +537,7 @@ function createFarthestPointsLines(map, farthest_points) {
   if (farthest_distances[1] == 3) {
     isFarthest = true;
   }
-  if ((farthest_points[3][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1] == 'e')) {
+  if ((farthest_points[3][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1].includes('e'))) {
     createLine(map, "FarthestWest_1", home[0], [-180, getInterLatitude(home[0], farthest_points[3][0])]);
     directions.push(["FarthestWest_1", isFarthest]);
     createLine(map, "FarthestWest_2", [180, getInterLatitude(home[0], farthest_points[3][0])], farthest_points[3][0]);
