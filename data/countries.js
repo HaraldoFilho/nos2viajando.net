@@ -1,5 +1,5 @@
 var countries = {
-  'BR': ['Brasil', ''],
+  'BR': ['Brasil', 'd'],
   'AR': ['Argentina', 'wd'],
   'PY': ['Paraguai', 'w'],
   'US': ['Estados Unidos', 'wd'],
