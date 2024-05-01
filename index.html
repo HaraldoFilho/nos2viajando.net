@@ -126,6 +126,7 @@
       strings_dict = strings_dict_en;
       trips = trips_en;
       countries = countries_en;
+      continents = continents_en;
       cities = cities_en;
       airports = airports_en;
       attractions = attractions_en;
@@ -240,9 +241,12 @@
 
     var n_countries = Object.keys(countries).length;
     var n_continents = 0;
+    var continents_text = "";
+
     for (var i = 0; i < continents.length; i++) {
       if (continents[i][1].length > 0) {
         n_continents++;
+        continents_text += continents[i][0] + "\n";
       }
     }
 
@@ -253,6 +257,7 @@
 
     document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
     document.getElementById('continents').append(n_continents + " " + strings_dict['CONTINENTS']);
+    document.getElementById('continents').setAttribute('title', continents_text);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 

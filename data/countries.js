@@ -23,6 +23,17 @@ var countries_en = {
 }
 
 var continents = [
+  ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY']],
+  ['América Central', []],
+  ['América do Norte', ['US']],
+  ['Europa', ['IT', 'VA', 'HR']],
+  ['África', []],
+  ['Ásia', []],
+  ['Oceania', []],
+  ['Antártida', []]
+]
+
+var continents_en = [
   ['South America', ['BR', 'AR', 'PY', 'CL', 'UY']],
   ['Central America', []],
   ['North America', ['US']],
