@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Haraldo Viajou</title>
+  <title>Raquel Viajou</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
   <link rel="stylesheet" type="text/css" href="../../style.css" />
 
@@ -49,7 +49,7 @@
       <div id="top-container" class="top-container">
 
         <div class="avatar">
-          <img class="avatar" src="avatar.jpeg" title="Haraldo" alt="Haraldo"/>
+          <img class="avatar" src="avatar.jpeg" title="Raquel" alt="Raquel"/>
         </div>
 
         <div id="title" class="title"></div>
@@ -97,7 +97,7 @@
     <img id="open-sidebar" class="open-sidebar" src="../../icons/sidebar_open.svg"/>
 
     <div id="travelmap" class="travelmap-container">
-      <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1025885/?tiles=default&showguide=true" frameBorder="0" >
+      <iframe src="https://nos2viajando.travelmap.net/" frameBorder="0" >
         Navegador não compatível
       </iframe>
     </div>
@@ -113,6 +113,7 @@
     <div id="menu" class="menu"></div>
 
     <div id="selector" class="selector"></div>
+    <div id="expand_selector" class="selector"></div>
 
     <div id="fullmap-countries-panel" class="fullmap-countries-panel"></div>
 
@@ -278,8 +279,16 @@
   }
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
-  document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
-  document.getElementById('fullwindow-center-icon').addEventListener('click', function() { centerMapOnHomeLocation(map_fullwindow) });
+  document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
+    fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+    document.getElementById('selector').style.display = "block";
+    document.getElementById('expand_selector').style.display = "none";
+  });
+  document.getElementById('fullwindow-center-icon').addEventListener('click', function() {
+    centerMapOnHomeLocation(map_fullwindow);
+    document.getElementById('selector').style.display = "none";
+    document.getElementById('expand_selector').style.display = "block";
+  });
   document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
   document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
   document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
@@ -443,6 +452,24 @@
   menu.appendChild(label_satellite);
 
   // construct selector on full window map
+  var icon_expand_more = document.createElement('IMG');
+  icon_expand_more.setAttribute('src', icons_path.concat('expand_more.svg'));
+  icon_expand_more.setAttribute('height', '7px');
+  icon_expand_more.setAttribute('style', 'margin: 0px 10px 1px 5px');
+  icon_expand_more.addEventListener('click', function() {
+    document.getElementById('selector').style.display = "none";
+    document.getElementById('expand_selector').style.display = "block";
+  });
+
+  var icon_expand_less = document.createElement('IMG');
+  icon_expand_less.setAttribute('src', icons_path.concat('expand_less.svg'));
+  icon_expand_less.setAttribute('height', '7px');
+  icon_expand_less.setAttribute('style', 'margin: 0px 10px 1px 5px');
+  icon_expand_less.addEventListener('click', function() {
+    document.getElementById('selector').style.display = "block";
+    document.getElementById('expand_selector').style.display = "none";
+  });
+
   var input_cities = document.createElement('INPUT');
   input_cities.setAttribute('id', 'checkbox-cities');
   input_cities.setAttribute('type', 'checkbox');
@@ -528,6 +555,15 @@
   icon_farthest_points.setAttribute('style', 'margin: 0px 2px -2px 2px');
 
   var selector = document.getElementById('selector');
+
+  selector.appendChild(icon_expand_more);
+  selector.append(strings_dict['MAP_ITEMS']);
+  selector.appendChild(document.createElement('BR'));
+
+  var separator_1 = document.createElement('HR');
+  separator_1.setAttribute('class', 'separator');
+  selector.appendChild(separator_1);
+
   selector.appendChild(input_cities);
   selector.appendChild(icon_cities);
   selector.append(strings_dict['MKR_CITIES']);
@@ -571,6 +607,11 @@
   selector.appendChild(icon_farthest_points);
   selector.append(strings_dict['MKR_FARTHEST_POINTS']);
 
+  var expand_selector = document.getElementById('expand_selector');
+  expand_selector.appendChild(icon_expand_less);
+  expand_selector.append(strings_dict['MAP_ITEMS']);
+  expand_selector.appendChild(document.createElement('BR'));
+
   // Add click listeners
   for (var country_code in countries) {
     addListenerToFlags(country_code, 10);
@@ -591,18 +632,24 @@
     if (document.getElementById("checkbox-flights-international").checked) {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById("checkbox-farthest-points").checked = false;
+      hideAllMarkersSolo();
+      showMarkers(map_fullwindow, airports_markers);
+      restoreIconsColors();
+    } else if (!document.getElementById("checkbox-flights-domestic").checked) {
+      toggleAllMarkersSolo();
     }
-    toggleAllMarkersSolo();
-    toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
   });
   document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
     loadFlights(map_fullwindow, flights, airports);
     if (document.getElementById("checkbox-flights-domestic").checked) {
       fitRegion(map_fullwindow, 'BR', map_padding_fw);
       document.getElementById("checkbox-farthest-points").checked = false;
+      hideAllMarkersSolo();
+      showMarkers(map_fullwindow, airports_markers);
+      restoreIconsColors();
+    } else if (!document.getElementById("checkbox-flights-international").checked) {
+      toggleAllMarkersSolo();
     }
-    toggleAllMarkersSolo();
-    toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
   });
   document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
     loadFarthestPoints(map_fullwindow, farthest_points);
@@ -610,12 +657,13 @@
     if (document.getElementById("checkbox-farthest-points").checked) {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       hideAllMarkersSolo();
-      hide_car_routes = true;
+      showMarkers(map_fullwindow, farthest_points_markers);
       document.getElementById("checkbox-flights-domestic").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
+      restoreIconsColors();
     } else {
       toggleAllMarkersSolo();
-      hide_car_routes = false;
+      hideMarkers(map_fullwindow, farthest_points_markers);
     }
   });
 
