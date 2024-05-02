@@ -112,6 +112,7 @@
       <div id="menu" class="menu"></div>
 
       <div id="selector" class="selector"></div>
+      <div id="expand_selector" class="selector"></div>
 
       <div id="fullmap-countries-panel" class="fullmap-countries-panel"></div>
 
@@ -155,11 +156,11 @@
     var map_padding_fw = 100;
 
     var places = [home].concat(cities)
-                       .concat(airports)
-                       .concat(accommodations)
-                       .concat(restaurants)
-                       .concat(attractions)
-                       .concat(parks);
+    .concat(airports)
+    .concat(accommodations)
+    .concat(restaurants)
+    .concat(attractions)
+    .concat(parks);
 
     var initial_bbox = getInitialBoundingBox(places, ref_long);
 
@@ -276,8 +277,16 @@
     }
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
-    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false) });
-    document.getElementById('fullwindow-center-icon').addEventListener('click', function() { centerMapOnHomeLocation(map_fullwindow) });
+    document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
+      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+      document.getElementById('selector').style.display = "block";
+      document.getElementById('expand_selector').style.display = "none";
+    });
+    document.getElementById('fullwindow-center-icon').addEventListener('click', function() {
+      centerMapOnHomeLocation(map_fullwindow);
+      document.getElementById('selector').style.display = "none";
+      document.getElementById('expand_selector').style.display = "block";
+    });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
     document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
@@ -501,6 +510,25 @@
     menu.appendChild(label_satellite);
 
     // construct selector on full window map
+
+    var icon_expand_more = document.createElement('IMG');
+    icon_expand_more.setAttribute('src', icons_path.concat('expand_more.svg'));
+    icon_expand_more.setAttribute('height', '7px');
+    icon_expand_more.setAttribute('style', 'margin: 0px 10px 1px 5px');
+    icon_expand_more.addEventListener('click', function() {
+      document.getElementById('selector').style.display = "none";
+      document.getElementById('expand_selector').style.display = "block";
+    });
+
+    var icon_expand_less = document.createElement('IMG');
+    icon_expand_less.setAttribute('src', icons_path.concat('expand_less.svg'));
+    icon_expand_less.setAttribute('height', '7px');
+    icon_expand_less.setAttribute('style', 'margin: 0px 10px 1px 5px');
+    icon_expand_less.addEventListener('click', function() {
+      document.getElementById('selector').style.display = "block";
+      document.getElementById('expand_selector').style.display = "none";
+    });
+
     var input_cities = document.createElement('INPUT');
     input_cities.setAttribute('id', 'checkbox-cities');
     input_cities.setAttribute('type', 'checkbox');
@@ -605,6 +633,14 @@
 
     var selector = document.getElementById('selector');
 
+    selector.appendChild(icon_expand_more);
+    selector.append(strings_dict['MAP_ITEMS']);
+    selector.appendChild(document.createElement('BR'));
+
+    var separator_1 = document.createElement('HR');
+    separator_1.setAttribute('class', 'separator');
+    selector.appendChild(separator_1);
+
     selector.appendChild(input_cities);
     selector.appendChild(icon_cities);
     selector.append(strings_dict['MKR_CITIES']);
@@ -640,9 +676,9 @@
     selector.append(strings_dict['MKR_PHOTOS']);
     selector.appendChild(document.createElement('BR'));
 
-    var separator = document.createElement('HR');
-    separator.setAttribute('class', 'separator');
-    selector.appendChild(separator);
+    var separator_2 = document.createElement('HR');
+    separator_2.setAttribute('class', 'separator');
+    selector.appendChild(separator_2);
 
     selector.appendChild(input_flights_international);
     selector.appendChild(icon_flights_international);
@@ -667,6 +703,11 @@
     selector.appendChild(input_farthest_points);
     selector.appendChild(icon_farthest_points);
     selector.append(strings_dict['MKR_FARTHEST_POINTS']);
+
+    var expand_selector = document.getElementById('expand_selector');
+    expand_selector.appendChild(icon_expand_less);
+    expand_selector.append("Items do Mapa");
+    expand_selector.appendChild(document.createElement('BR'));
 
     // Add click listeners
     for (var country_code in countries) {

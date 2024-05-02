@@ -12,6 +12,11 @@ var strings_dict = {
   'ACCOMMODATIONS': 'Hospedagens',
   'RESTAURANTS': 'Gastronomia',
   'AIRPORTS': 'Aeroportos',
+  'NORTH': 'Norte',
+  'SOUTH': 'Sul',
+  'EAST': 'Leste',
+  'WEST': 'Oeste',
+  'MAP_ITEMS': 'Items do Mapa',
   'MAP_LAYER_1': 'mapa',
   'MAP_LAYER_2': 'relevo',
   'MAP_LAYER_3': 'satélite',
@@ -26,11 +31,7 @@ var strings_dict = {
   'MKR_DOMESTIC_FLIGHT': 'voos domésticos',
   'MKR_CAR': 'viagens de carro',
   'MKR_CAR_ABROAD': 'carro alugado',
-  'MKR_FARTHEST_POINTS': 'extremos',
-  'NORTH': 'Norte',
-  'SOUTH': 'Sul',
-  'EAST': 'Leste',
-  'WEST': 'Oeste'
+  'MKR_FARTHEST_POINTS': 'extremos'
 }
 
 var strings_dict_en = {
@@ -47,6 +48,11 @@ var strings_dict_en = {
   'ACCOMMODATIONS': 'Accommodations',
   'RESTAURANTS': 'Gastronomia',
   'AIRPORTS': 'Airports',
+  'NORTH': 'North',
+  'SOUTH': 'South',
+  'EAST': 'East',
+  'WEST': 'West',
+  'MAP_ITEMS': 'Map Items',
   'MAP_LAYER_1': 'map',
   'MAP_LAYER_2': 'elevation',
   'MAP_LAYER_3': 'satellite',
@@ -61,9 +67,5 @@ var strings_dict_en = {
   'MKR_DOMESTIC_FLIGHT': 'domestic flights',
   'MKR_CAR': 'road trips',
   'MKR_CAR_ABROAD': 'rented car',
-  'MKR_FARTHEST_POINTS': 'extremes',
-  'NORTH': 'North',
-  'SOUTH': 'South',
-  'EAST': 'East',
-  'WEST': 'West'
+  'MKR_FARTHEST_POINTS': 'extremes'
 }

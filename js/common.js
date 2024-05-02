@@ -272,8 +272,9 @@ function enterMapFullWindow(current_bbox, current_coords) {
   document.getElementById('fullwindow-center-icon').style.display = "block";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
-  document.getElementById('selector').style.display = "block";
   document.getElementById('fullmap-countries-panel').style.display = "grid";
+  document.getElementById('selector').style.display = "block";
+  document.getElementById('expand_selector').style.display = "none";
 
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({
@@ -506,19 +507,19 @@ function createFarthestPointsLines(map, farthest_points) {
     directions.push(["FarthestNorth", isFarthest]);
   }
 
-    isFarthest = false;
-    if (farthest_distances[1] == 1) {
-      isFarthest = true;
-    }
-    if ((farthest_points[1][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1].includes('w'))) {
-      createLine(map, "FarthestEast_1", home[0], [-180, getInterLatitude(home[0], farthest_points[1][0])]);
-      directions.push(["FarthestEast_1", isFarthest]);
-      createLine(map, "FarthestEast_2", [180, getInterLatitude(home[0], farthest_points[1][0])], farthest_points[1][0]);
-      directions.push(["FarthestEast_2", isFarthest]);
-    } else {
-      createLine(map, "FarthestEast", home[0], farthest_points[1][0]);
-      directions.push(["FarthestEast", isFarthest]);
-    }
+  isFarthest = false;
+  if (farthest_distances[1] == 1) {
+    isFarthest = true;
+  }
+  if ((farthest_points[1][0][0] - home[0][0] > 180) && (countries[farthest_points[1][1]][1].includes('w'))) {
+    createLine(map, "FarthestEast_1", home[0], [-180, getInterLatitude(home[0], farthest_points[1][0])]);
+    directions.push(["FarthestEast_1", isFarthest]);
+    createLine(map, "FarthestEast_2", [180, getInterLatitude(home[0], farthest_points[1][0])], farthest_points[1][0]);
+    directions.push(["FarthestEast_2", isFarthest]);
+  } else {
+    createLine(map, "FarthestEast", home[0], farthest_points[1][0]);
+    directions.push(["FarthestEast", isFarthest]);
+  }
 
   isFarthest = false;
   if (farthest_distances[1] == 2) {
