@@ -1,12 +1,10 @@
 var driving = [
   ['2009', ['Campinas', 'Peixada do Lago', 'Hibiti Hotel Rural'], 'Monte Alegre do Sul'],
-  ['2009', ['Hibiti Hotel Rural', 'Cachoeira do Sol', 'Hibiti Hotel Rural'], 'Monte Alegre do Sul'],
+  ['2009', ['Hibiti Hotel Rural', 'Cachoeira do Sol'], 'Monte Alegre do Sul'],
   ['2009', ['Hibiti Hotel Rural', 'Fazenda Salmo 23'], 'Monte Alegre do Sul'],
-  ['2009', ['Hibiti Hotel Rural', 'Campinas'], 'Monte Alegre do Sul'],
   ['2016', ['Campinas', 'Chalé Macaúva'], 'Analândia'],
-  ['2016', ['Chalé Macaúva', 'Trembão', 'Chalé Macaúva'], 'Analândia'],
-  ['2016', ['Chalé Macaúva', 'Campinas'], 'Analândia'],
-  ['2018', ['Campinas', 'Kuriuwa Hotel', 'Campinas'], 'Monte Verde']
+  ['2016', ['Chalé Macaúva', 'Trembão'], 'Analândia'],
+  ['2018', ['Campinas', 'Kuriuwa Hotel'], 'Monte Verde']
 ]
 
 var driving_abroad = [
