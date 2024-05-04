@@ -767,7 +767,9 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
-        restoreIconsColors();
+        if (!document.getElementById("checkbox-road-trips-abroad").checked) {
+          restoreIconsColors();
+        }
       }
       toggleAllMarkers();
     });
