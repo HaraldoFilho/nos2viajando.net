@@ -128,7 +128,7 @@ function createPhotoMarker(map, value, icons_path) {
   img.setAttribute('height', '20');
   marker.appendChild(img);
 
-  var htmlText = "<div style=\"max-height:410px;overflow:auto;\">";
+  var htmlText = "<div style=\"max-height:490px;overflow:auto;\">";
 
   for (var i = 0; i < value[1].length; i++) {
     htmlText = htmlText.concat("<a href=\"").concat("https://www.flickr.com/photos/hpfilho/").concat(value[1][i][0])
