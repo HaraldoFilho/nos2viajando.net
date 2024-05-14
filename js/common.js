@@ -141,11 +141,11 @@ function createPhotoMarker(map, value, icons_path) {
   if (value[1].length <= 35) {
     photo_marker = new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
-    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'566px'}).setHTML(htmlText));
+    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'566px',anchor:'bottom'}).setHTML(htmlText));
   } else {
     photo_marker = new mapboxgl.Marker({element:marker,scale:1,draggable:false})
     .setLngLat(value[0])
-    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'592px'}).setHTML(htmlText));
+    .setPopup(new mapboxgl.Popup({closeButton:false,maxWidth:'592px',anchor:'bottom'}).setHTML(htmlText));
   }
 
   return photo_marker;
