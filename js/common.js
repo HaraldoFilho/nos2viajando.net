@@ -9,7 +9,7 @@ function createMarkers(map, places, color, scale, get_farthest_points) {
     var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + places[i][2] + "</p>";
     markers[i] = new mapboxgl.Marker({color:color,scale:scale,draggable:false})
     .setLngLat(places[i][0])
-    .setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
+    .setPopup(new mapboxgl.Popup({closeButton:false,anchor:'bottom'}).setHTML(text));
 
     if (get_farthest_points) {
       if (places[i][0][1] > far_north[0][1]) { far_north = places[i]};
