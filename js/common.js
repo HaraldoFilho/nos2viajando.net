@@ -447,7 +447,7 @@ function createSpecialMarker(map, coord, text, icon, size) {
   img.setAttribute('height', size);
   marker.appendChild(img);
   return new mapboxgl.Marker({element:marker,scale:1,draggable:false})
-  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false}).setHTML(text));
+  .setLngLat(coord).setPopup(new mapboxgl.Popup({closeButton:false,anchor:'bottom'}).setHTML(text));
 }
 
 function createLatitudeLines(map) {
