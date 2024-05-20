@@ -274,7 +274,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
   document.getElementById('menu').style.display = "block";
   document.getElementById('fullmap-countries-panel').style.display = "grid";
   document.getElementById('selector').style.display = "block";
-  document.getElementById('expand_selector').style.display = "none";
+  document.getElementById('expand-selector').style.display = "none";
 
   if (map_fullwindow == null) {
     map_fullwindow = new mapboxgl.Map({
@@ -386,6 +386,7 @@ function exitMapFullWindow() {
   document.getElementById('fullwindow-exit-icon').style.display = "none";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
   document.getElementById('menu').style.display = "none";
+  document.getElementById('expand-selector').style.display = "none";
   document.getElementById('selector').style.display = "none";
   document.getElementById('fullmap-countries-panel').style.display = "none";
   fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, map_padding_fw, true);

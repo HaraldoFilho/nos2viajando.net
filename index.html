@@ -112,7 +112,7 @@
       <div id="menu" class="menu"></div>
 
       <div id="selector" class="selector"></div>
-      <div id="expand_selector" class="selector"></div>
+      <div id="expand-selector" class="selector"></div>
 
       <div id="fullmap-countries-panel" class="fullmap-countries-panel"></div>
 
@@ -280,12 +280,12 @@
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById('selector').style.display = "block";
-      document.getElementById('expand_selector').style.display = "none";
+      document.getElementById('expand-selector').style.display = "none";
     });
     document.getElementById('fullwindow-center-icon').addEventListener('click', function() {
       centerMapOnHomeLocation(map_fullwindow);
       document.getElementById('selector').style.display = "none";
-      document.getElementById('expand_selector').style.display = "block";
+      document.getElementById('expand-selector').style.display = "block";
     });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
@@ -517,7 +517,7 @@
     icon_expand_more.setAttribute('style', 'margin: 0px 10px 1px 5px');
     icon_expand_more.addEventListener('click', function() {
       document.getElementById('selector').style.display = "none";
-      document.getElementById('expand_selector').style.display = "block";
+      document.getElementById('expand-selector').style.display = "block";
     });
 
     var icon_expand_less = document.createElement('IMG');
@@ -526,7 +526,7 @@
     icon_expand_less.setAttribute('style', 'margin: 0px 10px 1px 5px');
     icon_expand_less.addEventListener('click', function() {
       document.getElementById('selector').style.display = "block";
-      document.getElementById('expand_selector').style.display = "none";
+      document.getElementById('expand-selector').style.display = "none";
     });
 
     var input_cities = document.createElement('INPUT');
@@ -704,7 +704,7 @@
     selector.appendChild(icon_farthest_points);
     selector.append(strings_dict['MKR_FARTHEST_POINTS']);
 
-    var expand_selector = document.getElementById('expand_selector');
+    var expand_selector = document.getElementById('expand-selector');
     expand_selector.appendChild(icon_expand_less);
     expand_selector.append(strings_dict['MAP_ITEMS']);
     expand_selector.appendChild(document.createElement('BR'));
