@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nós Dois Viajando</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <!-- Mobile redirect script by https://www.pagecrafter.com -->
+  <script type="text/javascript" src="../js/redirection-mobile.js"></script>
+  <script type="text/javascript">// <![CDATA[
+    SA.redirection_mobile ({
+      mobile_url : "nos2viajando.net/m/",
+    });
+    // ]]></script>
+    <script src="../js/mapbox_token.js"></script>
+    <script src="../js/countries_bbox.js"></script>
+    <script src="../js/common.js"></script>
+
+    <!-- Locations data -->
+    <script src="data/strings.js"></script>
+    <script src="data/reference.js"></script>
+    <script src="data/guides.js"></script>
+    <script src="data/languages.js"></script>
+
+  </head>
+
+  <body onresize="setSelectorPosition()">
+
+    <div class="main-container">
+
+      <div id="sidebar" class="sidebar-container">
+
+        <div id="top-container" class="top-container">
+
+          <div class="avatar">
+            <img class="avatar" src="../avatar.jpg" title="Haraldo & Raquel" alt="Haraldo & Raquel"/>
+          </div>
+
+          <div id="title" class="title"></div>
+
+        </div>
+
+        <img id="close-sidebar" class="close-sidebar" src="../icons/sidebar_close.svg"/>
+
+        <div id="lists" class="lists-container"></div>
+
+      </div>
+
+      <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
+
+      <div id="travelmap" class="travelmap-container">
+        <iframe id="book-frame" src="welcome.html" frameBorder="0" >
+          Navegador não compatível
+        </iframe>
+      </div>
+
+    </div>
+
+    <script>
+
+    var userLang = navigator.language || navigator.userLanguage;
+    console.log ("User language is: " + userLang);
+
+    if (userLang != 'pt-BR') {
+      strings_dict = strings_dict_en;
+    }
+
+    var icons_path = '../icons/';
+
+    // Sidepanel
+
+    document.getElementById('title').innerText = strings_dict['TITLE'];
+    document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
+    document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });
+    document.getElementById('sidebar').addEventListener('mouseover', function() { showSideBarTab() });
+    document.getElementById('sidebar').addEventListener('mouseleave', function() { hideSideBarTab() });
+
+    var lists = document.getElementById('lists');
+
+    // Construct list of Reference Books
+    var reference_list = document.createElement('DIV');
+    reference_list.setAttribute('class', 'list-title-container');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', 'icons/bookmark.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['REFERENCE']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = reference.length;
+    reference_list.appendChild(title);
+    reference_list.appendChild(count);
+    lists.appendChild(reference_list);
+    for (var i = 0; i < reference.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(reference[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(icons_path, reference[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(reference[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    // Construct list of Guide Books
+    var guides_list = document.createElement('DIV');
+    guides_list.setAttribute('class', 'list-title-container');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', 'icons/bookmark.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['GUIDE']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = guides.length;
+    guides_list.appendChild(title);
+    guides_list.appendChild(count);
+    lists.appendChild(guides_list);
+    for (var i = 0; i < guides.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(guides[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(icons_path, guides[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(guides[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    // Construct list of Languages
+    var languages_list = document.createElement('DIV');
+    languages_list.setAttribute('class', 'list-title-container');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', 'icons/bookmark.svg');
+    title.appendChild(marker);
+    title.append(strings_dict['PHRASE']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = languages.length;
+    languages_list.appendChild(title);
+    languages_list.appendChild(count);
+    lists.appendChild(languages_list);
+    for (var i = 0; i < languages.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(languages[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(icons_path, languages[i][1]));
+      list_item.appendChild(tiny_flag);
+      list_item.append(languages[i][2]);
+      lists.appendChild(list_item);
+    }
+
+    reference.forEach(addListenerToBook);
+    guides.forEach(addListenerToBook);
+    languages.forEach(addListenerToBook);
+
+    function addListenerToBook(item) {
+      document.getElementById(getItemId(item[2]))
+      .addEventListener('click', function() {
+        document.getElementById('book-frame').setAttribute('src', item[0]);
+      });
+    }
+
+    </script>
+
+  </body>
+  </html>
