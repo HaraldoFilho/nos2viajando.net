@@ -3,7 +3,7 @@ var strings_dict = {
   'REFERENCE': 'Referência',
   'GUIDE': 'Guias',
   'PHRASE': 'Idiomas',
-  'WELCOME': 'Selecione um livro no painel para ser lido aqui'
+  'WELCOME': 'Selecione um livro para ler aqui'
 }
 
 var strings_dict_en = {
@@ -11,5 +11,5 @@ var strings_dict_en = {
   'REFERENCE': 'Reference Books',
   'GUIDE': 'Guide Books',
   'PHRASE': 'Phrasebooks',
-  'WELCOME': 'Select a book on the left panel to be read here'
+  'WELCOME': 'Select a book to read here'
 }
