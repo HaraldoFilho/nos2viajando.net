@@ -1,13 +1,10 @@
 var reference = [
-  ['source/50 Natural Wonders to Blow Your Mind.pdf', 'WW', '50 Natural Wonders to Blow Your Mind'],
-  ['source/A Spotter\'s Guide to Film and TV Locations.pdf', 'WW', 'A Spotter\'s Guide to Film and TV Locations'],
-  ['source/Amazing Boat Journeys.pdf', 'WW', 'Amazing Boat Journeys'],
-  ['source/Amazing Train Journeys.pdf', 'WW', 'Amazing Train Journeys'],
-  ['source/Lonely Planet\'s Best Ever Travel Tips.pdf', 'WW', 'Lonely Planet\'s Best Ever Travel Tips'],
-  ['source/Lonely Planet\'s Guide to Travel Photography.pdf', 'WW', 'Lonely Planet\'s Guide to Travel Photography'],
-  ['source/Lonely Planet\'s Where to Go When.pdf', 'WW', 'Lonely Planet\'s Where to Go When'],
-  ['source/National Parks of America.pdf', 'US', 'National Parks of America'],
-  ['source/National Parks of Europe.pdf', 'EU', 'National Parks of Europe'],
-  ['source/Secret Marvels of the World.pdf', 'WW', 'Secret Marvels of the World'],
-  ['source/The Place To Be.pdf', 'WW', 'The Place To Be']
+  ['https://drive.google.com/file/d/1RQfgDTERyvzkkIFsJArqjEa3m86JbkqY/preview', 'WW', '50 Natural Wonders to Blow Your Mind'],
+  ['https://drive.google.com/file/d/1V__-O30S3OO5zmnMV9VFTVs3mukPAfxV/preview', 'WW', 'Amazing Boat Journeys'],
+  ['https://drive.google.com/file/d/1h0gb0Lfnj129c1P9HX1_xjHNF61IFGg8/preview', 'WW', 'Amazing Train Journeys'],
+  ['https://drive.google.com/file/d/13yVwe1VGLtmPjRVbxuSamzvgbGdKaHDc/preview', 'WW', 'Lonely Planet\'s Best Ever Travel Tips'],
+  ['https://drive.google.com/file/d/1xX8HBzRhwnohVphGd5s2Ce23hzKnsQ_A/preview', 'WW', 'Lonely Planet\'s Guide to Travel Photography'],
+  ['https://drive.google.com/file/d/1L8j6O5jIlhPBZSk2-AwdYChv_9yPNErM/preview', 'WW', 'Lonely Planet\'s Where to Go When'],
+  ['https://drive.google.com/file/d/1nnQk6mha0OmTNCIwhKsxWVEN-fji5Edd/preview', 'WW', 'Secret Marvels of the World'],
+  ['https://drive.google.com/file/d/1G9FQp1bnQ0VTh4FTES5Gd1z8gQX3nwqm/preview', 'WW', 'The Place To Be']
 ]

@@ -13,9 +13,15 @@
     margin-top: 300px;
   }
   </style>
+  <script src="data/strings.js"></script>
 </head>
 
 <body>
-  <p style="font-size:32px;font-weight:bold;">Select a book on the left panel to be read here</p>
+  <div id="welcome" style="font-size:32px;font-weight:bold;"></div>
+
+  <script>
+    document.getElementById('welcome').innerText = strings_dict['WELCOME'];
+  </script>
+
 </body>
 </html>
