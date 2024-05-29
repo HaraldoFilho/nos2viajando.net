@@ -1,4 +1,4 @@
 py/*
 !py/photosets.py
-!py/setup-photoset.py
+!py/setup-photoset.sh
 !py/update-photo-markers.py

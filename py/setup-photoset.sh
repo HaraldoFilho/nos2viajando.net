@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RUN_DIR="/home/pi/github/nos2viajando.github.io/py"
+RUN_DIR="/home/pi/github/nos2viajando.net/py"
 
 echo "user = 'hpfilho'" > $RUN_DIR/config.py
 echo "photoset_id = '$1'" >> $RUN_DIR/config.py
