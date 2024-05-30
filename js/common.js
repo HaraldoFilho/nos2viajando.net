@@ -619,12 +619,14 @@ function removeLine(map, id) {
 
 function loadFlights(map, flights, airports) {
 
-  map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_international.png', function(error, image) {
+  var flight_icons_path = "https://raw.githubusercontent.com/HaraldoFilho/nos2viajando.net/master/icons/";
+
+  map.loadImage(flight_icons_path + 'flight_international.png', function(error, image) {
     if (!map.hasImage('flight_international')) map.addImage('flight_international', image);
     if (error) throw error;
   });
 
-  map.loadImage('https://raw.githubusercontent.com/nos2viajando/nos2viajando.github.io/master/icons/flight_domestic.png', function(error, image) {
+  map.loadImage(flight_icons_path + 'flight_domestic.png', function(error, image) {
     if (!map.hasImage('flight_domestic')) map.addImage('flight_domestic', image);
     if (error) throw error;
   });
