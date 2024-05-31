@@ -120,7 +120,7 @@ img.fullwindow-center {
   cursor: pointer;
 }
 
-img.fullwindow-world {
+img.fullwindow-zoom-out {
   position: absolute;
   display: none;
   top: 0;
@@ -138,7 +138,7 @@ img.fullwindow-world {
   cursor: pointer;
 }
 
-img.fullwindow-zoom-out {
+img.fullwindow-world {
   position: absolute;
   display: none;
   top: 0;
