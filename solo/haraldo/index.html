@@ -20,7 +20,6 @@
   <script src="../../data/attractions.js"></script>
   <script src="../../data/airports.js"></script>
   <script src="../../data/flights.js"></script>
-  <script src="../../data/driving.js"></script>
   <script src="../../data/photos.js"></script>
 
   <script src="data/strings.js"></script>
@@ -109,6 +108,7 @@
     <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../../icons/full_window_exit.svg"/>
     <img id="fullwindow-center-icon" class="fullwindow-center" src="../../icons/center_window.svg"/>
     <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../../icons/fit_window.svg"/>
+    <img id="fullwindow-world-icon" class="fullwindow-world" src="../../icons/world.svg"/>
 
     <div id="menu" class="menu"></div>
 
@@ -182,11 +182,6 @@
   var flights_lines = {};
   var color_international = '#F00';
   var color_domestic = '#00F';
-
-  var hide_car_routes = false;
-
-  var road_trips_places = [];
-  var road_trips_places_abroad = [];
 
   // Travelmap
 
@@ -279,6 +274,7 @@
   }
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
+  document.getElementById('fullwindow-world-icon').addEventListener('click', function() { fitRegion(fitRegion(map_fullwindow, 'WW', map_padding_fw)) });
   document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
     fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
     document.getElementById('selector').style.display = "block";
@@ -529,22 +525,6 @@
   icon_flights_domestic.setAttribute('src', icons_path.concat('flight_domestic.svg'));
   icon_flights_domestic.setAttribute('height', '18px');
   icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
-
-  var input_road_trips = document.createElement('INPUT');
-  input_road_trips.setAttribute('id', 'checkbox-road-trips');
-  input_road_trips.setAttribute('type', 'checkbox');
-  var icon_road_trip = document.createElement('IMG');
-  icon_road_trip.setAttribute('src', icons_path.concat('car.svg'));
-  icon_road_trip.setAttribute('height', '18px');
-  icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
-
-  var input_road_trips_abroad = document.createElement('INPUT');
-  input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
-  input_road_trips_abroad.setAttribute('type', 'checkbox');
-  var icon_road_trip_abroad = document.createElement('IMG');
-  icon_road_trip_abroad.setAttribute('src', icons_path.concat('car_abroad.svg'));
-  icon_road_trip_abroad.setAttribute('height', '18px');
-  icon_road_trip_abroad.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
   var input_farthest_points = document.createElement('INPUT');
   input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
