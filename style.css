@@ -90,7 +90,7 @@ img.fullwindow-exit {
   top: 0;
   right: 0;
   margin-right: 9px;
-  margin-top: 158px;
+  margin-top: 198px;
   width: 28px;
   height: 28px;
   z-index: 1;
@@ -108,9 +108,27 @@ img.fullwindow-center {
   top: 0;
   right: 0;
   margin-right: 9px;
-  margin-top: 118px;
+  margin-top: 158px;
   width: 28px;
   height: 28px;
+  z-index: 1;
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightgrey;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+}
+
+img.fullwindow-world {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: 0;
+  margin-right: 9px;
+  margin-top: 118px;
+  width: 28px;
+  heigh: 28px;
   z-index: 1;
   border-style: solid;
   border-width: 2px;

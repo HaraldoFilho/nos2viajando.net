@@ -271,6 +271,7 @@ function enterMapFullWindow(current_bbox, current_coords) {
   document.getElementById('fullwindow-exit-icon').style.display = "block";
   document.getElementById('fullwindow-center-icon').style.display = "block";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
+  document.getElementById('fullwindow-world-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
   document.getElementById('fullmap-countries-panel').style.display = "grid";
   document.getElementById('selector').style.display = "block";
@@ -385,6 +386,7 @@ function exitMapFullWindow() {
   document.getElementById('map-overlay').style.height = "0%";
   document.getElementById('fullwindow-exit-icon').style.display = "none";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
+  document.getElementById('fullwindow-world-icon').style.display = "none";
   document.getElementById('menu').style.display = "none";
   document.getElementById('expand-selector').style.display = "none";
   document.getElementById('selector').style.display = "none";
