@@ -34,7 +34,7 @@ var driving_abroad = [
   ['2023', ['Hosteria Pehoe', 'Morrena Lodge'], 'Patagônia'],
   ['2023', ['Morrena Lodge', 'Rio Pingo Restaurant & Minimarket'], 'Patagônia'],
   ['2023', ['Morrena Lodge', 'Puerto Natales'], 'Patagônia'],
-  ['2024', ['20 Hotel', 'Mirante de Punta Ballena', 'Las Grutas', 'Museu Casapueblo', '20 Hotel' ]]
+  ['2024', ['20 Hotel', 'Mirante de Punta Ballena', 'Las Grutas', 'Museu Casapueblo', '20 Hotel' ], 'Patagônia']
 
 ]
 
@@ -65,5 +65,5 @@ var driving_abroad_en = [
   ['2023', ['Hosteria Pehoe', 'Morrena Lodge'], 'Patagonia'],
   ['2023', ['Morrena Lodge', 'Rio Pingo Restaurant & Minimarket'], 'Patagonia'],
   ['2023', ['Morrena Lodge', 'Puerto Natales'], 'Patagonia']
-  ['2024', ['20 Hotel', 'Punta Ballena Lookout Point', 'Las Grutas', 'Museo Casapueblo', '20 Hotel' ]]
+  ['2024', ['20 Hotel', 'Punta Ballena Lookout Point', 'Las Grutas', 'Museo Casapueblo', '20 Hotel' ], 'Patagonia']
 ]

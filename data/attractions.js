@@ -244,7 +244,7 @@ var attractions_en = [
   [[-73.248333, -50.056073], 'AR', 'Upsala Glacier Viewpoint'],
   [[-73.223803, -50.198380], 'AR', 'Since Cows'],
   [[-70.580139, -52.920165], 'CL', 'Isla Magdalena'],
-  [[-70.577488, -52.919268], 'CL', 'Los Pingüinos Natural Monument']
+  [[-70.577488, -52.919268], 'CL', 'Los Pingüinos Natural Monument'],
   [[-55.038450, -34.895930], 'UY', 'Punta Ballena Lookout Point'],
   [[-55.041580, -34.910640], 'UY', 'Las Grutas'],
   [[-55.044610, -34.908710], 'UY', 'Museo Casapueblo'],
