@@ -673,14 +673,14 @@
     selector.append(strings_dict['MKR_RESTAURANTS']);
     selector.appendChild(document.createElement('BR'));
 
+    var separator_2 = document.createElement('HR');
+    separator_2.setAttribute('class', 'separator');
+    selector.appendChild(separator_2);
+
     selector.appendChild(input_photos);
     selector.appendChild(icon_photos);
     selector.append(strings_dict['MKR_PHOTOS']);
     selector.appendChild(document.createElement('BR'));
-
-    var separator_2 = document.createElement('HR');
-    separator_2.setAttribute('class', 'separator');
-    selector.appendChild(separator_2);
 
     selector.appendChild(input_flights_international);
     selector.appendChild(icon_flights_international);
@@ -728,7 +728,22 @@
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
-    document.getElementById("checkbox-photos").addEventListener('click', function() { toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos") });
+    document.getElementById("checkbox-photos").addEventListener('click', function() {
+      if (document.getElementById("checkbox-photos").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-road-trips-abroad").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-flights-domestic").checked = false;
+        hideAllMarkers();
+        showMarkers(map_fullwindow, photos_markers);
+        restoreIconsColors();
+      } else {
+        toggleAllMarkers();
+      }
+      toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
+    });
 
     document.getElementById("checkbox-flights-international").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports)
@@ -737,6 +752,7 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
         restoreIconsColors();
@@ -751,6 +767,7 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
         restoreIconsColors();
@@ -769,6 +786,7 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
         if (!document.getElementById("checkbox-road-trips-abroad").checked) {
           restoreIconsColors();
         }
@@ -783,6 +801,7 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
         for (var country_code in countries) {
           var flag_id = country_code.concat("__");
           if (!countries[country_code][1].includes('d')) {
@@ -806,6 +825,7 @@
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
         restoreIconsColors();
       } else {
         toggleAllMarkers();
