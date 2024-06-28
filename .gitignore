@@ -2,3 +2,11 @@ py/*
 !py/photosets.py
 !py/setup-photoset.sh
 !py/update-photo-markers.py
+haraldo/py/*
+!haraldo/py/photosets.py
+!haraldo/py/setup-photoset.sh
+!haraldo/py/update-photo-markers.py
+raquel/py/*
+!raquel/py/photosets.py
+!raquel/py/setup-photoset.sh
+!raquel/py/update-photo-markers.py
