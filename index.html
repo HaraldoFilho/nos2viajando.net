@@ -278,7 +278,11 @@
     }
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
-    document.getElementById('fullwindow-world-icon').addEventListener('click', function() { fitRegion(fitRegion(map_fullwindow, 'WW', map_padding_fw)) });
+    document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
+      fitRegion(map_fullwindow, 'WW', map_padding_fw);
+      document.getElementById('selector').style.display = "block";
+      document.getElementById('expand-selector').style.display = "none";
+    });
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById('selector').style.display = "block";
