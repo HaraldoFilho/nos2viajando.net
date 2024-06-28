@@ -31,7 +31,7 @@ for photoset in photosets:
 command = "cp /home/pi/github/nos2viajando.net/raquel/py/locations.py /home/pi/github/nos2viajando.net/raquel/data/photos.js_"
 os.system(command)
 
-command = "sed -e 's/locations_dict/locations_dict_' /home/pi/github/nos2viajando.net/raquel/data/photos.js_ > /home/pi/github/nos2viajando.net/raquel/data/photos.js"
+command = "sed -e 's/locations_dict/locations_dict_solo/' /home/pi/github/nos2viajando.net/raquel/data/photos.js_ > /home/pi/github/nos2viajando.net/raquel/data/photos.js"
 os.system(command)
 
 command = "rm /home/pi/github/nos2viajando.net/raquel/data/photos.js_"
