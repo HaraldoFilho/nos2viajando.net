@@ -430,14 +430,14 @@ a:hover {
 
 .footer {
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 7;
   font-family: arial;
   font-size: 10px;
-  text-align: left;
+  text-align: right;
   color: black;
   position: fixed;
-  margin-left: 335px;
+  margin-right: 15px;
   margin-bottom: 10px;
   padding: 5px;
 }
