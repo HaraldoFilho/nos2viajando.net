@@ -18,15 +18,15 @@ from photosets import photosets
 for photoset in photosets:
 
     print("Generating markers for photoset {}".format(photoset))
-    command = "/home/pi/github/nos2viajando.github.io/py/setup-photoset.sh {}".format(photoset)
+    command = "/home/pi/github/nos2viajando.net/py/setup-photoset.sh {}".format(photoset)
     os.system(command)
 
-    command = "/home/pi/github/nos2viajando.github.io/py/generate-map-data.py"
+    command = "/home/pi/github/nos2viajando.net/py/generate-map-data.py"
     os.system(command)
 
-    command = "rm /home/pi/github/nos2viajando.github.io/py/last_total.py"
+    command = "rm /home/pi/github/nos2viajando.net/py/last_total.py"
     os.system(command)
 
 
-command = "cp /home/pi/github/nos2viajando.github.io/py/locations.py /home/pi/github/nos2viajando.github.io/data/photos.js"
+command = "cp /home/pi/github/nos2viajando.net/py/locations.py /home/pi/github/nos2viajando.net/data/photos.js"
 os.system(command)
