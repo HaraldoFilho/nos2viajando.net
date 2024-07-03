@@ -137,7 +137,7 @@
   var restaurants = [];
   var accommodations = [];
 
-  locations_dict = [];
+  locations_dict = locations_dict_solo;
 
   loadAdditionalData();
   addFooter();
@@ -234,7 +234,7 @@
     }
   }
 
-  photos_markers_solo = createPhotosMarkers(map, locations_dict_solo);
+  photos_markers_solo = createPhotosMarkers(map, locations_dict);
 
   document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
   document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
