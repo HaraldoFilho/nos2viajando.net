@@ -211,8 +211,18 @@ function fitBoundingBox(map, bbox, x_offset, y_offset, padding, linear) {
 }
 
 function fitRegion(map, region, padding) {
-  var bbox = countries_bbox[region][1];
+
+  var bbox = [];
+
+  if (document.getElementById("checkbox-photos").checked && region != 'WW') {
+    bbox = getCountryMarkersBbox(region);
+    padding += 100;
+  } else {
+    bbox = countries_bbox[region][1];
+  }
+
   fitBoundingBox(map, bbox, 0, 0, padding, false);
+
 }
 
 function flyToCoordinates(map, coords, x_offset, y_offset, zoom, speed, scroll) {
@@ -440,6 +450,39 @@ function createPhotosMarkers(map, locations) {
     }
   }
   return photos_markers;
+}
+
+function getCountryMarkersBbox(country_code) {
+
+  var west = 180;
+  var south = 90;
+  var east = -180;
+  var north = -90;
+
+  var country_markers = locations_dict[country_code];
+  var country_bbox = [];
+
+  for (var i = 0; i < country_markers.length; i++) {
+
+    if (country_markers[i][0][0] < west) {
+      west = country_markers[i][0][0];
+    }
+    if (country_markers[i][0][0] > east) {
+      east = country_markers[i][0][0];
+    }
+    if (country_markers[i][0][1] < south) {
+      south = country_markers[i][0][1];
+    }
+    if (country_markers[i][0][1] > north) {
+      north = country_markers[i][0][1];
+    }
+
+    country_bbox = [west, south, east, north];
+
+  }
+
+  return country_bbox;
+
 }
 
 function createSpecialMarker(map, coord, text, icon, size) {
