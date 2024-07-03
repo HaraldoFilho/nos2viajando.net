@@ -733,8 +733,8 @@
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-photos").addEventListener('click', function() {
+      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       if (document.getElementById("checkbox-photos").checked) {
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
