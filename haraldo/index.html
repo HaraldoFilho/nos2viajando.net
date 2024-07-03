@@ -612,8 +612,8 @@
   document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
   document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
   document.getElementById("checkbox-photos").addEventListener('click', function() {
+    fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
     if (document.getElementById("checkbox-photos").checked) {
-      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
       document.getElementById("checkbox-flights-domestic").checked = false;
