@@ -739,6 +739,7 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
         hideAllMarkers();
         showMarkers(map_fullwindow, photos_markers);
         restoreIconsColors();
@@ -749,7 +750,7 @@
     });
 
     document.getElementById("checkbox-flights-international").addEventListener('click', function() {
-      loadFlights(map_fullwindow, flights, airports)
+      loadFlights(map_fullwindow, flights, airports);
       if (document.getElementById("checkbox-flights-international").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
@@ -790,6 +791,7 @@
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
         if (!document.getElementById("checkbox-road-trips-abroad").checked) {
           restoreIconsColors();
         }
@@ -805,6 +807,7 @@
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
         for (var country_code in countries) {
           var flag_id = country_code.concat("__");
           if (!countries[country_code][1].includes('d')) {
@@ -829,6 +832,7 @@
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
         restoreIconsColors();
       } else {
         toggleAllMarkers();
