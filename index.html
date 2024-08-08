@@ -243,6 +243,8 @@
 
     var n_countries = Object.keys(countries).length;
     var n_continents = 0;
+
+    var countries_text = "";
     var continents_text = "";
 
     for (var i = 0; i < continents.length; i++) {
@@ -275,7 +277,10 @@
       country_flag.setAttribute('alt', country_name);
       country.appendChild(country_flag);
       countries_panel.appendChild(country);
+      countries_text += country_name + "\n";
     }
+
+    document.getElementById('countries').setAttribute('title', countries_text);
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
     document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
