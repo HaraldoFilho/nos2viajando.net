@@ -161,10 +161,10 @@
   var map_padding_fw = 100;
 
   var places = [home].concat(cities)
-                     .concat(airports)
-                     .concat(accommodations)
-                     .concat(attractions)
-                     .concat(parks);
+  .concat(airports)
+  .concat(accommodations)
+  .concat(attractions)
+  .concat(parks);
 
   var initial_bbox = getInitialBoundingBox(places, ref_long);
 
@@ -245,9 +245,13 @@
 
   var n_countries = Object.keys(countries).length;
   var n_continents = 0;
+
+  var continents_text = "";
+
   for (var i = 0; i < continents.length; i++) {
     if (continents[i][1].length > 0) {
       n_continents++;
+      continents_text += continents[i][0] + "\n";
     }
   }
 
@@ -258,11 +262,14 @@
 
   document.getElementById('countries').append(n_countries + " " + strings_dict['COUNTRIES']);
   document.getElementById('continents').append(n_continents + " " + strings_dict['CONTINENTS']);
+  document.getElementById('continents').setAttribute('title', continents_text);
   countries_panel.setAttribute('style', 'height:'.concat(panel_height));
   lists.setAttribute('style', 'top:'.concat(lists_height));
 
+  var countries_names = [];
+
   for (var country_code in countries) {
-    var country_name = countries[country_code];
+    var country_name = countries[country_code][0];
     var country_icon = getIconSrc(icons_path, country_code);
     var country = document.createElement('DIV');
     country.setAttribute('id', country_code);
@@ -273,7 +280,18 @@
     country_flag.setAttribute('alt', country_name);
     country.appendChild(country_flag);
     countries_panel.appendChild(country);
+    countries_names.push(country_name);
   }
+
+  countries_names.sort();
+
+  var countries_text = "";
+
+  for (var i = 0; i < countries_names.length; i++) {
+    countries_text += countries_names[i] + "\n";
+  }
+
+  document.getElementById('countries').setAttribute('title', countries_text);
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
   document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
@@ -616,9 +634,12 @@
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
       document.getElementById("checkbox-flights-domestic").checked = false;
+      loadFlights(map_fullwindow, flights, airports);
+      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, photos_markers);
       showMarkers(map_fullwindow, photos_markers_solo);
+      hideFarthestPointsLines(map_fullwindow);
       restoreIconsColors();
     } else {
       toggleAllMarkersSolo();
@@ -633,6 +654,7 @@
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-photos").checked = false;
+      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
       restoreIconsColors();
@@ -646,6 +668,7 @@
       fitRegion(map_fullwindow, 'BR', map_padding_fw);
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-photos").checked = false;
+      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
       restoreIconsColors();
@@ -658,11 +681,13 @@
     toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     if (document.getElementById("checkbox-farthest-points").checked) {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, farthest_points_markers);
       document.getElementById("checkbox-flights-domestic").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
       document.getElementById("checkbox-photos").checked = false;
+      loadFlights(map_fullwindow, flights, airports);
       restoreIconsColors();
     } else {
       toggleAllMarkersSolo();

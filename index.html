@@ -244,7 +244,6 @@
     var n_countries = Object.keys(countries).length;
     var n_continents = 0;
 
-    var countries_text = "";
     var continents_text = "";
 
     for (var i = 0; i < continents.length; i++) {
@@ -265,6 +264,8 @@
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
+    var countries_names = [];
+
     for (var country_code in countries) {
       var country_name = countries[country_code][0];
       var country_icon = getIconSrc(icons_path, country_code);
@@ -277,7 +278,15 @@
       country_flag.setAttribute('alt', country_name);
       country.appendChild(country_flag);
       countries_panel.appendChild(country);
-      countries_text += country_name + "\n";
+      countries_names.push(country_name);
+    }
+
+    countries_names.sort();
+
+    var countries_text = "";
+
+    for (var i = 0; i < countries_names.length; i++) {
+      countries_text += countries_names[i] + "\n";
     }
 
     document.getElementById('countries').setAttribute('title', countries_text);
