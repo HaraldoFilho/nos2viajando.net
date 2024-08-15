@@ -507,7 +507,7 @@ hr.separator {
   position: fixed;
   bottom: 0;
   left: 0;
-  margin: auto auto 5px -160px;
+  margin: auto auto 5px -250px;
   padding: 10px;
   grid-gap: 7px;
   border-style: solid;
@@ -539,5 +539,12 @@ img.icon_grey {
   width: 32px;
   height: 32px;
   filter: grayscale(100%) opacity(30%);
+  margin: auto;
+}
+
+img.icon_opaque {
+  width: 32px;
+  height: 32px;
+  filter: opacity(50%);
   margin: auto;
 }

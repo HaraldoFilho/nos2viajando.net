@@ -1069,6 +1069,10 @@ function addIcon(icons_path, country_code, panel) {
   elem.setAttribute("src", getIconSrc(icons_path, country_code));
   elem.setAttribute("title", country_name);
   elem.setAttribute("alt", country_name);
+  if(countries[country_code][1].includes('c')) {
+    elem.setAttribute("class", "icon_opaque");
+    elem.setAttribute("title", country_name + strings_dict['FLIGHT_CONNECT']);
+  }
   var div_icon = document.createElement("DIV");
   div_icon.setAttribute("class", "flag-icon");
   div_icon.appendChild(elem);
@@ -1079,5 +1083,8 @@ function restoreIconsColors() {
   for (var country_code in countries) {
     var flag_id = country_code.concat("__");
     document.getElementById(flag_id).setAttribute('class', 'icon');
+    if(countries[country_code][1].includes('c')) {
+      document.getElementById(flag_id).setAttribute("class", "icon_opaque");
+    }
   }
 }

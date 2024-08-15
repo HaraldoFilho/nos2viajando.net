@@ -241,7 +241,35 @@
     var countries_panel = document.getElementById('countries-panel');
     var lists = document.getElementById('lists');
 
-    var n_countries = Object.keys(countries).length;
+    var n_countries = 0;
+    var countries_names = [];
+
+    for (var country_code in countries) {
+      if (!countries[country_code][1].includes('c')) {
+        var country_name = countries[country_code][0];
+        var country_icon = getIconSrc(icons_path, country_code);
+        var country = document.createElement('DIV');
+        country.setAttribute('id', country_code);
+        var country_flag = document.createElement('IMG');
+        country_flag.setAttribute('class', 'flag');
+        country_flag.setAttribute('src', country_icon);
+        country_flag.setAttribute('title', country_name);
+        country_flag.setAttribute('alt', country_name);
+        country.appendChild(country_flag);
+        countries_panel.appendChild(country);
+        countries_names.push(country_name);
+        n_countries++;
+      }
+    }
+
+    countries_names.sort();
+
+    var countries_text = "";
+
+    for (var i = 0; i < countries_names.length; i++) {
+      countries_text += countries_names[i] + "\n";
+    }
+
     var n_continents = 0;
 
     var continents_text = "";
@@ -263,31 +291,6 @@
     document.getElementById('continents').setAttribute('title', continents_text);
     countries_panel.setAttribute('style', 'height:'.concat(panel_height));
     lists.setAttribute('style', 'top:'.concat(lists_height));
-
-    var countries_names = [];
-
-    for (var country_code in countries) {
-      var country_name = countries[country_code][0];
-      var country_icon = getIconSrc(icons_path, country_code);
-      var country = document.createElement('DIV');
-      country.setAttribute('id', country_code);
-      var country_flag = document.createElement('IMG');
-      country_flag.setAttribute('class', 'flag');
-      country_flag.setAttribute('src', country_icon);
-      country_flag.setAttribute('title', country_name);
-      country_flag.setAttribute('alt', country_name);
-      country.appendChild(country_flag);
-      countries_panel.appendChild(country);
-      countries_names.push(country_name);
-    }
-
-    countries_names.sort();
-
-    var countries_text = "";
-
-    for (var i = 0; i < countries_names.length; i++) {
-      countries_text += countries_names[i] + "\n";
-    }
 
     document.getElementById('countries').setAttribute('title', countries_text);
 
@@ -340,6 +343,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, cities[i][1]));
+      tiny_flag.setAttribute('title', countries[cities[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(cities[i][2]);
       lists.appendChild(list_item);
@@ -370,6 +374,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, parks[i][1]));
+      tiny_flag.setAttribute('title', countries[parks[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(parks[i][2]);
       lists.appendChild(list_item);
@@ -400,6 +405,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, attractions[i][1]));
+      tiny_flag.setAttribute('title', countries[attractions[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(attractions[i][2]);
       lists.appendChild(list_item);
@@ -430,6 +436,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, accommodations[i][1]));
+      tiny_flag.setAttribute('title', countries[accommodations[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(accommodations[i][2]);
       lists.appendChild(list_item);
@@ -460,6 +467,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, airports[i][1]));
+      tiny_flag.setAttribute('title', countries[airports[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(airports[i][2]);
       lists.appendChild(list_item);
@@ -490,6 +498,7 @@
       var tiny_flag = document.createElement('IMG');
       tiny_flag.setAttribute('class', 'tiny_icon');
       tiny_flag.setAttribute('src', getIconSrc(icons_path, restaurants[i][1]));
+      tiny_flag.setAttribute('title', countries[restaurants[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(restaurants[i][2]);
       lists.appendChild(list_item);
@@ -731,7 +740,9 @@
 
     // Add click listeners
     for (var country_code in countries) {
-      addListenerToFlags(country_code, 10);
+      if (!countries[country_code][1].includes('c')) {
+        addListenerToFlags(country_code, 10);
+      }
     }
     cities.forEach(addListenerToRegions, false);
     parks.forEach(addListenerToRegions, false);
@@ -758,8 +769,17 @@
         showMarkers(map_fullwindow, photos_markers);
         hideFarthestPointsLines(map_fullwindow);
         restoreIconsColors();
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (country_code in locations_dict) {
+            document.getElementById(flag_id).setAttribute('class', 'icon');
+          } else {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
       } else {
         toggleAllMarkers();
+        restoreIconsColors();
       }
       toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
     });
@@ -774,9 +794,24 @@
         document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
-        restoreIconsColors();
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (countries[country_code][1].includes('f')) {
+            document.getElementById(flag_id).setAttribute('class', 'icon');
+          } else {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
       } else if (!document.getElementById("checkbox-flights-domestic").checked) {
         toggleAllMarkers();
+        restoreIconsColors();
+    } else {
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (country_code != 'BR') {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
       }
     });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
@@ -789,9 +824,18 @@
         document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
-        restoreIconsColors();
+        if (!document.getElementById("checkbox-flights-international").checked) {
+          restoreIconsColors();
+          for (var country_code in countries) {
+            var flag_id = country_code.concat("__");
+            if (country_code != 'BR') {
+              document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+            }
+          }
+        }
       } else if (!document.getElementById("checkbox-flights-international").checked) {
         toggleAllMarkers();
+        restoreIconsColors();
       }
     });
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
@@ -809,7 +853,15 @@
         loadFlights(map_fullwindow, flights, airports);
         if (!document.getElementById("checkbox-road-trips-abroad").checked) {
           restoreIconsColors();
+          for (var country_code in countries) {
+            var flag_id = country_code.concat("__");
+            if (country_code != 'BR') {
+              document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+            }
+          }
         }
+      } else if (!document.getElementById("checkbox-road-trips-abroad").checked) {
+        restoreIconsColors();
       }
       toggleAllMarkers();
     });
@@ -823,9 +875,17 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
+        restoreIconsColors();
         for (var country_code in countries) {
           var flag_id = country_code.concat("__");
           if (!countries[country_code][1].includes('d')) {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
+      } else if (document.getElementById("checkbox-road-trips").checked) {
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (country_code != 'BR') {
             document.getElementById(flag_id).setAttribute('class', 'icon_grey');
           }
         }
@@ -848,10 +908,20 @@
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
-        restoreIconsColors();
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+        }
+        console.log(farthest_points);
+        for (var i in farthest_points) {
+          country_code = farthest_points[i][1];
+          var flag_id = country_code.concat("__");
+          document.getElementById(flag_id).setAttribute('class', 'icon');
+        }
       } else {
         toggleAllMarkers();
         hideMarkers(map_fullwindow, farthest_points_markers);
+        restoreIconsColors();
         hide_car_routes = false;
       }
     });
