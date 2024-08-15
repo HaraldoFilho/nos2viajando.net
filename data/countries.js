@@ -1,25 +1,32 @@
+// Countries properties:
+// w = flyed to west
+// e = flyed to east
+// f = flight
+// c = connection
+// d = drived a car
+
 var countries = {
-  'BR': ['Brasil', 'd'],
+  'BR': ['Brasil', 'fd'],
   'AR': ['Argentina', 'wd'],
   'PY': ['Paraguai', 'w'],
-  'US': ['Estados Unidos', 'wd'],
-  'IT': ['Itália', 'e'],
+  'US': ['Estados Unidos', 'fwd'],
+  'IT': ['Itália', 'fe'],
   'VA': ['Vaticano', 'e'],
-  'HR': ['Croácia', 'e'],
-  'CL': ['Chile', 'wd'],
-  'UY': ['Uruguai', 'wd']
+  'HR': ['Croácia', 'fe'],
+  'CL': ['Chile', 'fwd'],
+  'UY': ['Uruguai', 'fwd']
 }
 
 var countries_en = {
-  'BR': ['Brazil', ''],
+  'BR': ['Brazil', 'fd'],
   'AR': ['Argentina', 'wd'],
   'PY': ['Paraguay', 'w'],
-  'US': ['United States', 'wd'],
-  'IT': ['Italy', 'e'],
+  'US': ['United States', 'fwd'],
+  'IT': ['Italy', 'fe'],
   'VA': ['Vatican City', 'e'],
-  'HR': ['Croatia', 'e'],
-  'CL': ['Chile', 'wd'],
-  'UY': ['Uruguay', 'wd']
+  'HR': ['Croatia', 'fe'],
+  'CL': ['Chile', 'fwd'],
+  'UY': ['Uruguay', 'fwd']
 }
 
 var continents = [
