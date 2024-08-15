@@ -507,7 +507,7 @@ hr.separator {
   position: fixed;
   bottom: 0;
   left: 0;
-  margin: auto auto 5px -250px;
+  margin: auto auto 5px -160px;
   padding: 10px;
   grid-gap: 7px;
   border-style: solid;
