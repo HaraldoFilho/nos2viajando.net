@@ -11,6 +11,8 @@ The purpose of the site is to showcase the trips my wife and I have done togethe
 
 [![Nós Dois Viajando](https://github.com/HaraldoFilho/nos2viajando.net/blob/master/img/site.png)](https://nos2viajando.net/)
 
+<br>
+
 ## The Fullscreen Map
 
 Clicking on the fullscreen icon on the small map of the left panel opens a fullscreen map where it is possible to see more information about the trips. There are different selectors where it is possible to change the map appearance, such as alternating from map to satellite view, different zoom levels, such as the entire world or an especific country, and filter the information displayed on the map, such as the markers for each place visited, the flight routes or the photos taken on each place.
@@ -30,7 +32,7 @@ _Map in satellite view, with zoom level showing the entire world and displaying 
 [![Nós Dois Viajando](https://github.com/HaraldoFilho/nos2viajando.net/blob/master/img/photos.png)](https://nos2viajando.net/)
 _Map showing the photos taken on each place_
 
-<br><br>
+<br>
 
 ### About the icons
 
