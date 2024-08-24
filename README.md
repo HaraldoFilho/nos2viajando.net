@@ -1,6 +1,6 @@
 # Nós Dois Viajando
 
-This is the code repository for the [Nós Dois Viajando](https://nos2viajando.net) website.
+This is the code repository for the website [Nós Dois Viajando](https://nos2viajando.net) ("We Traveling").
 
 The purpose of the site is to showcase the trips my wife and I have done together, with informartion for each of the countries and places we have visited. It was written in _**Python**_, _**Javascript**_, _**HTML**_ and _**CSS**_, and integrates two others:
 
