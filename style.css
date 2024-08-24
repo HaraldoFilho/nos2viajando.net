@@ -245,8 +245,9 @@ a:hover {
 .flights {
   display: block;
   grid-area: flights;
-  width: 110px;
+  width: 105px;
   height: 25px;
+  margin-left: 5px;
   font-family: arial;
   font-size: 13px;
   text-align: left;
@@ -269,8 +270,9 @@ a:hover {
 .continents {
   display: block;
   grid-area: continents;
-  width: 110px;
+  width: 105px;
   height: 25px;
+  margin-left: 5px;
   font-family: arial;
   font-size: 13px;
   text-align: left;
@@ -399,9 +401,9 @@ a:hover {
   bottom: 0px;
   padding: 5px 10px 0px 10px;
   margin-top: 50px;
-  width: 299px;
+  width: 300px;
   text-align: left;
-  border-width: 1px;
+  border-width: 1px 1px 0 0;
   border-style: solid;
   border-color: lightgrey;
 }
