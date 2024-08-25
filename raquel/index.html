@@ -640,18 +640,25 @@
       hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, photos_markers);
-      showMarkers(map_fullwindow, photos_markers_solo);
       hideFarthestPointsLines(map_fullwindow);
       restoreIconsColors();
+      for (var country_code in countries) {
+        var flag_id = country_code.concat("__");
+        if (country_code in locations_dict) {
+          document.getElementById(flag_id).setAttribute('class', 'icon');
+        } else {
+          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+        }
+      }
     } else {
       toggleAllMarkersSolo();
+      restoreIconsColors();
     }
-    toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos");
-    toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos")
+    toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
   });
 
   document.getElementById("checkbox-flights-international").addEventListener('click', function() {
-    loadFlights(map_fullwindow, flights, airports)
+    loadFlights(map_fullwindow, flights, airports);
     if (document.getElementById("checkbox-flights-international").checked) {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById("checkbox-farthest-points").checked = false;
@@ -659,9 +666,24 @@
       hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
-      restoreIconsColors();
+      for (var country_code in countries) {
+        var flag_id = country_code.concat("__");
+        if (countries[country_code][1].includes('f')) {
+          document.getElementById(flag_id).setAttribute('class', 'icon');
+        } else {
+          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+        }
+      }
     } else if (!document.getElementById("checkbox-flights-domestic").checked) {
       toggleAllMarkersSolo();
+      restoreIconsColors();
+  } else {
+      for (var country_code in countries) {
+        var flag_id = country_code.concat("__");
+        if (country_code != 'BR') {
+          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+        }
+      }
     }
   });
   document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
@@ -673,9 +695,18 @@
       hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
-      restoreIconsColors();
+      if (!document.getElementById("checkbox-flights-international").checked) {
+        restoreIconsColors();
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (country_code != 'BR') {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
+      }
     } else if (!document.getElementById("checkbox-flights-international").checked) {
       toggleAllMarkersSolo();
+      restoreIconsColors();
     }
   });
   document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
@@ -686,14 +717,26 @@
       hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, farthest_points_markers);
+      hide_car_routes = true;
       document.getElementById("checkbox-flights-domestic").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
       document.getElementById("checkbox-photos").checked = false;
       loadFlights(map_fullwindow, flights, airports);
-      restoreIconsColors();
+      for (var country_code in countries) {
+        var flag_id = country_code.concat("__");
+        document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+      }
+      console.log(farthest_points);
+      for (var i in farthest_points) {
+        country_code = farthest_points[i][1];
+        var flag_id = country_code.concat("__");
+        document.getElementById(flag_id).setAttribute('class', 'icon');
+      }
     } else {
       toggleAllMarkersSolo();
       hideMarkers(map_fullwindow, farthest_points_markers);
+      restoreIconsColors();
+      hide_car_routes = false;
     }
   });
 
