@@ -3,29 +3,30 @@
 // e = flyed to east
 // f = flight
 // c = connection
+// b = bus ride (inter cities abroad)
 // d = drived a car
 
 var countries = {
-  'BR': ['Brasil', 'fd'],
-  'AR': ['Argentina', 'wd'],
-  'PY': ['Paraguai', 'w'],
+  'BR': ['Brasil', 'fbd'],
+  'AR': ['Argentina', 'd'],
+  'PY': ['Paraguai', ''],
   'US': ['Estados Unidos', 'fwd'],
   'IT': ['Itália', 'fe'],
-  'VA': ['Vaticano', 'e'],
-  'HR': ['Croácia', 'fe'],
-  'CL': ['Chile', 'fwd'],
-  'UY': ['Uruguai', 'fwd']
+  'VA': ['Vaticano', ''],
+  'HR': ['Croácia', 'feb'],
+  'CL': ['Chile', 'fwbd'],
+  'UY': ['Uruguai', 'fwbd']
 }
 
 var countries_en = {
-  'BR': ['Brazil', 'fd'],
-  'AR': ['Argentina', 'wd'],
-  'PY': ['Paraguay', 'w'],
+  'BR': ['Brazil', 'fbd'],
+  'AR': ['Argentina', 'd'],
+  'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
   'IT': ['Italy', 'fe'],
-  'VA': ['Vatican City', 'e'],
-  'HR': ['Croatia', 'fe'],
-  'CL': ['Chile', 'fwd'],
+  'VA': ['Vatican City', ''],
+  'HR': ['Croatia', 'feb'],
+  'CL': ['Chile', 'fwbd'],
   'UY': ['Uruguay', 'fwd']
 }
 
