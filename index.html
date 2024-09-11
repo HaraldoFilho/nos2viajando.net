@@ -28,6 +28,7 @@
     <script src="data/airports.js"></script>
     <script src="data/restaurants.js"></script>
     <script src="data/flights.js"></script>
+    <script src="data/bus.js"></script>
     <script src="data/driving.js"></script>
     <script src="data/photos.js"></script>
 
@@ -134,6 +135,7 @@
       airports = airports_en;
       attractions = attractions_en;
       parks = parks_en;
+      bus_rides = bus_rides_en;
       driving_abroad = driving_abroad_en;
     }
 
@@ -182,9 +184,11 @@
     var color_domestic = '#00F';
 
     var hide_car_routes = false;
+    var hide_bus_routes = false;
 
     var road_trips_places = [];
     var road_trips_places_abroad = [];
+    var bus_rides_places = [];
 
     // Travelmap
 
@@ -637,13 +641,13 @@
     icon_flights_domestic.setAttribute('height', '18px');
     icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
 
-    var input_road_trips = document.createElement('INPUT');
-    input_road_trips.setAttribute('id', 'checkbox-road-trips');
-    input_road_trips.setAttribute('type', 'checkbox');
-    var icon_road_trip = document.createElement('IMG');
-    icon_road_trip.setAttribute('src', icons_path.concat('car.svg'));
-    icon_road_trip.setAttribute('height', '18px');
-    icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
+    var input_bus_rides = document.createElement('INPUT');
+    input_bus_rides.setAttribute('id', 'checkbox-bus-rides');
+    input_bus_rides.setAttribute('type', 'checkbox');
+    var icon_bus_ride = document.createElement('IMG');
+    icon_bus_ride.setAttribute('src', icons_path.concat('bus.png'));
+    icon_bus_ride.setAttribute('height', '18px');
+    icon_bus_ride.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_road_trips_abroad = document.createElement('INPUT');
     input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
@@ -652,6 +656,14 @@
     icon_road_trip_abroad.setAttribute('src', icons_path.concat('car_abroad.svg'));
     icon_road_trip_abroad.setAttribute('height', '18px');
     icon_road_trip_abroad.setAttribute('style', 'margin: 0px 2px -3px 1px');
+
+    var input_road_trips = document.createElement('INPUT');
+    input_road_trips.setAttribute('id', 'checkbox-road-trips');
+    input_road_trips.setAttribute('type', 'checkbox');
+    var icon_road_trip = document.createElement('IMG');
+    icon_road_trip.setAttribute('src', icons_path.concat('car.svg'));
+    icon_road_trip.setAttribute('height', '18px');
+    icon_road_trip.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_farthest_points = document.createElement('INPUT');
     input_farthest_points.setAttribute('id', 'checkbox-farthest-points');
@@ -705,11 +717,6 @@
     separator_2.setAttribute('class', 'separator');
     selector.appendChild(separator_2);
 
-    selector.appendChild(input_photos);
-    selector.appendChild(icon_photos);
-    selector.append(strings_dict['MKR_PHOTOS']);
-    selector.appendChild(document.createElement('BR'));
-
     selector.appendChild(input_flights_international);
     selector.appendChild(icon_flights_international);
     selector.append(strings_dict['MKR_INTERNATIONAL_FLIGHT']);
@@ -720,9 +727,9 @@
     selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
     selector.appendChild(document.createElement('BR'));
 
-    selector.appendChild(input_road_trips);
-    selector.appendChild(icon_road_trip);
-    selector.append(strings_dict['MKR_CAR']);
+    selector.appendChild(input_bus_rides);
+    selector.appendChild(icon_bus_ride);
+    selector.append(strings_dict['MKR_BUS']);
     selector.appendChild(document.createElement('BR'));
 
     selector.appendChild(input_road_trips_abroad);
@@ -730,9 +737,23 @@
     selector.append(strings_dict['MKR_CAR_ABROAD']);
     selector.appendChild(document.createElement('BR'));
 
+    var separator_3 = document.createElement('HR');
+    separator_3.setAttribute('class', 'separator');
+    selector.appendChild(separator_3);
+
+    selector.appendChild(input_road_trips);
+    selector.appendChild(icon_road_trip);
+    selector.append(strings_dict['MKR_CAR']);
+    selector.appendChild(document.createElement('BR'));
+
     selector.appendChild(input_farthest_points);
     selector.appendChild(icon_farthest_points);
     selector.append(strings_dict['MKR_FARTHEST_POINTS']);
+    selector.appendChild(document.createElement('BR'));
+
+    selector.appendChild(input_photos);
+    selector.appendChild(icon_photos);
+    selector.append(strings_dict['MKR_PHOTOS']);
 
     var expand_selector = document.getElementById('expand-selector');
     expand_selector.appendChild(icon_expand_less);
@@ -760,6 +781,7 @@
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
     document.getElementById("checkbox-photos").addEventListener('click', function() {
       if (document.getElementById("checkbox-photos").checked) {
+        document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
@@ -769,19 +791,10 @@
         hideAllMarkers();
         showMarkers(map_fullwindow, photos_markers);
         hideFarthestPointsLines(map_fullwindow);
-        restoreIconsColors();
-        for (var country_code in countries) {
-          var flag_id = country_code.concat("__");
-          if (country_code in locations_dict) {
-            document.getElementById(flag_id).setAttribute('class', 'icon');
-          } else {
-            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-          }
-        }
       } else {
         toggleAllMarkers();
-        restoreIconsColors();
       }
+      setIconsColors();
       toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
     });
 
@@ -790,43 +803,38 @@
       if (document.getElementById("checkbox-flights-international").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
-        document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
+        if (document.getElementById("checkbox-bus-rides").checked) {
+          showMarkers(map_fullwindow, cities_markers);
+        }
         for (var country_code in countries) {
           var flag_id = country_code.concat("__");
-          if (countries[country_code][1].includes('f')) {
-            document.getElementById(flag_id).setAttribute('class', 'icon');
-          } else {
+          if (!countries[country_code][1].includes('f')) {
             document.getElementById(flag_id).setAttribute('class', 'icon_grey');
           }
         }
-      } else if (!document.getElementById("checkbox-flights-domestic").checked) {
+      } else if (!document.getElementById("checkbox-flights-domestic").checked
+              && !document.getElementById("checkbox-bus-rides").checked) {
         toggleAllMarkers();
-        restoreIconsColors();
-    } else {
-        for (var country_code in countries) {
-          var flag_id = country_code.concat("__");
-          if (country_code != 'BR') {
-            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-          }
-        }
       }
+      setIconsColors();
     });
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports);
       if (document.getElementById("checkbox-flights-domestic").checked) {
         fitRegion(map_fullwindow, 'BR', map_padding_fw);
         document.getElementById("checkbox-road-trips").checked = false;
-        document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         hideAllMarkers();
         showMarkers(map_fullwindow, airports_markers);
+        if (document.getElementById("checkbox-bus-rides").checked) {
+          showMarkers(map_fullwindow, cities_markers);
+        }
         if (!document.getElementById("checkbox-flights-international").checked) {
-          restoreIconsColors();
           for (var country_code in countries) {
             var flag_id = country_code.concat("__");
             if (country_code != 'BR') {
@@ -834,10 +842,36 @@
             }
           }
         }
-      } else if (!document.getElementById("checkbox-flights-international").checked) {
+      } else if (!document.getElementById("checkbox-flights-international").checked && !document.getElementById("checkbox-bus-rides").checked) {
         toggleAllMarkers();
-        restoreIconsColors();
       }
+      setIconsColors();
+    });
+    document.getElementById("checkbox-bus-rides").addEventListener('click', function() {
+      hide_car_routes = false;
+      loadBusRoutes(map_fullwindow, bus_rides, bus_rides_places, hide_bus_routes);
+      if (document.getElementById("checkbox-bus-rides").checked) {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
+        hideAllMarkers();
+        showMarkers(map_fullwindow, airports_markers);
+        showMarkers(map_fullwindow, cities_markers);
+        for (var country_code in countries) {
+          var flag_id = country_code.concat("__");
+          if (!countries[country_code][1].includes('b')) {
+            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
+          }
+        }
+      } else if (!document.getElementById("checkbox-flights-international").checked && !document.getElementById("checkbox-flights-domestic").checked) {
+        toggleAllMarkers();
+      } else if (document.getElementById("checkbox-flights-international").checked || document.getElementById("checkbox-flights-domestic").checked) {
+        hideAllMarkers();
+        showMarkers(map_fullwindow, airports_markers);
+      }
+      setIconsColors();
     });
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
       hide_car_routes = false;
@@ -847,13 +881,14 @@
         if(!hide_car_routes) {
           fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
         }
+        document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
         if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-          restoreIconsColors();
           for (var country_code in countries) {
             var flag_id = country_code.concat("__");
             if (country_code != 'BR') {
@@ -861,39 +896,22 @@
             }
           }
         }
-      } else if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-        restoreIconsColors();
       }
       toggleAllMarkers();
+      setIconsColors();
     });
     document.getElementById("checkbox-road-trips-abroad").addEventListener('click', function() {
       hide_car_routes = false;
       loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
       if (document.getElementById("checkbox-road-trips-abroad").checked) {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
-        document.getElementById("checkbox-flights-domestic").checked = false;
-        document.getElementById("checkbox-flights-international").checked = false;
+        document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
-        restoreIconsColors();
-        for (var country_code in countries) {
-          var flag_id = country_code.concat("__");
-          if (!countries[country_code][1].includes('d')) {
-            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-          }
-        }
-      } else if (document.getElementById("checkbox-road-trips").checked) {
-        for (var country_code in countries) {
-          var flag_id = country_code.concat("__");
-          if (country_code != 'BR') {
-            document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-          }
-        }
-      } else {
-        restoreIconsColors();
       }
       toggleAllMarkers();
+      setIconsColors();
     });
     document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
       loadFarthestPoints(map_fullwindow, farthest_points);
@@ -903,28 +921,19 @@
         hideAllMarkers();
         showMarkers(map_fullwindow, farthest_points_markers);
         hide_car_routes = true;
+        document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
-        for (var country_code in countries) {
-          var flag_id = country_code.concat("__");
-          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-        }
-        console.log(farthest_points);
-        for (var i in farthest_points) {
-          country_code = farthest_points[i][1];
-          var flag_id = country_code.concat("__");
-          document.getElementById(flag_id).setAttribute('class', 'icon');
-        }
       } else {
         toggleAllMarkers();
         hideMarkers(map_fullwindow, farthest_points_markers);
-        restoreIconsColors();
         hide_car_routes = false;
       }
+      setIconsColors();
     });
 
     if (traveling) {

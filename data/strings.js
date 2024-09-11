@@ -16,6 +16,7 @@ var strings_dict = {
   'SOUTH': 'Sul',
   'EAST': 'Leste',
   'WEST': 'Oeste',
+  'FLIGHT_CONNECT': ' (conexão de voo)',
   'MAP_ITEMS': 'Items do Mapa',
   'MAP_LAYER_1': 'mapa',
   'MAP_LAYER_2': 'relevo',
@@ -29,9 +30,10 @@ var strings_dict = {
   'MKR_PHOTOS': 'fotos',
   'MKR_INTERNATIONAL_FLIGHT': 'voos internacionais',
   'MKR_DOMESTIC_FLIGHT': 'voos domésticos',
+  'MKR_BUS': 'ônibus',
   'MKR_CAR': 'viagens de carro',
   'MKR_CAR_ABROAD': 'carro alugado',
-  'MKR_FARTHEST_POINTS': 'extremos'
+  'MKR_FARTHEST_POINTS': 'extremos',
 }
 
 var strings_dict_en = {
@@ -52,6 +54,7 @@ var strings_dict_en = {
   'SOUTH': 'South',
   'EAST': 'East',
   'WEST': 'West',
+  'FLIGHT_CONNECT': ' (flight connection)',
   'MAP_ITEMS': 'Map Items',
   'MAP_LAYER_1': 'map',
   'MAP_LAYER_2': 'elevation',
@@ -65,6 +68,7 @@ var strings_dict_en = {
   'MKR_PHOTOS': 'photos',
   'MKR_INTERNATIONAL_FLIGHT': 'international flights',
   'MKR_DOMESTIC_FLIGHT': 'domestic flights',
+  'MKR_BUS': 'bus rides',
   'MKR_CAR': 'road trips',
   'MKR_CAR_ABROAD': 'rented car',
   'MKR_FARTHEST_POINTS': 'extremes'
