@@ -801,7 +801,6 @@
     document.getElementById("checkbox-flights-international").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports);
       if (document.getElementById("checkbox-flights-international").checked) {
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
@@ -825,7 +824,6 @@
     document.getElementById("checkbox-flights-domestic").addEventListener('click', function() {
       loadFlights(map_fullwindow, flights, airports);
       if (document.getElementById("checkbox-flights-domestic").checked) {
-        fitRegion(map_fullwindow, 'BR', map_padding_fw);
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
@@ -851,7 +849,6 @@
       hide_car_routes = false;
       loadBusRoutes(map_fullwindow, bus_rides, bus_rides_places, hide_bus_routes);
       if (document.getElementById("checkbox-bus-rides").checked) {
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
@@ -904,7 +901,6 @@
       hide_car_routes = false;
       loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
       if (document.getElementById("checkbox-road-trips-abroad").checked) {
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
