@@ -54,9 +54,7 @@ function toggleAllMarkers () {
 }
 
 function toggleMarkers(map, markers, checkbox) {
-  if (!document.getElementById("checkbox-farthest-points").checked
-    && !document.getElementById("checkbox-flights-international").checked
-  && !document.getElementById("checkbox-flights-domestic").checked) {
+  if (!document.getElementById("checkbox-farthest-points").checked) {
   if (document.getElementById(checkbox).checked) {
     showMarkers(map, markers);
   } else {
@@ -965,9 +963,6 @@ function loadBusRoutes(map, bus_rides, places, hide_bus_routes) {
 }
 
 function createCarRoute(map, id, points) {
-  //
-  // console.log(id);
-  // console.log(points);
 
   var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/'
 
@@ -1163,8 +1158,6 @@ function setIconsColors() {
     }
 
   }
-
-  console.log(all_unchecked);
 
   if (all_unchecked) {
     for (var country_code in countries) {
