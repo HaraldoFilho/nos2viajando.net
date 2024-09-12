@@ -54,7 +54,7 @@ function toggleAllMarkers () {
 }
 
 function toggleMarkers(map, markers, checkbox) {
-  if (!document.getElementById("checkbox-farthest-points").checked) {
+  if (!document.getElementById("checkbox-farthest-points").checked && !document.getElementById("checkbox-photos").checked) {
   if (document.getElementById(checkbox).checked) {
     showMarkers(map, markers);
   } else {
