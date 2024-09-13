@@ -644,6 +644,14 @@
     icon_flights_domestic.setAttribute('height', '18px');
     icon_flights_domestic.setAttribute('style', 'margin: 0px 1px -2px 2px');
 
+    var input_road_trips_abroad = document.createElement('INPUT');
+    input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
+    input_road_trips_abroad.setAttribute('type', 'checkbox');
+    var icon_road_trip_abroad = document.createElement('IMG');
+    icon_road_trip_abroad.setAttribute('src', icons_path.concat('car_abroad.svg'));
+    icon_road_trip_abroad.setAttribute('height', '18px');
+    icon_road_trip_abroad.setAttribute('style', 'margin: 0px 2px -3px 1px');
+
     var input_bus_rides = document.createElement('INPUT');
     input_bus_rides.setAttribute('id', 'checkbox-bus-rides');
     input_bus_rides.setAttribute('type', 'checkbox');
@@ -667,14 +675,6 @@
     icon_boat_rote.setAttribute('src', icons_path.concat('boat.png'));
     icon_boat_rote.setAttribute('height', '18px');
     icon_boat_rote.setAttribute('style', 'margin: 0px 2px -3px 1px');
-
-    var input_road_trips_abroad = document.createElement('INPUT');
-    input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
-    input_road_trips_abroad.setAttribute('type', 'checkbox');
-    var icon_road_trip_abroad = document.createElement('IMG');
-    icon_road_trip_abroad.setAttribute('src', icons_path.concat('car_abroad.svg'));
-    icon_road_trip_abroad.setAttribute('height', '18px');
-    icon_road_trip_abroad.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
     var input_road_trips = document.createElement('INPUT');
     input_road_trips.setAttribute('id', 'checkbox-road-trips');
@@ -746,6 +746,11 @@
     selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
     selector.appendChild(document.createElement('BR'));
 
+    selector.appendChild(input_road_trips_abroad);
+    selector.appendChild(icon_road_trip_abroad);
+    selector.append(strings_dict['MKR_CAR_ABROAD']);
+    selector.appendChild(document.createElement('BR'));
+
     selector.appendChild(input_bus_rides);
     selector.appendChild(icon_bus_ride);
     selector.append(strings_dict['MKR_BUS']);
@@ -759,11 +764,6 @@
     selector.appendChild(input_boat_rotes);
     selector.appendChild(icon_boat_rote);
     selector.append(strings_dict['MKR_BOAT']);
-    selector.appendChild(document.createElement('BR'));
-
-    selector.appendChild(input_road_trips_abroad);
-    selector.appendChild(icon_road_trip_abroad);
-    selector.append(strings_dict['MKR_CAR_ABROAD']);
     selector.appendChild(document.createElement('BR'));
 
     var separator_3 = document.createElement('HR');
