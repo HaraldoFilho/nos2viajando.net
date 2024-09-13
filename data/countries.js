@@ -4,6 +4,7 @@
 // f = flight
 // c = connection
 // b = bus ride (inter cities abroad)
+// t = train (inter cities abroad)
 // d = drived a car
 
 var countries = {
@@ -11,7 +12,7 @@ var countries = {
   'AR': ['Argentina', 'd'],
   'PY': ['Paraguai', ''],
   'US': ['Estados Unidos', 'fwd'],
-  'IT': ['Itália', 'feb'],
+  'IT': ['Itália', 'febt'],
   'VA': ['Vaticano', ''],
   'HR': ['Croácia', 'feb'],
   'CL': ['Chile', 'fwbd'],
@@ -19,11 +20,10 @@ var countries = {
 }
 
 var countries_en = {
-  'BR': ['Brazil', 'fbd'],
   'AR': ['Argentina', 'd'],
   'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
-  'IT': ['Italy', 'feb'],
+  'IT': ['Italy', 'febt'],
   'VA': ['Vatican City', ''],
   'HR': ['Croatia', 'feb'],
   'CL': ['Chile', 'fwbd'],
@@ -37,7 +37,6 @@ var continents = [
   ['Europa', ['IT', 'VA', 'HR']],
   ['África', []],
   ['Ásia', []],
-  ['Oceania', []],
   ['Antártida', []]
 ]
 
