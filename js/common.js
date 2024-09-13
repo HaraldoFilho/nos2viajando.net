@@ -668,6 +668,61 @@ function loadTrainRoutes(map, train_routes, places) {
       removeLine(map, ids[i]);
     }
   }
+
+}
+
+function loadBoatRoutes(map, boat_routes, places) {
+
+  var route_id;
+  var ids = [];
+
+  for (var t = 0; t < boat_routes.length; t++) {
+    for (var p = 0; p < places.length; p++) {
+      if (places[p][2] == boat_routes[t][1][0]) {
+        var initial_coord = places[p][0];
+      }
+      if (places[p][2] == boat_routes[t][1][2]) {
+        var final_coord = places[p][0];
+      }
+    }
+
+    var points = boat_routes[t][1][1];
+    var n_points = points.length;
+
+    if (n_points == 0) {
+      route_id = 'boat_route_' + (t+1);
+      createLine(map, route_id, initial_coord, final_coord);
+      ids.push(route_id);
+    } else if (n_points == 1) {
+      route_id = 'boat_route_' + (t+1) + '_0';
+      createLine(map, route_id, initial_coord, points[0]);
+      ids.push(route_id);
+      route_id = 'boat_route_' + (t+1) + '_1';
+      createLine(map, route_id, points[0], final_coord);
+      ids.push(route_id);
+    } else {
+      route_id = 'boat_route_' + (t+1) + '_0';
+      createLine(map, route_id, initial_coord, points[0]);
+      ids.push(route_id);
+      for (var i = 0; i < n_points; i++) {
+        route_id = 'boat_route_' + (t+1) + '_' + (i+1);
+        createLine(map, route_id, points[i], points[i+1]);
+        ids.push(route_id);
+      }
+      route_id = 'boat_route_' + (t+1) + '_' + (n_points+1);
+      createLine(map, route_id, points[n_points-1], final_coord);
+      ids.push(route_id);
+    }
+  }
+
+  for (var i = 0; i < ids.length; i++) {
+    if (document.getElementById("checkbox-boat-routes").checked) {
+      addLine(map, ids[i], '#099', 4, [1,0]);
+    } else {
+      removeLine(map, ids[i]);
+    }
+  }
+
 }
 
 function createLine(map, id, coord_a, coord_b) {
@@ -755,12 +810,12 @@ function loadFlights(map, flights, airports) {
 
         if (country_a == 'BR' && country_b == 'BR') {
           color = color_domestic;
-          width = 2;
+          width = 2.2;
           add = document.getElementById("checkbox-flights-domestic").checked;
 
         } else {
           color = color_international;
-          width = 2;
+          width = 2.2;
           add = document.getElementById("checkbox-flights-international").checked;
         }
 
@@ -979,7 +1034,7 @@ function loadCarRoutesAbroad(map, driving_abroad, places, hide_car_routes) {
     createCarRoute(map, route_id, trip_points_abroad);
 
     if (document.getElementById("checkbox-road-trips-abroad").checked && !hide_car_routes) {
-      addCarRoute(map, route_id, '#F00');
+      addCarRoute(map, route_id, '#950');
     } else {
       removeCarRoute(map, route_id);
     }
@@ -1201,6 +1256,11 @@ function setIconsColors() {
     }
 
     if (document.getElementById("checkbox-train-routes").checked && countries[country_code][1].includes('t')) {
+      document.getElementById(flag_id).setAttribute('class', 'icon');
+      all_unchecked = false;
+    }
+
+    if (document.getElementById("checkbox-boat-routes").checked && countries[country_code][1].includes('s')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
       all_unchecked = false;
     }

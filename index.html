@@ -30,6 +30,7 @@
     <script src="data/flights.js"></script>
     <script src="data/bus.js"></script>
     <script src="data/train.js"></script>
+    <script src="data/boat.js"></script>
     <script src="data/driving.js"></script>
     <script src="data/photos.js"></script>
 
@@ -659,6 +660,14 @@
     icon_train_rote.setAttribute('height', '18px');
     icon_train_rote.setAttribute('style', 'margin: 0px 2px -3px 1px');
 
+    var input_boat_rotes = document.createElement('INPUT');
+    input_boat_rotes.setAttribute('id', 'checkbox-boat-routes');
+    input_boat_rotes.setAttribute('type', 'checkbox');
+    var icon_boat_rote = document.createElement('IMG');
+    icon_boat_rote.setAttribute('src', icons_path.concat('boat.png'));
+    icon_boat_rote.setAttribute('height', '18px');
+    icon_boat_rote.setAttribute('style', 'margin: 0px 2px -3px 1px');
+
     var input_road_trips_abroad = document.createElement('INPUT');
     input_road_trips_abroad.setAttribute('id', 'checkbox-road-trips-abroad');
     input_road_trips_abroad.setAttribute('type', 'checkbox');
@@ -747,6 +756,11 @@
     selector.append(strings_dict['MKR_TRAIN']);
     selector.appendChild(document.createElement('BR'));
 
+    selector.appendChild(input_boat_rotes);
+    selector.appendChild(icon_boat_rote);
+    selector.append(strings_dict['MKR_BOAT']);
+    selector.appendChild(document.createElement('BR'));
+
     selector.appendChild(input_road_trips_abroad);
     selector.appendChild(icon_road_trip_abroad);
     selector.append(strings_dict['MKR_CAR_ABROAD']);
@@ -801,17 +815,9 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
-        if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-          hideAllMarkers();
-          showMarkers(map_fullwindow, airports_markers);
-          if (document.getElementById("checkbox-bus-rides").checked || document.getElementById("checkbox-train-routes").checked) {
-            showMarkers(map_fullwindow, cities_markers);
-          }
-        }
-      } else if (!document.getElementById("checkbox-flights-domestic").checked
-      && !document.getElementById("checkbox-bus-rides").checked) {
-        toggleAllMarkers();
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
+      toggleAllMarkers();
       setIconsColors();
     });
 
@@ -821,16 +827,9 @@
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
-        if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-          hideAllMarkers();
-          showMarkers(map_fullwindow, airports_markers);
-          if (document.getElementById("checkbox-bus-rides").checked || document.getElementById("checkbox-train-routes").checked) {
-            showMarkers(map_fullwindow, cities_markers);
-          }
-        }
-      } else if (!document.getElementById("checkbox-flights-international").checked && !document.getElementById("checkbox-bus-rides").checked) {
-        toggleAllMarkers();
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
+      toggleAllMarkers();
       setIconsColors();
     });
 
@@ -842,23 +841,9 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
-        if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-          hideAllMarkers();
-          showMarkers(map_fullwindow, airports_markers);
-          showMarkers(map_fullwindow, cities_markers);
-        }
-      } else if (!document.getElementById("checkbox-flights-international").checked && !document.getElementById("checkbox-flights-domestic").checked) {
-        toggleAllMarkers();
-      } else if (document.getElementById("checkbox-flights-international").checked || document.getElementById("checkbox-flights-domestic").checked) {
-        hideAllMarkers();
-        showMarkers(map_fullwindow, airports_markers);
-        if (document.getElementById("checkbox-train-routes").checked) {
-          showMarkers(map_fullwindow, cities_markers);
-        }
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
-      if (document.getElementById("checkbox-road-trips-abroad").checked) {
-        toggleAllMarkers();
-      }
+      toggleAllMarkers();
       setIconsColors();
     });
 
@@ -870,23 +855,37 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
-        if (!document.getElementById("checkbox-road-trips-abroad").checked) {
-          hideAllMarkers();
-          showMarkers(map_fullwindow, airports_markers);
-          showMarkers(map_fullwindow, cities_markers);
-        }
-      } else if (!document.getElementById("checkbox-flights-international").checked && !document.getElementById("checkbox-flights-domestic").checked) {
-        toggleAllMarkers();
-      } else if (document.getElementById("checkbox-flights-international").checked || document.getElementById("checkbox-flights-domestic").checked) {
-        hideAllMarkers();
-        showMarkers(map_fullwindow, airports_markers);
-        if (document.getElementById("checkbox-bus-rides").checked) {
-          showMarkers(map_fullwindow, cities_markers);
-        }
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
+      toggleAllMarkers();
+      setIconsColors();
+    });
+
+    document.getElementById("checkbox-boat-routes").addEventListener('click', function() {
+      hide_car_routes = false;
+      loadBoatRoutes(map_fullwindow, boat_routes, places);
+      if (document.getElementById("checkbox-boat-routes").checked) {
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
+        loadFarthestPoints(map_fullwindow, farthest_points);
+      }
+      toggleAllMarkers();
+      setIconsColors();
+    });
+
+    document.getElementById("checkbox-road-trips-abroad").addEventListener('click', function() {
+      hide_car_routes = false;
+      loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
       if (document.getElementById("checkbox-road-trips-abroad").checked) {
-        toggleAllMarkers();
+        document.getElementById("checkbox-road-trips").checked = false;
+        document.getElementById("checkbox-farthest-points").checked = false;
+        document.getElementById("checkbox-photos").checked = false;
+        loadFlights(map_fullwindow, flights, airports);
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
+      toggleAllMarkers();
       setIconsColors();
     });
 
@@ -903,31 +902,16 @@
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-train-routes").checked = false;
+        document.getElementById("checkbox-boat-routes").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-photos").checked = false;
         loadFlights(map_fullwindow, flights, airports);
+        loadBusRoutes(map_fullwindow, train_routes, places);
         loadTrainRoutes(map_fullwindow, train_routes, places);
+        loadBoatRoutes(map_fullwindow, boat_routes, places);
+        loadFarthestPoints(map_fullwindow, farthest_points);
       }
       toggleAllMarkers();
-      setIconsColors();
-    });
-
-    document.getElementById("checkbox-road-trips-abroad").addEventListener('click', function() {
-      hide_car_routes = false;
-      loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
-      if (document.getElementById("checkbox-road-trips-abroad").checked) {
-        document.getElementById("checkbox-road-trips").checked = false;
-        document.getElementById("checkbox-farthest-points").checked = false;
-        document.getElementById("checkbox-photos").checked = false;
-        loadFlights(map_fullwindow, flights, airports);
-        toggleAllMarkers();
-      } else if (document.getElementById("checkbox-flights-international").checked || document.getElementById("checkbox-flights-domestic").checked || document.getElementById("checkbox-bus-rides").checked) {
-        hideAllMarkers();
-        showMarkers(map_fullwindow, airports_markers);
-        if (document.getElementById("checkbox-bus-rides").checked) {
-          showMarkers(map_fullwindow, cities_markers);
-        }
-      }
       setIconsColors();
     });
 
@@ -937,6 +921,7 @@
       if (document.getElementById("checkbox-farthest-points").checked) {
         document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-train-routes").checked = false;
+        document.getElementById("checkbox-boat-routes").checked = false;
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
@@ -945,7 +930,9 @@
         hide_car_routes = true;
         loadCarRoutes(map_fullwindow, driving, road_trips_places, hide_car_routes);
         loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
+        loadBusRoutes(map_fullwindow, train_routes, places);
         loadTrainRoutes(map_fullwindow, train_routes, places);
+        loadBoatRoutes(map_fullwindow, boat_routes, places);
         loadFlights(map_fullwindow, flights, airports);
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         hideAllMarkers();
@@ -958,14 +945,11 @@
       setIconsColors();
     });
 
-    if (traveling) {
-      hideSideBar();
-    }
-
     document.getElementById("checkbox-photos").addEventListener('click', function() {
       if (document.getElementById("checkbox-photos").checked) {
         document.getElementById("checkbox-bus-rides").checked = false;
         document.getElementById("checkbox-train-routes").checked = false;
+        document.getElementById("checkbox-boat-routes").checked = false;
         document.getElementById("checkbox-road-trips").checked = false;
         document.getElementById("checkbox-road-trips-abroad").checked = false;
         document.getElementById("checkbox-farthest-points").checked = false;
@@ -975,6 +959,7 @@
         loadCarRoutes(map_fullwindow, driving, road_trips_places, hide_car_routes);
         loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
         loadTrainRoutes(map_fullwindow, train_routes, places);
+        loadBoatRoutes(map_fullwindow, boat_routes, places);
         loadFlights(map_fullwindow, flights, airports);
         hideFarthestPointsLines(map_fullwindow);
         hideAllMarkers();
@@ -986,6 +971,10 @@
       setIconsColors();
       toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
     });
+
+    if (traveling) {
+      hideSideBar();
+    }
 
     // avoid bug of shows empty countries panel when window is resized
     exitMapFullWindow();

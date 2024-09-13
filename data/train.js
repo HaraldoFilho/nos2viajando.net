@@ -1,4 +1,5 @@
 var train_routes = [
+
   [2019, [
     'Roma', [
     [12.61449596758722, 41.79664810285015],
@@ -12,10 +13,16 @@ var train_routes = [
     'Salerno'
   ]],
 
-  [2019, ['Roma', [], 'Aeroporto de Roma-Fiumicino']]
+  [2019, [
+    'Roma', [
+    ],
+    'Aeroporto de Roma-Fiumicino'
+  ]]
+
 ]
 
 var train_routes_en = [
+
   [2019, [
     'Rome', [
     [12.61449596758722, 41.79664810285015],
@@ -29,5 +36,10 @@ var train_routes_en = [
     'Salerno'
   ]],
 
-  [2019, ['Rome', [], 'Rome-Fiumicino Airport']]
+  [2019, [
+    'Rome', [
+    ],
+    'Rome-Fiumicino Airport'
+  ]]
+
 ]

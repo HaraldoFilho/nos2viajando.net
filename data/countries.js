@@ -5,29 +5,30 @@
 // c = connection
 // b = bus ride (inter cities abroad)
 // t = train (inter cities abroad)
+// s = boat (ship)
 // d = drived a car
 
 var countries = {
   'BR': ['Brasil', 'fbd'],
-  'AR': ['Argentina', 'd'],
+  'AR': ['Argentina', 'ds'],
   'PY': ['Paraguai', ''],
   'US': ['Estados Unidos', 'fwd'],
   'IT': ['Itália', 'febt'],
   'VA': ['Vaticano', ''],
-  'HR': ['Croácia', 'feb'],
+  'HR': ['Croácia', 'febs'],
   'CL': ['Chile', 'fwbd'],
-  'UY': ['Uruguai', 'fwbd']
+  'UY': ['Uruguai', 'fwbsd']
 }
 
 var countries_en = {
-  'AR': ['Argentina', 'd'],
+  'AR': ['Argentina', 'ds'],
   'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
   'IT': ['Italy', 'febt'],
   'VA': ['Vatican City', ''],
-  'HR': ['Croatia', 'feb'],
+  'HR': ['Croatia', 'fesb'],
   'CL': ['Chile', 'fwbd'],
-  'UY': ['Uruguay', 'fwd']
+  'UY': ['Uruguay', 'fwsd']
 }
 
 var continents = [
