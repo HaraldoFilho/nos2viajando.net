@@ -3,10 +3,10 @@
 // e = flyed to east
 // f = flight
 // c = connection
-// b = bus ride (inter cities abroad)
+// b = bus (inter cities abroad)
 // t = train (inter cities abroad)
 // s = boat (ship)
-// d = drived a car
+// d = drived a rented car
 
 var countries = {
   'BR': ['Brasil', 'fbd'],
@@ -21,14 +21,15 @@ var countries = {
 }
 
 var countries_en = {
+  'BR': ['Brazil', 'fbd'],
   'AR': ['Argentina', 'ds'],
   'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
   'IT': ['Italy', 'febt'],
   'VA': ['Vatican City', ''],
-  'HR': ['Croatia', 'fesb'],
+  'HR': ['Croatia', 'febs'],
   'CL': ['Chile', 'fwbd'],
-  'UY': ['Uruguay', 'fwsd']
+  'UY': ['Uruguay', 'fwbsd']
 }
 
 var continents = [
@@ -38,6 +39,7 @@ var continents = [
   ['Europa', ['IT', 'VA', 'HR']],
   ['África', []],
   ['Ásia', []],
+  ['Oceania', []],
   ['Antártida', []]
 ]
 
