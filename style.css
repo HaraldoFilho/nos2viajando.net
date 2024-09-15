@@ -482,11 +482,11 @@ a:hover {
   display: none;
   bottom: 0;
   left: 0;
-  width: auto;
+  width: 150px;
   z-index: 9;
   margin: 5px;
   background: white;
-  padding: 10px 15px 10px 10px;
+  padding: 10px;
   border-style: solid;
   border-width: 2px;
   border-color: lightgrey;
