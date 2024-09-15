@@ -934,9 +934,9 @@
         loadTrainRoutes(map_fullwindow, train_routes, places);
         loadBoatRoutes(map_fullwindow, boat_routes, places);
         loadFlights(map_fullwindow, flights, airports);
-        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         hideAllMarkers();
         showMarkers(map_fullwindow, farthest_points_markers);
+        fitRegion(map_fullwindow, 'WW', map_padding_fw);
       } else {
         toggleAllMarkers();
         hideMarkers(map_fullwindow, farthest_points_markers);
@@ -955,6 +955,7 @@
         document.getElementById("checkbox-farthest-points").checked = false;
         document.getElementById("checkbox-flights-international").checked = false;
         document.getElementById("checkbox-flights-domestic").checked = false;
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
         hide_car_routes = true;
         loadCarRoutes(map_fullwindow, driving, road_trips_places, hide_car_routes);
         loadCarRoutesAbroad(map_fullwindow, driving_abroad, road_trips_places_abroad, hide_car_routes);
