@@ -5,5 +5,6 @@ var flights = [
   [2018, [['VCP', 'REC', 'FEN'], ['FEN', 'REC', 'VCP']]],
   [2019, [['GRU', 'FCO'], ['FCO', 'SPU', 'ZAG'], ['DBV', 'FCO'], ['NAP', 'FCO', 'GRU']]],
   [2023, [['GRU', 'SCL', 'PUQ'], ['PUQ', 'SCL', 'GRU']]],
-  [2024, [['GRU', 'MVD'], ['MVD', 'GRU']]]
+  [2024, [['GRU', 'MVD'], ['MVD', 'GRU']]],
+  // [2025, [['GRU', 'SCL', 'PMC'], ['BRC', 'SCL', 'GRU']]]
 ]

@@ -15,7 +15,9 @@ var airports = [
   [[14.289361, 40.884847], 'IT', 'Aeroporto de Nápoles', 'NAP'],
   [[-70.792669, -33.402072], 'CL', 'Aeroporto de Santiago', 'SCL'],
   [[-70.847176, -53.004180], 'CL', 'Aeroporto de Punta Arenas', 'PUQ'],
-  [[-56.016373, -34.837431], 'UY', 'Aeroporto de Montevidéu', 'MVD']
+  [[-56.016373, -34.837431], 'UY', 'Aeroporto de Montevidéu', 'MVD'],
+  // [[-73.098784, -41.433182], 'CL', 'Aeroporto de Puerto Montt', 'PMC'],
+  // [[-71.161577, -41.145985], 'AR', 'Aeroporto de Bariloche', 'BRC']
 ]
 
 var airports_en = [
@@ -35,5 +37,7 @@ var airports_en = [
   [[14.289361, 40.884847], 'IT', 'Naples Airport', 'NAP'],
   [[-70.792669, -33.402072], 'CL', 'Santiago Airport', 'SCL'],
   [[-70.847176, -53.004180], 'CL', 'Punta Arenas Airport', 'PUQ'],
-  [[-56.016373, -34.837431], 'UY', 'Montevideo Airport', 'MVD']
+  [[-56.016373, -34.837431], 'UY', 'Montevideo Airport', 'MVD'],
+  // [[-73.098784, -41.433182], 'CL', 'Puerto Montt Airport', 'PMC'],
+  // [[-71.161577, -41.145985], 'AR', 'Bariloche Airport', 'BRC']
 ]
