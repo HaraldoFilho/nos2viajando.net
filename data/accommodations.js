@@ -23,5 +23,9 @@ var accommodations = [
   [[-54.94409, -34.96062], 'UY', '20 Hotel'],
   [[-57.85253, -34.47187], 'UY', 'Posada Plaza Mayor'],
   [[-58.40009, -34.60927], 'AR', 'GrandView Hotel Buenos Aires'],
-  [[-56.19891, -34.90531], 'UY', 'Holiday Inn Montevideo']
+  [[-56.19891, -34.90531], 'UY', 'Holiday Inn Montevideo'],
+  // [[-72.98553, -41.31484], 'CL', 'Park Inn by Radisson Puerto Varas'],
+  // [[-72.01985, -41.08567], 'CL', 'Hotel Natura Patagonia'],
+  // [[-71.81388, -41.02444], 'AR', 'Hotel Puerto Blest'],
+  // [[-71.30377, -41.13335], 'AR', 'Hotel Crans Montana']
 ]
