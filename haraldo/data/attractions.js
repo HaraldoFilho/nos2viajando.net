@@ -1,4 +1,15 @@
 var attractions_solo = [
+  [[-32.419546, -3.8523687], 'BR', 'Ilhatour'],
+  [[-32.398248, -3.834981], 'BR', 'Mirante Buraco da Raquel'],
+  [[-32.431141, -3.846836], 'BR', 'Mirante Forte do Boldró'],
+  [[-32.442897, -3.855229], 'BR', 'Trilha Costa dos Mirantes'],
+  [[-32.446763, -3.858239], 'BR', 'Mirante dos Golfinhos'],
+  [[-32.437210, -3.849362], 'BR', 'Praia da Cacimba do Padre'],
+  [[-32.400426, -3.834329], 'BR', 'Porto Santo Antônio'],
+  [[-32.432973, -3.847640], 'BR', 'Trilha Costa da Esmeralda'],
+  [[-32.411044, -3.840651], 'BR', 'Trilha Histórica'],
+  [[-32.410139, -3.837930], 'BR', 'Forte de Nossa Senhora dos Remédios'],
+  [[-32.445217, -3.852690], 'BR', 'Passeio de Barco'],
   [[-35.902746, -9.669572], 'BR', 'Lagoa Manguaba'],
   [[-35.904206, -9.859470], 'BR', 'Praia do Gunga'],
   [[-36.394894, -10.479603], 'BR', 'Foz do Rio São Francisco'],
@@ -16,6 +27,17 @@ var attractions_solo = [
 ]
 
 var attractions_solo_en = [
+  [[-32.419546, -3.8523687], 'BR', 'Ilhatour'],
+  [[-32.398248, -3.834981], 'BR', '\'Buraco da Raquel\' Lookout'],
+  [[-32.431141, -3.846836], 'BR', '\'Forte do Boldró\' Lookout'],
+  [[-32.442897, -3.855229], 'BR', '\'Costa dos Mirantes\' Trail'],
+  [[-32.446763, -3.858239], 'BR', 'Dolphins\' Lookout'],
+  [[-32.437210, -3.849362], 'BR', 'Cacimba do Padre\'s Beach'],
+  [[-32.400426, -3.834329], 'BR', 'Santo Antônio Port'],
+  [[-32.432973, -3.847640], 'BR', '\'Costa da Esmeralda\' Trail'],
+  [[-32.411044, -3.840651], 'BR', 'Historic Trail'],
+  [[-32.410139, -3.837930], 'BR', '\'Nossa Senhora dos Remédios\' Fortress'],
+  [[-32.445217, -3.852690], 'BR', 'Boat Ride'],
   [[-35.902746, -9.669572], 'BR', 'Lagoa Manguaba'],
   [[-35.904206, -9.859470], 'BR', 'Praia do Gunga'],
   [[-36.394894, -10.479603], 'BR', 'Foz do Rio São Francisco'],

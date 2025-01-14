@@ -1,6 +1,9 @@
 var airports_solo = [
   [[-46.656734, -23.627357], 'BR', 'Aeroporto de Congonhas', 'CGH'],
+  [[-32.424450, -3.853822], 'BR', 'Aeroporto de Fernando de Noronha', 'FEN'],
+  [[-47.137552, -23.008121], 'BR', 'Aeroporto de Viracopos', 'VCP'],
   [[-35.792416, -9.514836], 'BR', 'Aeroporto de Maceió', 'MCZ'],
+  [[-46.473064, -23.429726], 'BR', 'Aeroporto de Guarulhos', 'GRU'],
   [[-87.899794, 41.976487], 'US', 'Aeroporto de Chicago', 'ORD'],
   [[-48.545479, -27.670034], 'BR', 'Aeroporto de Florianópolis', 'FLN'],
   [[-35.365953, -5.768892], 'BR', 'Aeroporto de Natal', 'NAT'],
@@ -10,7 +13,10 @@ var airports_solo = [
 
 var airports_solo_en = [
   [[-46.656734, -23.627357], 'BR', 'Congonhas Airport', 'CGH'],
+  [[-32.424450, -3.853822], 'BR', 'Fernando de Noronha Airport', 'FEN'],
+  [[-47.137552, -23.008121], 'BR', 'Viracopos Airport', 'VCP'],
   [[-35.792416, -9.514836], 'BR', 'Maceió Airport', 'MCZ'],
+  [[-46.473064, -23.429726], 'BR', 'Guarulhos Airport', 'GRU'],
   [[-87.899794, 41.976487], 'US', 'Chicago Airport', 'ORD'],
   [[-48.545479, -27.670034], 'BR', 'Florianópolis Airport', 'FLN'],
   [[-35.365953, -5.768892], 'BR', 'Natal Airport', 'NAT'],

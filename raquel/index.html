@@ -21,10 +21,10 @@
   <script src="../data/attractions.js"></script>
   <script src="../data/airports.js"></script>
   <script src="../data/flights.js"></script>
-  <script src="../data/photos.js"></script>
 
   <script src="data/strings.js"></script>
   <script src="data/trips.js"></script>
+  <script src="data/countries.js"></script>
   <script src="data/cities.js"></script>
   <script src="data/attractions.js"></script>
   <script src="data/airports.js"></script>
@@ -135,10 +135,14 @@
     trips = trips_en;
   }
 
+  for (var country_code in countries) {
+    countries_solo[country_code] = countries[country_code];
+  }
+
+  countries = countries_solo;
+
   var restaurants = [];
   var accommodations = [];
-
-  locations_dict = locations_dict_solo;
 
   loadAdditionalData();
   addFooter();
@@ -235,7 +239,8 @@
     }
   }
 
-  photos_markers_solo = createPhotosMarkers(map, locations_dict);
+  var locations_dict = {};
+  photos_markers_solo = createPhotosMarkers(map_fullwindow, locations_dict_solo);
 
   document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
   document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
@@ -595,11 +600,6 @@
   separator.setAttribute('class', 'separator');
   selector.appendChild(separator);
 
-  selector.appendChild(input_photos);
-  selector.appendChild(icon_photos);
-  selector.append(strings_dict['MKR_PHOTOS']);
-  selector.appendChild(document.createElement('BR'));
-
   selector.appendChild(input_flights_international);
   selector.appendChild(icon_flights_international);
   selector.append(strings_dict['MKR_INTERNATIONAL_FLIGHT']);
@@ -610,9 +610,18 @@
   selector.append(strings_dict['MKR_DOMESTIC_FLIGHT']);
   selector.appendChild(document.createElement('BR'));
 
+  var separator = document.createElement('HR');
+  separator.setAttribute('class', 'separator');
+  selector.appendChild(separator);
+
   selector.appendChild(input_farthest_points);
   selector.appendChild(icon_farthest_points);
   selector.append(strings_dict['MKR_FARTHEST_POINTS']);
+  selector.appendChild(document.createElement('BR'));
+
+  selector.appendChild(input_photos);
+  selector.appendChild(icon_photos);
+  selector.append(strings_dict['MKR_PHOTOS']);
 
   var expand_selector = document.getElementById('expand-selector');
   expand_selector.appendChild(icon_expand_less);
@@ -637,25 +646,18 @@
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-flights-international").checked = false;
       document.getElementById("checkbox-flights-domestic").checked = false;
+      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       loadFlights(map_fullwindow, flights, airports);
-      hideAllMarkers();
+      hideFarthestPointsLines(map_fullwindow);
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, photos_markers);
-      hideFarthestPointsLines(map_fullwindow);
-      restoreIconsColors();
-      for (var country_code in countries) {
-        var flag_id = country_code.concat("__");
-        if (country_code in locations_dict) {
-          document.getElementById(flag_id).setAttribute('class', 'icon');
-        } else {
-          document.getElementById(flag_id).setAttribute('class', 'icon_grey');
-        }
-      }
+      showMarkers(map_fullwindow, photos_markers_solo);
     } else {
       toggleAllMarkersSolo();
-      restoreIconsColors();
     }
+    setIconsColorsSolo();
     toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
+    toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos")
   });
 
   document.getElementById("checkbox-flights-international").addEventListener('click', function() {
@@ -677,7 +679,7 @@
       }
     } else if (!document.getElementById("checkbox-flights-domestic").checked) {
       toggleAllMarkersSolo();
-      restoreIconsColors();
+      setIconsColorsSolo();
   } else {
       for (var country_code in countries) {
         var flag_id = country_code.concat("__");
@@ -697,7 +699,7 @@
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
       if (!document.getElementById("checkbox-flights-international").checked) {
-        restoreIconsColors();
+        setIconsColorsSolo();
         for (var country_code in countries) {
           var flag_id = country_code.concat("__");
           if (country_code != 'BR') {
@@ -707,7 +709,7 @@
       }
     } else if (!document.getElementById("checkbox-flights-international").checked) {
       toggleAllMarkersSolo();
-      restoreIconsColors();
+      setIconsColorsSolo();
     }
   });
   document.getElementById("checkbox-farthest-points").addEventListener('click', function() {
@@ -736,7 +738,7 @@
     } else {
       toggleAllMarkersSolo();
       hideMarkers(map_fullwindow, farthest_points_markers);
-      restoreIconsColors();
+      setIconsColorsSolo();
       hide_car_routes = false;
     }
   });
