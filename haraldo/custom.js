@@ -67,6 +67,7 @@ function hideAllMarkersSolo () {
   hideMarkers(map_fullwindow, parks_markers);
   hideMarkers(map_fullwindow, attractions_markers);
   hideMarkers(map_fullwindow, airports_markers);
+  hideMarkers(map_fullwindow, farthest_points_markers);
   hideMarkers(map_fullwindow, photos_markers);
   hideMarkers(map_fullwindow, photos_markers_solo);
 }
@@ -76,6 +77,7 @@ function toggleAllMarkersSolo () {
   toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
   toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
   toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
+  toggleMarkers(map_fullwindow, farthest_points_markers, 'checkbox-farthest-points');
   toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
   toggleMarkers(map_fullwindow, photos_markers_solo, 'checkbox-photos');
 }

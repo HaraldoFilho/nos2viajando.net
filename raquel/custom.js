@@ -67,6 +67,7 @@ function hideAllMarkersSolo () {
   hideMarkers(map_fullwindow, parks_markers);
   hideMarkers(map_fullwindow, attractions_markers);
   hideMarkers(map_fullwindow, airports_markers);
+  hideMarkers(map_fullwindow, farthest_points_markers);
   hideMarkers(map_fullwindow, photos_markers_solo);
 }
 
@@ -75,6 +76,7 @@ function toggleAllMarkersSolo () {
   toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
   toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
   toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
+  toggleMarkers(map_fullwindow, farthest_points_markers, 'checkbox-farthest-points');
   toggleMarkers(map_fullwindow, photos_markers_solo, 'checkbox-photos');
 }
 
@@ -110,7 +112,7 @@ function setIconsColorsSolo() {
 
     var flag_id = country_code.concat("__");
 
-    if (document.getElementById("checkbox-photos").checked && (country_code in locations_dict)) {
+    if (document.getElementById("checkbox-photos").checked && (country_code in locations_dict_solo)) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
       all_unchecked = false;
     }

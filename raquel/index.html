@@ -641,25 +641,6 @@
   document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
   document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
   document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
-  document.getElementById("checkbox-photos").addEventListener('click', function() {
-    if (document.getElementById("checkbox-photos").checked) {
-      document.getElementById("checkbox-farthest-points").checked = false;
-      document.getElementById("checkbox-flights-international").checked = false;
-      document.getElementById("checkbox-flights-domestic").checked = false;
-      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
-      loadFlights(map_fullwindow, flights, airports);
-      hideFarthestPointsLines(map_fullwindow);
-      hideAllMarkersSolo();
-      showMarkers(map_fullwindow, photos_markers);
-      showMarkers(map_fullwindow, photos_markers_solo);
-    } else {
-      toggleAllMarkersSolo();
-    }
-    setIconsColorsSolo();
-    toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
-    toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos")
-  });
-
   document.getElementById("checkbox-flights-international").addEventListener('click', function() {
     loadFlights(map_fullwindow, flights, airports);
     if (document.getElementById("checkbox-flights-international").checked) {
@@ -741,6 +722,24 @@
       setIconsColorsSolo();
       hide_car_routes = false;
     }
+  });
+  document.getElementById("checkbox-photos").addEventListener('click', function() {
+    if (document.getElementById("checkbox-photos").checked) {
+      document.getElementById("checkbox-farthest-points").checked = false;
+      document.getElementById("checkbox-flights-international").checked = false;
+      document.getElementById("checkbox-flights-domestic").checked = false;
+      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+      loadFlights(map_fullwindow, flights, airports);
+      hideFarthestPointsLines(map_fullwindow);
+      hideAllMarkersSolo();
+      showMarkers(map_fullwindow, photos_markers);
+      showMarkers(map_fullwindow, photos_markers_solo);
+    } else {
+      toggleAllMarkersSolo();
+    }
+    setIconsColorsSolo();
+    toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
+    toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos")
   });
 
   </script>
