@@ -1,0 +1,299 @@
+body {
+   margin: 0;
+   padding: 0;
+   font-family: arial;
+}
+
+img.avatar {
+  width: 100%;
+  height: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50%;
+  border-color: lightgrey;
+}
+
+img.flag {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+img.metric {
+  width: 50px;
+  height: 50px;
+  margin-bottom: -10px;
+  cursor: default;
+}
+
+img.metric_2 {
+  width: 56px;
+  height: 56px;
+  margin: 20px 0 -10px 0;
+  cursor: default;
+}
+
+img.tiny_icon {
+  width: 40px;
+  height: 40px;
+  margin: 0px 20px -4px 0px;
+}
+
+img.marker {
+  height: 58px;
+  margin: 0px 8px -4px -6px;
+}
+
+img.zoom-out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 30px;
+  margin-top: 30px;
+  width: 60px;
+  heigh: 60px;
+  z-index: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+img.map-style {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 30px;
+  margin-top: 30px;
+  width: 60px;
+  heigh: 60px;
+  z-index: 1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+p.list-item {
+  font-size: 15px;
+  text-align: left;
+  margin-top: -10px;
+  color: #606060;
+  cursor: pointer;
+}
+
+.avatar {
+  display: block;
+  grid-area: avatar;
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  display: block;
+  grid-area: title;
+  width: 100%;
+  height: auto;
+  font-weight: bold;
+  font-size: 64px;
+  text-align: left;
+  padding-left: 25px;
+  color: #606060;
+  cursor: default;
+}
+
+.trips {
+  display: block;
+  grid-area: trips;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 25px;
+  color: inherit;
+  cursor: default;
+}
+
+.flights {
+  display: block;
+  grid-area: flights;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 5px;
+  color: inherit;
+  cursor: default;
+}
+
+.countries {
+  display: block;
+  grid-area: countries;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 25px;
+  color: inherit;
+  cursor: default;
+}
+
+.continents {
+  display: block;
+  grid-area: continents;
+  width: auto;
+  font-family: arial;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 5px;
+  color: inherit;
+  cursor: default;
+}
+
+.distance {
+  display: block;
+  grid-area: distance;
+  width: auto;
+  font-size: 18px;
+  font-family: arial;
+  text-align: left;
+  padding: 0 0 20px 120px;
+  margin-top: 25px;
+  color: inherit;
+  cursor: default;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
+}
+
+.days {
+  display: block;
+  grid-area: days;
+  width: auto;
+  font-family: arial;
+  font-size: 18px;
+  text-align: left;
+  padding: 0 0 20px 20px;
+  margin-top: 25px;
+  cursor: default;
+  color: inherit;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: lightgrey;
+}
+
+.blog-button {
+  display: block;
+  grid-area: blog-button;
+  width: auto;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  background-color: grey;
+  padding: 25px;
+  margin-top: 25px;
+  border-radius: 50px;
+}
+
+.map {
+  display: block;
+  grid-area: map;
+  width: 100%;
+  height: 500px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.flags {
+  display: grid;
+  grid-area: flags;
+  z-index: 3;
+  width: auto;
+  height: auto;
+  grid-gap: 25px;
+  padding: 25px;
+  margin-bottom: -20px;
+  border-radius: 20px;
+  background-color: #cad2d3;
+  grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.list-title {
+  display: block;
+  grid-area: list-title;
+  text-align: left;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.list-count {
+  display: block;
+  grid-area: list-count;
+  text-align: right;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.list-title-container {
+  display: grid;
+  grid-area: list-title-container;
+  grid-template-columns: auto auto;
+  font-size: 36px;
+  font-weight: bold;
+  color: #606060;
+  border-style: none none solid none;
+  border-color: grey;
+  border-width: thin;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  cursor: default;
+}
+
+.main-container {
+  display: grid;
+  z-index: 3;
+  top: 0;
+  grid-area: main-container;
+  grid-template-areas:
+  'avatar title title'
+  'avatar trips flights'
+  'avatar countries continents'
+  'distance distance days'
+  'blog-button blog-button blog-button'
+  'map map map'
+  'flags flags flags'
+  'lists lists lists';
+  grid-template-columns: 25% 35% auto;
+  position: sticky;
+  width: auto;
+  height: auto;
+  padding: 25px;
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: lightgrey;
+  color: #707070;
+}
+
+.lists {
+  display: block;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  grid-area: lists;
+  width: auto;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  text-align: left;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: lightgrey;
+  background-color: white;
+}
