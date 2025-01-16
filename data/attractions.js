@@ -129,6 +129,8 @@ var attractions = [
   [[-56.199827, -34.906588], 'UY', 'Praça Independência'],
   [[-56.206330, -34.908020], 'UY', 'Cidade Velha'],
   [[-56.200810, -34.906520], 'UY', 'Puerta de la Ciudadela'],
+  [[-56.201533, -34.906434], 'UY', 'Livraria Más Puro Verso'],
+  [[-56.197484, -34.906228], 'UY', 'Centro de Fotografia de Montevidéu'],
   [[-56.200842, -34.907460], 'UY', 'Teatro Solis']
 ]
 
@@ -264,5 +266,7 @@ var attractions_en = [
   [[-56.199827, -34.906588], 'UY', 'Plaza Independencia'],
   [[-56.206330, -34.908020], 'UY', 'Old City'],
   [[-56.200810, -34.906520], 'UY', 'Puerta de la Ciudadela'],
+  [[-56.201533, -34.906434], 'UY', 'Más Puro Verso Bookshop'],
+  [[-56.197484, -34.906228], 'UY', 'Montevideo Photography Center'],
   [[-56.200842, -34.907460], 'UY', 'Teatro Solis']
 ]
