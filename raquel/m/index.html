@@ -8,8 +8,8 @@
   <script src="../../js/mapbox_token.js"></script>
   <script src="../../js/countries_bbox.js"></script>
   <script src="../../js/common.js"></script>
+  <script src="../../m/custom.js"></script>
   <script src="../custom.js"></script>
-  <script src="custom.js"></script>
 
   <!-- Locations data -->
   <script src="../../data/strings.js"></script>
@@ -206,7 +206,7 @@
   }
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, 100, false) });
-  document.getElementById('map-style-icon').addEventListener('click', function() { toggleMapStyle() });
+  document.getElementById('map-style-icon').addEventListener('click', function() { toggleMapStyle(icons_path) });
 
   var lists = document.getElementById('lists');
 
@@ -391,7 +391,7 @@
 
   // Add click listeners
   for (var country_code in countries) {
-    addListenerToFlags(country_code, 20);
+    addListenerToFlagsMobile(country_code, 20);
   }
   cities.forEach(addListenerToRegions, true);
   parks.forEach(addListenerToRegions, true);

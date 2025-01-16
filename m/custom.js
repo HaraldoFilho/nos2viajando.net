@@ -1,14 +1,14 @@
 // Map style
 
-function toggleMapStyle() {
+function toggleMapStyle(icons_path) {
   if (current_map_style == 'light-v10') {
     current_map_style = 'satellite-v9'
     map.setStyle('mapbox://styles/mapbox/' + current_map_style);
-    document.getElementById('map-style-icon').setAttribute('src', '../icons/map-light.svg');
+    document.getElementById('map-style-icon').setAttribute('src', icons_path.concat('map-light.svg'));
   } else {
     current_map_style = 'light-v10'
     map.setStyle('mapbox://styles/mapbox/' + current_map_style);
-    document.getElementById('map-style-icon').setAttribute('src', '../icons/map-satellite.svg');
+    document.getElementById('map-style-icon').setAttribute('src', icons_path.concat('map-satellite.svg'));
   }
 }
 
@@ -39,4 +39,21 @@ function loadMarkersOnMap(map, markers_scale) {
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
   addMarkersToMap(map, cities_markers);
+}
+
+function addListenerToFlagsMobile(id, padding) {
+  document.getElementById(id).addEventListener('click', function() {
+    fitRegionMobile(map, id, padding);
+    if (map_fullwindow != null) {
+      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, map_padding_fw, true);
+    }
+  });
+}
+
+function fitRegionMobile(map, region, padding) {
+
+  var bbox = countries_bbox[region][1];
+
+  fitBoundingBox(map, bbox, 0, 0, padding, false);
+
 }
