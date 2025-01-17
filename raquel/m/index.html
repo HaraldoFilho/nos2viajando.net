@@ -299,36 +299,6 @@
     lists.appendChild(list_item);
   }
 
-  // Construct list of Accommodations
-  var accommodations_list = document.createElement('DIV');
-  accommodations_list.setAttribute('class', 'list-title-container');
-  accommodations_list.setAttribute('style', 'margin-top:25px');
-  var title = document.createElement('DIV');
-  title.setAttribute('class', 'list-title');
-  var marker = document.createElement('IMG');
-  marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', icons_path.concat('marker_accommodation.svg'));
-  title.appendChild(marker);
-  title.append(strings_dict['ACCOMMODATIONS']);
-  var count = document.createElement('DIV');
-  count.setAttribute('class', 'list-count');
-  count.innerText = accommodations.length;
-  accommodations_list.appendChild(title);
-  accommodations_list.appendChild(count);
-  lists.appendChild(accommodations_list);
-  for (var i = 0; i < accommodations.length; i++) {
-    var list_item = document.createElement('P');
-    var item_id = getItemId(accommodations[i][2]);
-    list_item.setAttribute('id', item_id);
-    list_item.setAttribute('class', 'list-item');
-    var tiny_flag = document.createElement('IMG');
-    tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(icons_path, accommodations[i][1]));
-    list_item.appendChild(tiny_flag);
-    list_item.append(accommodations[i][2]);
-    lists.appendChild(list_item);
-  }
-
   // Construct list of Airports
   var airports_list = document.createElement('DIV');
   airports_list.setAttribute('class', 'list-title-container');
@@ -359,36 +329,6 @@
     lists.appendChild(list_item);
   }
 
-  // Construct list of Restaurants
-  var restaurants_list = document.createElement('DIV');
-  restaurants_list.setAttribute('class', 'list-title-container');
-  restaurants_list.setAttribute('style', 'margin-top:25px');
-  var title = document.createElement('DIV');
-  title.setAttribute('class', 'list-title');
-  var marker = document.createElement('IMG');
-  marker.setAttribute('class', 'marker');
-  marker.setAttribute('src', icons_path.concat('marker_restaurant.svg'));
-  title.appendChild(marker);
-  title.append(strings_dict['RESTAURANTS']);
-  var count = document.createElement('DIV');
-  count.setAttribute('class', 'list-count');
-  count.innerText = restaurants.length;
-  restaurants_list.appendChild(title);
-  restaurants_list.appendChild(count);
-  lists.appendChild(restaurants_list);
-  for (var i = 0; i < restaurants.length; i++) {
-    var list_item = document.createElement('P');
-    var item_id = getItemId(restaurants[i][2]);
-    list_item.setAttribute('id', item_id);
-    list_item.setAttribute('class', 'list-item');
-    var tiny_flag = document.createElement('IMG');
-    tiny_flag.setAttribute('class', 'tiny_icon');
-    tiny_flag.setAttribute('src', getIconSrc(icons_path, restaurants[i][1]));
-    list_item.appendChild(tiny_flag);
-    list_item.append(restaurants[i][2]);
-    lists.appendChild(list_item);
-  }
-
   // Add click listeners
   for (var country_code in countries) {
     addListenerToFlagsMobile(country_code, 20);
@@ -396,8 +336,6 @@
   cities.forEach(addListenerToRegions, true);
   parks.forEach(addListenerToRegions, true);
   attractions.forEach(addListenerToPlaces, true);
-  restaurants.forEach(addListenerToPlaces, true);
-  accommodations.forEach(addListenerToPlaces, true);
   airports.forEach(addListenerToRegions, true);
 
   </script>
