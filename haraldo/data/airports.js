@@ -9,6 +9,7 @@ var airports_solo = [
   [[-35.365953, -5.768892], 'BR', 'Aeroporto de Natal', 'NAT'],
   [[-95.336579, 29.990220], 'US', 'Aeroporto de Houston', 'IAH'],
   [[-97.666288, 30.197508], 'US', 'Aeroporto de Austin', 'AUS'],
+  [[-51.175306, -29.993566], 'BR', 'Aeroporto de Porto Alegre', 'POA'],
   [[-49.172599, -25.532713], 'BR', 'Aeroporto de Curitiba', 'CWB']
 ]
 
@@ -23,5 +24,6 @@ var airports_solo_en = [
   [[-35.365953, -5.768892], 'BR', 'Natal Airport', 'NAT'],
   [[-95.336579, 29.990220], 'US', 'Houston Airport', 'IAH'],
   [[-97.666288, 30.197508], 'US', 'Austin Airport', 'AUS'],
+  [[-51.175306, -29.993566], 'BR', 'Porto Alegre Airport', 'POA'],
   [[-49.172599, -25.532713], 'BR', 'Curitiba Airport', 'CWB']
 ]
