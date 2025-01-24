@@ -24,9 +24,6 @@ for photoset in photosets:
     command = "/home/pi/github/nos2viajando.net/raquel/py/generate-map-data.py"
     os.system(command)
 
-    command = "rm /home/pi/github/nos2viajando.net/raquel/py/last_total.py"
-    os.system(command)
-
 command = "cp /home/pi/github/nos2viajando.net/raquel/py/locations.py /home/pi/github/nos2viajando.net/raquel/data/photos.js_"
 os.system(command)
 
