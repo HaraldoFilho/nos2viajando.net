@@ -27,7 +27,7 @@ function createMarkers(map, places, color, scale) {
 }
 
 function loadMarkersOnMap(map, markers_scale) {
-  restaurants_markers = createMarkers(map, restaurants, '#a0a0a0', markers_scale);
+  restaurants_markers = createMarkers(map, restaurants, '#ff9955', markers_scale);
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale);
