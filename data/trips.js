@@ -13,7 +13,7 @@ var trips = [
   ['2019', 'Croácia e Itália', 21956, 22],
   ['2023', 'Patagônia', 12358, 14],
   ['2024', 'Uruguai', 4268, 11],
-  // ['2025', 'Lagos Andinos', 0, 12]
+  ['2025', 'Lagos Andinos', 0, 12]
 ]
 
 var trips_en = [
@@ -27,5 +27,5 @@ var trips_en = [
   ['2019', 'Croatia and Italy', 21956, 22],
   ['2023', 'Patagonia', 12358, 14],
   ['2024', 'Uruguay', 4268, 11],
-  // ['2025', 'Andean Lakes', 0, 12]
+  ['2025', 'Andean Lakes', 0, 12]
 ]
