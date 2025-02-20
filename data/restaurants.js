@@ -59,5 +59,16 @@ var restaurants = [
   [[-58.37452, -34.59126], 'AR', 'Starbucks (Estação Retiro)'],
   [[-58.39216, -34.58855], 'AR', 'Nane'],
   [[-56.20866, -34.90850], 'UY', 'MOJO Parrillada'],
-  [[-56.20808, -34.90864], 'UY', 'Piwo Helados']
+  [[-56.20808, -34.90864], 'UY', 'Piwo Helados'],
+  [[-72.98330, -41.31688], 'CL', 'El Barista Caffé'],
+  [[-72.98553, -41.31484], 'CL', 'Westfalia'],
+  [[-72.55349, -41.21868], 'CL', 'Cerveza Bordelago'],
+  [[-72.88469, -40.97259], 'CL', 'Konicrima'],
+  [[-72.98394, -41.31783], 'CL', 'El Retorno'],
+  [[-72.98441, -41.31586], 'CL', 'Chocolaterie Dominique'],
+  [[-71.83173, -41.19459], 'AR', 'Los Ventisqueros'],
+  [[-71.30385, -41.13377], 'AR', 'SandwichCafe'],
+  [[-71.30524, -41.13357], 'AR', 'El Nuevo Gaucho'],
+  [[-71.30560, -41.13384], 'AR', 'Mamuschka'],
+  [[-71.30619, -41.13379], 'AR', 'Zirosha']
 ]
