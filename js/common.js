@@ -37,6 +37,7 @@ function hideAllMarkers () {
   hideMarkers(map_fullwindow, attractions_markers);
   hideMarkers(map_fullwindow, accommodations_markers);
   hideMarkers(map_fullwindow, airports_markers);
+  hideMarkers(map_fullwindow, ports_markers);
   hideMarkers(map_fullwindow, restaurants_markers);
   hideMarkers(map_fullwindow, photos_markers);
   hideMarkers(map_fullwindow, farthest_points_markers);
@@ -45,6 +46,7 @@ function hideAllMarkers () {
 function toggleAllMarkers () {
   toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
   toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
+  toggleMarkers(map_fullwindow, ports_markers, 'checkbox-ports');
   toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
   toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
   toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
@@ -84,6 +86,7 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   }
   restaurants_markers = createMarkers(map, restaurants, '#ff9955', markers_scale, false);
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
+  ports_markers = createMarkers(map, ports, '#ac9393', markers_scale, true);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
@@ -92,6 +95,7 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances(), icons_path);
   addMarkersToMap(map, restaurants_markers);
   addMarkersToMap(map, airports_markers);
+  addMarkersToMap(map, ports_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
@@ -497,7 +501,7 @@ function createSpecialMarker(map, coord, text, icon, size) {
 
 function createLatitudeLines(map) {
   createLine(map, "Artic_Circle", [-180,66.563444], [180,66.563444]);
-  createLine(map, "Topic_of_Cancer", [-180,23.43656], [180,23.43656]);
+  createLine(map, "Tropic_of_Cancer", [-180,23.43656], [180,23.43656]);
   createLine(map, "Equator", [-180,0], [180,0]);
   createLine(map, "Tropic_of_Capricorn", [-180,-23.43656], [180,-23.43656]);
   createLine(map, "Antartic_Circle", [-180,-66.563444], [180,-66.563444]);
@@ -506,7 +510,7 @@ function createLatitudeLines(map) {
 function showLatitudeLines(map) {
   createLatitudeLines(map);
   addLine(map, "Artic_Circle", '#FFF', 1, [5,5]);
-  addLine(map, "Topic_of_Cancer", '#DDD', 1, [5,5]);
+  addLine(map, "Tropic_of_Cancer", '#DDD', 1, [5,5]);
   addLine(map, "Equator", '#AAA', 1, [5,5]);
   addLine(map, "Tropic_of_Capricorn", '#DDD', 1, [5,5]);
   addLine(map, "Antartic_Circle", '#FFF', 1, [5,5]);
@@ -514,7 +518,7 @@ function showLatitudeLines(map) {
 
 function hideLatitudeLines(map) {
   removeLine(map, "Artic_Circle");
-  removeLine(map, "Topic_of_Cancer");
+  removeLine(map, "Tropic_of_Cancer");
   removeLine(map, "Equator");
   removeLine(map, "Tropic_of_Capricorn");
   removeLine(map, "Antartic_Circle");

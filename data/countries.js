@@ -16,7 +16,7 @@ var countries = {
   'IT': ['Itália', 'febt'],
   'VA': ['Vaticano', ''],
   'HR': ['Croácia', 'febs'],
-  'CL': ['Chile', 'fwbd'],
+  'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguai', 'fwbsd']
 }
 
@@ -28,7 +28,7 @@ var countries_en = {
   'IT': ['Italy', 'febt'],
   'VA': ['Vatican City', ''],
   'HR': ['Croatia', 'febs'],
-  'CL': ['Chile', 'fwbd'],
+  'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguay', 'fwbsd']
 }
 
