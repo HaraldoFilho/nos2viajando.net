@@ -9,7 +9,7 @@
 // d = drived a rented car
 
 var countries = {
-  'BR': ['Brasil', 'fbd'],
+  'BR': ['Brasil', 'fd'],
   'AR': ['Argentina', 'ds'],
   'PY': ['Paraguai', ''],
   'US': ['Estados Unidos', 'fwd'],
@@ -21,7 +21,7 @@ var countries = {
 }
 
 var countries_en = {
-  'BR': ['Brazil', 'fbd'],
+  'BR': ['Brazil', 'fd'],
   'AR': ['Argentina', 'ds'],
   'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
