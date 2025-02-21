@@ -10,7 +10,7 @@
 
 var countries = {
   'BR': ['Brasil', 'fd'],
-  'AR': ['Argentina', 'ds'],
+  'AR': ['Argentina', 'dsbfw'],
   'PY': ['Paraguai', ''],
   'US': ['Estados Unidos', 'fwd'],
   'IT': ['Itália', 'febt'],
@@ -22,7 +22,7 @@ var countries = {
 
 var countries_en = {
   'BR': ['Brazil', 'fd'],
-  'AR': ['Argentina', 'ds'],
+  'AR': ['Argentina', 'dsbfw'],
   'PY': ['Paraguay', ''],
   'US': ['United States', 'fwd'],
   'IT': ['Italy', 'febt'],
