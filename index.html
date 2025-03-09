@@ -337,7 +337,7 @@
       document.getElementById('selector').style.display = "none";
       document.getElementById('expand-selector').style.display = "block";
     });
-    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
+    document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords, false) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
     document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
     document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });

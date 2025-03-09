@@ -277,7 +277,7 @@ function getInitialBoundingBox(markers, long_offset) {
 
 // Full Window
 
-function enterMapFullWindow(current_bbox, current_coords) {
+function enterMapFullWindow(current_bbox, current_coords, solo) {
 
   document.getElementById('map-overlay').style.height = "100%";
   document.getElementById('fullwindow-exit-icon').style.display = "block";
@@ -328,8 +328,11 @@ function enterMapFullWindow(current_bbox, current_coords) {
       inputs[i].onclick = switchLayer;
     }
 
-    loadMarkersOnMap(map_fullwindow, 0.7, icons_path);
-
+    if (!solo) {
+      loadMarkersOnMap(map_fullwindow, 0.7, icons_path);
+    } else {
+      loadMarkersOnMapSolo(map_fullwindow, 0.7, icons_path);
+    }
     var fullmap_countries_panel = document.getElementById('fullmap-countries-panel');
     setSelectorPosition();
 

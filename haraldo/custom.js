@@ -62,6 +62,25 @@ function loadAdditionalData() {
 
 }
 
+function loadMarkersOnMapSolo(map, markers_scale, icons_path) {
+  if (markers_scale > 0.4) {
+    var home_marker = [];
+    var text = "<p style=\"text-align:center;margin: 0px 5px -5px 5px;\">" + home[2] + ", " + countries[home[1]][0] + "</p>";
+    home_marker.push(createSpecialMarker(map, home[0], text, icons_path.concat('home.svg'), 24));
+    addMarkersToMap(map, home_marker);
+  }
+  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
+  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
+  parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
+  cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
+  photos_markers = createPhotosMarkers(map, locations_dict);
+  farthest_points_markers = createFarthestPointsMarkers(map, farthest_points, getFarthestDistances(), icons_path);
+  addMarkersToMap(map, airports_markers);
+  addMarkersToMap(map, attractions_markers);
+  addMarkersToMap(map, parks_markers);
+  addMarkersToMap(map, cities_markers);
+}
+
 function hideAllMarkersSolo () {
   hideMarkers(map_fullwindow, cities_markers);
   hideMarkers(map_fullwindow, parks_markers);

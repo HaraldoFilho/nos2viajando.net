@@ -29,7 +29,6 @@
   <script src="../data/airports.js"></script>
   <script src="../data/ports.js"></script>
   <script src="../data/flights.js"></script>
-  <script src="../data/photos.js"></script>
 
   <script src="data/strings.js"></script>
   <script src="data/trips.js"></script>
@@ -192,7 +191,6 @@
   var accommodations_markers = [];
   var airports_markers = [];
   var photos_markers = [];
-  var photos_markers_solo = [];
   var farthest_points_markers = [];
 
   var flights_lines = {};
@@ -222,7 +220,7 @@
 
   var icons_path = '../icons/';
 
-  loadMarkersOnMap(map, 0.4, icons_path);
+  loadMarkersOnMapSolo(map, 0.4, icons_path);
 
   fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
@@ -259,7 +257,8 @@
     }
   }
 
-  photos_markers_solo = createPhotosMarkers(map_fullwindow, locations_dict_solo);
+  var locations_dict = locations_dict_solo;
+  photos_markers = createPhotosMarkers(map_fullwindow, locations_dict);
 
   document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
   document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
@@ -340,7 +339,7 @@
     document.getElementById('selector').style.display = "none";
     document.getElementById('expand-selector').style.display = "block";
   });
-  document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords) });
+  document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords, true) });
   document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
   document.getElementById('close-sidebar').addEventListener('click', function() { hideSideBar() });
   document.getElementById('open-sidebar').addEventListener('click', function() { showSideBar() });
@@ -697,7 +696,6 @@
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-photos").checked = false;
-      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
       for (var country_code in countries) {
@@ -726,7 +724,6 @@
       fitRegion(map_fullwindow, 'BR', map_padding_fw);
       document.getElementById("checkbox-farthest-points").checked = false;
       document.getElementById("checkbox-photos").checked = false;
-      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, airports_markers);
       if (!document.getElementById("checkbox-flights-international").checked) {
@@ -752,7 +749,6 @@
       } else {
         fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, 150, false);
       }
-      hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, farthest_points_markers);
       hide_car_routes = true;
@@ -787,13 +783,11 @@
       hideFarthestPointsLines(map_fullwindow);
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, photos_markers);
-      showMarkers(map_fullwindow, photos_markers_solo);
     } else {
       toggleAllMarkersSolo();
     }
     setIconsColorsSolo();
     toggleMarkers(map_fullwindow, photos_markers, "checkbox-photos")
-    toggleMarkers(map_fullwindow, photos_markers_solo, "checkbox-photos")
   });
 
   </script>
