@@ -293,16 +293,38 @@ function enterMapFullWindow(current_bbox, current_coords) {
     map_fullwindow = new mapboxgl.Map({
       container: 'map-overlay',
       style: current_map_style,
+      projection: current_map_projection,
       logoPosition: 'bottom-right'
     });
     map_fullwindow.addControl(new mapboxgl.NavigationControl({showCompass:false}));
     map_fullwindow.dragRotate.disable();
     map_fullwindow.touchZoomRotate.disableRotation();
+    map.scrollZoom.enable();
 
-    layerList = document.getElementById('menu');
-    inputs = layerList.getElementsByTagName('input');
+    map_fullwindow.on('style.load', () => {
+      map_fullwindow.setFog({}); // Set the default atmosphere style
+    });
 
-    for (var i = 0; i < inputs.length; i++) {
+    // Pause spinning on interaction
+    map_fullwindow.on('mousedown', () => {
+      userInteracting = true;
+    });
+    map_fullwindow.on('dragstart', () => {
+      userInteracting = true;
+    });
+
+    // When animation is complete, start spinning if there is no ongoing interaction
+    map_fullwindow.on('moveend', () => {
+      spinGlobe();
+    });
+
+    var layerList = document.getElementById('menu');
+    var inputs = layerList.getElementsByTagName('input');
+
+    for (var i = 0; i < 2; i++) {
+      inputs[i].onclick = switchProjection;
+    }
+    for (var i = 2; i < inputs.length; i++) {
       inputs[i].onclick = switchLayer;
     }
 
@@ -429,6 +451,27 @@ function hideSideBarTab() {
 
 function showSideBarTab() {
   document.getElementById('close-sidebar').style = 'margin-left:310px';
+}
+
+function switchProjection(projection) {
+  var projId = projection.target.id;
+  current_map_projection = projId;
+  map_fullwindow.setProjection(current_map_projection);
+  if (current_map_projection == 'globe') {
+    spinEnabled = true;
+    spinGlobe();
+  } else {
+    spinEnabled = false;
+  }
+  if(!hide_car_routes) {
+    fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
+  } else {
+    map_fullwindow.fitBounds([
+      [current_bbox[0], current_bbox[1]],
+      [current_bbox[2], current_bbox[3]]],
+      {padding: 100}
+    );
+  }
 }
 
 function switchLayer(layer) {
@@ -1291,4 +1334,22 @@ function setIconsColors() {
     }
   }
 
+}
+
+function spinGlobe() {
+  const zoom = map_fullwindow.getZoom();
+  if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+    let distancePerSecond = 360 / secondsPerRevolution;
+    if (zoom > slowSpinZoom) {
+      // Slow spinning at higher zooms
+      const zoomDif =
+      (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+      distancePerSecond *= zoomDif;
+    }
+    const center = map_fullwindow.getCenter();
+    center.lng -= distancePerSecond;
+    // Smoothly animate the map over one second.
+    // When this animation is complete, it calls a 'moveend' event.
+    map_fullwindow.easeTo({ center, duration: 1000, easing: (n) => n });
+  }
 }

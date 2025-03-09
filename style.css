@@ -473,6 +473,7 @@ a:hover {
   border-width: 2px;
   border-color: lightgrey;
   border-radius: 10px;
+  font-size: 14px;
   font-family: 'Open Sans', sans-serif;
   cursor: default;
 }

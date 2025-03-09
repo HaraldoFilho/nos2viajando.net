@@ -29,6 +29,7 @@
   <script src="../data/airports.js"></script>
   <script src="../data/ports.js"></script>
   <script src="../data/flights.js"></script>
+  <script src="../data/photos.js"></script>
 
   <script src="data/strings.js"></script>
   <script src="data/trips.js"></script>
@@ -40,8 +41,8 @@
   <script src="data/photos.js"></script>
 
   <!-- Mapbox -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
 
   <!-- Turf -->
   <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
@@ -78,7 +79,7 @@
           <img class="metric" src="../icons/globe.svg"/>
         </div>
 
-        <div id="distance" class="distance">
+        <div id="distance" class="distance" style="padding:7px 0 0 13px;">
           <img class="metric_2" src="../icons/navigation.svg"/>
         </div>
 
@@ -105,7 +106,7 @@
     <img id="open-sidebar" class="open-sidebar" src="../icons/sidebar_open.svg"/>
 
     <div id="travelmap" class="travelmap-container">
-      <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1139938/?tiles=default&showguide=true" frameBorder="0" >
+      <iframe src="https://www.travellerspoint.com/embed/map.cfm/#/embed/1025885/?tiles=default&showguide=true" frameBorder="0" >
         Navegador não compatível
       </iframe>
     </div>
@@ -198,7 +199,18 @@
   var color_international = '#F00';
   var color_domestic = '#00F';
 
-  // Travelmap
+  let userInteracting = false;
+
+  var current_map_projection = 'mercator';
+
+  // At low zooms, complete a revolution every two minutes.
+  const secondsPerRevolution = 240;
+  // Above zoom level 5, do not rotate.
+  const maxSpinZoom = 2;
+  // Rotate at intermediate speeds between zoom levels 3 and 5.
+  const slowSpinZoom = 3;
+
+  var spinEnabled = false;
 
   var map = new mapboxgl.Map({
     container: 'map',
@@ -247,7 +259,6 @@
     }
   }
 
-  var locations_dict = {};
   photos_markers_solo = createPhotosMarkers(map_fullwindow, locations_dict_solo);
 
   document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
@@ -311,7 +322,11 @@
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
   document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
-    fitRegion(map_fullwindow, 'WW', map_padding_fw);
+    if (current_map_projection == 'mercator') {
+      fitRegion(map_fullwindow, 'WW', map_padding_fw);
+    } else {
+      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, 150, false);
+    }
     document.getElementById('selector').style.display = "block";
     document.getElementById('expand-selector').style.display = "none";
   });
@@ -454,9 +469,29 @@
   }
 
   // construct menu on full window map
+  var input_map = document.createElement('INPUT');
+  input_map.setAttribute('id', 'mercator');
+  input_map.setAttribute('type', 'radio');
+  input_map.setAttribute('style', 'height:10px');
+  input_map.setAttribute('name', 'mtoggle');
+  input_map.setAttribute('value', 'mercator');
+  input_map.setAttribute('checked', 'checked');
+  var label_map = document.createElement('LABEL');
+  label_map.setAttribute('for', 'mercator');
+  label_map.innerText = strings_dict['MAP_PROJECTION_1'];
+  var input_globe = document.createElement('INPUT');
+  input_globe.setAttribute('id', 'globe');
+  input_globe.setAttribute('type', 'radio');
+  input_globe.setAttribute('style', 'height:10px');
+  input_globe.setAttribute('name', 'mtoggle');
+  input_globe.setAttribute('value', 'globe');
+  var label_globe = document.createElement('LABEL');
+  label_globe.setAttribute('for', 'globe-v11');
+  label_globe.innerText = strings_dict['MAP_PROJECTION_2'];
   var input_streets = document.createElement('INPUT');
   input_streets.setAttribute('id', 'streets-v11');
   input_streets.setAttribute('type', 'radio');
+  input_streets.setAttribute('style', 'height:10px');
   input_streets.setAttribute('name', 'rtoggle');
   input_streets.setAttribute('value', 'streets');
   input_streets.setAttribute('checked', 'checked');
@@ -466,6 +501,7 @@
   var input_outdoors = document.createElement('INPUT');
   input_outdoors.setAttribute('id', 'outdoors-v11');
   input_outdoors.setAttribute('type', 'radio');
+  input_outdoors.setAttribute('style', 'height:10px');
   input_outdoors.setAttribute('name', 'rtoggle');
   input_outdoors.setAttribute('value', 'outdoors');
   var label_outdoors = document.createElement('LABEL');
@@ -474,12 +510,17 @@
   var input_satellite = document.createElement('INPUT');
   input_satellite.setAttribute('id', 'satellite-v9');
   input_satellite.setAttribute('type', 'radio');
+  input_satellite.setAttribute('style', 'height:10px');
   input_satellite.setAttribute('name', 'rtoggle');
   input_satellite.setAttribute('value', 'satellite');
   var label_satellite = document.createElement('LABEL');
   label_satellite.setAttribute('for', 'satellite-v9');
   label_satellite.innerText = strings_dict['MAP_LAYER_3'];
   var menu = document.getElementById('menu');
+  menu.appendChild(input_map);
+  menu.appendChild(label_map);
+  menu.appendChild(input_globe);
+  menu.appendChild(label_globe);
   menu.appendChild(input_streets);
   menu.appendChild(label_streets);
   menu.appendChild(input_outdoors);
@@ -649,6 +690,7 @@
   document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
   document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
   document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
+
   document.getElementById("checkbox-flights-international").addEventListener('click', function() {
     loadFlights(map_fullwindow, flights, airports);
     if (document.getElementById("checkbox-flights-international").checked) {
@@ -705,7 +747,11 @@
     loadFarthestPoints(map_fullwindow, farthest_points);
     toggleMarkers(map_fullwindow, farthest_points_markers, "checkbox-farthest-points")
     if (document.getElementById("checkbox-farthest-points").checked) {
-      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
+      if (current_map_projection == 'mercator') {
+        fitRegion(map_fullwindow, 'WW', map_padding_fw);
+      } else {
+        fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, 150, false);
+      }
       hideAllMarkers();
       hideAllMarkersSolo();
       showMarkers(map_fullwindow, farthest_points_markers);
