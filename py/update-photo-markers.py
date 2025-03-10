@@ -21,10 +21,10 @@ for photoset in photosets:
     command = "/home/pi/github/nos2viajando.net/py/setup-photoset.sh {}".format(photoset)
     os.system(command)
 
-    command = "/home/pi/github/nos2viajando.net/py/generate-map-data.py"
+    command = "rm /home/pi/github/nos2viajando.net/py/last_total.py"
     os.system(command)
 
-    command = "rm /home/pi/github/nos2viajando.net/py/last_total.py"
+    command = "/home/pi/github/nos2viajando.net/py/generate-map-data.py"
     os.system(command)
 
 command = "cp /home/pi/github/nos2viajando.net/py/locations.py /home/pi/github/nos2viajando.net/data/photos.js"
