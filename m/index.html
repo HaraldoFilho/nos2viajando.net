@@ -20,6 +20,7 @@
   <script src="../data/restaurants.js"></script>
   <script src="../data/accommodations.js"></script>
   <script src="../data/airports.js"></script>
+  <script src="../data/ports.js"></script>
   <script src="../data/flights.js"></script>
   <script src="../data/photos.js"></script>
 
@@ -87,6 +88,7 @@
     strings_dict = strings_dict_en;
     accommodations = accommodations_en;
     airports = airports_en;
+    ports = ports_en;
     attractions = attractions_en;
     cities = cities_en;
     countries = countries_en;
@@ -115,6 +117,7 @@
   var restaurants_markers = [];
   var accommodations_markers = [];
   var airports_markers = [];
+  var ports_markers = [];
   var photos_markers = [];
   var flights_lines = {};
 
@@ -317,6 +320,37 @@
     lists.appendChild(list_item);
   }
 
+  // Construct list of Ports
+  var ports_list = document.createElement('DIV');
+  ports_list.setAttribute('class', 'list-title-container');
+  ports_list.setAttribute('style', 'margin-top:25px');
+  var title = document.createElement('DIV');
+  title.setAttribute('class', 'list-title');
+  var marker = document.createElement('IMG');
+  marker.setAttribute('class', 'marker');
+  marker.setAttribute('src', icons_path.concat('marker_port.svg'));
+  title.appendChild(marker);
+  title.append(strings_dict['PORTS']);
+  var count = document.createElement('DIV');
+  count.setAttribute('class', 'list-count');
+  count.innerText = ports.length;
+  ports_list.appendChild(title);
+  ports_list.appendChild(count);
+  lists.appendChild(ports_list);
+  for (var i = 0; i < ports.length; i++) {
+    var list_item = document.createElement('P');
+    var item_id = getItemId(ports[i][2]);
+    list_item.setAttribute('id', item_id);
+    list_item.setAttribute('class', 'list-item');
+    var tiny_flag = document.createElement('IMG');
+    tiny_flag.setAttribute('class', 'tiny_icon');
+    tiny_flag.setAttribute('src', getIconSrc(icons_path, ports[i][1]));
+    tiny_flag.setAttribute('title', countries[ports[i][1]][0]);
+    list_item.appendChild(tiny_flag);
+    list_item.append(ports[i][2]);
+    lists.appendChild(list_item);
+  }
+
   // Construct list of Accommodations
   var accommodations_list = document.createElement('DIV');
   accommodations_list.setAttribute('class', 'list-title-container');
@@ -387,6 +421,7 @@
   restaurants.forEach(addListenerToPlaces, true);
   accommodations.forEach(addListenerToPlaces, true);
   airports.forEach(addListenerToRegions, true);
+  ports.forEach(addListenerToRegions, false);
 
   </script>
 
