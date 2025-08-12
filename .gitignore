@@ -2,6 +2,7 @@ py/*
 !py/photosets.py
 !py/setup-photoset.sh
 !py/update-photo-markers.py
+!py/map.log
 haraldo/py/*
 !haraldo/py/photosets.py
 !haraldo/py/setup-photoset.sh
