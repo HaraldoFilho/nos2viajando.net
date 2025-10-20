@@ -17,7 +17,10 @@ var countries = {
   'VA': ['Vaticano', ''],
   'HR': ['Croácia', 'febs'],
   'CL': ['Chile', 'fwbds'],
-  'UY': ['Uruguai', 'fwbsd']
+  'UY': ['Uruguai', 'fwbsd'],
+  // 'ES': ['Espanha', 'fet'],
+  // 'FR': ['França', 't'],
+  // 'PT': ['Portugal', 'fe']
 }
 
 var countries_en = {
@@ -29,27 +32,28 @@ var countries_en = {
   'VA': ['Vatican City', ''],
   'HR': ['Croatia', 'febs'],
   'CL': ['Chile', 'fwbds'],
-  'UY': ['Uruguay', 'fwbsd']
+  'UY': ['Uruguay', 'fwbsd'],
+  // 'ES': ['Spain', 'fet'],
+  // 'FR': ['France', 't'],
+  // 'PT': ['Portugal', 'fe']
 }
 
 var continents = [
   ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY']],
   ['América Central', []],
   ['América do Norte', ['US']],
-  ['Europa', ['IT', 'VA', 'HR']],
+  ['Europa', ['IT', 'VA', 'HR', 'ES', 'FR', 'PT']],
   ['África', []],
   ['Ásia', []],
-  ['Oceania', []],
-  ['Antártida', []]
+  ['Oceania', []]
 ]
 
 var continents_en = [
   ['South America', ['BR', 'AR', 'PY', 'CL', 'UY']],
   ['Central America', []],
   ['North America', ['US']],
-  ['Europe', ['IT', 'VA', 'HR']],
+  ['Europe', ['IT', 'VA', 'HR', 'ES', 'FR', 'PT']],
   ['Africa', []],
   ['Asia', []],
-  ['Oceania', []],
-  ['Antarctica', []]
+  ['Oceania', []]
 ]
