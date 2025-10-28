@@ -18,6 +18,7 @@ var countries = {
   'HR': ['Croácia', 'febs'],
   'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguai', 'fwbsd'],
+  'PT': ['Portugal', 'fe'],
   'ES': ['Espanha', 'fet'],
   // 'FR': ['França', 't'],
   // 'PT': ['Portugal', 'fe']
