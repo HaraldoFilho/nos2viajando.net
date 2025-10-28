@@ -18,7 +18,7 @@ var countries = {
   'HR': ['Croácia', 'febs'],
   'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguai', 'fwbsd'],
-  // 'ES': ['Espanha', 'fet'],
+  'ES': ['Espanha', 'fet'],
   // 'FR': ['França', 't'],
   // 'PT': ['Portugal', 'fe']
 }
@@ -33,7 +33,7 @@ var countries_en = {
   'HR': ['Croatia', 'febs'],
   'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguay', 'fwbsd'],
-  // 'ES': ['Spain', 'fet'],
+  'ES': ['Spain', 'fet'],
   // 'FR': ['France', 't'],
   // 'PT': ['Portugal', 'fe']
 }
