@@ -18,8 +18,8 @@ var airports = [
   [[-56.016373, -34.837431], 'UY', 'Aeroporto de Montevidéu', 'MVD'],
   [[-73.098784, -41.433182], 'CL', 'Aeroporto de Puerto Montt', 'PMC'],
   [[-71.161577, -41.145985], 'AR', 'Aeroporto de Bariloche', 'BRC'],
-  // [[-9.133827, 38.776307], 'PT', 'Aeroporto de Lisboa', 'LIS'],
-  // [[2.079834, 41.299084], 'ES', 'Aeroporto de Barcelona', 'BCN']
+  [[-9.133827, 38.776307], 'PT', 'Aeroporto de Lisboa', 'LIS'],
+  [[2.079834, 41.299084], 'ES', 'Aeroporto de Barcelona', 'BCN']
 ]
 
 var airports_en = [
@@ -42,6 +42,6 @@ var airports_en = [
   [[-56.016373, -34.837431], 'UY', 'Montevideo Airport', 'MVD'],
   [[-73.098784, -41.433182], 'CL', 'Puerto Montt Airport', 'PMC'],
   [[-71.161577, -41.145985], 'AR', 'Bariloche Airport', 'BRC'],
-  // [[-9.133827, 38.776307], 'PT', 'Lisbon Airport', 'LIS'],
-  // [[2.079834, 41.299084], 'ES', 'Barcelona Airport', 'BCN']
+  [[-9.133827, 38.776307], 'PT', 'Lisbon Airport', 'LIS'],
+  [[2.079834, 41.299084], 'ES', 'Barcelona Airport', 'BCN']
 ]
