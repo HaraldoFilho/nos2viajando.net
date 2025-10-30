@@ -14,7 +14,7 @@ var trips = [
   ['2023', 'Patagônia', 12358, 14],
   ['2024', 'Uruguai', 4268, 11],
   ['2025', 'Lagos Andinos', 8101, 12],
-  ['2025', 'Catalunha e Lisboa', 9324, 6],
+  ['2025', 'Catalunha e Lisboa', 9428, 9],
 ]
 
 var trips_en = [
@@ -29,5 +29,5 @@ var trips_en = [
   ['2023', 'Patagonia', 12358, 14],
   ['2024', 'Uruguay', 4268, 11],
   ['2025', 'Andean Lakes', 8101, 12],
-  ['2025', 'Catalonia and Lisbon', 9324, 6],
+  ['2025', 'Catalonia and Lisbon', 9428, 9],
 ]
