@@ -20,7 +20,7 @@ var countries = {
   'UY': ['Uruguai', 'fwbsd'],
   'PT': ['Portugal', 'fe'],
   'ES': ['Espanha', 'fet'],
-  // 'FR': ['França', 't'],
+  'FR': ['França', 't'],
   // 'PT': ['Portugal', 'fe']
 }
 
@@ -35,7 +35,7 @@ var countries_en = {
   'CL': ['Chile', 'fwbds'],
   'UY': ['Uruguay', 'fwbsd'],
   'ES': ['Spain', 'fet'],
-  // 'FR': ['France', 't'],
+  'FR': ['France', 't'],
   // 'PT': ['Portugal', 'fe']
 }
 
