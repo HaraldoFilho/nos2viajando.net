@@ -31,5 +31,5 @@ var accommodations = [
   [[2.201111, 41.400000], 'ES', 'Travelodge Barcelona Poblenou'],
   [[2.824629, 41.988584], 'ES', 'Hotel Museu Llegendes de Girona'],
   [[2.878274, 42.695680], 'FR', 'Appart\'City Confort Perpignan Centre Gare'],
-  // [[-9.135000, 38.727787], 'PT', 'Lisboa 85 Suites & Apartments']
+  [[-9.135000, 38.727787], 'PT', 'Lisboa 85 Suites & Apartments']
 ]
