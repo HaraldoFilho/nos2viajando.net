@@ -1,6 +1,6 @@
 // Year, Trip, Distance (km), Days
 
-var traveling = true;
+var traveling = false;
 
 var trips = [
   ['2009', 'Monte Alegre do Sul', 182, 4],
@@ -14,7 +14,7 @@ var trips = [
   ['2023', 'Patagônia', 12358, 14],
   ['2024', 'Uruguai', 4268, 11],
   ['2025', 'Lagos Andinos', 8101, 12],
-  ['2025', 'Catalunha e Lisboa', 11172, 14],
+  ['2025', 'Catalunha e Lisboa', 19221, 17],
 ]
 
 var trips_en = [
@@ -29,5 +29,5 @@ var trips_en = [
   ['2023', 'Patagonia', 12358, 14],
   ['2024', 'Uruguay', 4268, 11],
   ['2025', 'Andean Lakes', 8101, 12],
-  ['2025', 'Catalonia and Lisbon', 11172, 14],
+  ['2025', 'Catalonia and Lisbon', 19221, 17],
 ]
