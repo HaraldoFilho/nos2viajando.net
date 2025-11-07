@@ -70,5 +70,18 @@ var restaurants = [
   [[-71.30385, -41.13377], 'AR', 'SandwichCafe'],
   [[-71.30524, -41.13357], 'AR', 'El Nuevo Gaucho'],
   [[-71.30560, -41.13384], 'AR', 'Mamuschka'],
-  [[-71.30619, -41.13379], 'AR', 'Zirosha']
+  [[-71.30619, -41.13379], 'AR', 'Zirosha'],
+  [[2.202613, 41.399904], 'ES', '365 Obrador'],
+  [[2.185342, 41.382616], 'ES', 'McDonald\'s Barceloneta'],
+  [[2.139889, 41.378456], 'ES', 'McDonald\'s Sants Estacion'],
+  [[2.824260, 41.987847], 'ES', 'König Sandwiches'],
+  [[2.825025, 41.985482], 'ES', 'All Tal'],
+  [[2.824116, 41.987672], 'ES', 'Pastisseria Forn Montserrat'],
+  [[2.824529, 41.986593], 'ES', 'Casamoner'],
+  [[2.878514, 42.696052], 'FR', 'BCHEF Burgers'],
+  [[2.368770, 42.587346], 'FR', 'Cave & Biscuiterie du Conflent'],
+  [[2.351511, 43.212892], 'FR', 'Restaurant Le Longchamp'],
+  [[-9.213911, 38.691957], 'PT', 'Confeitaria Nacional Belém'],
+  [[-9.135092, 38.722876], 'PT', 'Pastelaria Capri'],
+  [[-9.136008, 38.708716], 'PT', 'Café Restaurante Martinho da Arcada']
 ]
