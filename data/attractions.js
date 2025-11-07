@@ -350,7 +350,7 @@ var attractions_en = [
   [[2.165058, 41.362940], 'ES', 'Montjuïc Castle'],
   [[2.826749, 41.984846], 'ES', 'Girona Old Town'],
   [[2.828420, 41.986547], 'ES', 'Girona Walls'],
-  [[2.825869, 41.987414], 'ES', 'Girona\'s Cathedral],
+  [[2.825869, 41.987414], 'ES', 'Girona\'s Cathedral'],
   [[2.824804, 41.988074], 'ES', 'Sant Feliu\'s Basilica'],
   [[2.825716, 41.988158], 'ES', 'Arab Baths'],
   [[2.548845, 42.219757], 'ES', 'Castellfollit de la Roca'],
