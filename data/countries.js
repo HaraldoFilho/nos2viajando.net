@@ -35,7 +35,8 @@ var countries_en = {
   'UY': ['Uruguay', 'fwbsd'],
   'PT': ['Portugal', 'fe'],
   'ES': ['Spain', 'fet'],
-  'FR': ['France', 't'],}
+  'FR': ['France', 't']
+}
 
 var continents = [
   ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY']],
