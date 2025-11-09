@@ -82,6 +82,7 @@ p.list-item {
   font-size: 44px;
   text-align: left;
   margin-top: -10px;
+  margin-bottom: 20px;
   color: #606060;
   cursor: pointer;
 }
@@ -161,7 +162,7 @@ p.list-item {
   font-size: 52px;
   font-family: arial;
   text-align: left;
-  padding: 0 0 20px 120px;
+  padding: 0 0 20px 60px;
   margin-top: 25px;
   color: inherit;
   cursor: default;
@@ -191,7 +192,7 @@ p.list-item {
   grid-area: blog-button;
   width: auto;
   font-family: arial;
-  font-size: 52px;
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -254,6 +255,7 @@ p.list-item {
   margin-top: 25px;
   margin-bottom: 30px;
   padding-top: 20px;
+  padding-bottom: 10px;
   cursor: default;
 }
 
