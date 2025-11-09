@@ -79,7 +79,7 @@ img.map-style {
 }
 
 p.list-item {
-  font-size: 15px;
+  font-size: 40px;
   text-align: left;
   margin-top: -10px;
   color: #606060;
@@ -99,7 +99,7 @@ p.list-item {
   width: 100%;
   height: auto;
   font-weight: bold;
-  font-size: 64px;
+  font-size: 84px;
   text-align: left;
   padding-left: 25px;
   color: #606060;
@@ -111,7 +111,7 @@ p.list-item {
   grid-area: trips;
   width: auto;
   font-family: arial;
-  font-size: 13px;
+  font-size: 48px;
   text-align: left;
   padding-left: 25px;
   color: inherit;
@@ -123,7 +123,7 @@ p.list-item {
   grid-area: flights;
   width: auto;
   font-family: arial;
-  font-size: 13px;
+  font-size: 48px;
   text-align: left;
   padding-left: 5px;
   color: inherit;
@@ -135,7 +135,7 @@ p.list-item {
   grid-area: countries;
   width: auto;
   font-family: arial;
-  font-size: 13px;
+  font-size: 48px;
   text-align: left;
   padding-left: 25px;
   color: inherit;
@@ -147,7 +147,7 @@ p.list-item {
   grid-area: continents;
   width: auto;
   font-family: arial;
-  font-size: 13px;
+  font-size: 48px;
   text-align: left;
   padding-left: 5px;
   color: inherit;
@@ -158,7 +158,7 @@ p.list-item {
   display: block;
   grid-area: distance;
   width: auto;
-  font-size: 18px;
+  font-size: 52px;
   font-family: arial;
   text-align: left;
   padding: 0 0 20px 120px;
@@ -175,7 +175,7 @@ p.list-item {
   grid-area: days;
   width: auto;
   font-family: arial;
-  font-size: 18px;
+  font-size: 52px;
   text-align: left;
   padding: 0 0 20px 20px;
   margin-top: 25px;
@@ -191,7 +191,7 @@ p.list-item {
   grid-area: blog-button;
   width: auto;
   font-family: arial;
-  font-size: 20px;
+  font-size: 56px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -245,7 +245,7 @@ p.list-item {
   display: grid;
   grid-area: list-title-container;
   grid-template-columns: auto auto;
-  font-size: 36px;
+  font-size: 58px;
   font-weight: bold;
   color: #606060;
   border-style: none none solid none;
