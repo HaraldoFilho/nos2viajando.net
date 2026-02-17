@@ -9,33 +9,33 @@
 // d = drived a rented car
 
 var countries = {
-  'BR': ['Brasil', 'fd'],
-  'AR': ['Argentina', 'dsbfw'],
-  'PY': ['Paraguai', ''],
-  'US': ['Estados Unidos', 'fwd'],
-  'IT': ['Itália', 'febt'],
-  'VA': ['Vaticano', ''],
-  'HR': ['Croácia', 'febs'],
-  'CL': ['Chile', 'fwbds'],
-  'UY': ['Uruguai', 'fwbsd'],
-  'PT': ['Portugal', 'fe'],
-  'ES': ['Espanha', 'fet'],
-  'FR': ['França', 't']
+  'BR': ['Brasil', 'fd', 28],
+  'AR': ['Argentina', 'dsbfw', 10],
+  'PY': ['Paraguai', '', 0],
+  'US': ['Estados Unidos', 'fwd', 9],
+  'IT': ['Itália', 'febt', 7],
+  'VA': ['Vaticano', '', 0],
+  'HR': ['Croácia', 'febs', 12],
+  'CL': ['Chile', 'fwbds', 14],
+  'UY': ['Uruguai', 'fwbsd', 7],
+  'PT': ['Portugal', 'fe', 3],
+  'ES': ['Espanha', 'fet', 7],
+  'FR': ['França', 't', 4]
 }
 
 var countries_en = {
-  'BR': ['Brazil', 'fd'],
-  'AR': ['Argentina', 'dsbfw'],
-  'PY': ['Paraguay', ''],
-  'US': ['United States', 'fwd'],
-  'IT': ['Italy', 'febt'],
-  'VA': ['Vatican City', ''],
-  'HR': ['Croatia', 'febs'],
-  'CL': ['Chile', 'fwbds'],
-  'UY': ['Uruguay', 'fwbsd'],
-  'PT': ['Portugal', 'fe'],
-  'ES': ['Spain', 'fet'],
-  'FR': ['France', 't']
+  'BR': ['Brazil', 'fd', 28],
+  'AR': ['Argentina', 'dsbfw', 10],
+  'PY': ['Paraguay', '', 0],
+  'US': ['United States', 'fwd', 9],
+  'IT': ['Italy', 'febt', 7],
+  'VA': ['Vatican City', '', 0],
+  'HR': ['Croatia', 'febs', 12],
+  'CL': ['Chile', 'fwbds', 14],
+  'UY': ['Uruguay', 'fwbsd', 7],
+  'PT': ['Portugal', 'fe', 3],
+  'ES': ['Spain', 'fet', 7],
+  'FR': ['France', 't', 4]
 }
 
 var continents = [

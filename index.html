@@ -270,6 +270,7 @@
     for (var country_code in countries) {
       if (!countries[country_code][1].includes('c')) {
         var country_name = countries[country_code][0];
+        var country_days = countries[country_code][2];
         var country_icon = getIconSrc(icons_path, country_code);
         var country = document.createElement('DIV');
         country.setAttribute('id', country_code);
@@ -280,17 +281,27 @@
         country_flag.setAttribute('alt', country_name);
         country.appendChild(country_flag);
         countries_panel.appendChild(country);
-        countries_names.push(country_name);
+        countries_names.push([country_name, country_days]);
         n_countries++;
       }
     }
 
-    countries_names.sort();
+    countries_names.sort(function(a,b) {
+      return (b[1]-a[1]);
+    });
 
     var countries_text = "";
 
     for (var i = 0; i < countries_names.length; i++) {
-      countries_text += countries_names[i] + "\n";
+      countries_text += countries_names[i][0] + ", ";
+      if (countries_names[i][1] == 0) {
+        countries_text += strings_dict['HALF_DAY'];
+      } else if (countries_names[i][1] == 1) {
+        countries_text += countries_names[i][1] + " " + strings_dict['DAY'];
+      } else {
+        countries_text += countries_names[i][1] + " " + strings_dict['DAYS'];
+      }
+      countries_text += "\n";
     }
 
     var n_continents = 0;
