@@ -295,28 +295,42 @@
   var countries_names = [];
 
   for (var country_code in countries) {
-    var country_name = countries[country_code][0];
-    var country_icon = getIconSrc(icons_path, country_code);
-    var country = document.createElement('DIV');
-    country.setAttribute('id', country_code);
-    var country_flag = document.createElement('IMG');
-    country_flag.setAttribute('class', 'flag');
-    country_flag.setAttribute('src', country_icon);
-    country_flag.setAttribute('title', country_name);
-    country_flag.setAttribute('alt', country_name);
-    country.appendChild(country_flag);
-    countries_panel.appendChild(country);
-    countries_names.push(country_name);
+    if (!countries[country_code][1].includes('c')) {
+      var country_name = countries[country_code][0];
+      var country_days = countries[country_code][2];
+      var country_icon = getIconSrc(icons_path, country_code);
+      var country = document.createElement('DIV');
+      country.setAttribute('id', country_code);
+      var country_flag = document.createElement('IMG');
+      country_flag.setAttribute('class', 'flag');
+      country_flag.setAttribute('src', country_icon);
+      country_flag.setAttribute('title', country_name);
+      country_flag.setAttribute('alt', country_name);
+      country.appendChild(country_flag);
+      countries_panel.appendChild(country);
+      countries_names.push([country_name, country_days]);
+      n_countries++;
+    }
   }
 
-  countries_names.sort();
+  countries_names.sort(function(a,b) {
+    return (b[1]-a[1]);
+  });
 
   var countries_text = "";
 
   for (var i = 0; i < countries_names.length; i++) {
-    countries_text += countries_names[i] + "\n";
+    countries_text += countries_names[i][0] + ", ";
+    if (countries_names[i][1] > 1) {
+      countries_text += Math.floor(countries_names[i][1]) + " " + strings_dict['DAYS'];
+    } else if (countries_names[i][1] == 1) {
+      countries_text += countries_names[i][1] + " " + strings_dict['DAY'];
+    } else {
+      countries_text += Math.floor(countries_names[i][1] * 24) + " " + strings_dict['HOURS'];
+    }
+    countries_text += "\n";
   }
-
+  
   document.getElementById('countries').setAttribute('title', countries_text);
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });

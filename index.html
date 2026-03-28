@@ -295,7 +295,7 @@
     for (var i = 0; i < countries_names.length; i++) {
       countries_text += countries_names[i][0] + ", ";
       if (countries_names[i][1] > 1) {
-        countries_text += countries_names[i][1] + " " + strings_dict['DAYS'];
+        countries_text += Math.floor(countries_names[i][1]) + " " + strings_dict['DAYS'];
       } else if (countries_names[i][1] == 1) {
         countries_text += countries_names[i][1] + " " + strings_dict['DAY'];
       } else {
