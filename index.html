@@ -271,6 +271,7 @@
       if (!countries[country_code][1].includes('c')) {
         var country_name = countries[country_code][0];
         var country_days = countries[country_code][2];
+        var country_trips = countries[country_code][3];
         var country_icon = getIconSrc(icons_path, country_code);
         var country = document.createElement('DIV');
         country.setAttribute('id', country_code);
@@ -281,7 +282,7 @@
         country_flag.setAttribute('alt', country_name);
         country.appendChild(country_flag);
         countries_panel.appendChild(country);
-        countries_names.push([country_name, country_days]);
+        countries_names.push([country_name, country_days, country_trips]);
         n_countries++;
       }
     }
@@ -301,7 +302,13 @@
       } else {
         countries_text += Math.floor(countries_names[i][1] * 24) + " " + strings_dict['HOURS'];
       }
-      countries_text += "\n";
+      countries_text += " (";
+      if (countries_names[i][2] == 1) {
+        countries_text += countries_names[i][2] + " " + strings_dict['TRIP'];
+      } else {
+        countries_text += countries_names[i][2] + " " + strings_dict['TRIPS'];
+      }
+      countries_text += ")\n";
     }
 
     var n_continents = 0;

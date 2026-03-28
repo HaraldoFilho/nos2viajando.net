@@ -9,17 +9,17 @@
 // d = drived a rented car
 
 var countries_solo = {
-  'BR': ['Brasil', 'fbd', 28],
-  'US': ['Estados Unidos', 'fwd', 30],
-  'AR': ['Argentina', 'ds', 0.5],
-  'PY': ['Paraguai', '', 0.17],
+  'BR': ['Brasil', 'fbd', 28, 5],
+  'US': ['Estados Unidos', 'fwd', 30, 2],
+  'AR': ['Argentina', 'ds', 0.5, 1],
+  'PY': ['Paraguai', '', 0.17, 1],
 }
 
 var countries_solo_en = {
-  'BR': ['Brazil', 'fbd', 28],
-  'US': ['United States', 'fwd', 30],
-  'AR': ['Argentina', 'ds', 0.5],
-  'PY': ['Paraguay', '', 0.17],
+  'BR': ['Brazil', 'fbd', 28, 5],
+  'US': ['United States', 'fwd', 30, 2],
+  'AR': ['Argentina', 'ds', 0.5, 1],
+  'PY': ['Paraguay', '', 0.17, 1],
 }
 
 var continents_solo = [
