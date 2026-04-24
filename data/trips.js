@@ -3,12 +3,12 @@
 var traveling = false;
 
 var trips = [
-  ['2009', 'Monte Alegre do Sul', 182, 4, 'd'],
+  ['2009', 'Monte Alegre do Sul', 182, 4, 'l'],
   ['2012', 'Canela', 2400, 7, 'd'],
   ['2016', 'Foz do Iguaçu', 2721, 8, 'd'],
-  ['2016', 'Analândia', 405, 3, 'd'],
+  ['2016', 'Analândia', 405, 3, 'l'],
   ['2017', 'Califórnia', 24478, 12, 'i'],
-  ['2018', 'Monte Verde', 306, 3, 'd'],
+  ['2018', 'Monte Verde', 306, 3, 'l'],
   ['2018', 'Fernando de Noronha', 5463, 9, 'd'],
   ['2019', 'Croácia e Itália', 21956, 22, 'i'],
   ['2023', 'Patagônia', 12358, 14, 'i'],
@@ -18,12 +18,12 @@ var trips = [
 ]
 
 var trips_en = [
-  ['2009', 'Monte Alegre do Sul', 182, 4, 'd'],
+  ['2009', 'Monte Alegre do Sul', 182, 4, 'l'],
   ['2012', 'Canela', 2400, 7, 'd'],
   ['2016', 'Foz do Iguaçu', 2721, 8, 'd'],
-  ['2016', 'Analândia', 405, 3, 'd'],
+  ['2016', 'Analândia', 405, 3, 'l'],
   ['2017', 'California', 24478, 12, 'i'],
-  ['2018', 'Monte Verde', 306, 3, 'd'],
+  ['2018', 'Monte Verde', 306, 3, 'l'],
   ['2018', 'Fernando de Noronha', 5463, 9, 'd'],
   ['2019', 'Croatia and Italy', 21956, 22, 'i'],
   ['2023', 'Patagonia', 12358, 14, 'i'],
