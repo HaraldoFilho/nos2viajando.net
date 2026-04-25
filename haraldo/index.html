@@ -139,8 +139,15 @@
     attractions = attractions_en;
     cities = cities_en;
     countries = countries_en;
+    continents = continents_en;
     parks = parks_en;
     trips = trips_en;
+    airports_solo = airports_en_solo;
+    attractions_solo = attractions_en_solo;
+    cities_solo = cities_en_solo;
+    countries_solo = countries_en_solo;
+    continents_solo = continents_en_solo;
+    trips_solo = trips_en_solo;
   }
 
   for (var country_code in countries) {
@@ -153,7 +160,19 @@
     }
   }
 
+  for (var i = 0; i < continents.length; i++) {
+    continents_solo[i][2] += continents[i][2];
+    for (var j = 0; j < continents[i][1].length; j++) {
+      if (!continents_solo[i][1].includes(continents[i][1][j])) {
+        continents_solo[i][1].push(continents[i][1][j]);
+      }
+    }
+  }
+
   countries = countries_solo;
+  continents = continents_solo;
+
+  console.log(continents);
 
   var restaurants = [];
   var accommodations = [];
@@ -244,7 +263,6 @@
 
   var n_trips = trips.length;
   var n_flights = 0;
-
   var distance = 0;
   var days = 0;
 
@@ -253,9 +271,24 @@
     days += trips[i][3];
   }
 
-  var distance_str = distance/1000 + " km";
-  if (userLang != 'pt-BR') {
-    distance_str = distance_str.replace('.',',');
+  var n_loc_trips = 0;
+  var n_dom_trips = 0;
+  var n_int_trips = 0;
+
+  for (var i = 0; i < n_trips; i++) {
+    distance += trips[i][2];
+    days += trips[i][3];
+    switch (trips[i][4]) {
+      case 'l':
+        n_loc_trips++;
+        break;
+      case 'd':
+        n_dom_trips++;
+        break;
+      case 'i':
+        n_int_trips++;
+        break;
+    }
   }
 
   for (var i = 0; i < flights.length; i++) {
@@ -264,11 +297,49 @@
     }
   }
 
+  var n_int_flights = 0;
+  var n_dom_flights = 0;
+
+  for (var f = 0; f < flights.length; f++) {
+    for (var t = 0; t < flights[f][1].length; t++) {
+      for (var c = 1; c < flights[f][1][t].length; c++) {
+        for (var a = 0; a < airports.length; a++) {
+          var airport_1 = flights[f][1][t][c-1];
+          var airport_2 = flights[f][1][t][c];
+          if (airport_1 == airports[a][3]) {
+            var coord_a = airports[a][0];
+            var country_a = airports[a][1];
+          }
+          if (airport_2 == airports[a][3]) {
+            var coord_b = airports[a][0];
+            var country_b = airports[a][1];
+          }
+        }
+        if (country_a == 'BR' && country_b == 'BR') {
+          n_dom_flights++;
+
+        } else {
+          n_int_flights++;
+        }
+      }
+    }
+  }
+
+  var flights_text = n_dom_flights + strings_dict['FLIGHTS_DOMESTIC'] + "\n" + n_int_flights + strings_dict['FLIGHTS_INTERNATIONAL'];
+  var trips_text = n_loc_trips + strings_dict['TRIPS_LOCAL'] + "\n" + n_dom_trips + strings_dict['TRIPS_DOMESTIC'] + "\n" + n_int_trips + strings_dict['TRIPS_INTERNATIONAL'];
+
+  var distance_str = distance/1000 + " km";
+  if (userLang != 'pt-BR') {
+    distance_str = distance_str.replace('.',',');
+  }
+
   photos_markers_solo = createPhotosMarkers(map_fullwindow, locations_dict_solo);
 
   document.getElementById('title').innerText = strings_dict_solo['TITLE_SOLO'];
   document.getElementById('trips').append(n_trips + " " + strings_dict['TRIPS']);
+  document.getElementById('trips').setAttribute('title', trips_text);
   document.getElementById('flights').append(n_flights + " " + strings_dict['FLIGHTS']);
+  document.getElementById('flights').setAttribute('title', flights_text);
   document.getElementById('distance').append(distance_str);
   document.getElementById('days').append(days + " " + strings_dict['DAYS']);
 
@@ -277,13 +348,28 @@
 
   var n_countries = Object.keys(countries).length;
   var n_continents = 0;
-
   var continents_text = "";
+
+  continents.sort(function(a,b) {
+    return (b[1].length-a[1].length);
+  });
 
   for (var i = 0; i < continents.length; i++) {
     if (continents[i][1].length > 0) {
       n_continents++;
-      continents_text += continents[i][0] + "\n";
+      continents_text += continents[i][0] + ", " + continents[i][1].length + " ";
+      if (continents[i][1].length == 1) {
+        continents_text += strings_dict['COUNTRY'];
+      } else {
+        continents_text += strings_dict['COUNTRIES'];
+      }
+      continents_text += " (" + continents[i][2] + " ";
+      if (continents[i][2] == 1) {
+        continents_text += strings_dict['TRIP'];
+      } else {
+        continents_text += strings_dict['TRIPS'];
+      }
+      continents_text += ")\n"
     }
   }
 

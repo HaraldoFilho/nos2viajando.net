@@ -358,8 +358,11 @@
       countries_text += ")\n";
     }
 
-    var n_continents = 0;
+    continents.sort(function(a,b) {
+      return (b[1].length-a[1].length);
+    });
 
+    var n_continents = 0;
     var continents_text = "";
 
     for (var i = 0; i < continents.length; i++) {
