@@ -150,29 +150,24 @@
     trips_solo = trips_en_solo;
   }
 
-  for (var country_code in countries) {
-    if (country_code in countries_solo) {
-      var country_days = countries_solo[country_code][2] + countries[country_code][2];
-      var country_trips = countries_solo[country_code][3] + countries[country_code][3];
-      countries_solo[country_code] = [countries[country_code][0], countries[country_code][1], country_days, country_trips];
+  for (var country_code in countries_solo) {
+    if (country_code in countries) {
+      var country_days = countries[country_code][2] + countries_solo[country_code][2];
+      var country_trips = countries[country_code][3] + countries_solo[country_code][3];
+      countries[country_code] = [countries_solo[country_code][0], countries_solo[country_code][1], country_days, country_trips];
     } else {
-      countries_solo[country_code] = countries[country_code];
+      countries[country_code] = countries_solo[country_code];
     }
   }
 
-  for (var i = 0; i < continents.length; i++) {
-    continents_solo[i][2] += continents[i][2];
-    for (var j = 0; j < continents[i][1].length; j++) {
-      if (!continents_solo[i][1].includes(continents[i][1][j])) {
-        continents_solo[i][1].push(continents[i][1][j]);
+  for (var i = 0; i < continents_solo.length; i++) {
+    continents[i][2] += continents_solo[i][2];
+    for (var j = 0; j < continents_solo[i][1].length; j++) {
+      if (!continents[i][1].includes(continents_solo[i][1][j])) {
+        continents[i][1].push(continents_solo[i][1][j]);
       }
     }
   }
-
-  countries = countries_solo;
-  continents = continents_solo;
-
-  console.log(continents);
 
   var restaurants = [];
   var accommodations = [];

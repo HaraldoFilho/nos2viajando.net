@@ -1,4 +1,4 @@
-// Year, Trip, Distance (km), Days
+// Year, Trip, Distance (km), Days, Local(l)|Domestic(d)|International(i)
 
 var traveling = false;
 

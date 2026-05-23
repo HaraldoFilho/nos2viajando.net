@@ -11,54 +11,49 @@ function loadAdditionalData() {
     trips_solo = trips_solo_en;
   }
 
-  for (var i = 0; i < cities.length; i++) {
+  for (var i = 0; i < cities_solo.length; i++) {
     var first_visit = true
-    for (var j = 0; j < cities_solo.length; j++) {
-      if (cities_solo[j][2] == cities[i][2]) {
+    for (var j = 0; j < cities.length; j++) {
+      if (cities[j][2] == cities_solo[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      cities_solo.push(cities[i]);
+      cities.push(cities_solo[i]);
     }
   }
-  cities = cities_solo;
 
-  for (var i = 0; i < attractions.length; i++) {
+  for (var i = 0; i < attractions_solo.length; i++) {
     var first_visit = true
-    for (var j = 0; j < attractions_solo.length; j++) {
-      if (attractions_solo[j][2] == attractions[i][2]) {
+    for (var j = 0; j < attractions.length; j++) {
+      if (attractions[j][2] == attractions_solo[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      attractions_solo.push(attractions[i]);
+      attractions.push(attractions_solo[i]);
     }
   }
-  attractions = attractions_solo;
 
-  for (var i = 0; i < airports.length; i++) {
+  for (var i = 0; i < airports_solo.length; i++) {
     var first_visit = true
-    for (var j = 0; j < airports_solo.length; j++) {
-      if (airports_solo[j][2] == airports[i][2]) {
+    for (var j = 0; j < airports.length; j++) {
+      if (airports[j][2] == airports_solo[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      airports_solo.push(airports[i]);
+      airports.push(airports_solo[i]);
     }
   }
-  airports = airports_solo;
 
-  for (var i = 0; i < flights.length; i++) {
-    flights_solo.push(flights[i]);
+  for (var i = 0; i < flights_solo.length; i++) {
+    flights.push(flights_solo[i]);
   }
-  flights = flights_solo;
 
-  for (var i = 0; i < trips.length; i++) {
-    trips_solo.push(trips[i]);
+  for (var i = 0; i < trips_solo.length; i++) {
+    trips.push(trips_solo[i]);
   }
-  trips = trips_solo;
 
 }
 

@@ -1,4 +1,4 @@
-// Year, Trip, Distance (km), Days
+// Year, Trip, Distance (km), Days, Local(l)|Domestic(d)|International(i)
 
 var trips_solo = [
   ['1998', 'Fernando de Noronha', 5360, 7, 'd'],
