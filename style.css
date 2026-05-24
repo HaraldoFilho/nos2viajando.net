@@ -444,6 +444,20 @@ a:hover {
   padding: 5px;
 }
 
+.footer_solo {
+  bottom: 0;
+  left: 0;
+  z-index: 7;
+  font-family: arial;
+  font-size: 10px;
+  text-align: right;
+  color: black;
+  position: fixed;
+  margin-left: 335px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
 .main-container {
   display: grid;
   grid-template-columns: 320px auto;

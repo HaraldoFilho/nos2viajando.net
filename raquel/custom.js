@@ -99,7 +99,7 @@ function toggleAllMarkersSolo () {
 function addFooter() {
   var footer = document.createElement("DIV");
   footer.setAttribute("id", "footer");
-  footer.setAttribute("class", "footer");
+  footer.setAttribute("class", "footer_solo");
   footer.innerHTML = "Map by <a href=\"https://www.travellerspoint.com/\" target=\"_blank\"><b>Travellers</b>point</a>";
   document.body.append(footer);
 }
