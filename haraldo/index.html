@@ -160,6 +160,24 @@
     }
   }
 
+  var countries_array = [];
+  var i = 0;
+
+  for (var country_code in countries_solo) {
+    countries_array[i] = [country_code, countries_solo[country_code][0], countries_solo[country_code][1], countries_solo[country_code][2], countries_solo[country_code][3], countries_solo[country_code][4]];
+    i++;
+  }
+
+  countries_array.sort(function(a,b) {
+    return (a[5]-b[5]);
+  });
+
+  var countries_dict = {};
+
+  for (i = 0; i < countries_array.length; i++) {
+    countries_dict[countries_array[i][0]] = [countries_array[i][1], countries_array[i][2], countries_array[i][3], countries_array[i][4], countries_array[i][5]];
+  }
+
   for (var i = 0; i < continents.length; i++) {
     continents_solo[i][2] += continents[i][2];
     for (var j = 0; j < continents[i][1].length; j++) {
@@ -169,10 +187,11 @@
     }
   }
 
-  countries = countries_solo;
-  continents = continents_solo;
+  countries = countries_dict;
 
-  console.log(continents);
+  console.log(countries);
+
+  continents = continents_solo;
 
   var restaurants = [];
   var accommodations = [];

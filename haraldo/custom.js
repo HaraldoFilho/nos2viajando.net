@@ -24,6 +24,10 @@ function loadAdditionalData() {
   }
   cities = cities_solo;
 
+  cities.sort(function(a,b) {
+    return (a[3]-b[3]);
+  });
+
   for (var i = 0; i < attractions.length; i++) {
     var first_visit = true
     for (var j = 0; j < attractions_solo.length; j++) {
@@ -36,6 +40,10 @@ function loadAdditionalData() {
     }
   }
   attractions = attractions_solo;
+
+  attractions.sort(function(a,b) {
+    return (a[3]-b[3]);
+  });
 
   for (var i = 0; i < airports.length; i++) {
     var first_visit = true
@@ -50,6 +58,10 @@ function loadAdditionalData() {
   }
   airports = airports_solo;
 
+  airports.sort(function(a,b) {
+    return (a[4]-b[4]);
+  });
+
   for (var i = 0; i < flights.length; i++) {
     flights_solo.push(flights[i]);
   }
@@ -59,6 +71,10 @@ function loadAdditionalData() {
     trips_solo.push(trips[i]);
   }
   trips = trips_solo;
+
+  trips.sort(function(a,b) {
+    return (a[5]-b[5]);
+  });
 
 }
 

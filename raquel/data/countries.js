@@ -9,11 +9,11 @@
 // d = drived a rented car
 
 var countries_solo = {
-  'MX': ['México', 'fw', 3, 1],
+  'MX': ['México', 'fw', 3, 1, 17],
 }
 
 var countries_solo_en = {
-  'MX': ['Mexico', 'fw', 3, 1],
+  'MX': ['Mexico', 'fw', 3, 1, 17],
 }
 
 var continents_solo = [

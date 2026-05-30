@@ -11,49 +11,70 @@ function loadAdditionalData() {
     trips_solo = trips_solo_en;
   }
 
-  for (var i = 0; i < cities_solo.length; i++) {
+  for (var i = 0; i < cities.length; i++) {
     var first_visit = true
-    for (var j = 0; j < cities.length; j++) {
-      if (cities[j][2] == cities_solo[i][2]) {
+    for (var j = 0; j < cities_solo.length; j++) {
+      if (cities_solo[j][2] == cities[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      cities.push(cities_solo[i]);
+      cities_solo.push(cities[i]);
     }
   }
+  cities = cities_solo;
 
-  for (var i = 0; i < attractions_solo.length; i++) {
+  cities.sort(function(a,b) {
+    return (a[3]-b[3]);
+  });
+
+  for (var i = 0; i < attractions.length; i++) {
     var first_visit = true
-    for (var j = 0; j < attractions.length; j++) {
-      if (attractions[j][2] == attractions_solo[i][2]) {
+    for (var j = 0; j < attractions_solo.length; j++) {
+      if (attractions_solo[j][2] == attractions[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      attractions.push(attractions_solo[i]);
+      attractions_solo.push(attractions[i]);
     }
   }
+  attractions = attractions_solo;
 
-  for (var i = 0; i < airports_solo.length; i++) {
+  attractions.sort(function(a,b) {
+    return (a[3]-b[3]);
+  });
+
+  for (var i = 0; i < airports.length; i++) {
     var first_visit = true
-    for (var j = 0; j < airports.length; j++) {
-      if (airports[j][2] == airports_solo[i][2]) {
+    for (var j = 0; j < airports_solo.length; j++) {
+      if (airports_solo[j][2] == airports[i][2]) {
         first_visit = false
       }
     }
     if (first_visit) {
-      airports.push(airports_solo[i]);
+      airports_solo.push(airports[i]);
     }
   }
+  airports = airports_solo;
 
-  for (var i = 0; i < flights_solo.length; i++) {
-    flights.push(flights_solo[i]);
-  }
+  airports.sort(function(a,b) {
+    return (a[4]-b[4]);
+  });
 
-  for (var i = 0; i < trips_solo.length; i++) {
-    trips.push(trips_solo[i]);
+  for (var i = 0; i < flights.length; i++) {
+    flights_solo.push(flights[i]);
   }
+  flights = flights_solo;
+
+  for (var i = 0; i < trips.length; i++) {
+    trips_solo.push(trips[i]);
+  }
+  trips = trips_solo;
+
+  trips.sort(function(a,b) {
+    return (a[5]-b[5]);
+  });
 
 }
 
@@ -83,6 +104,7 @@ function hideAllMarkersSolo () {
   hideMarkers(map_fullwindow, airports_markers);
   hideMarkers(map_fullwindow, farthest_points_markers);
   hideMarkers(map_fullwindow, photos_markers);
+  hideMarkers(map_fullwindow, photos_markers_solo);
 }
 
 function toggleAllMarkersSolo () {
@@ -92,6 +114,7 @@ function toggleAllMarkersSolo () {
   toggleMarkers(map_fullwindow, cities_markers, 'checkbox-cities');
   toggleMarkers(map_fullwindow, farthest_points_markers, 'checkbox-farthest-points');
   toggleMarkers(map_fullwindow, photos_markers, 'checkbox-photos');
+  toggleMarkers(map_fullwindow, photos_markers_solo, 'checkbox-photos');
 }
 
 // Footer
@@ -126,7 +149,7 @@ function setIconsColorsSolo() {
 
     var flag_id = country_code.concat("__");
 
-    if (document.getElementById("checkbox-photos").checked && (country_code in locations_dict_solo)) {
+    if (document.getElementById("checkbox-photos").checked && (country_code in locations_dict)) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
       all_unchecked = false;
     }
