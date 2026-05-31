@@ -7,6 +7,7 @@ function loadAdditionalData() {
     airports_solo = airports_solo_en;
     attractions_solo = attractions_solo_en;
     cities_solo = cities_solo_en;
+    parks_solo = parks_solo_en;
     countries_solo = countries_solo_en;
     trips_solo = trips_solo_en;
   }
@@ -24,7 +25,24 @@ function loadAdditionalData() {
   }
   cities = cities_solo;
 
-  cities.sort(function(a,b) {
+  parks.sort(function(a,b) {
+    return (a[3]-b[3]);
+  });
+
+  for (var i = 0; i < parks.length; i++) {
+    var first_visit = true
+    for (var j = 0; j < parks_solo.length; j++) {
+      if (parks_solo[j][2] == parks[i][2]) {
+        first_visit = false
+      }
+    }
+    if (first_visit) {
+      parks_solo.push(parks[i]);
+    }
+  }
+  parks = parks_solo;
+
+  parks.sort(function(a,b) {
     return (a[3]-b[3]);
   });
 
