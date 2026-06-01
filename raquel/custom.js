@@ -25,7 +25,7 @@ function loadAdditionalData() {
   }
   cities = cities_solo;
 
-  parks.sort(function(a,b) {
+  cities.sort(function(a,b) {
     return (a[3]-b[3]);
   });
 
