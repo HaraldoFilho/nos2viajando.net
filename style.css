@@ -494,6 +494,12 @@ a:hover {
   transition: 0.5s;
 }
 
+.menu_separator {
+  margin: 0px 8px -5px 14px;
+  height: 20px;
+  width: 1.2px;
+}
+
 hr.separator {
   border-top: 1px solid #ccc;
 }

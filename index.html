@@ -680,10 +680,17 @@
     label_satellite.setAttribute('for', 'satellite-v9');
     label_satellite.innerText = strings_dict['MAP_LAYER_3'];
     var menu = document.getElementById('menu');
+
     menu.appendChild(input_map);
     menu.appendChild(label_map);
     menu.appendChild(input_globe);
     menu.appendChild(label_globe);
+
+    var menu_separator = document.createElement('IMG');
+    menu_separator.setAttribute('class', 'menu_separator');
+    menu_separator.setAttribute('src', 'icons/menu_separator.png');
+    menu.appendChild(menu_separator);
+
     menu.appendChild(input_streets);
     menu.appendChild(label_streets);
     menu.appendChild(input_outdoors);
