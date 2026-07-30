@@ -345,7 +345,7 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
     fullmap_countries_panel.appendChild(icons_separator);
 
     for (let region_code of ['EU', 'WW']) {
-      var region_name = countries_bbox[region_code][0];
+      var region_name = strings_dict[region_code];
       var elem = document.createElement("IMG");
       elem.setAttribute("id", region_code.concat("__"));
       elem.setAttribute("class", "icon");
