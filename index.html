@@ -113,7 +113,6 @@
       <img id="fullwindow-exit-icon" class="fullwindow-exit" src="icons/full_window_exit.svg"/>
       <img id="fullwindow-center-icon" class="fullwindow-center" src="icons/center_window.svg"/>
       <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="icons/fit_window.svg"/>
-      <!-- <img id="fullwindow-world-icon" class="fullwindow-world" src="icons/world.svg"/> -->
 
       <div id="menu" class="menu"></div>
 
@@ -397,15 +396,6 @@
     lists.setAttribute('style', 'top:'.concat(lists_height));
 
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
-    // document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
-    //   if (current_map_projection == 'mercator') {
-    //     fitRegion(map_fullwindow, 'WW', map_padding_fw);
-    //   } else {
-    //     fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, 150, false);
-    //   }
-    //   document.getElementById('selector').style.display = "block";
-    //   document.getElementById('expand-selector').style.display = "none";
-    // });
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
       fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
       document.getElementById('selector').style.display = "block";

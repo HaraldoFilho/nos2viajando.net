@@ -283,7 +283,6 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
   document.getElementById('fullwindow-exit-icon').style.display = "block";
   document.getElementById('fullwindow-center-icon').style.display = "block";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "block";
-  // document.getElementById('fullwindow-world-icon').style.display = "block";
   document.getElementById('menu').style.display = "block";
   document.getElementById('fullmap-countries-panel').style.display = "grid";
   document.getElementById('selector').style.display = "block";
@@ -345,31 +344,20 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
     icons_separator.setAttribute('class', 'icons_separator');
     fullmap_countries_panel.appendChild(icons_separator);
 
-    var country_name = countries_bbox['EU'][0];
-    var elem = document.createElement("IMG");
-    elem.setAttribute("id", 'EU'.concat("__"));
-    elem.setAttribute("class", "icon");
-    elem.setAttribute("src", getIconSrc(icons_path, 'EU'));
-    elem.setAttribute("title", country_name);
-    elem.setAttribute("alt", country_name);
-    var div_icon = document.createElement("DIV");
-    div_icon.setAttribute("class", "flag-icon");
-    div_icon.appendChild(elem);
-    fullmap_countries_panel.appendChild(div_icon);
-    addListenerToFlagsFullWindow('EU');
-
-    var country_name = countries_bbox['WW'][0];
-    var elem = document.createElement("IMG");
-    elem.setAttribute("id", 'WW'.concat("__"));
-    elem.setAttribute("class", "icon");
-    elem.setAttribute("src", getIconSrc(icons_path, 'WW'));
-    elem.setAttribute("title", country_name);
-    elem.setAttribute("alt", country_name);
-    var div_icon = document.createElement("DIV");
-    div_icon.setAttribute("class", "flag-icon");
-    div_icon.appendChild(elem);
-    fullmap_countries_panel.appendChild(div_icon);
-    addListenerToFlagsFullWindow('WW');
+    for (let region_code of ['EU', 'WW']) {
+      var region_name = countries_bbox[region_code][0];
+      var elem = document.createElement("IMG");
+      elem.setAttribute("id", region_code.concat("__"));
+      elem.setAttribute("class", "icon");
+      elem.setAttribute("src", getIconSrc(icons_path, region_code));
+      elem.setAttribute("title", region_name);
+      elem.setAttribute("alt", region_name);
+      var div_icon = document.createElement("DIV");
+      div_icon.setAttribute("class", "flag-icon");
+      div_icon.appendChild(elem);
+      fullmap_countries_panel.appendChild(div_icon);
+      addListenerToFlagsFullWindow(region_code);
+    }
 
     map_fullwindow.on('render', function() {
       try {
@@ -454,7 +442,6 @@ function exitMapFullWindow() {
   document.getElementById('map-overlay').style.height = "0%";
   document.getElementById('fullwindow-exit-icon').style.display = "none";
   document.getElementById('fullwindow-zoom-out-icon').style.display = "none";
-  // document.getElementById('fullwindow-world-icon').style.display = "none";
   document.getElementById('menu').style.display = "none";
   document.getElementById('expand-selector').style.display = "none";
   document.getElementById('selector').style.display = "none";
