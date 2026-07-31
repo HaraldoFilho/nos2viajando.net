@@ -1,4 +1,7 @@
-// Countries properties:
+// Dictionary items:
+// 'Country Code': ['Country name', 'Means of transportation', days, trips, order]
+
+// Transportation:
 // w = flyed to west
 // e = flyed to east
 // f = flight
@@ -20,7 +23,7 @@ var countries = {
   'UY': ['Uruguai', 'fwbsd', 7, 1, 13],
   'PT': ['Portugal', 'fe', 3, 1, 14],
   'ES': ['Espanha', 'fet', 7, 1, 15],
-  'FR': ['França', 't', 4, 16, 16]
+  'FR': ['França', 't', 4, 1, 16]
 }
 
 var countries_en = {

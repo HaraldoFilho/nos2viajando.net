@@ -1,4 +1,7 @@
-// Countries properties:
+// Dictionary items:
+// 'Country Code': ['Country name', 'Means of transportation', days, trips, order]
+
+// Transportation:
 // w = flyed to west
 // e = flyed to east
 // f = flight
@@ -7,6 +10,7 @@
 // t = train (inter cities abroad)
 // s = boat (ship)
 // d = drived a rented car
+
 
 var countries_solo = {
   'BR': ['Brasil', 'fbd', 28, 5, 1],

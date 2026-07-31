@@ -118,7 +118,6 @@
     <img id="fullwindow-exit-icon" class="fullwindow-exit" src="../icons/full_window_exit.svg"/>
     <img id="fullwindow-center-icon" class="fullwindow-center" src="../icons/center_window.svg"/>
     <img id="fullwindow-zoom-out-icon" class="fullwindow-zoom-out" src="../icons/fit_window.svg"/>
-    <img id="fullwindow-world-icon" class="fullwindow-world" src="../icons/world.svg"/>
 
     <div id="menu" class="menu"></div>
 
@@ -445,15 +444,6 @@
   document.getElementById('countries').setAttribute('title', countries_text);
 
   document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
-  document.getElementById('fullwindow-world-icon').addEventListener('click', function() {
-    if (current_map_projection == 'mercator') {
-      fitRegion(map_fullwindow, 'WW', map_padding_fw);
-    } else {
-      fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, 150, false);
-    }
-    document.getElementById('selector').style.display = "block";
-    document.getElementById('expand-selector').style.display = "none";
-  });
   document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
     fitBoundingBox(map_fullwindow, initial_bbox, init_x_offset, 0, map_padding_fw, false);
     document.getElementById('selector').style.display = "block";
@@ -640,11 +630,19 @@
   var label_satellite = document.createElement('LABEL');
   label_satellite.setAttribute('for', 'satellite-v9');
   label_satellite.innerText = strings_dict['MAP_LAYER_3'];
+
   var menu = document.getElementById('menu');
+
   menu.appendChild(input_map);
   menu.appendChild(label_map);
   menu.appendChild(input_globe);
   menu.appendChild(label_globe);
+
+  var menu_separator = document.createElement('IMG');
+  menu_separator.setAttribute('class', 'menu_separator');
+  menu_separator.setAttribute('src', '../icons/menu_separator.png');
+  menu.appendChild(menu_separator);
+
   menu.appendChild(input_streets);
   menu.appendChild(label_streets);
   menu.appendChild(input_outdoors);
