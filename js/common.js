@@ -502,7 +502,7 @@ function switchLayer(layer) {
 
 function setSelectorPosition() {
   var pixels = window.innerWidth/2;
-  var selector_position = pixels.toString() + "px";
+  var selector_position = (pixels-(((n_countries+2)*43)/2)+3).toString() + "px";
   document.getElementById("fullmap-countries-panel").style.left = selector_position;
 }
 
