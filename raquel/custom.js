@@ -179,6 +179,7 @@ function setIconsColorsSolo() {
 
     if (document.getElementById("checkbox-flights-domestic").checked && country_code == 'BR') {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      document.getElementById("EU__").setAttribute('class', 'icon_grey');
       all_unchecked = false;
     }
 
@@ -192,6 +193,7 @@ function setIconsColorsSolo() {
         document.getElementById(flag_id).setAttribute("class", "icon_opaque");
       }
     }
+    document.getElementById("EU__").setAttribute('class', 'icon');
   }
 
 }

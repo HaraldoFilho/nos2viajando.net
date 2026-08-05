@@ -1060,7 +1060,6 @@
     });
 
     document.getElementById("checkbox-road-trips").addEventListener('click', function() {
-      hide_car_routes = false;
       loadCarRoutes(map_fullwindow, driving, road_trips_places, hide_car_routes);
       if (document.getElementById("checkbox-road-trips").checked) {
         var road_trips_bbox = getRoadTripsBoundingBox(road_trips_places, 0);
@@ -1077,6 +1076,9 @@
         loadTrainRoutes(map_fullwindow, train_routes, places);
         loadBoatRoutes(map_fullwindow, boat_routes, places);
         loadFarthestPoints(map_fullwindow, farthest_points);
+        hide_car_routes = false;
+      } else {
+        hide_car_routes = true;
       }
       if(!hide_car_routes) {
         fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
