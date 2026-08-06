@@ -21,9 +21,7 @@ var countries = {
   'HR': ['Croácia', 'febs', 12, 1, 11],
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguai', 'fwbsd', 7, 1, 13],
-  'PT': ['Portugal', 'fe', 3, 1, 14],
-  'ES': ['Espanha', 'fet', 7, 1, 15],
-  'FR': ['França', 't', 4, 1, 16]
+  'PT': ['Portugal', 'fe', 3, 1, 14]
 }
 
 var countries_en = {
@@ -36,27 +34,25 @@ var countries_en = {
   'HR': ['Croatia', 'febs', 12, 1, 11],
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguay', 'fwbsd', 7, 1, 13],
-  'PT': ['Portugal', 'fe', 3, 1, 14],
-  'ES': ['Spain', 'fet', 7, 1, 15],
-  'FR': ['France', 't', 4, 1, 16]
+  'PT': ['Portugal', 'fe', 3, 1, 14]
 }
 
-var continents = [
-  ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
-  ['América Central', [], 0],
-  ['América do Norte', ['US'], 1],
-  ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 2],
-  ['África', [], 0],
-  ['Ásia', [], 0],
-  ['Oceania', [], 0]
-]
+var continents = {
+  'SA': ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
+  'CA': ['América Central', [], 0],
+  'NA': ['América do Norte', ['US'], 1],
+  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 3],
+  'AF': ['África', [], 0],
+  'AS': ['Ásia', [], 0],
+  'OC': ['Oceania', [], 0]
+}
 
-var continents_en = [
-  ['South America', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
-  ['Central America', [], 0],
-  ['North America', ['US'], 1],
-  ['Europe', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 2],
-  ['Africa', [], 0],
-  ['Asia', [], 0],
-  ['Oceania', [], 0]
-]
+var continents_en = {
+  'SA': ['South America', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
+  'CA': ['Central America', [], 0],
+  'NA': ['North America', ['US'], 1],
+  'EU': ['Europe', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 2],
+  'AF': ['Africa', [], 0],
+  'AS': ['Asia', [], 0],
+  'OC': ['Oceania', [], 0]
+}
