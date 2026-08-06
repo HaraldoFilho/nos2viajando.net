@@ -356,24 +356,29 @@
       countries_text += ")\n";
     }
 
-    continents.sort(function(a,b) {
+    var n_continents = 0;
+    var continents_list = [];
+    var continents_text = "";
+
+    for (var continent_code in continents) {
+      continents_list.push(continents[continent_code]);
+    }
+
+    continents_list.sort(function(a,b) {
       return (b[1].length-a[1].length);
     });
 
-    var n_continents = 0;
-    var continents_text = "";
-
-    for (var i = 0; i < continents.length; i++) {
-      if (continents[i][1].length > 0) {
+    for (var i = 0; i < continents_list.length; i++) {
+      if (continents_list[i][1].length > 0) {
         n_continents++;
-        continents_text += continents[i][0] + ", " + continents[i][1].length + " ";
-        if (continents[i][1].length == 1) {
+        continents_text += continents_list[i][0] + ", " + continents_list[i][1].length + " ";
+        if (continents_list[i][1].length == 1) {
           continents_text += strings_dict['COUNTRY'];
         } else {
           continents_text += strings_dict['COUNTRIES'];
         }
-        continents_text += " (" + continents[i][2] + " ";
-        if (continents[i][2] == 1) {
+        continents_text += " (" + continents_list[i][2] + " ";
+        if (continents_list[i][2] == 1) {
           continents_text += strings_dict['TRIP'];
         } else {
           continents_text += strings_dict['TRIPS'];

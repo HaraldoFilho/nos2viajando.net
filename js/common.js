@@ -525,7 +525,21 @@ function getCountryMarkersBbox(country_code) {
   var east = -180;
   var north = -90;
 
-  var country_markers = locations_dict[country_code];
+  var country_markers = [];
+
+  if (country_code != 'EU') {
+    country_markers = locations_dict[country_code];
+  } else {
+    var european_countries = continents['EU'][1];
+    for (var i = 0; i < european_countries.length; i ++) {
+      if (european_countries[i] in locations_dict) {
+        for (var j = 0; j < locations_dict[european_countries[i]].length; j++) {
+          country_markers.push(locations_dict[european_countries[i]][j]);
+        }
+      }
+    }
+  }
+
   var country_bbox = [];
 
   for (var i = 0; i < country_markers.length; i++) {
