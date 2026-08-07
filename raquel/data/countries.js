@@ -20,22 +20,22 @@ var countries_solo_en = {
   'MX': ['Mexico', 'fw', 3, 1, 17],
 }
 
-var continents_solo = [
-  ['América do Sul', [], 0],
-  ['América Central', [], 0],
-  ['América do Norte', ['MX'], 1],
-  ['Europa', [], 0],
-  ['África', [], 0],
-  ['Ásia', [], 0],
-  ['Oceania', [], 0]
-]
+var continents_solo = {
+  'SA': ['América do Sul', [], 0],
+  'CA': ['América Central', [], 0],
+  'NA': ['América do Norte', ['MX'], 1],
+  'EU': ['Europa', [], 0],
+  'AF': ['África', [], 0],
+  'AS': ['Ásia', [], 0],
+  'OC': ['Oceania', [], 0]
+}
 
-var continents_en_solo = [
-  ['South America', [], 0],
-  ['Central America', [], 0],
-  ['North America', ['MX'], 1],
-  ['Europe', [], 0],
-  ['Africa', [], 0],
-  ['Asia', [], 0],
-  ['Oceania', [], 0]
-]
+var continents_en_solo = {
+  'SA': ['South America', [], 0],
+  'CA': ['Central America', [], 0],
+  'NA': ['North America', ['MX'], 1],
+  'EU': ['Europe', [], 0],
+  'AF': ['Africa', [], 0],
+  'AS': ['Asia', [], 0],
+  'OC': ['Oceania', [], 0]
+}

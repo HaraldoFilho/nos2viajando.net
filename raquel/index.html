@@ -178,17 +178,35 @@
     countries_dict[countries_array[i][0]] = [countries_array[i][1], countries_array[i][2], countries_array[i][3], countries_array[i][4], countries_array[i][5]];
   }
 
-  for (var i = 0; i < continents.length; i++) {
-    continents_solo[i][2] += continents[i][2];
-    for (var j = 0; j < continents[i][1].length; j++) {
-      if (!continents_solo[i][1].includes(continents[i][1][j])) {
-        continents_solo[i][1].push(continents[i][1][j]);
+  for (var continent_code in continents_solo) {
+      for (let country_code of continents_solo[continent_code][1]) {
+        if (!continents[continent_code][1].includes(country_code)) {
+          continents[continent_code][1].push(country_code);
+        }
       }
-    }
+      continents[continent_code][2] += continents_solo[continent_code][2];
+  }
+
+  var continents_array = [];
+  var i = 0;
+
+  for (var continent_code in continents) {
+    continents_array[i] = [continent_code, continents[continent_code][0], continents[continent_code][1], continents[continent_code][2]];
+    i++;
+  }
+
+  continents_array.sort(function(a,b) {
+    return (b[2].length-a[2].length);
+  });
+
+  var continents_dict = {};
+
+  for (i = 0; i < continents_array.length; i++) {
+    continents_dict[continents_array[i][0]] = [continents_array[i][1], continents_array[i][2], continents_array[i][3]];
   }
 
   countries = countries_dict;
-  continents = continents_solo;
+  continents = continents_dict;
 
   var restaurants = [];
   var accommodations = [];
@@ -361,21 +379,17 @@
   var n_continents = 0;
   var continents_text = "";
 
-  continents.sort(function(a,b) {
-    return (b[1].length-a[1].length);
-  });
-
-  for (var i = 0; i < continents.length; i++) {
-    if (continents[i][1].length > 0) {
+  for (var i = 0; i < continents_array.length; i++) {
+    if (continents_array[i][2].length > 0) {
       n_continents++;
-      continents_text += continents[i][0] + ", " + continents[i][1].length + " ";
-      if (continents[i][1].length == 1) {
+      continents_text += continents_array[i][1] + ", " + continents_array[i][2].length + " ";
+      if (continents_array[i][2].length == 1) {
         continents_text += strings_dict['COUNTRY'];
       } else {
         continents_text += strings_dict['COUNTRIES'];
       }
-      continents_text += " (" + continents[i][2] + " ";
-      if (continents[i][2] == 1) {
+      continents_text += " (" + continents_array[i][3] + " ";
+      if (continents_array[i][3] == 1) {
         continents_text += strings_dict['TRIP'];
       } else {
         continents_text += strings_dict['TRIPS'];
