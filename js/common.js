@@ -317,18 +317,6 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
       spinGlobe();
     });
 
-    var layerList = document.getElementById('menu');
-    var inputs = layerList.getElementsByTagName('input');
-
-    console.log(inputs);
-
-    for (var i = 0; i < 2; i++) {
-      inputs[i].onclick = switchProjection;
-    }
-    for (var i = 2; i < inputs.length; i++) {
-      inputs[i].onclick = switchLayer;
-    }
-
     if (!solo) {
       loadMarkersOnMap(map_fullwindow, 0.7, icons_path);
     } else {

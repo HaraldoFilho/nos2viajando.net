@@ -645,6 +645,7 @@
     input_map.setAttribute('name', 'mtoggle');
     input_map.setAttribute('value', 'mercator');
     input_map.setAttribute('checked', 'checked');
+    input_map.onclick = switchProjection;
     var label_map = document.createElement('LABEL');
     label_map.setAttribute('for', 'mercator');
     label_map.innerText = strings_dict['MAP_PROJECTION_1'];
@@ -654,6 +655,7 @@
     input_globe.setAttribute('style', 'height:10px');
     input_globe.setAttribute('name', 'mtoggle');
     input_globe.setAttribute('value', 'globe');
+    input_globe.onclick = switchProjection;
     var label_globe = document.createElement('LABEL');
     label_globe.setAttribute('for', 'globe-v11');
     label_globe.innerText = strings_dict['MAP_PROJECTION_2'];
@@ -664,6 +666,7 @@
     input_streets.setAttribute('name', 'rtoggle');
     input_streets.setAttribute('value', 'streets');
     input_streets.setAttribute('checked', 'checked');
+    input_streets.onclick = switchLayer;
     var label_streets = document.createElement('LABEL');
     label_streets.setAttribute('for', 'streets-v11');
     label_streets.innerText = strings_dict['MAP_LAYER_1'];
@@ -673,6 +676,7 @@
     input_outdoors.setAttribute('style', 'height:10px');
     input_outdoors.setAttribute('name', 'rtoggle');
     input_outdoors.setAttribute('value', 'outdoors');
+    input_outdoors.onclick = switchLayer;
     var label_outdoors = document.createElement('LABEL');
     label_outdoors.setAttribute('for', 'outdoors-v11');
     label_outdoors.innerText = strings_dict['MAP_LAYER_2'];
@@ -682,6 +686,7 @@
     input_satellite.setAttribute('style', 'height:10px');
     input_satellite.setAttribute('name', 'rtoggle');
     input_satellite.setAttribute('value', 'satellite');
+    input_satellite.onclick = switchLayer;
     var label_satellite = document.createElement('LABEL');
     label_satellite.setAttribute('for', 'satellite-v9');
     label_satellite.innerText = strings_dict['MAP_LAYER_3'];
