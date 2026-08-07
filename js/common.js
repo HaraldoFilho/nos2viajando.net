@@ -320,6 +320,8 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
     var layerList = document.getElementById('menu');
     var inputs = layerList.getElementsByTagName('input');
 
+    console.log(inputs);
+
     for (var i = 0; i < 2; i++) {
       inputs[i].onclick = switchProjection;
     }
