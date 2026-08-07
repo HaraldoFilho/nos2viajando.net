@@ -21,7 +21,9 @@ var countries = {
   'HR': ['Croácia', 'febs', 12, 1, 11],
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguai', 'fwbsd', 7, 1, 13],
-  'PT': ['Portugal', 'fe', 3, 1, 14]
+  'PT': ['Portugal', 'fe', 3, 1, 14],
+  'ES': ['Espanha', 'fet', 7, 1, 15],
+  'FR': ['França', 't', 4, 1, 16]
 }
 
 var countries_en = {
@@ -34,14 +36,16 @@ var countries_en = {
   'HR': ['Croatia', 'febs', 12, 1, 11],
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguay', 'fwbsd', 7, 1, 13],
-  'PT': ['Portugal', 'fe', 3, 1, 14]
+  'PT': ['Portugal', 'fe', 3, 1, 14],
+  'ES': ['Spain', 'fet', 7, 1, 15],
+  'FR': ['France', 't', 4, 1, 16]
 }
 
 var continents = {
   'SA': ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
   'CA': ['América Central', [], 0],
   'NA': ['América do Norte', ['US'], 1],
-  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 3],
+  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR'], 2],
   'AF': ['África', [], 0],
   'AS': ['Ásia', [], 0],
   'OC': ['Oceania', [], 0]
