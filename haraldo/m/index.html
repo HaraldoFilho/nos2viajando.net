@@ -215,9 +215,16 @@
   var lists = document.getElementById('lists');
 
   var n_countries = Object.keys(countries).length;
+
   var n_continents = 0;
-  for (var i = 0; i < continents.length; i++) {
-    if (continents[i][1].length > 0) {
+  var continents_list = [];
+
+  for (var continent_code in continents) {
+    continents_list.push(continents[continent_code]);
+  }
+
+  for (var i = 0; i < continents_list.length; i++) {
+    if (continents_list[i][1].length > 0) {
       n_continents++;
     }
   }
