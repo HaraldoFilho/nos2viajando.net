@@ -27,6 +27,7 @@
     <script src="data/accommodations.js"></script>
     <script src="data/airports.js"></script>
     <script src="data/ports.js"></script>
+    <script src="data/stations.js"></script>
     <script src="data/restaurants.js"></script>
     <script src="data/flights.js"></script>
     <script src="data/bus.js"></script>
@@ -136,6 +137,7 @@
       cities = cities_en;
       airports = airports_en;
       ports = ports_en;
+      stations = stations_en;
       attractions = attractions_en;
       parks = parks_en;
       bus_rides = bus_rides_en;
@@ -166,6 +168,7 @@
     var places = [home].concat(cities)
     .concat(airports)
     .concat(ports)
+    .concat(stations)
     .concat(accommodations)
     .concat(restaurants)
     .concat(attractions)
@@ -181,6 +184,7 @@
     var accommodations_markers = [];
     var airports_markers = [];
     var ports_markers = [];
+    var stations_markers = [];
     var restaurants_markers = [];
     var photos_markers = [];
     var farthest_points_markers = [];
@@ -220,8 +224,6 @@
     var icons_path = 'icons/';
 
     loadMarkersOnMap(map, 0.4, icons_path);
-
-    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
     // Full window map
 
@@ -575,6 +577,37 @@
       lists.appendChild(list_item);
     }
 
+    // Construct list of Train Stations
+    var stations_list = document.createElement('DIV');
+    stations_list.setAttribute('class', 'list-title-container');
+    stations_list.setAttribute('style', 'margin-top:25px');
+    var title = document.createElement('DIV');
+    title.setAttribute('class', 'list-title');
+    var marker = document.createElement('IMG');
+    marker.setAttribute('class', 'marker');
+    marker.setAttribute('src', icons_path.concat('marker_station.svg'));
+    title.appendChild(marker);
+    title.append(strings_dict['STATIONS']);
+    var count = document.createElement('DIV');
+    count.setAttribute('class', 'list-count');
+    count.innerText = stations.length;
+    stations_list.appendChild(title);
+    stations_list.appendChild(count);
+    lists.appendChild(stations_list);
+    for (var i = 0; i < stations.length; i++) {
+      var list_item = document.createElement('P');
+      var item_id = getItemId(stations[i][2]);
+      list_item.setAttribute('id', item_id);
+      list_item.setAttribute('class', 'list-item');
+      var tiny_flag = document.createElement('IMG');
+      tiny_flag.setAttribute('class', 'tiny_icon');
+      tiny_flag.setAttribute('src', getIconSrc(icons_path, stations[i][1]));
+      tiny_flag.setAttribute('title', countries[stations[i][1]][0]);
+      list_item.appendChild(tiny_flag);
+      list_item.append(stations[i][2]);
+      lists.appendChild(list_item);
+    }
+
     // Construct list of Accommodations
     var accommodations_list = document.createElement('DIV');
     accommodations_list.setAttribute('class', 'list-title-container');
@@ -784,6 +817,15 @@
     icon_ports.setAttribute('height', '20px');
     icon_ports.setAttribute('style', 'margin-bottom:-3px');
 
+    var input_stations = document.createElement('INPUT');
+    input_stations.setAttribute('id', 'checkbox-stations');
+    input_stations.setAttribute('type', 'checkbox');
+    input_stations.setAttribute('checked', 'checked');
+    var icon_stations = document.createElement('IMG');
+    icon_stations.setAttribute('src', icons_path.concat('marker_station.svg'));
+    icon_stations.setAttribute('height', '20px');
+    icon_stations.setAttribute('style', 'margin-bottom:-3px');
+
     var input_restaurants = document.createElement('INPUT');
     input_restaurants.setAttribute('id', 'checkbox-restaurants');
     input_restaurants.setAttribute('type', 'checkbox');
@@ -900,6 +942,11 @@
     selector.append(strings_dict['MKR_PORTS']);
     selector.appendChild(document.createElement('BR'));
 
+    selector.appendChild(input_stations);
+    selector.appendChild(icon_stations);
+    selector.append(strings_dict['MKR_STATIONS']);
+    selector.appendChild(document.createElement('BR'));
+
     selector.appendChild(input_accommodations);
     selector.appendChild(icon_accommodations);
     selector.append(strings_dict['MKR_ACCOMMODATIONS']);
@@ -980,12 +1027,14 @@
     restaurants.forEach(addListenerToPlaces, false);
     airports.forEach(addListenerToRegions, false);
     ports.forEach(addListenerToRegions, false);
+    stations.forEach(addListenerToRegions, false);
 
     document.getElementById("checkbox-cities").addEventListener('click', function() { toggleMarkers(map_fullwindow, cities_markers, "checkbox-cities") });
     document.getElementById("checkbox-parks").addEventListener('click', function() { toggleMarkers(map_fullwindow, parks_markers, "checkbox-parks") });
     document.getElementById("checkbox-attractions").addEventListener('click', function() { toggleMarkers(map_fullwindow, attractions_markers, "checkbox-attractions") });
     document.getElementById("checkbox-airports").addEventListener('click', function() { toggleMarkers(map_fullwindow, airports_markers, "checkbox-airports") });
     document.getElementById("checkbox-ports").addEventListener('click', function() { toggleMarkers(map_fullwindow, ports_markers, "checkbox-ports") });
+    document.getElementById("checkbox-stations").addEventListener('click', function() { toggleMarkers(map_fullwindow, stations_markers, "checkbox-stations") });
     document.getElementById("checkbox-accommodations").addEventListener('click', function() { toggleMarkers(map_fullwindow, accommodations_markers, "checkbox-accommodations") });
     document.getElementById("checkbox-restaurants").addEventListener('click', function() { toggleMarkers(map_fullwindow, restaurants_markers, "checkbox-restaurants") });
 
@@ -1162,6 +1211,8 @@
     if (traveling) {
       hideSideBar();
     }
+
+    fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, true);
 
     // avoid bug of shows empty countries panel when window is resized
     exitMapFullWindow();

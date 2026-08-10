@@ -6,7 +6,7 @@
    height="48px"
    version="1.1"
    id="svg6"
-   sodipodi:docname="marker_port.svg"
+   sodipodi:docname="marker_station.svg"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -37,13 +37,13 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2148"
-     inkscape:window-height="1473"
+     inkscape:window-width="2666"
+     inkscape:window-height="1560"
      id="namedview8"
      showgrid="false"
      inkscape:zoom="4.9166667"
      inkscape:cx="24"
-     inkscape:cy="24"
+     inkscape:cy="24.101695"
      inkscape:window-x="143"
      inkscape:window-y="76"
      inkscape:window-maximized="0"
@@ -58,5 +58,5 @@
   <path
      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
      id="path4"
-     style="fill:#916f6f;fill-opacity:1" />
+     style="fill:#d38d5f;fill-opacity:1" />
 </svg>

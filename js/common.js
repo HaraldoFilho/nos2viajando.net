@@ -38,6 +38,7 @@ function hideAllMarkers () {
   hideMarkers(map_fullwindow, accommodations_markers);
   hideMarkers(map_fullwindow, airports_markers);
   hideMarkers(map_fullwindow, ports_markers);
+  hideMarkers(map_fullwindow, stations_markers);
   hideMarkers(map_fullwindow, restaurants_markers);
   hideMarkers(map_fullwindow, photos_markers);
   hideMarkers(map_fullwindow, farthest_points_markers);
@@ -47,6 +48,7 @@ function toggleAllMarkers () {
   toggleMarkers(map_fullwindow, restaurants_markers, 'checkbox-restaurants');
   toggleMarkers(map_fullwindow, airports_markers, 'checkbox-airports');
   toggleMarkers(map_fullwindow, ports_markers, 'checkbox-ports');
+  toggleMarkers(map_fullwindow, stations_markers, 'checkbox-stations');
   toggleMarkers(map_fullwindow, accommodations_markers, 'checkbox-accommodations');
   toggleMarkers(map_fullwindow, attractions_markers, 'checkbox-attractions');
   toggleMarkers(map_fullwindow, parks_markers, 'checkbox-parks');
@@ -87,6 +89,7 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   restaurants_markers = createMarkers(map, restaurants, '#ff9955', markers_scale, false);
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
   ports_markers = createMarkers(map, ports, '#ac9393', markers_scale, true);
+  stations_markers = createMarkers(map, stations, '#ac9393', markers_scale, true);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
@@ -96,6 +99,7 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   addMarkersToMap(map, restaurants_markers);
   addMarkersToMap(map, airports_markers);
   addMarkersToMap(map, ports_markers);
+  addMarkersToMap(map, stations_markers);
   addMarkersToMap(map, accommodations_markers);
   addMarkersToMap(map, attractions_markers);
   addMarkersToMap(map, parks_markers);
