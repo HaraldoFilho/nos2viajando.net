@@ -54,12 +54,6 @@ var train_routes = [
   ]],
 
   [2025, [
-    'Estação de Perpinhã', [
-    ],
-    'Estação Villefranche Vernet-les-Bains'
-  ]],
-
-  [2025, [
     'Estação Villefranche Vernet-les-Bains', [
     ],
     'Estação Font-Romeu-Odeillo-Via'
@@ -142,12 +136,6 @@ var train_routes_en = [
     [2.9610445510082597, 42.261839891378635],
     [2.8088994464865413, 42.52168822971845]],
     'Perpignan Station'
-  ]],
-
-  [2025, [
-    'Perpignan Station', [
-    ],
-    'Villefranche Vernet-les-Bains Station'
   ]],
 
   [2025, [

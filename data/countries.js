@@ -22,8 +22,8 @@ var countries = {
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguai', 'fwbsd', 7, 1, 13],
   'PT': ['Portugal', 'fe', 3, 1, 14],
-  'ES': ['Espanha', 'fet', 7, 1, 15],
-  'FR': ['França', 't', 4, 1, 16]
+  'ES': ['Espanha', 'febt', 7, 1, 15],
+  'FR': ['França', 'bt', 4, 1, 16]
 }
 
 var countries_en = {
@@ -37,8 +37,8 @@ var countries_en = {
   'CL': ['Chile', 'fwbds', 14, 2, 12],
   'UY': ['Uruguay', 'fwbsd', 7, 1, 13],
   'PT': ['Portugal', 'fe', 3, 1, 14],
-  'ES': ['Spain', 'fet', 7, 1, 15],
-  'FR': ['France', 't', 4, 1, 16]
+  'ES': ['Spain', 'febt', 7, 1, 15],
+  'FR': ['France', 'bt', 4, 1, 16]
 }
 
 var continents = {
