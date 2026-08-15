@@ -164,7 +164,7 @@ function addListenerToFlags(id, padding) {
   document.getElementById(id).addEventListener('click', function() {
     fitRegion(map, id, padding);
     if (map_fullwindow != null) {
-      fitBoundingBox(map_fullwindow, current_bbox, 0, 0, map_padding_fw, true);
+      fitBoundingBox(map_fullwindow, current_bbox, init_fw_x_offset, init_fw_y_offset, map_padding_fw, true);
     }
   });
 }
@@ -371,7 +371,7 @@ function enterMapFullWindow(current_bbox, current_coords, solo) {
     });
 
     if (current_coords.length == 0) {
-      fitBoundingBox(map_fullwindow, current_bbox, init_x_offset, 0, map_padding_fw, true);
+      fitBoundingBox(map_fullwindow, current_bbox, init_fw_x_offset, init_fw_y_offset, map_padding_fw, true);
     } else {
       flyToCoordinates(map_fullwindow, current_coords, 0, 0, 14, 1.5, false);
     }
@@ -440,7 +440,7 @@ function exitMapFullWindow() {
   document.getElementById('expand-selector').style.display = "none";
   document.getElementById('selector').style.display = "none";
   document.getElementById('fullmap-countries-panel').style.display = "none";
-  fitBoundingBox(map_fullwindow, initial_bbox, 0, 0, map_padding_fw, true);
+  fitBoundingBox(map_fullwindow, initial_bbox, init_fw_x_offset, init_fw_y_offset, map_padding_fw, true);
 }
 
 function hideSideBar() {
@@ -478,7 +478,7 @@ function switchProjection(projection) {
     spinEnabled = false;
   }
   if(!hide_car_routes) {
-    fitBoundingBox(map_fullwindow, road_trips_bbox, init_x_offset, 0, 300, false);
+    fitBoundingBox(map_fullwindow, road_trips_bbox, init_fw_x_offset, init_fw_y_offset, 300, false);
   } else {
     map_fullwindow.fitBounds([
       [current_bbox[0], current_bbox[1]],
