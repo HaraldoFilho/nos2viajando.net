@@ -467,6 +467,16 @@ function showSideBarTab() {
   document.getElementById('close-sidebar').style = 'margin-left:310px';
 }
 
+function expandSelector() {
+  document.getElementById('selector').style.display = "none";
+  document.getElementById('expand-selector').style.display = "block";
+}
+
+function contractSelector() {
+  document.getElementById('selector').style.display = "block";
+  document.getElementById('expand-selector').style.display = "none";
+}
+
 function switchProjection(projection) {
   var projId = projection.target.id;
   current_map_projection = projId;

@@ -381,6 +381,14 @@
     tiny_flag.setAttribute('src', getIconSrc(icons_path, restaurants[i][1]));
     list_item.appendChild(tiny_flag);
     list_item.append(restaurants[i][2]);
+    if (restaurants[i][3] == '*') {
+      list_item.append(' ');
+      var tiny_star = document.createElement('IMG');
+      tiny_star.setAttribute('class', 'tiny_icon');
+      tiny_star.setAttribute('src', '../icons/star.png');
+      tiny_star.setAttribute('title', strings_dict['FAVORITE']);
+      list_item.appendChild(tiny_star);
+    }
     lists.appendChild(list_item);
   }
 

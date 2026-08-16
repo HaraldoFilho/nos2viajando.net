@@ -411,13 +411,9 @@
     document.getElementById('zoom-out-icon').addEventListener('click', function() { fitBoundingBox(map, initial_bbox, init_x_offset, init_y_offset, map_padding, false) });
     document.getElementById('fullwindow-zoom-out-icon').addEventListener('click', function() {
       fitBoundingBox(map_fullwindow, initial_bbox, init_fw_x_offset, init_fw_y_offset, map_padding_fw, false);
-      document.getElementById('selector').style.display = "block";
-      document.getElementById('expand-selector').style.display = "none";
     });
     document.getElementById('fullwindow-center-icon').addEventListener('click', function() {
       centerMapOnHomeLocation(map_fullwindow);
-      document.getElementById('selector').style.display = "none";
-      document.getElementById('expand-selector').style.display = "block";
     });
     document.getElementById('fullwindow-enter-icon').addEventListener('click', function() { enterMapFullWindow(current_bbox, current_coords, false) });
     document.getElementById('fullwindow-exit-icon').addEventListener('click', function() { exitMapFullWindow() });
@@ -672,6 +668,14 @@
       tiny_flag.setAttribute('title', countries[restaurants[i][1]][0]);
       list_item.appendChild(tiny_flag);
       list_item.append(restaurants[i][2]);
+      if (restaurants[i][3] == '*') {
+        list_item.append(' ');
+        var tiny_star = document.createElement('IMG');
+        tiny_star.setAttribute('class', 'tiny_icon');
+        tiny_star.setAttribute('src', 'icons/star.png');
+        tiny_star.setAttribute('title', strings_dict['FAVORITE']);
+        list_item.appendChild(tiny_star);
+      }
       lists.appendChild(list_item);
     }
 
@@ -754,19 +758,13 @@
     icon_expand_more.setAttribute('src', icons_path.concat('expand_more.svg'));
     icon_expand_more.setAttribute('height', '7px');
     icon_expand_more.setAttribute('style', 'margin: 0px 10px 1px 5px');
-    icon_expand_more.addEventListener('click', function() {
-      document.getElementById('selector').style.display = "none";
-      document.getElementById('expand-selector').style.display = "block";
-    });
+    icon_expand_more.addEventListener('click', function() {expandSelector()});
 
     var icon_expand_less = document.createElement('IMG');
     icon_expand_less.setAttribute('src', icons_path.concat('expand_less.svg'));
     icon_expand_less.setAttribute('height', '7px');
     icon_expand_less.setAttribute('style', 'margin: 0px 10px 1px 5px');
-    icon_expand_less.addEventListener('click', function() {
-      document.getElementById('selector').style.display = "block";
-      document.getElementById('expand-selector').style.display = "none";
-    });
+    icon_expand_less.addEventListener('click', function() {contractSelector()});
 
     var input_cities = document.createElement('INPUT');
     input_cities.setAttribute('id', 'checkbox-cities');
