@@ -88,10 +88,10 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
   }
   restaurants_markers = createMarkers(map, restaurants, '#ff9955', markers_scale, false);
   airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
-  ports_markers = createMarkers(map, ports, '#ac9393', markers_scale, true);
-  stations_markers = createMarkers(map, stations, '#ac9393', markers_scale, true);
+  ports_markers = createMarkers(map, ports, '#ff8080', markers_scale, true);
+  stations_markers = createMarkers(map, stations, '#d35f5f', markers_scale, true);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
-  attractions_markers = createMarkers(map, attractions, '#ff8080', markers_scale, false);
+  attractions_markers = createMarkers(map, attractions, '#d38d5f', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
   cities_markers = createMarkers(map, cities, '#3fb1ce', markers_scale, true);
   photos_markers = createPhotosMarkers(map, locations_dict);
