@@ -11,7 +11,16 @@ var stations = [
   [[2.370693, 42.591794], 'FR', 'Estação Villefranche Vernet-les-Bains'],
   [[2.038357, 42.491354], 'FR', 'Estação Font-Romeu-Odeillo-Via'],
   [[3.005659, 43.190623], 'FR', 'Estação de Narbonne'],
-  [[2.351798, 43.218119], 'FR', 'Estação de Carcassonne']
+  [[2.351798, 43.218119], 'FR', 'Estação de Carcassonne'],
+  // [[4.337015, 50.836545], 'BE', 'Estação Bruxelles-Zuid'],
+  // [[4.372986, 50.838287], 'BE', 'Estação Bruxelles-Luxembourg'],
+  // [[4.862411, 50.469163], 'BE', 'Estação de Namur'],
+  // [[6.133938, 49.599657], 'LU', 'Estação de Luxemburgo'],
+  // [[4.907935, 50.261158], 'BE', 'Estação de Dinant'],
+  // [[4.900261, 52.379138], 'NL', 'Estação Amsterdam Centraal'],
+  // [[-0.125769, 51.531096], 'GB', 'Estação London St Pancras Int\'l'],
+  // [[3.2182163, 51.197603], 'BE', 'Estação de Bruges'],
+  // [[3.710817, 51.036109], 'BE', 'Estação Gent-Sint-Pieters']
 ]
 
 var stations_en = [
@@ -27,5 +36,14 @@ var stations_en = [
   [[2.370693, 42.591794], 'FR', 'Villefranche Vernet-les-Bains Station'],
   [[2.038357, 42.491354], 'FR', 'Font-Romeu-Odeillo-Via Station'],
   [[3.005659, 43.190623], 'FR', 'Narbonne Station'],
-  [[2.351798, 43.218119], 'FR', 'Carcassonne Station']
+  [[2.351798, 43.218119], 'FR', 'Carcassonne Station'],
+  // [[4.337015, 50.836545], 'BE', 'Bruxelles-Zuid Station'],
+  // [[4.372986, 50.838287], 'BE', 'Bruxelles-Luxembourg Station'],
+  // [[4.862411, 50.469163], 'BE', 'Namur Station'],
+  // [[6.133938, 49.599657], 'LU', 'Luxembourg Station'],
+  // [[4.907935, 50.261158], 'BE', 'Dinant Station'],
+  // [[4.900261, 52.379138], 'NL', 'Amsterdam Centraal Station'],
+  // [[-0.125769, 51.531096], 'GB', 'London St Pancras Int\'l Station'],
+  // [[3.2182163, 51.197603], 'BE', 'Bruges Station'],
+  // [[3.710817, 51.036109], 'BE', 'Gent-Sint-Pieters Station']
 ]
