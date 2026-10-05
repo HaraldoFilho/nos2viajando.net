@@ -81,6 +81,87 @@ var train_routes = [
     'Estação Barcelona-Sants'
   ]],
 
+  // 2026 - Bélgica, Holanda e Londres
+
+  [2026, [
+    'Estação Bruxelles-Nord', [
+    [4.358775, 50.846350],
+    [4.372986, 50.838287]],
+    'Estação de Namur'
+  ]],
+
+  [2026, [
+    'Estação de Namur', [
+    ],
+    'Estação de Dinant'
+  ]],
+
+  [2026, [
+    'Estação de Dinant', [
+    [4.862411, 50.469163]],
+    'Estação Bruxelles-Luxembourg'
+  ]],
+
+  [2026, [
+    'Estação Central de Bruxelas', [
+    [4.372986, 50.838287]],
+    'Estação de Namur'
+  ]],
+
+  [2026, [
+    'Estação de Namur', [
+    ],
+    'Estação de Luxemburgo'
+  ]],
+
+  [2026, [
+    'Estação de Namur', [
+    [4.372986, 50.838287],
+    [4.337015, 50.836545],
+    [4.415905, 51.219579],
+    [4.730886, 51.520441],
+    [4.479231, 51.924344],
+    [4.900261, 52.379138]],
+    'Estação de Zaandijk Zaanse Schans'
+  ]],
+
+  [2026, [
+    'Estação de Zaandijk Zaanse Schans', [
+    [4.900261, 52.379138],
+    [4.324074, 52.081089]],
+    'Estação de Delft'
+  ]],
+
+  [2026, [
+    'Estação de Zaandijk Zaanse Schans', [
+      [4.900261, 52.379138],
+      [4.479231, 51.924344],
+      [4.730886, 51.520441],
+      [4.415905, 51.219579],
+      [4.337015, 50.836545],
+      [3.068690, 50.624552],
+      [1.854053, 50.954326],
+      [1.288813, 51.129716]],
+    'Estação Inter. de Londres St Pancras'
+  ]],
+
+  [2026, [
+    'Estação Inter. de Londres St Pancras', [
+    [1.288813, 51.129716],
+    [1.854053, 50.954326],
+    [3.068690, 50.624552],
+    [4.337015, 50.836545],
+    [3.737170, 51.050555]],
+    'Estação de Bruges'
+  ]],
+
+  [2026, [
+    'Estação de Bruges', [
+    [3.737170, 51.050555],
+    [4.337015, 50.836545]],
+    'Aeroporto de Bruxelas'
+  ]],
+
 ]
 
 var train_routes_en = [
