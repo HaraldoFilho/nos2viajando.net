@@ -20,7 +20,7 @@ var airports = [
   [[-71.161577, -41.145985], 'AR', 'Aeroporto de Bariloche', 'BRC', 31],
   [[-9.133827, 38.776307], 'PT', 'Aeroporto de Lisboa', 'LIS', 32],
   [[2.079834, 41.299084], 'ES', 'Aeroporto de Barcelona', 'BCN', 33],
-  // [[4.486119, 50.900712], 'BE', 'Aeroporto de Bruxelas', 'BRU', 35]
+  [[4.486119, 50.900712], 'BE', 'Aeroporto de Bruxelas', 'BRU', 35]
 
 ]
 
@@ -46,5 +46,5 @@ var airports_en = [
   [[-71.161577, -41.145985], 'AR', 'Bariloche Airport', 'BRC', 31],
   [[-9.133827, 38.776307], 'PT', 'Lisbon Airport', 'LIS', 32],
   [[2.079834, 41.299084], 'ES', 'Barcelona Airport', 'BCN', 33],
-  // [[4.486119, 50.900712], 'BE', 'Brussels Airport', 'BRU', 35]
+  [[4.486119, 50.900712], 'BE', 'Brussels Airport', 'BRU', 35]
 ]
