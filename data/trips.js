@@ -15,7 +15,7 @@ var trips = [
   ['2024', 'Uruguai', 4268, 11, 'i', 17],
   ['2025', 'Lagos Andinos', 8101, 12, 'i', 18],
   ['2025', 'Catalunha e Lisboa', 19221, 17, 'i', 19],
-  ['2026', 'Bélgica, Amsterdã e Londres', 10024, 2, 'i', 21]
+  ['2026', 'Bélgica, Amsterdã e Londres', 10355, 3, 'i', 21]
 ]
 
 var trips_en = [
@@ -31,5 +31,5 @@ var trips_en = [
   ['2024', 'Uruguay', 4268, 11, 'i', 17],
   ['2025', 'Andean Lakes', 8101, 12, 'i', 18],
   ['2025', 'Catalonia and Lisbon', 19221, 17, 'i', 19],
-  ['2026', 'Belgium, Amsterdam and London', 10024, 2, 'i', 21]
+  ['2026', 'Belgium, Amsterdam and London', 10355, 3, 'i', 21]
 ]
