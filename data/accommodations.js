@@ -32,7 +32,7 @@ var accommodations = [
   [[2.824629, 41.988584], 'ES', 'Hotel Museu Llegendes de Girona'],
   [[2.878274, 42.695680], 'FR', 'Appart\'City Confort Perpignan Centre Gare'],
   [[-9.135000, 38.727787], 'PT', 'Lisboa 85 Suites & Apartments'],
-  //[[4.85981, 50.46823], 'BE', 'B&B Hotel Namur'],
+  [[4.85981, 50.46823], 'BE', 'B&B Hotel Namur'],
   // [[4.80852, 52.46934], 'NL', 'Boutique Hotel 43 Amsterdam - Zaandam'],
   // [[-0.25938, 51.52304], 'GB', 'Holiday Inn London Park Royal'],
   // [[3.225358, 51.207547], 'BE', 'Martin\'s Brugge']
