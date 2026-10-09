@@ -1,4 +1,4 @@
-// Dictionary items:
+6// Dictionary items:
 // 'Country Code': ['Country name', 'Means of transportation', days, trips, order]
 
 // Transportation:
@@ -25,7 +25,7 @@ var countries = {
   'ES': ['Espanha', 'febt', 7, 1, 15],
   'FR': ['França', 'bt', 4, 1, 16],
   'BE': ['Bélgica', 'febt', 2, 1, 18],
-  'LU': ['Luxemburgo', 't', 0.125, 1, 19],
+  //'LU': ['Luxemburgo', 't', 0.125, 1, 19],
   // 'NL': ['Holanda', 'bt', 4, 1, 20],
   // 'GB': ['Inglaterra', 't', 4, 1, 21]
 }
@@ -44,7 +44,7 @@ var countries_en = {
   'ES': ['Spain', 'febt', 7, 1, 15],
   'FR': ['France', 'bt', 4, 1, 16],
   'BE': ['Belgium', 'febt', 2, 1, 18],
-  'LU': ['Luxembourg', 't', 0.125, 1, 19],
+  //'LU': ['Luxembourg', 't', 0.125, 1, 19],
   // 'NL': ['Netherlands', 'bt', 4, 1, 20],
   // 'GB': ['United Kingdom', 't', 4, 1, 21]
 }
@@ -53,7 +53,7 @@ var continents = {
   'SA': ['América do Sul', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
   'CA': ['América Central', [], 0],
   'NA': ['América do Norte', ['US'], 1],
-  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE', 'LU'], 3],
+  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE'], 3],
   // 'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE', 'LU', 'NL', 'GB'], 3],
   'AF': ['África', [], 0],
   'AS': ['Ásia', [], 0],
@@ -64,7 +64,7 @@ var continents_en = {
   'SA': ['South America', ['BR', 'AR', 'PY', 'CL', 'UY'], 9],
   'CA': ['Central America', [], 0],
   'NA': ['North America', ['US'], 1],
-  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE', 'LU'], 3],
+  'EU': ['Europa', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE'], 3],
   // 'EU': ['Europe', ['IT', 'VA', 'HR', 'PT', 'ES', 'FR', 'BE', 'LU', 'NL', 'GB'], 3],
   'AF': ['Africa', [], 0],
   'AS': ['Asia', [], 0],
