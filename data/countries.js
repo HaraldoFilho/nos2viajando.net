@@ -24,9 +24,9 @@ var countries = {
   'PT': ['Portugal', 'fe', 3, 1, 14],
   'ES': ['Espanha', 'febt', 7, 1, 15],
   'FR': ['França', 'bt', 4, 1, 16],
-  'BE': ['Bélgica', 'febt', 2, 1, 18],
+  'BE': ['Bélgica', 'febt', 3, 1, 18],
   'LU': ['Luxemburgo', 't', 0.125, 1, 19],
-  // 'NL': ['Holanda', 'bt', 4, 1, 20],
+  'NL': ['Holanda', 'bt', 1, 1, 20],
   // 'GB': ['Inglaterra', 't', 4, 1, 21]
 }
 
@@ -43,9 +43,9 @@ var countries_en = {
   'PT': ['Portugal', 'fe', 3, 1, 14],
   'ES': ['Spain', 'febt', 7, 1, 15],
   'FR': ['France', 'bt', 4, 1, 16],
-  'BE': ['Belgium', 'febt', 2, 1, 18],
+  'BE': ['Belgium', 'febt', 3, 1, 18],
   'LU': ['Luxembourg', 't', 0.125, 1, 19],
-  // 'NL': ['Netherlands', 'bt', 4, 1, 20],
+  'NL': ['Netherlands', 'bt', 1, 1, 20],
   // 'GB': ['United Kingdom', 't', 4, 1, 21]
 }
 
