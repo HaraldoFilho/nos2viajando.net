@@ -35,5 +35,5 @@ var accommodations = [
   [[4.85981, 50.46823], 'BE', 'B&B Hotel Namur'],
   [[4.80852, 52.46934], 'NL', 'Boutique Hotel 43 Amsterdam - Zaandam'],
   [[-0.25938, 51.52304], 'GB', 'Holiday Inn London Park Royal'],
-  // [[3.225358, 51.207547], 'BE', 'Martin\'s Brugge']
+  [[3.225358, 51.207547], 'BE', 'Martin\'s Brugge']
 ]
