@@ -87,9 +87,9 @@ function loadMarkersOnMap(map, markers_scale, icons_path) {
     addMarkersToMap(map, home_marker);
   }
   restaurants_markers = createMarkers(map, restaurants, '#ff9955', markers_scale, false);
-  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, true);
-  ports_markers = createMarkers(map, ports, '#ff8080', markers_scale, true);
-  stations_markers = createMarkers(map, stations, '#d35f5f', markers_scale, true);
+  airports_markers = createMarkers(map, airports, '#a0a0a0', markers_scale, false);
+  ports_markers = createMarkers(map, ports, '#ff8080', markers_scale, false);
+  stations_markers = createMarkers(map, stations, '#d35f5f', markers_scale, false);
   accommodations_markers = createMarkers(map, accommodations, '#dec900', markers_scale, false);
   attractions_markers = createMarkers(map, attractions, '#d38d5f', markers_scale, false);
   parks_markers = createMarkers(map, parks, '#55a455', markers_scale, false);
@@ -397,12 +397,12 @@ function getFarthestDistances() {
     far_points_km[i] = my_home.distanceTo(far_points[i])/1000000;
   }
 
-  if (farthest_points[1][0][0] > 0) {
-    var middle = new mapboxgl.LngLat(0, getInterLatitude(home[0], [farthest_points[1][0][0], farthest_points[1][0][1]]));
-    var half_1 = my_home.distanceTo(middle)/1000000;
-    var half_2 = middle.distanceTo(far_points[1])/1000000;
-    far_points_km[1] = half_1 + half_2;
-  }
+  // if (farthest_points[1][0][0] > 0) {
+  //   var middle = new mapboxgl.LngLat(0, getInterLatitude(home[0], [farthest_points[1][0][0], farthest_points[1][0][1]]));
+  //   var half_1 = my_home.distanceTo(middle)/1000000;
+  //   var half_2 = middle.distanceTo(far_points[1])/1000000;
+  //   far_points_km[1] = half_1 + half_2;
+  // }
 
   var farthest_km = far_points_km[0];
   var farthest = 0;
