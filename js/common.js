@@ -1312,7 +1312,8 @@ function setIconsColors() {
       country_code = farthest_points[i][1];
       var flag_id = country_code.concat("__");
       document.getElementById(flag_id).setAttribute('class', 'icon');
-    }
+      setEuropeIconColor(country_code);
+  }
     all_unchecked = false;
   }
 
@@ -1322,11 +1323,13 @@ function setIconsColors() {
 
     if (document.getElementById("checkbox-photos").checked && (country_code in locations_dict)) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
     if (document.getElementById("checkbox-flights-international").checked && countries[country_code][1].includes('f')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
@@ -1338,22 +1341,26 @@ function setIconsColors() {
 
     if (document.getElementById("checkbox-bus-rides").checked && countries[country_code][1].includes('b')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
     if (document.getElementById("checkbox-train-routes").checked && countries[country_code][1].includes('t')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
     if (document.getElementById("checkbox-boat-routes").checked && countries[country_code][1].includes('s')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
     if (document.getElementById("checkbox-road-trips-abroad").checked && countries[country_code][1].includes('d')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
       document.getElementById("EU__").setAttribute('class', 'icon_grey');
+      setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
@@ -1369,13 +1376,17 @@ function setIconsColors() {
     for (var country_code in countries) {
       var flag_id = country_code.concat("__");
       document.getElementById(flag_id).setAttribute('class', 'icon');
-      if (countries[country_code][1].includes('c')) {
-        document.getElementById(flag_id).setAttribute("class", "icon_opaque");
-      }
+      setEuropeIconColor(country_code);
     }
     document.getElementById("EU__").setAttribute('class', 'icon');
   }
 
+}
+
+function setEuropeIconColor(country_code) {
+  if (continents['EU'][1].includes(country_code)) {
+    document.getElementById("EU__").setAttribute('class', 'icon');
+  }
 }
 
 function spinGlobe() {
