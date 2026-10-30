@@ -1304,6 +1304,7 @@ function setIconsColors() {
     var flag_id = country_code.concat("__");
     document.getElementById(flag_id).setAttribute('class', 'icon_grey');
   }
+  document.getElementById("EU__").setAttribute('class', 'icon_grey');
 
   var all_unchecked = true;
 
@@ -1359,14 +1360,12 @@ function setIconsColors() {
 
     if (document.getElementById("checkbox-road-trips-abroad").checked && countries[country_code][1].includes('d')) {
       document.getElementById(flag_id).setAttribute('class', 'icon');
-      document.getElementById("EU__").setAttribute('class', 'icon_grey');
       setEuropeIconColor(country_code);
       all_unchecked = false;
     }
 
     if (document.getElementById("checkbox-road-trips").checked && country_code == 'BR') {
       document.getElementById(flag_id).setAttribute('class', 'icon');
-      document.getElementById("EU__").setAttribute('class', 'icon_grey');
       all_unchecked = false;
     }
 
@@ -1378,7 +1377,6 @@ function setIconsColors() {
       document.getElementById(flag_id).setAttribute('class', 'icon');
       setEuropeIconColor(country_code);
     }
-    document.getElementById("EU__").setAttribute('class', 'icon');
   }
 
 }
