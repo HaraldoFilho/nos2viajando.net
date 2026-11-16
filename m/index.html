@@ -93,7 +93,7 @@
     parks = parks_en;
     trips = trips_en;
   } else if (traveling) {
-    window.location.replace("https://nos2viajando.travelmap.net")
+    window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
   }
 
   mapboxgl.accessToken = mapbox_token;

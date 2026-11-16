@@ -1,6 +1,7 @@
 // Year, Trip, Distance (km), Days, Local(l)|Domestic(d)|International(i)
 
 var traveling = false;
+var current_trip = "belgica-holanda-londres";
 
 var trips = [
   ['2009', 'Monte Alegre do Sul', 182, 4, 'l', 6],
