@@ -102,7 +102,7 @@
       <img id="open-sidebar" class="open-sidebar" src="icons/sidebar_open.svg"/>
 
       <div id="travelmap" class="travelmap-container">
-        <embed src="https://nos2viajando.travelmap.net/" width="100%" height="100%" frameBorder="0" >
+        <embed id="travelmap_embed" width="100%" height="100%" frameBorder="0" >
           Navegador não compatível
         </embed>
       </div>
@@ -127,7 +127,9 @@
     <script>
 
     if (traveling) {
-      window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
+      document.getElementById('travelmap_embed').setAttribute('src', "https://nos2viajando.travelmap.net/" + current_trip);
+    } else {
+      document.getElementById('travelmap_embed').setAttribute('src', "https://nos2viajando.travelmap.net/");
     }
 
     var userLang = navigator.language || navigator.userLanguage;
@@ -1217,6 +1219,14 @@
 
     // avoid bug of shows empty countries panel when window is resized
     exitMapFullWindow();
+
+    if (traveling) {
+      document.getElementById('sidebar').style.display = 'none';
+      document.getElementById('travelmap').style = "grid-column:1 / span 2";
+      document.getElementById('open-sidebar').style.display = 'none';
+      document.getElementById('close-sidebar').style.display = 'none';
+      document.getElementById('footer').style = "margin-left:15px";
+    }
 
     </script>
 
