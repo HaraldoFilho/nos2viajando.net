@@ -80,6 +80,10 @@
 
   <script>
 
+  if (traveling) {
+    window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
+  }
+
   var userLang = navigator.language || navigator.userLanguage;
   console.log ("User language is: " + userLang);
 
@@ -92,8 +96,6 @@
     countries = countries_en;
     parks = parks_en;
     trips = trips_en;
-  } else if (traveling) {
-    window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
   }
 
   mapboxgl.accessToken = mapbox_token;

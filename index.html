@@ -126,6 +126,10 @@
 
     <script>
 
+    if (traveling) {
+      window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
+    }
+
     var userLang = navigator.language || navigator.userLanguage;
     console.log ("User language is: " + userLang);
 
@@ -1213,10 +1217,6 @@
 
     // avoid bug of shows empty countries panel when window is resized
     exitMapFullWindow();
-
-    if (traveling) {
-      window.location.replace("https://nos2viajando.travelmap.net/" + current_trip);
-    }
 
     </script>
 
